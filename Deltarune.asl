@@ -12,6 +12,27 @@ init {
 
 startup {
     print("[DELTARUNE] STARTUP");
+    
+    /*
+    *   Chapters
+    */
+    settings.Add("ch1", true, "Chapter 1");
+
+    /*
+    *   Chapter 1
+    */
+    settings.Add("intro", true, "Intro", "ch1");
+        settings.Add("survey", true, "Survey finished", "intro"); // Split when warp to Kris room
+        settings.Add("lightworld", true, "Exit Light World / Entering in Dark World", "intro"); // Split when warp to Dark World when Kris is on the ground
+    settings.Add("pre-castletown", true, "Entering Castle Town", "ch1");
+    settings.Add("castletown", true, "Exit Castle Town", "ch1");
+    settings.Add("fields", true, "Fields", "ch1");
+        settings.Add("rudinnskip1", true, "Rudinn Skip 1", "fields");
+        settings.Add("rudinnskip2", true, "Rudinn Skip 2", "fields");
+        settings.Add("rudinnskip3", true, "Rudinn Skip 3", "fields");
+        settings.Add("vandalizedpuzzle", true, "Vandalized Puzzle", "fields");
+        settings.Add("exitfields", true, "Rudinn Skip 4 / Exiting Fields", "fields");
+    
     // @TODO Need update later, for now only check rooms
     // object array structure
 	vars.done = 0;		// bool		have we triggered this split already?
@@ -19,6 +40,18 @@ startup {
 	vars.curroom = 2; 		// int 		required current room, -1 if none
 
     vars.splits = new Dictionary<string, object[]>() {
+        /*
+        *   Chapter 1
+        */
+        {"survey",  new object[] {false, -1, 282}},
+        {"lightworld",  new object[] {false, -1, 314}},
+        {"pre-castletown",  new object[] {false, -1, 324}},
+        {"castletown",  new object[] {false, -1, 329}},
+        {"rudinnskip1",  new object[] {false, -1, 332}},
+        {"rudinnskip2",  new object[] {false, -1, 334}},
+        {"rudinnskip3",  new object[] {false, -1, 336}},
+        {"vandalizedpuzzle",  new object[] {false, -1, 343}},
+        {"exitfields",  new object[] {false, -1, 345}}
     };
 
     vars.resetsRoom = new object[] {
