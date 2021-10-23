@@ -22,31 +22,31 @@ startup {
     *   Chapter 1
     */
     settings.Add("intro", true, "Intro", "ch1");
-        settings.Add("survey", true, "Survey finished", "intro"); // Split when warp to Kris room
-        settings.Add("lightworld", true, "Exit Light World / Entering in Dark World", "intro"); // Split when warp to Dark World when Kris is on the ground
-    settings.Add("pre-castletown", true, "Entering Castle Town", "ch1");
+        settings.Add("survey", false, "Survey finished", "intro"); // Split when warp to Kris room
+        settings.Add("lightworld", false, "Exit Light World / Entering in Dark World", "intro"); // Split when warp to Dark World when Kris is on the ground
+    settings.Add("pre-castletown", false, "Entering Castle Town", "ch1");
     settings.Add("castletown", true, "Exit Castle Town", "ch1");
     settings.Add("fields", true, "Fields", "ch1");
-        settings.Add("rudinnskip1", true, "Rudinn Skip 1", "fields");
-        settings.Add("rudinnskip2", true, "Rudinn Skip 2", "fields");
-        settings.Add("rudinnskip3", true, "Rudinn Skip 3", "fields");
-        settings.Add("vandalizedpuzzle", true, "Vandalized Puzzle", "fields");
+        settings.Add("rudinnskip1", false, "Rudinn Skip 1", "fields");
+        settings.Add("rudinnskip2", false, "Rudinn Skip 2", "fields");
+        settings.Add("rudinnskip3", false, "Rudinn Skip 3", "fields");
+        settings.Add("vandalizedpuzzle", false, "Vandalized Puzzle", "fields");
         settings.Add("exitfields", true, "Rudinn Skip 4 / Exiting Fields", "fields");
     settings.Add("checkerboard", true, "Checkerboard", "ch1");
-        settings.Add("pawnskip1", true, "Pawn Skip 1", "checkerboard");
-        settings.Add("pawnskip2", true, "Pawn Skip 2", "checkerboard");
+        settings.Add("pawnskip1", false, "Pawn Skip 1", "checkerboard");
+        settings.Add("pawnskip2", false, "Pawn Skip 2", "checkerboard");
         settings.Add("exitcheckerboard", true, "Exiting Checkerboard", "checkerboard");
     settings.Add("forest", true, "Forest", "ch1");
-        settings.Add("bloxerskip1", true, "Pawn Skip 1", "forest");
-        settings.Add("bloxerskip2", true, "Pawn Skip 2", "forest");
+        settings.Add("bloxerskip1", false, "Pawn Skip 1", "forest");
+        settings.Add("bloxerskip2", false, "Pawn Skip 2", "forest");
         settings.Add("exitforest", true, "Exiting Checkerboard", "forest");
     settings.Add("prison", true, "Prison", "ch1");
-        settings.Add("captured", true, "Captured", "prison");
+        settings.Add("captured", false, "Captured", "prison");
         settings.Add("exitprison", true, "Exiting Prison", "prison");
     settings.Add("cardcastle", true, "Card Castle", "ch1");
-        settings.Add("rudinnrangerskip", true, "Rudinn Ranger Skip", "cardcastle");
-        settings.Add("headhathyskip", true, "Head Hathy Skip", "cardcastle");
-        settings.Add("shopping", true, "After the shop, before K Round", "cardcastle");
+        settings.Add("rudinnrangerskip", false, "Rudinn Ranger Skip", "cardcastle");
+        settings.Add("headhathyskip", false, "Head Hathy Skip", "cardcastle");
+        settings.Add("shopping", false, "After the shop, before K Round", "cardcastle");
         settings.Add("exitthrone", true, "Exit Card Castle's Throne room", "cardcastle");
         settings.Add("king", true, "After King Battle", "cardcastle");
     
