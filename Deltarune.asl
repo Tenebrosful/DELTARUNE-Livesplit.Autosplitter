@@ -28,6 +28,8 @@ startup {
     };
     
     vars.menusRoom = new object[] {
+        419, // Ch1 Menu
+        243 // Ch2 Menu
     };
 
     vars.startsRoom = new object[] {
