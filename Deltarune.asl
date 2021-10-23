@@ -22,6 +22,9 @@ startup {
     };
 
     vars.resetsRoom = new object[] {
+        278, // Select Chapter
+        412, // Ch1 Intro
+        233 // Ch2 Intro
     };
     
     vars.menusRoom = new object[] {
