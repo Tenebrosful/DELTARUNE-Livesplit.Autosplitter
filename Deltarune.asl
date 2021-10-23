@@ -32,6 +32,23 @@ startup {
         settings.Add("rudinnskip3", true, "Rudinn Skip 3", "fields");
         settings.Add("vandalizedpuzzle", true, "Vandalized Puzzle", "fields");
         settings.Add("exitfields", true, "Rudinn Skip 4 / Exiting Fields", "fields");
+    settings.Add("checkerboard", true, "Checkerboard", "ch1");
+        settings.Add("pawnskip1", true, "Pawn Skip 1", "checkerboard");
+        settings.Add("pawnskip2", true, "Pawn Skip 2", "checkerboard");
+        settings.Add("exitcheckerboard", true, "Exiting Checkerboard", "checkerboard");
+    settings.Add("forest", true, "Forest", "ch1");
+        settings.Add("bloxerskip1", true, "Pawn Skip 1", "forest");
+        settings.Add("bloxerskip2", true, "Pawn Skip 2", "forest");
+        settings.Add("exitforest", true, "Exiting Checkerboard", "forest");
+    settings.Add("prison", true, "Prison", "ch1");
+        settings.Add("captured", true, "Captured", "prison");
+        settings.Add("exitprison", true, "Exiting Prison", "prison");
+    settings.Add("cardcastle", true, "Card Castle", "ch1");
+        settings.Add("rudinnrangerskip", true, "Rudinn Ranger Skip", "cardcastle");
+        settings.Add("headhathyskip", true, "Head Hathy Skip", "cardcastle");
+        settings.Add("shopping", true, "After the shop, before K Round", "cardcastle");
+        settings.Add("exitthrone", true, "Exit Card Castle's Throne room", "cardcastle");
+        settings.Add("king", true, "After King Battle", "cardcastle");
     
     // @TODO Need update later, for now only check rooms
     // object array structure
@@ -51,7 +68,20 @@ startup {
         {"rudinnskip2",  new object[] {false, -1, 334}},
         {"rudinnskip3",  new object[] {false, -1, 336}},
         {"vandalizedpuzzle",  new object[] {false, -1, 343}},
-        {"exitfields",  new object[] {false, -1, 345}}
+        {"exitfields",  new object[] {false, -1, 345}},
+        {"pawnskip1",  new object[] {false, -1, 347}},
+        {"pawnskip2",  new object[] {false, -1, 351}},
+        {"exitcheckerboard",  new object[] {false, -1, 353}},
+        {"bloxerskip1",  new object[] {false, -1, 365}},
+        {"bloxerskip2",  new object[] {false, -1, 376}},
+        {"exitforest",  new object[] {false, -1, 378}},
+        {"captured",  new object[] {false, -1, 385}},
+        {"exitprison",  new object[] {false, -1, 389}},
+        {"rudinnrangerskip",  new object[] {false, -1, 396}},
+        {"headhathyskip",  new object[] {false, -1, 400}},
+        {"shopping",  new object[] {false, -1, 405}},
+        {"exitthrone",  new object[] {false, -1, 407}},
+        {"king",  new object[] {false, -1, 409}}
     };
 
     vars.resetsRoom = new object[] {
