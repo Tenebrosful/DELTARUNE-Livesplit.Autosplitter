@@ -7,3 +7,6 @@ Inspired by [Narry's Autosplitter](https://drive.google.com/file/d/1SCpuUpDgIYHm
 
 # Splits
 There is a lot of additional splits possible like after skips that normally aren't in standart splits because if I made a autosplitter it's to split the most possible segments as possible.
+
+## Currently available
+- Chapter 1 (any%, TP, TR) -- **Need manual split to end the run**
