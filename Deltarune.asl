@@ -33,6 +33,8 @@ startup {
     };
 
     vars.startsRoom = new object[] {
+        281 // Ch1
+        // Ch2 runs don't start with a room changing
     };
 
 }
