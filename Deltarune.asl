@@ -8,6 +8,16 @@ state("Deltarune")
 
 init {
     print("[DELTARUNE] INIT");
+
+    vars.firstRun = true;
+    vars.reactivate =  (Func<bool>)(() =>
+	{
+		foreach (string split in vars.splits.Keys)
+			vars.splits[split][vars.done] = false;
+
+		vars.log("[DELTARUNE] All splits have been reset to initial state");
+		return true;
+	});
 }
 
 startup {
@@ -238,6 +248,21 @@ reset {
     }
 
     return false;
+}
+
+update {
+    current.phase = timer.CurrentPhase;
+
+	if (vars.firstRun) {
+		vars.firstRun = false;
+	}
+	else
+	{
+		// Did the timer just start?
+		if ((current.phase == TimerPhase.Running) && (old.phase == TimerPhase.NotRunning)) {
+			vars.reactivate();
+		}
+	}
 }
 
 split {
