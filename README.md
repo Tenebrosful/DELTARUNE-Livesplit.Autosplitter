@@ -10,3 +10,5 @@ There is a lot of additional splits possible like after skips that normally aren
 
 ## Currently available
 - Chapter 1 (any%, TP, TR) -- **Need manual split to end the run**
+- Chapter 2 (Main Route, All Recruits) -- **Need manual split for Mecha Queen and to end the run**
+- All Chapters (Main route) -- **Need manual split to end ch1 split and end the run *(Need to uncheck RESET)***
