@@ -54,8 +54,8 @@ startup {
         settings.Add("ch1pawnskip2", false, "Pawn Skip 2", "ch1checkerboard");
         settings.Add("ch1exitcheckerboard", true, "Exiting Checkerboard", "ch1checkerboard");
     settings.Add("ch1forest", true, "Forest", "ch1");
-        settings.Add("ch1bloxerskip1", false, "Pawn Skip 1", "ch1forest");
-        settings.Add("ch1bloxerskip2", false, "Pawn Skip 2", "ch1forest");
+        settings.Add("ch1bloxerskip1", false, "Bloxer Skip 1", "ch1forest");
+        settings.Add("ch1bloxerskip2", false, "Bloxer Skip 2", "ch1forest");
         settings.Add("ch1exitforest", true, "Exiting Checkerboard", "ch1forest");
     settings.Add("ch1prison", true, "Prison", "ch1");
         settings.Add("ch1captured", false, "Captured", "ch1prison");
