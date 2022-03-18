@@ -9,6 +9,6 @@ Inspired by [Narry's Autosplitter](https://drive.google.com/file/d/1SCpuUpDgIYHm
 There is a lot of additional splits possible like after skips that normally aren't in standart splits because if I made a autosplitter it's to split the most possible segments as possible.
 
 ## Currently available
-- Chapter 1 (any%, TP, TR) -- **Need manual split to end the run**
+- Chapter 1 (any%, TP, TR) -- **Need manual split to end the run *(except for SURVEY PROGRAM)***
 - Chapter 2 (Main Route, All Recruits) -- **Need manual split for Mecha Queen and to end the run**
 - All Chapters (Main route) -- **Need manual split to end ch1 split and end the run *(Need to uncheck RESET)***
