@@ -1,13 +1,39 @@
 // DELTARUNE autosplitter by Tenebrosful
 // Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
-state("Deltarune")
+state("Deltarune", "v1.10/v1.09")
+{
+    uint room : "Deltarune.exe", 0x6EF248;
+}
+
+state("Deltarune", "v1.07/v1.06/v1.05/v1.00")
 {
     uint room : "Deltarune.exe", 0x6EBF08;
 }
 
+state("Deltarune", "SURVEY_PROGRAM")
+{
+    uint room : "Deltarune.exe", 0x6AC9F0;
+}
+
 init {
     print("[DELTARUNE] INIT");
+
+    switch(modules.First().ModuleMemorySize) {
+        case 7495680:
+            version = "v1.10/v1.09/v1.08";
+            break;
+        case 7491584:
+            version = "v1.07/v1.06/v1.05/v1.00";
+            break;
+        case 7954432:
+            version = "SURVEY_PROGRAM";
+            break;
+    }
+
+    print("[DELTARUNE] Detected version : " + version);
+
+    print("[DELTARUNE] " + modules.First().ModuleMemorySize);
 
     vars.firstRun = true;
     vars.reactivate =  (Func<bool>)(() =>
@@ -15,7 +41,7 @@ init {
 		foreach (string split in vars.splits.Keys)
 			vars.splits[split][vars.done] = false;
 
-		vars.log("[DELTARUNE] All splits have been reset to initial state");
+		print("[DELTARUNE] All splits have been reset to initial state");
 		return true;
 	});
 }
