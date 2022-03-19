@@ -512,6 +512,7 @@ start {
 
 reset {
   if (old.room == current.room) return false;
+  if (settings["allch"]) return false;
 
   switch(version) {
     case "SURVEY_PROGRAM":
