@@ -117,6 +117,7 @@ init {
             {"ch2exitacidlake", new object[] {false, -1, 203}},
             {"ch2werewerewire", new object[] {false, -1, 205}},
             {"ch2queen", new object[] {false, -1, 207}},
+            {"ch2mecaqueen", new object[] {false, 207, 208}},
 
             {"ch2sealfountain", new object[] {false, -1, 1}}
         };
@@ -220,6 +221,7 @@ init {
             {"ch2exitacidlake", new object[] {false, -1, 202}},
             {"ch2werewerewire", new object[] {false, -1, 204}},
             {"ch2queen", new object[] {false, -1, 206}},
+            {"ch2mecaqueen", new object[] {false, 207, 208}},
 
             {"ch2sealfountain", new object[] {false, -1, 0}}
         };
@@ -479,6 +481,7 @@ startup {
     settings.Add("ch2tasquemanagersnowgrave", false, "Tasque Manager (Snowgrave)", "ch2mansion");
     settings.Add("ch2werewerewire", false, "Werewerewire", "ch2mansion");
     settings.Add("ch2queen", true, "Queen", "ch2mansion");
+    settings.Add("ch2mecaqueen", true, "Meca Queen", "ch2mansion");
     settings.Add("ch2sealfountain", false, "Fountain sealed", "ch2mansion");
   settings.Add("ch2acidlake", true, "Acid Lake", "ch2");
     settings.Add("ch2enteracidlake", true, "Entering Acid Lake", "ch2acidlake");
