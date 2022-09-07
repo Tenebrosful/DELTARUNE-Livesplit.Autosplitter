@@ -1,5 +1,5 @@
 # DELTARUNE-Livesplit.Autosplitter
-Autosplitter for DELTARUNE (version 1.00 to 1.10).
+Autosplitter for DELTARUNE (version 1.00 to 1.15).
 
 Inspired by [Narry's Autosplitter](https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing) based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own)
 
