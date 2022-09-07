@@ -1,6 +1,10 @@
 // DELTARUNE autosplitter by Tenebrosful
 // Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
+state("Deltarune", "v1.15") {
+  uint room : "Deltarune.exe", 0x6F0B70;
+}
+
 state("Deltarune", "v1.10/v1.09/v1.08") {
   uint room : "Deltarune.exe", 0x6EF248;
 }
@@ -34,8 +38,23 @@ init {
   print("[DELTARUNE] INIT");
 
   switch(modules.First().ModuleMemorySize) {
+    case 7503872:
+        version = "v1.15";
+        break;
     case 7495680:
         version = "v1.10/v1.09/v1.08";
+        break;
+    case 7491584:
+        version = "v1.07/v1.06/v1.05/v1.00";
+        break;
+    case 7954432:
+        version = "SURVEY_PROGRAM";
+        break;
+  }
+
+  switch(version) {
+    case "v1.15":
+    case "v1.10/v1.09/v1.08":
         // @TODO Need update later, for now only check rooms
         // object array structure
         vars.done = 0; // bool have we triggered this split already?
@@ -138,8 +157,7 @@ init {
             // Ch2 runs don't start with a room changing
         };
         break;
-    case 7491584:
-        version = "v1.07/v1.06/v1.05/v1.00";
+    case "v1.07/v1.06/v1.05/v1.00":
         // @TODO Need update later, for now only check rooms
         // object array structure
         vars.done = 0; // bool have we triggered this split already?
@@ -242,8 +260,7 @@ init {
             // Ch2 runs don't start with a room changing
         };
         break;
-    case 7954432:
-        version = "SURVEY_PROGRAM";
+    case "SURVEY_PROGRAM":
         // object array structure
         vars.done = 0;  // bool  have we triggered this split already?
         vars.maxplot = 1;  // double  maximum allowed plot, -1 if none
@@ -499,6 +516,7 @@ start {
     case "SURVEY_PROGRAM":
       if (current.room == 1) return true;
       break;
+    default:
     case "v1.10/v1.09/v1.08":
     case "v1.07/v1.06/v1.05/v1.00":
       foreach(int startingRoom in vars.startsRoom) {
@@ -521,6 +539,8 @@ reset {
     case "SURVEY_PROGRAM":
         if (version == "SURVEY_PROGRAM") return current.room == 1;
         break;
+    default:
+    case "v1.15":
     case "v1.10/v1.09/v1.08":
     case "v1.07/v1.06/v1.05/v1.00":
         foreach(int resetingRoom in vars.resetsRoom) {
@@ -549,6 +569,8 @@ split {
   if(current.room != old.room) print("[DELTARUNE] ROOM CHANGED " + old.room + "->" + current.room);
 
   switch(version) {
+    default:
+    case "v1.15":
     case "v1.10/v1.09/v1.08":
     case "v1.07/v1.06/v1.05/v1.00":
         foreach(string splitKey in vars.splits.Keys){
