@@ -402,7 +402,7 @@ startup {
   *************************/
 
   settings.Add("demo", true, "Current Demo");
-  settings.SetToolTip("survey_program", "Only concern if you play on current demo");
+  settings.SetToolTip("demo", "Only concern if you play on current demo");
 
   settings.CurrentDefaultParent = "demo";
 
