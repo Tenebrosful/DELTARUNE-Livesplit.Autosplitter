@@ -593,6 +593,9 @@ split {
         }
         break;
     case "SURVEY_PROGRAM":
+    if(current.plot != old.plot) print("[DELTARUNE] PLOT CHANGED " + old.plot + "->" + current.plot);
+    if(current.fight != old.fight) print("[DELTARUNE] FIGHT CHANGED " + old.fight + "->" + current.fight);
+
         foreach (string goal in vars.splits.Keys) {
             // is this an enabled split that is armed?
             if ((settings[goal]) && (!vars.splits[goal][vars.done])) {
@@ -669,6 +672,8 @@ split {
 
                 // if we get to this point, all requirements are met
                 vars.splits[goal][vars.done] = true;
+
+                print("[DELTARUNE] SPLIT " + goal);
 
                 return true;
             }
