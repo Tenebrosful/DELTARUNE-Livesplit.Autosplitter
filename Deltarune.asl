@@ -90,6 +90,37 @@ startup {
   #region All Chapters Settings
   settings.Add("AC", false, "All Chapters");
 
+  #region All Chapters All Bosses Settings
+  settings.Add("AC_AB", false, "All Bosses", "AC");
+    settings.Add("AC_AB$Ch1", true, "Chapter 1", "AC_AB");
+    settings.CurrentDefaultParent = "AC_AB$Ch1";
+      settings.Add("AC_AB$Ch1_CastleTown", true, "Castle Town");
+    settings.CurrentDefaultParent = "AC_AB$Ch1_CastleTown";
+      settings.Add("AC_AB$Ch1_CastleTown_Intro", false, "Introduction");
+      settings.Add("AC_AB$Ch1_CastleTown_EnterBed", false, "Enter Bed");
+      settings.Add("AC_AB$Ch1_CastleTown_WristProtector", false, "Wrist Protector");
+      settings.Add("AC_AB$Ch1_CastleTown_SavePointRoom", false, "Save Point Room");
+      settings.Add("AC_AB$Ch1_CastleTown_WindyMovement", false, "Windy Movement");
+      settings.Add("AC_AB$Ch1_CastleTown_FirstSlidesRoom", false, "First Slides Room");
+      settings.Add("AC_AB$Ch1_CastleTown_Pre-EyesPuzzleRoom", false, "Pre-Eyes Puzzle Room");
+      settings.Add("AC_AB$Ch1_CastleTown_EyesPuzzle", false, "Eyes Puzzle");
+      settings.Add("AC_AB$Ch1_CastleTown_SecondSlidesRoom", false, "Second Slides Room");
+      settings.Add("AC_AB$Ch1_CastleTown_Chase1Room", false, "Chase 1 Room");
+      settings.Add("AC_AB$Ch1_CastleTown_Chase2Room", false, "Chase 2 Room");
+      settings.Add("AC_AB$Ch1_CastleTown_Post-ChaseRoom", false, "Post-Chase Room");
+      settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#1", false, "Empty Town #1");
+      settings.Add("AC_AB$Ch1_CastleTown_Pre-Lancer", false, "Pre-Lancer (SURVEY ONLY)");
+      settings.Add("AC_AB$Ch1_CastleTown_Lancer", false, "Lancer (SURVEY ONLY)");
+      settings.Add("AC_AB$Ch1_CastleTown_Post-Lancer", false, "Post-Lancer (SURVEY ONLY)");
+      settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#2", false, "Empty Town #2");
+      settings.Add("AC_AB$Ch1_CastleTown_DummyRoom", false, "Dummy Room");
+      settings.Add("AC_AB$Ch1_CastleTown_GreatDoor", true, "Great Door");
+    settings.CurrentDefaultParent = null;
+    settings.Add("AC_AB$Ch1ToCh2", true, "Switching Chapter 1 -> 2", "AC_AB");
+    settings.Add("AC_AB$Ch2", true, "Chapter 2", "AC_AB");
+    settings.CurrentDefaultParent = "AC_AB$Ch2";
+  #endregion
+
   #region All Chapters Main Route / All Recruits Settings
   settings.Add("AC_MR", false, "Main Route / All Recruits", "AC");
     settings.Add("AC_MR$Ch1", true, "Chapter 1", "AC_MR");
@@ -108,21 +139,6 @@ startup {
     settings.Add("AC_SG$Ch1ToCh2", true, "Switching Chapter 1 -> 2", "AC_SG");
     settings.Add("AC_SG$Ch2", true, "Chapter 2", "AC_SG");
     settings.CurrentDefaultParent = "AC_SG$Ch2";
-  #endregion
-
-  #region All Chapters All Bosses Settings
-  settings.Add("AC_AB", false, "All Bosses", "AC");
-    settings.Add("AC_AB$Ch1", true, "Chapter 1", "AC_AB");
-    settings.CurrentDefaultParent = "AC_AB$Ch1";
-      settings.Add("AC_AB$Ch1_CastleTown", true, "Castle Town");
-    settings.CurrentDefaultParent = "AC_AB$Ch1_CastleTown";
-      settings.Add("AC_AB$Ch1_CastleTown_Intro", false, "Introduction");
-      settings.Add("AC_AB$Ch1_CastleTown_EnterBed", false, "Enter Bed");
-      settings.Add("AC_AB$Ch1_CastleTown_WristProtector", false, "Wrist Protector");
-    settings.CurrentDefaultParent = null;
-    settings.Add("AC_AB$Ch1ToCh2", true, "Switching Chapter 1 -> 2", "AC_AB");
-    settings.Add("AC_AB$Ch2", true, "Chapter 2", "AC_AB");
-    settings.CurrentDefaultParent = "AC_AB$Ch2";
   #endregion
 
   settings.CurrentDefaultParent = null;
@@ -225,7 +241,148 @@ init {
         {"Ch1_CastleTown_EnterBed", new object[] {false, 283, 315, -1}}
       };
       break;
+    case "SURVEY_PROGRAM":
+      vars.startRooms = new object[] { 1 };
+      vars.resetRooms = new object[] { 132, 139 };
+      vars.splitsVarIndex = new object[] { "done", "maxPlot", "exactPlot", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
+      vars.splits = new Dictionary<string, object[]>() {
+        // Castle Town
+        {"Ch1_CastleTown_Intro", new object[] {false, -1, -1, 1, 2, -1, -1, -1}},
+        {"Ch1_CastleTown_EnterBed", new object[] {false, -1, -1, 2, 34, -1, -1, -1}},
+        {"Ch1_CastleTown_WristProtector", new object[] {false, -1, -1, 34, 35, -1, -1, -1}},
+        {"Ch1_CastleTown_SavePointRoom", new object[] {false, -1, -1, 35, 36, -1, -1, -1}},
+        {"Ch1_CastleTown_WindyMovement", new object[] {false, -1, -1, 36, 37, -1, -1, -1}},
+        {"Ch1_CastleTown_FirstSlidesRoom", new object[] {false, -1, -1, 37, 39, -1, -1, -1}},
+        {"Ch1_CastleTown_Pre-EyesPuzzleRoom", new object[] {false, -1, -1, 39, 40, -1, -1, -1}},
+        {"Ch1_CastleTown_EyesPuzzle", new object[] {false, -1, -1, 40, 41, -1, -1, -1}},
+        {"Ch1_CastleTown_SecondSlidesRoom", new object[] {false, -1, -1, 41, 42, -1, -1, -1}},
+        {"Ch1_CastleTown_Chase1Room", new object[] {false, -1, -1, 42, 43, -1, -1, -1}},
+        {"Ch1_CastleTown_Chase2Room", new object[] {false, -1, -1, 43, 44, -1, -1, -1}},
+        {"Ch1_CastleTown_Post-ChaseRoom", new object[] {false, -1, -1, 44, 45, -1, -1, -1}},
+        {"Ch1_CastleTown_EmptyTown#1", new object[] {false, -1, -1, 45, 46, -1, -1, -1}},
+        {"Ch1_CastleTown_Pre-Lancer", new object[] {false, -1, -1, -1, 46, 0, 1, -1}},
+        {"Ch1_CastleTown_Lancer", new object[] {false, -1, -1, -1, 46, 1, 0, -1}},
+        {"Ch1_CastleTown_Post-Lancer", new object[] {false, -1, -1, 46, 45, -1, -1, -1}},
+        {"Ch1_CastleTown_EmptyTown#2", new object[] {false, -1, -1, 45, 47, -1, -1, -1}},
+        {"Ch1_CastleTown_DummyRoom", new object[] {false, -1, -1, 47, 48, -1, -1, -1}},
+        {"Ch1_CastleTown_GreatDoor", new object[] {false, -1, -1, 48, 49, -1, -1, -1}},
 
+        // Fields
+        // {"savepointroomF", new object[] {false, -1, -1, 49, 50, -1, -1, -1}},
+        // {"fields2ndroom", new object[] {false, -1, -1, 50, 51, -1, -1, -1}},
+        // {"rudinn1skip", new object[] {false, -1, -1, 51, 52, -1, -1, -1}},
+        // {"rudinn2skip", new object[] {false, -1, -1, 52, 54, -1, -1, -1}},
+        // {"brokencakeroom", new object[] {false, -1, -1, 54, 55, -1, -1, -1}},
+        // {"rudinn3skip", new object[] {false, -1, -1, 55, 56, -1, -1, -1}},
+        // {"pre-hathy", new object[] {false, -1, -1, -1, 56, 0, 1, -1}},
+        // {"hathyfight", new object[] {false, -1, -1, -1, 56, 1, 0, -1}},
+        // {"post-hathy", new object[] {false, -1, -1, 56, 57, -1, -1, -1}},
+        // {"puzzleroom#1", new object[] {false, -1, -1, 57, 58, -1, -1, -1}},
+        // {"susiejoinedtheparty", new object[] {false, -1, -1, 58, 57, -1, -1, -1}},
+        // {"puzzleroom#2", new object[] {false, -1, -1, 57, 58, -1, -1, 8}},
+        // {"pre-cround", new object[] {false, -1, -1, -1, 58, 0, 1, -1}},
+        // {"cround", new object[] {false, -1, -1, -1, 58, 1, 0, -1}},
+        // {"post-cround", new object[] {false, -1, -1, 58, 59, -1, -1, -1}},
+        // {"savepointroomSF", new object[] {false, -1, -1, 59, 61, -1, -1, -1}},
+        // {"pre-jigsawry", new object[] {false, -1, -1, -1, 61, 0, 1, -1}},
+        // {"jigsawry", new object[] {false, -1, -1, -1, 61, 1, 0, -1}},
+        // {"post-jigsawry", new object[] {false, -1, -1, 61, 62, -1, -1, -1}},
+        // {"boxpushingpuzzle", new object[] {false, -1, -1, 62, 63, -1, -1, -1}},
+        // {"rudinn4skip", new object[] {false, -1, -1, 63, 65, -1, -1, -1}},
+
+        // //Checkboard
+        // {"whitetiles#1", new object[] {false, -1, -1, 65, 66, -1, -1, -1}},
+        // {"ponman1skip", new object[] {false, -1, -1, 66, 67, -1, -1, -1}},
+        // {"whitetiles#2", new object[] {false, -1, -1, 67, 68, -1, -1, -1}},
+        // {"lancercutsceneroom", new object[] {false, -1, -1, 68, 69, -1, -1, -1}},
+        // {"whitetiles#3", new object[] {false, -1, -1, 69, 70, -1, -1, -1}},
+        // {"ponman2skip", new object[] {false, -1, -1, 70, 71, -1, -1, -1}},
+        // {"savepointroomCB", new object[] {false, -1, -1, 71, 72, -1, -1, -1}},
+        // {"pre-kround", new object[] {false, -1, -1, -1, 72, 0, 1, -1}},
+        // {"kround", new object[] {false, -1, -1, -1, 72, 1, 0, -1}},
+        // {"post-kround", new object[] {false, -1, -1, 72, 73, -1, -1, -1}},
+
+        // //Forest
+        // {"savepointroomFo#1", new object[] {false, -1, -1, 73, 74, -1, -1, -1}},
+        // {"rabbickskip#1", new object[] {false, -1, -1, 74, 75, -1, -1, -1}},
+        // {"rabbickskip#2", new object[] {false, -1, -1, 75, 76, -1, -1, -1}},
+        // {"spinningdiamondsroom", new object[] {false, -1, -1, 76, 78, -1, -1, -1}},
+        // {"suitpuzzle#1", new object[] {false, -1, -1, 78, 79, -1, -1, -1}},
+        // {"bloxer1skip", new object[] {false, -1, -1, 79, 81, -1, -1, -1}},
+        // {"pre-clover", new object[] {false, -1, -1, -1, 81, 0, 1, -1}},
+        // {"clover", new object[] {false, -1, -1, -1, 81, 1, 0, -1}},
+        // {"post-clover", new object[] {false, -1, -1, 81, 82, -1, -1, -1}},
+        // {"bakesale", new object[] {false, -1, -1, 82, 84, -1, -1, -1}},
+        // {"bloxer2skip", new object[] {false, -1, -1, 84, 85, -1, -1, -1}},
+        // {"scissorsdancersroom", new object[] {false, -1, -1, 85, 87, -1, -1, -1}},
+        // {"trashmachine", new object[] {false, -1, -1, 87, 88, -1, -1, -1}},
+        // {"starwalkerroom", new object[] {false, -1, -1, 88, 89, -1, -1, -1}},
+        // {"hiddenswitchroom", new object[] {false, -1, -1, 89, 90, -1, -1, -1}},
+        // {"savepointroomFo#2", new object[] {false, -1, -1, 90, 91, -1, -1, -1}},
+        // {"mazeroomfirstpart", new object[] {false, -1, -1, 91, 93, -1, -1, -1}},
+        // {"mazeroommSusie", new object[] {false, -1, -1, 93, 94, -1, -1, -1}},
+        // {"mazeroomsecondpart", new object[] {false, -1, -1, 94, 96, -1, -1, -1}},
+        // {"savepointroomFo#3", new object[] {false, -1, -1, 96, 97, -1, -1, -1}},
+        // {"pre-susielancer", new object[] {false, -1, -1, -1, 97, 0, 1, -1}},
+        // {"susielancer", new object[] {false, -1, -1, -1, 97, 1, 0, -1}},
+        // {"post-susielancer", new object[] {false, -1, -1, 97, 98, -1, -1, -1}},
+
+        // //Escape
+        // {"autoscroller#1", new object[] {false, -1, -1, 98, 99, -1, -1, -1}},
+        // {"autoscroller#2", new object[] {false, -1, -1, 99, 100, -1, -1, -1}},
+        // {"autoscroller#3", new object[] {false, -1, -1, 100, 101, -1, -1, -1}},
+        // {"autoscroller#4", new object[] {false, -1, -1, 101, 102, -1, -1, -1}},
+        // {"chase1roomFo", new object[] {false, -1, -1, 102, 103, -1, -1, -1}},
+        // {"chase2roomFo", new object[] {false, -1, -1, 103, 104, -1, -1, -1}},
+        // {"capturedcutscene", new object[] {false, -1, -1, 104, 105, -1, -1, -1}},
+        // {"prizonpuzzle", new object[] {false, -1, -1, 105, 106, -1, -1, -1}},
+        // {"pre-susiefight", new object[] {false, -1, -1, -1, 106, 0, 1, -1}},
+        // {"susiefight", new object[] {false, -1, -1, -1, 106, 1, 0, -1}},
+        // {"post-susiefight", new object[] {false, -1, -1, 106, 105, -1, -1, -1}},
+        // {"escapeprisoncutscene", new object[] {false, -1, -1, 105, 106, -1, -1, 9}},
+        // {"enterelevator#1", new object[] {false, -1, -1, 106, 107, -1, -1, -1}},
+        // {"enterelevator#2", new object[] {false, -1, -1, 107, 109, -1, -1, -1}},
+        // {"elevator", new object[] {false, -1, -1, 109, 114, -1, -1, -1}},
+        // {"rudinnrangerskip", new object[] {false, -1, -1, 114, 116, -1, -1, -1}},
+        // {"spinningdiamondsroom#1Castle", new object[] {false, -1, -1, 116, 117, -1, -1, -1}},
+        // {"rouxlspuzzle#1", new object[] {false, -1, -1, 117, 116, -1, -1, -1}},
+        // {"spinningdiamondsroom#2Castle", new object[] {false, -1, -1, 116, 118, -1, -1, -1}},
+        // {"headhathyskip", new object[] {false, -1, -1, 118, 120, -1, -1, -1}},
+        // {"scissordancersroom#1", new object[] {false, -1, -1, 120, 121, -1, -1, -1}},
+        // {"rouxlspuzzle#2", new object[] {false, -1, -1, 121, 120, -1, -1, -1}},
+        // {"scissordancersroom#2", new object[] {false, -1, -1, 120, 123, -1, -1, -1}},
+        // {"cardcastle5f#1", new object[] {false, -1, -1, 123, 134, -1, -1, -1}},
+        // {"hipshop", new object[] {false, -1, -1, 134, 123, -1, -1, -1}},
+        // {"cardcastle5f#2", new object[] {false, -1, -1, 123, 125, -1, -1, -1}},
+        // {"pre-kroundcastle", new object[] {false, -1, -1, -1, 125, 0, 1, -1}},
+        // {"kroundcastle", new object[] {false, -1, -1, -1, 125, 1, 0, -1}},
+        // {"post-kroundcastle", new object[] {false, -1, -1, 125, 126, -1, -1, -1}},
+
+        // //Chaos King
+        // {"cardcastlethrone", new object[] {false, -1, -1, 126, 127, -1, -1, -1}},
+        // {"pre-kingroom", new object[] {false, -1, -1, 127, 128, -1, -1, -1}},
+        // {"pre-king", new object[] {false, -1, -1, -1, 128, 0, 1, -1}},
+        // {"king", new object[] {false, -1, -1, -1, 128, 1, 0, -1}},
+        // {"post-king", new object[] {false, -1, -1, 128, 129, -1, -1, -1}},
+
+        // //Sleep
+        // {"post-kingroom", new object[] {false, -1, -1, 129, 130, -1, -1, -1}},
+        // {"fountaincutscene", new object[] {false, -1, -1, 130, 33, -1, -1, -1}},
+        // {"unusedclassroom", new object[] {false, -1, -1, 33, 31, -1, -1, -1}},
+        // {"school1", new object[] {false, -1, -1, 31, 29, -1, -1, -1}},
+        // {"school2", new object[] {false, -1, -1, 29, 14, -1, -1, -1}},
+        // {"hometownschool", new object[] {false, -1, -1, 14, 13, -1, -1, -1}},
+        // {"hometownlibrary", new object[] {false, -1, -1, 13, 11, -1, -1, -1}},
+        // {"hometownsans", new object[] {false, -1, -1, 11, 9, -1, -1, -1}},
+        // {"hometownscatty", new object[] {false, -1, -1, 9, 7, -1, -1, -1}},
+        // {"hometowntorielhouse", new object[] {false, -1, -1, 7, 5, -1, -1, -1}},
+        // {"torielhouse#1", new object[] {false, -1, -1, 5, 3, -1, -1, -1}},
+        // {"torielhouse#2", new object[] {false, -1, -1, 3, 2, -1, -1, -1}},
+
+        //Ends on the textwriter being discarded
+        // {"theend", new object[] {false, -1, 251, -1, 2, -1, -1, 2}},
+      };
+      break;
   }
   #endregion
 }
