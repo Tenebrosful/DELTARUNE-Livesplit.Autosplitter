@@ -111,7 +111,7 @@ startup {
       settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#1", false, "Empty Town #1");
       settings.Add("AC_AB$Ch1_CastleTown_Pre-Lancer", false, "Pre-Lancer (SURVEY ONLY)");
       settings.Add("AC_AB$Ch1_CastleTown_Lancer", false, "Lancer (SURVEY ONLY)");
-      settings.Add("AC_AB$Ch1_CastleTown_Post-Lancer", false, "Post-Lancer (SURVEY ONLY)");
+      settings.Add("AC_AB$Ch1_CastleTown_Post-Lancer", false, "Post-Lancer");
       settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#2", false, "Empty Town #2");
       settings.Add("AC_AB$Ch1_CastleTown_DummyRoom", false, "Dummy Room");
       settings.Add("AC_AB$Ch1_CastleTown_GreatDoor", true, "Great Door");
