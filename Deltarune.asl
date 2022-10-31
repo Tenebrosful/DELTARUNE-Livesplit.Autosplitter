@@ -537,7 +537,7 @@ reset {
 
   switch(version) {
     case "SURVEY_PROGRAM":
-        if (version == "SURVEY_PROGRAM") return current.room == 1;
+        if (current.room == 1) { print("[DELTARUNE] RESET"); return true; }
         break;
     default:
     case "v1.15":
