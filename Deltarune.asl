@@ -1,16 +1,17 @@
 // DELTARUNE autosplitter by Tenebrosful
 // Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
-
+// filechoice on demo is used for ending chapter 1 and pausing the timer in all chapters (by NERS)
 state("Deltarune", "v1.15") {
   uint room : "Deltarune.exe", 0x6F0B70;
+
+  double filechoice : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x110;
+  double filechoice2 : "Deltarune.exe", 0x6FE864, 0x828, 0x78, 0x24, 0x10, 0x858, 0x2F0; // for SOME reason if you start chapter 2 first and then go into chapter 1 the first pointer doesn't work so i had to find a separate one
 }
 
-state("Deltarune", "v1.10/v1.09/v1.08") {
+state("Deltarune", "v1.08 - v1.10") {
   uint room : "Deltarune.exe", 0x6EF248;
-}
 
-state("Deltarune", "v1.07/v1.06/v1.05/v1.00") {
-  uint room : "Deltarune.exe", 0x6EBF08;
+  // gotta find filechoice pointers for the 1.09 enthusiasts too someday
 }
 
 state("Deltarune", "SURVEY_PROGRAM") {
@@ -92,33 +93,33 @@ startup {
 
   #region All Chapters All Bosses Settings
   settings.Add("AC_AB", false, "All Bosses", "AC");
-    settings.Add("AC_AB$Ch1", true, "Chapter 1", "AC_AB");
-    settings.CurrentDefaultParent = "AC_AB$Ch1";
-      settings.Add("AC_AB$Ch1_CastleTown", true, "Castle Town");
-    settings.CurrentDefaultParent = "AC_AB$Ch1_CastleTown";
-      settings.Add("AC_AB$Ch1_CastleTown_Intro", false, "Introduction");
-      settings.Add("AC_AB$Ch1_CastleTown_EnterBed", false, "Enter Bed");
-      settings.Add("AC_AB$Ch1_CastleTown_WristProtector", false, "Wrist Protector");
-      settings.Add("AC_AB$Ch1_CastleTown_SavePointRoom", false, "Save Point Room");
-      settings.Add("AC_AB$Ch1_CastleTown_WindyMovement", false, "Windy Movement");
-      settings.Add("AC_AB$Ch1_CastleTown_FirstSlidesRoom", false, "First Slides Room");
-      settings.Add("AC_AB$Ch1_CastleTown_Pre-EyesPuzzleRoom", false, "Pre-Eyes Puzzle Room");
-      settings.Add("AC_AB$Ch1_CastleTown_EyesPuzzle", false, "Eyes Puzzle");
-      settings.Add("AC_AB$Ch1_CastleTown_SecondSlidesRoom", false, "Second Slides Room");
-      settings.Add("AC_AB$Ch1_CastleTown_Chase1Room", false, "Chase 1 Room");
-      settings.Add("AC_AB$Ch1_CastleTown_Chase2Room", false, "Chase 2 Room");
-      settings.Add("AC_AB$Ch1_CastleTown_Post-ChaseRoom", false, "Post-Chase Room");
-      settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#1", false, "Empty Town #1");
-      settings.Add("AC_AB$Ch1_CastleTown_Pre-Lancer", false, "Pre-Lancer (SURVEY ONLY)");
-      settings.Add("AC_AB$Ch1_CastleTown_Lancer", false, "Lancer (SURVEY ONLY)");
-      settings.Add("AC_AB$Ch1_CastleTown_Post-Lancer", false, "Post-Lancer");
-      settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#2", false, "Empty Town #2");
-      settings.Add("AC_AB$Ch1_CastleTown_DummyRoom", false, "Dummy Room");
-      settings.Add("AC_AB$Ch1_CastleTown_GreatDoor", true, "Great Door");
-    settings.CurrentDefaultParent = null;
-    settings.Add("AC_AB$Ch1ToCh2", true, "Switching Chapter 1 -> 2", "AC_AB");
-    settings.Add("AC_AB$Ch2", true, "Chapter 2", "AC_AB");
-    settings.CurrentDefaultParent = "AC_AB$Ch2";
+    // settings.Add("AC_AB$Ch1", true, "Chapter 1", "AC_AB");
+    // settings.CurrentDefaultParent = "AC_AB$Ch1";
+    //   settings.Add("AC_AB$Ch1_CastleTown", true, "Castle Town");
+    // settings.CurrentDefaultParent = "AC_AB$Ch1_CastleTown";
+    //   settings.Add("AC_AB$Ch1_CastleTown_Intro", false, "Introduction");
+    //   settings.Add("AC_AB$Ch1_CastleTown_EnterBed", false, "Enter Bed");
+    //   settings.Add("AC_AB$Ch1_CastleTown_WristProtector", false, "Wrist Protector");
+    //   settings.Add("AC_AB$Ch1_CastleTown_SavePointRoom", false, "Save Point Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_WindyMovement", false, "Windy Movement");
+    //   settings.Add("AC_AB$Ch1_CastleTown_FirstSlidesRoom", false, "First Slides Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Pre-EyesPuzzleRoom", false, "Pre-Eyes Puzzle Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_EyesPuzzle", false, "Eyes Puzzle");
+    //   settings.Add("AC_AB$Ch1_CastleTown_SecondSlidesRoom", false, "Second Slides Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Chase1Room", false, "Chase 1 Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Chase2Room", false, "Chase 2 Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Post-ChaseRoom", false, "Post-Chase Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#1", false, "Empty Town #1");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Pre-Lancer", false, "Pre-Lancer (SURVEY ONLY)");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Lancer", false, "Lancer (SURVEY ONLY)");
+    //   settings.Add("AC_AB$Ch1_CastleTown_Post-Lancer", false, "Post-Lancer");
+    //   settings.Add("AC_AB$Ch1_CastleTown_EmptyTown#2", false, "Empty Town #2");
+    //   settings.Add("AC_AB$Ch1_CastleTown_DummyRoom", false, "Dummy Room");
+    //   settings.Add("AC_AB$Ch1_CastleTown_GreatDoor", true, "Great Door");
+    // settings.CurrentDefaultParent = null;
+    // settings.Add("AC_AB$Ch1ToCh2", true, "Switching Chapter 1 -> 2", "AC_AB");
+    // settings.Add("AC_AB$Ch2", true, "Chapter 2", "AC_AB");
+    // settings.CurrentDefaultParent = "AC_AB$Ch2";
   #endregion
 
   #region All Chapters Main Route / All Recruits Settings
@@ -149,12 +150,61 @@ startup {
 
   #region Any% / True Pacifist Settings
   settings.Add("Ch1_Any", false, "Any% / True Pacifist", "Ch1");
-  settings.CurrentDefaultParent = "Ch1_Any";
-    settings.Add("Ch1_Any$Ch1_CastleTown", true, "Castle Town");
+    settings.Add("Ch1_Any$Ch1_CastleTown", true, "Castle Town", "Ch1_Any");
     settings.CurrentDefaultParent = "Ch1_Any$Ch1_CastleTown";
       settings.Add("Ch1_Any$Ch1_CastleTown_Intro", false, "Introduction");
       settings.Add("Ch1_Any$Ch1_CastleTown_EnterBed", false, "Enter Bed");
       settings.Add("Ch1_Any$Ch1_CastleTown_WristProtector", false, "Wrist Protector");
+      settings.Add("Ch1_Any$Ch1_CastleTown_SavePointRoom", false, "Save Point Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_WindyMovement", false, "Windy Movement");
+      settings.Add("Ch1_Any$Ch1_CastleTown_FirstSlidesRoom", false, "First Slides Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Pre-EyesPuzzleRoom", false, "Pre-Eyes Puzzle Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_EyesPuzzle", false, "Eyes Puzzle");
+      settings.Add("Ch1_Any$Ch1_CastleTown_SecondSlidesRoom", false, "Second Slides Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Chase1Room", false, "Chase 1 Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Chase2Room", false, "Chase 2 Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Post-ChaseRoom", false, "Post-Chase Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_EmptyTown#1", false, "Empty Town #1");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Pre-Lancer", false, "Pre-Lancer (SURVEY ONLY)");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Lancer", false, "Lancer (SURVEY ONLY)");
+      settings.Add("Ch1_Any$Ch1_CastleTown_Post-Lancer", false, "Post-Lancer");
+      settings.Add("Ch1_Any$Ch1_CastleTown_EmptyTown#2", false, "Empty Town #2");
+      settings.Add("Ch1_Any$Ch1_CastleTown_DummyRoom", false, "Dummy Room");
+      settings.Add("Ch1_Any$Ch1_CastleTown_GreatDoor", true, "Great Door");
+    settings.CurrentDefaultParent = null;
+    settings.Add("Ch1_Any$Ch1_Fields", true, "Fields", "Ch1_Any");
+    settings.CurrentDefaultParent = "Ch1_Any$Ch1_Fields";
+      settings.Add("Ch1_Any$Ch1_Fields_RudinnSkip#1", false, "Rudinn Skip 1");
+      settings.Add("Ch1_Any$Ch1_Fields_RudinnSkip#2", false, "Rudinn Skip 2");
+      settings.Add("Ch1_Any$Ch1_Fields_RudinnSkip#3", false, "Rudinn Skip 3");
+      settings.Add("Ch1_Any$Ch1_VandalizedPuzzle", false, "Vandalized Puzzle");
+      settings.Add("Ch1_Any$Ch1_Fields_RudinnSkip#4", true, "Rudinn Skip 4 / Exiting Fields");
+    settings.CurrentDefaultParent = null;
+    settings.Add("Ch1_Any$Ch1_Checkerboard", true, "Checkerboard", "Ch1_Any");
+    settings.CurrentDefaultParent = "Ch1_Any$Ch1_Checkerboard";
+      settings.Add("Ch1_Any$Ch1_PawnSkip#1", false, "Pawn Skip 1");
+      settings.Add("Ch1_Any$Ch1_PawnSkip#2", false, "Pawn Skip 2");
+      settings.Add("Ch1_Any$Ch1_ExitCheckerboard", true, "Exiting Checkerboard");
+    settings.CurrentDefaultParent = null;
+    settings.Add("Ch1_Any$Ch1_Forest", true, "Forest", "Ch1_Any");
+    settings.CurrentDefaultParent = "Ch1_Any$Ch1_Forest";
+      settings.Add("Ch1_Any$Ch1_BloxerSkip#1", false, "Bloxer Skip 1");
+      settings.Add("Ch1_Any$Ch1_BloxerSkip#2", false, "Bloxer Skip 2");
+      settings.Add("Ch1_Any$Ch1_ExitForest", true, "Exiting Forest");
+    settings.CurrentDefaultParent = null;
+    settings.Add("Ch1_Any$Ch1_prison", true, "Prison", "Ch1_Any");
+    settings.CurrentDefaultParent = "Ch1_Any$Ch1_prison";
+      settings.Add("Ch1_Any$Ch1_Captured", false, "Captured");
+      settings.Add("Ch1_Any$Ch1_ExitPrison", true, "Exiting Prison");
+    settings.CurrentDefaultParent = null;
+    // settings.Add("ch1cardcastle", true, "Card Castle", "ch1");
+    //   settings.Add("ch1rudinnrangerskip", false, "Rudinn Ranger Skip", "ch1cardcastle");
+    //   settings.Add("ch1headhathyskip", false, "Head Hathy Skip", "ch1cardcastle");
+    //   settings.Add("ch1shopping", false, "After the shop, before K Round", "ch1cardcastle");
+    //   settings.Add("ch1exitthrone", true, "Exiting Card Castle's Throne room", "ch1cardcastle");
+    //   settings.Add("ch1king", true, "After King Battle", "ch1cardcastle");
+    // settings.Add("ch1ending", true, "Light World (End)", "ch1");
+    //   settings.Add("ch1theend", true, "The End (Final Text Dismissed)", "ch1ending");
   #endregion
 
   #region
@@ -213,10 +263,10 @@ init {
     default:
       switch(module.ModuleMemorySize) {
         case 7495680:
-          version = "v1.10/v1.09/v1.08";
+          version = "v1.08 - v1.10";
           break;
         case 7491584:
-          version = "v1.07/v1.06/v1.05/v1.00";
+          version = "v1.00 - v1.07";
           break;
         default:
           vars.DebugPrint("Unable to recognize the game version");
@@ -232,7 +282,7 @@ init {
   #region Version variables (Splits, Start Rooms, Reset Rooms, ...)
   switch(version) {
     case "v1.15":
-    case "v1.10/v1.09/v1.08":
+    case "v1.08 - v1.10":
       vars.startRooms = new object[] { 282 };
       vars.resetRooms = new object[] { 234, 279, 413 };
       vars.splitsVarIndex = new object[] { "done", "oldRoom", "currentRoom", "specialCondition" };
@@ -397,6 +447,7 @@ update {
 	vars.prevUpdateTime = Environment.TickCount;
 
   if (version == "") return false; // Disable the autosplitter when game version is unknown
+  if (version == "v1.00 - v1.07") { vars.DebugPrint("Version v1.00 - v1.07 is not longer supported"); return false; }
 
   if (current.room != old.room) vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
@@ -420,7 +471,7 @@ onStart {
   else if (settings["Ch1_Any"]) { vars.currentCategoryPrefix = "Ch1_Any$"; vars.DebugPrint("Selected category: Chapter 1 Any% / True Pacifist"); }
   else if (settings["Ch1_AB"]) { vars.currentCategoryPrefix = "Ch1_AB$"; vars.DebugPrint("Selected category: Chapter 1 All Bosses"); }
 
-  else if (settings["Ch2_MR"]) { vars.currentCategoryPrefix = "Ch2_MR$"; vars.DebugPrint("Selected category: Chapter 2 Main Route"); }
+  else if (settings["Ch2_MR"]) { vars.currentCategoryPrefix = "Ch2_MR$"; vars.DebugPrint("Selected category: Chapter 2 Main Route / All Recruits"); }
   else if (settings["Ch2_SG"]) { vars.currentCategoryPrefix = "Ch2_SG$"; vars.DebugPrint("Selected category: Chapter 2 Snowgrave"); }
   else if (settings["Ch2_AB"]) { vars.currentCategoryPrefix = "Ch2_AB$"; vars.DebugPrint("Selected category: Chapter 2 All Bosses"); }
 }
@@ -445,8 +496,7 @@ split {
 
   switch(version) {
     case "v1.15":
-    case "v1.10/v1.09/v1.08":
-    case "v1.07/v1.06/v1.05/v1.00":
+    case "v1.08 - v1.10":
       foreach(string splitKey in vars.splits.Keys){
         if (!settings[vars.currentCategoryPrefix + splitKey] || vars.splits[splitKey][vars.findSplitVarIndex("done")]) // Checking if the split isn't already done or not enabled
           continue;
@@ -461,11 +511,15 @@ split {
 
         // is there a special flag requirement?
         if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
+          bool pass = false;
           switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
-            case 0:
-              vars.DebugPrint("Special !");
-              continue;
+            case 1:
+              // Chapter 1 end
+              pass = ((current.filechoice === old.filechoice + 3) || (current.filechoice2 === old.filechoice2 + 3));
+              break;
           }
+
+          if (!pass) continue;
         }
 
         vars.splits[splitKey][vars.findSplitVarIndex("done")] = true;
