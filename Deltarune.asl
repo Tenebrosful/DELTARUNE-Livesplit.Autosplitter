@@ -97,7 +97,6 @@ startup {
   #region Global Variables declaration
 
   vars.prevUpdateTime = -1; // Previous time that the autosplitter updated to detect lags
-  vars.isGameClose = true;
 
   vars.startRooms = new object[] {};
   vars.resetRooms = new object[] {};
