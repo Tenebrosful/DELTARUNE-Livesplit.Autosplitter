@@ -225,8 +225,7 @@ startup {
     //   settings.Add("ch1shopping", false, "After the shop, before K Round", "ch1cardcastle");
     //   settings.Add("ch1exitthrone", true, "Exiting Card Castle's Throne room", "ch1cardcastle");
     //   settings.Add("ch1king", true, "After King Battle", "ch1cardcastle");
-    settings.Add("ch1ending", true, "Light World (End)", "Ch1_Any");
-      settings.Add("ch1theend", true, "The End (Final Text Dismissed)", "ch1ending");
+    settings.Add("Ch1_Any$Ch1_Ending", true, "The End (Final Text Dismissed)", "Ch1_Any");
   #endregion
 
   #region
@@ -546,7 +545,7 @@ split {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
-        return settings["ch1theend"];
+        return settings[vars.currentCategoryPrefix + "Ch1_Ending"];
       }
 
       // Chapter 2 end (needs to split 2 frames later)
