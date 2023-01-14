@@ -86,7 +86,7 @@ startup {
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
 
-    print("[DELTARUNE] All splits have been reset to initial state");
+    vars.DebugPrint("[DELTARUNE] All splits have been reset to initial state");
     return true;
   });
 
@@ -487,7 +487,7 @@ update {
     vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
     if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && settings["pausetimer"] && current.room == 28)
     {
-      print("[DELTARUNE] ALL CHAPTERS: Chapter 2 started, timer resumed");
+      vars.DebugPrint("ALL CHAPTERS: Chapter 2 started, timer resumed");
       timer.IsGameTimePaused = false;
     }
   }
@@ -543,7 +543,7 @@ split {
       // Chapter 1 end
       if((current.chapter == 1 || current.chapter2 == 1) && (current.filechoice == old.filechoice + 3 || current.filechoice2 == old.filechoice2 + 3)) {
         if(settings["pausetimer"]) {
-          print("[DELTARUNE] ALL CHAPTERS: Chapter 1 ended, timer paused");
+          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
         return settings["ch1theend"];
