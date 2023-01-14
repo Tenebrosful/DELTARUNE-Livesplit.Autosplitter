@@ -461,9 +461,6 @@ init {
         // {"hometowntorielhouse", new object[] {false, -1, -1, 7, 5, -1, -1, -1}},
         // {"torielhouse#1", new object[] {false, -1, -1, 5, 3, -1, -1, -1}},
         // {"torielhouse#2", new object[] {false, -1, -1, 3, 2, -1, -1, -1}},
-
-        // Ends on the textwriter being discarded
-           {"theend", new object[] {false, -1, 251, -1, 2, -1, -1, 2}}
       };
       break;
   }
