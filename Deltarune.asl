@@ -550,7 +550,7 @@ split {
       }
 
       // Chapter 2 end (needs to split 2 frames later)
-      if((current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5) || vars.ch2EndFrameDelay == 1)) {
+      if(vars.ch2EndFrameDelay == 1 || (current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5))) {
         vars.ch2EndFrameDelay += 1;
         return (vars.ch2EndFrameDelay == 2);
       }
