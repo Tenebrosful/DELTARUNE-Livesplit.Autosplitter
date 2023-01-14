@@ -214,7 +214,7 @@ startup {
       settings.Add("Ch1_Any$Ch1_BloxerSkip#2", false, "Bloxer Skip 2");
       settings.Add("Ch1_Any$Ch1_ExitForest", true, "Exiting Forest");
     settings.CurrentDefaultParent = null;
-    settings.Add("Ch1_Any$Ch1_prison", true, "Prison", "Ch1_Any");
+    settings.Add("Ch1_Any$Ch1_Prison", true, "Prison", "Ch1_Any");
     settings.CurrentDefaultParent = "Ch1_Any$Ch1_prison";
       settings.Add("Ch1_Any$Ch1_Captured", false, "Captured");
       settings.Add("Ch1_Any$Ch1_ExitPrison", true, "Exiting Prison");
