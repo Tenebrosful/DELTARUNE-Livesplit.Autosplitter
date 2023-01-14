@@ -485,7 +485,7 @@ update {
 
   if (current.room != old.room) {
     vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
-    if(version != "SURVEY_PROGRAM" && settings["pausetimer"] && current.room == 28 && timer.IsGameTimePaused == true)
+    if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && settings["pausetimer"] && current.room == 28)
     {
       print("[DELTARUNE] ALL CHAPTERS: Chapter 2 started, timer resumed");
       timer.IsGameTimePaused = false;
