@@ -63,7 +63,7 @@ startup {
 
   vars.DebugPrint("Autosplitter is starting up");
 
-  vars.ch2EndWait = 0;
+  vars.ch2EndFrameDelay = 0;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
@@ -81,6 +81,7 @@ startup {
 	});
 
   vars.reactivate = (Func<bool>)(() => {
+    vars.ch2EndFrameDelay = 0;
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
@@ -531,7 +532,6 @@ reset {
 
 onReset {
   vars.DebugPrint("RESET !");
-  vars.ch2EndWait = 0;
   vars.reactivate();
 }
 
@@ -551,9 +551,9 @@ split {
       }
 
       // Chapter 2 end (needs to split 2 frames later)
-      if((current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5) || vars.ch2EndWait == 1)) {
-        vars.ch2EndWait += 1;
-        return (vars.ch2EndWait == 2);
+      if((current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5) || vars.ch2EndFrameDelay == 1)) {
+        vars.ch2EndFrameDelay += 1;
+        return (vars.ch2EndFrameDelay == 2);
       }
 
       foreach(string splitKey in vars.splits.Keys){
