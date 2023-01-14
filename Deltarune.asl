@@ -215,7 +215,7 @@ startup {
       settings.Add("Ch1_Any$Ch1_ExitForest", true, "Exiting Forest");
     settings.CurrentDefaultParent = null;
     settings.Add("Ch1_Any$Ch1_Prison", true, "Prison", "Ch1_Any");
-    settings.CurrentDefaultParent = "Ch1_Any$Ch1_prison";
+    settings.CurrentDefaultParent = "Ch1_Any$Ch1_Prison";
       settings.Add("Ch1_Any$Ch1_Captured", false, "Captured");
       settings.Add("Ch1_Any$Ch1_ExitPrison", true, "Exiting Prison");
     settings.CurrentDefaultParent = null;
