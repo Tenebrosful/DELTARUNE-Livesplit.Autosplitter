@@ -1,38 +1,58 @@
-// DELTARUNE autosplitter by Tenebrosful
+// DELTARUNE autosplitter by Tenebrosful (and NERS kinda :keuchrCat:)
 // Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
-// filechoice on demo is used for ending chapter 1 and pausing the timer in all chapters (by NERS)
+
 state("Deltarune", "v1.15") {
+  // static
   uint room : "Deltarune.exe", 0x6F0B70;
 
-  double filechoice : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x110;
-  double filechoice2 : "Deltarune.exe", 0x6FE864, 0x828, 0x78, 0x24, 0x10, 0x858, 0x2F0; // for SOME reason if you start chapter 2 first and then go into chapter 1 the first pointer doesn't work so i had to find a separate one
+  // globals
+  double filechoice : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x110; // used for chapter 1 autoend
+  double filechoice2 : "Deltarune.exe", 0x6FE864, 0x828, 0x78, 0x24, 0x10, 0x858, 0x2F0; // for some reason if you start chapter 2 first and then go into chapter 1 the first pointer doesn't work so i had to find a separate one
+  
+  double chapter : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x120; // used for chapter end checks because they could accidentally get triggered in the other chapter
+  double chapter2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0xA08, 0x340; // again, going into chapter 2 and then chapter 1 breaks the first pointer
+  
+  double textboxesLeft : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x3C0, 0x30, 0x0, 0x330; // used for chapter 2 autoend
+  
+  // selfs
+  double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0; // used for chapter 2 autostart
 }
 
 state("Deltarune", "v1.08 - v1.10") {
+  // static
   uint room : "Deltarune.exe", 0x6EF248;
 
-  // gotta find filechoice pointers for the 1.09 enthusiasts too someday
+  // globals
+  double filechoice : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x1BC, 0x890;
+  double filechoice2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x310;
+ 
+  double chapter : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x4C8, 0x5F0;
+  double chapter2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x480;
+ 
+  double textboxesLeft : "Deltarune.exe", 0x6FCF3C, 0xCB8, 0x78, 0x24, 0x10, 0x624, 0x1F0;
+  
+  // selfs
+  double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
 }
 
 state("Deltarune", "SURVEY_PROGRAM") {
   //static
-  uint room :   "Deltarune.exe", 0x6AC9F0;
+  uint room : "Deltarune.exe", 0x6AC9F0;
   
   //globals
-  double money :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
-  double fight :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
-  double plot :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
-  double filechoice :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
-  double interact :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x20;
-  double choicer :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
+  double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
+  double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
+  double plot : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
+  double filechoice : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
+  double interact : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x20;
+  double choicer : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
 
   //selfs - Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases I found so we don't need to use a sigscan
-  double jevilDance :   "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
-  double jevilDance2 :   "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
+  double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
+  double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
   
-  double finalTextboxHalt :   "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
-  double finalTextboxHalt2 :   "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
-  
+  double finalTextboxHalt : "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
+  double finalTextboxHalt2 : "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
 }
 
 startup {
@@ -42,6 +62,8 @@ startup {
   vars.DebugPrint =(Action<string>)((text) => { print("[DELTARUNE]  " + text); });
 
   vars.DebugPrint("Autosplitter is starting up");
+
+  vars.ch2EndWait = 0;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
@@ -203,8 +225,8 @@ startup {
     //   settings.Add("ch1shopping", false, "After the shop, before K Round", "ch1cardcastle");
     //   settings.Add("ch1exitthrone", true, "Exiting Card Castle's Throne room", "ch1cardcastle");
     //   settings.Add("ch1king", true, "After King Battle", "ch1cardcastle");
-    // settings.Add("ch1ending", true, "Light World (End)", "ch1");
-    //   settings.Add("ch1theend", true, "The End (Final Text Dismissed)", "ch1ending");
+    settings.Add("ch1ending", true, "Light World (End)", "Ch1_Any");
+      settings.Add("ch1theend", true, "The End (Final Text Dismissed)", "ch1ending");
   #endregion
 
   #region
@@ -214,6 +236,9 @@ startup {
 
   settings.CurrentDefaultParent = null;
   #endregion
+
+  settings.Add("pausetimer", false, "Pause timer between Chapter 1 and 2");
+  settings.SetToolTip("pausetimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
 
   #region Chapter 2 Settings
   settings.Add("Ch2", false, "Chapter 2");
@@ -290,6 +315,15 @@ init {
         {"Ch1_CastleTown_Intro", new object[] {false, 282, 283, -1}},
         {"Ch1_CastleTown_EnterBed", new object[] {false, 283, 315, -1}}
       };
+
+      if(timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && settings["pausetimer"]) {
+        var message = MessageBox.Show(
+            "LiveSplit uses Game Time for this game. Would you like to change the current timing method to Game Time instead of Real Time?",
+            "LiveSplit | DELTARUNE All Chapters", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+      
+        if (message == DialogResult.Yes)
+            timer.CurrentTimingMethod = TimingMethod.GameTime;
+      }
       break;
     case "SURVEY_PROGRAM":
       vars.startRooms = new object[] { 1 };
@@ -429,8 +463,8 @@ init {
         // {"torielhouse#1", new object[] {false, -1, -1, 5, 3, -1, -1, -1}},
         // {"torielhouse#2", new object[] {false, -1, -1, 3, 2, -1, -1, -1}},
 
-        //Ends on the textwriter being discarded
-        // {"theend", new object[] {false, -1, 251, -1, 2, -1, -1, 2}},
+        // Ends on the textwriter being discarded
+           {"theend", new object[] {false, -1, 251, -1, 2, -1, -1, 2}}
       };
       break;
   }
@@ -449,13 +483,22 @@ update {
   if (version == "") return false; // Disable the autosplitter when game version is unknown
   if (version == "v1.00 - v1.07") { vars.DebugPrint("Version v1.00 - v1.07 is not longer supported"); return false; }
 
-  if (current.room != old.room) vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
+  if (current.room != old.room) {
+    vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
+    if(version != "SURVEY_PROGRAM" && settings["pausetimer"] && current.room == 28 && timer.IsGameTimePaused == true)
+    {
+      print("[DELTARUNE] ALL CHAPTERS: Chapter 2 started, timer resumed");
+      timer.IsGameTimePaused = false;
+    }
+  }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
   if (((IDictionary<String, object>)current).ContainsKey("fight") && current.fight != old.fight) vars.DebugPrint("FIGHT " + (current.fight == 1 ? "STARTED" : "ENDED"));
 }
 
 start {
   if (!settings.StartEnabled) return;
+
+  if(current.namerEvent == 75 && old.namerEvent == 74) return true;
 
   foreach(int startRoom in vars.startRooms)
     if (current.room == startRoom) { vars.DebugPrint("START (Start Room " + startRoom + " detected)"); return true; }
@@ -488,6 +531,7 @@ reset {
 
 onReset {
   vars.DebugPrint("RESET !");
+  vars.ch2EndWait = 0;
   vars.reactivate();
 }
 
@@ -497,6 +541,21 @@ split {
   switch(version) {
     case "v1.15":
     case "v1.08 - v1.10":
+      // Chapter 1 end
+      if((current.chapter == 1 || current.chapter2 == 1) && (current.filechoice == old.filechoice + 3 || current.filechoice2 == old.filechoice2 + 3)) {
+        if(settings["pausetimer"]) {
+          print("[DELTARUNE] ALL CHAPTERS: Chapter 1 ended, timer paused");
+          timer.IsGameTimePaused = true;
+        }
+        return settings["ch1theend"];
+      }
+
+      // Chapter 2 end (needs to split 2 frames later)
+      if((current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5) || vars.ch2EndWait == 1)) {
+        vars.ch2EndWait += 1;
+        return (vars.ch2EndWait == 2);
+      }
+
       foreach(string splitKey in vars.splits.Keys){
         if (!settings[vars.currentCategoryPrefix + splitKey] || vars.splits[splitKey][vars.findSplitVarIndex("done")]) // Checking if the split isn't already done or not enabled
           continue;
@@ -514,8 +573,7 @@ split {
           bool pass = false;
           switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
             case 1:
-              // Chapter 1 end
-              pass = ((current.filechoice === old.filechoice + 3) || (current.filechoice2 === old.filechoice2 + 3));
+              // Chapter 1 end moved above
               break;
           }
 
