@@ -113,6 +113,9 @@ startup {
   #region All Chapters Settings
   settings.Add("AC", false, "All Chapters");
 
+  settings.Add("pausetimer", false, "Pause timer between Chapter 1 and 2", "AC");
+  settings.SetToolTip("pausetimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
+
   #region All Chapters All Bosses Settings
   settings.Add("AC_AB", false, "All Bosses", "AC");
     // settings.Add("AC_AB$Ch1", true, "Chapter 1", "AC_AB");
@@ -235,9 +238,6 @@ startup {
 
   settings.CurrentDefaultParent = null;
   #endregion
-
-  settings.Add("pausetimer", false, "Pause timer between Chapter 1 and 2");
-  settings.SetToolTip("pausetimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
 
   #region Chapter 2 Settings
   settings.Add("Ch2", false, "Chapter 2");
