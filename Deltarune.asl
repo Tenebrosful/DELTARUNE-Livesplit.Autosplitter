@@ -205,7 +205,7 @@ startup {
       settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu_Lance #2 fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight", "Ch2_CyberCity");
       settings.Add("Ch2_Mice", false, "Mice fight", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
