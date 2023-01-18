@@ -512,7 +512,7 @@ split {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((current.chapter == 1 || current.chapter2 == 1) && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0) {
+      if(settings["Ch1_Ending"] && ((current.chapter == 1 || current.chapter2 == 1) && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0)) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
         Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
@@ -522,7 +522,7 @@ split {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
-        return settings["Ch1_Ending"];
+        return true;
       }
 
       // Chapter 2 end
