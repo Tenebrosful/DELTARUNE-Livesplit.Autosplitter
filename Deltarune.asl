@@ -489,17 +489,17 @@ update {
   if (version == "") { // Disable the autosplitter when game version is unknown
     if (!vars.VersionOutputWarning){
       vars.DebugPrint("Unknown version");
-      MessageBox.Show("This Autosplitter didn't recognized your game version",
-        "Deltarune unkown version");
+      MessageBox.Show("The autosplitter wasn't able to recognize your game version. Restarting the game could fix this issue.",
+        "[DELTARUNE] Unknown Version");
       vars.VersionOutputWarning = true;
     }
     return false;
   }
   if (version == "v1.00 - v1.07") {
     if (!vars.VersionOutputWarning){
-      vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
-      MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
-        "Deltarune Version not handled");
+      vars.DebugPrint("Versions v1.00 - v1.07 are no longer handled");
+      MessageBox.Show("The autosplitter doesn't handle versions v1.00 - v1.07 of the game anymore.",
+        "[DELTARUNE] Unsupported Version");
       vars.VersionOutputWarning = true;
     }
     return false;
