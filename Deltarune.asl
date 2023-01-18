@@ -114,6 +114,63 @@ startup {
 
   #region Settings
 
+  settings.Add("AC", false, "All Chapters");
+      settings.SetToolTip("AC", "Enabling this will remove auto-reset function");
+  settings.CurrentDefaultParent = "AC";
+    settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
+      settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
+  settings.CurrentDefaultParent = null;
+
+  settings.Add("Ch1", false, "Chapter 1");
+  settings.CurrentDefaultParent = "Ch1";
+  settings.Add("Ch1_Intro", false, "Introduction");
+    settings.Add("Ch1_Survey", true, "Survey", "Ch1_Intro");
+    settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
+  settings.Add("Ch1_CastleTown", true, "Castle Town section");
+    settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
+    settings.Add("Ch1_LancerFight", false, "Lancer Fight (SURVEY)", "Ch1_CastleTown");
+    settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
+    settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
+  settings.Add("Ch1_Fields", true, "Fields section");
+    settings.Add("Ch1_RudinnSkip#1", false, "Rudinn Skip 1", "Ch1_Fields");
+    settings.Add("Ch1_RudinnSkip#2", false, "Rudinn Skip 2", "Ch1_Fields");
+    settings.Add("Ch1_RudinnSkip#3", false, "Rudinn Skip 3", "Ch1_Fields");
+    settings.Add("Ch1_VandalizedPuzzle", false, "Vandalized Puzzle", "Ch1_Fields");
+    settings.Add("Ch1_KeyA", false, "Key A (Survey)", "Ch1_Fields");
+    settings.Add("Ch1_Fields_Exit", true, "Rudinn Skip 4 / Exiting Fields", "Ch1_Fields");
+  settings.Add("Ch1_Checkerboard", true, "Checkerboard");
+    settings.Add("Ch1_PawnSkip#1", false, "Pawn Skip 1", "Ch1_Checkerboard");
+    settings.Add("Ch1_PawnSkip#2", false, "Pawn Skip 2", "Ch1_Checkerboard");
+    settings.Add("Ch1_Checkerboard_Exit", true, "Exiting Checkerboard", "Ch1_Checkerboard");
+  settings.Add("Ch1_Forest", true, "Forest section");
+    settings.Add("Ch1_KeyB", false, "Key B (Survey)", "Ch1_Forest");
+    settings.Add("Ch1_BloxerSkip#1", false, "Bloxer Skip 1", "Ch1_Forest");
+    settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
+    settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
+    settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
+    settings.Add("Ch1_Sussie&Lancer", false, "Sussie & Lancer fight (SURVEY)", "Ch1_Forest");
+    settings.Add("Ch1_Sussie&Lancer_Exit", true, "Sussie & Lancer exit room", "Ch1_Forest");
+    settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
+  settings.Add("Ch1_Prison", true, "Prison section");
+    settings.Add("Ch1_Escape_Cell", false, "Exiting Cell", "Ch1_Prison");
+    settings.Add("Ch1_Escape_Elevator", true, "Entering Escape Elevator", "Ch1_Prison");
+  settings.Add("Ch1_Jevil", false, "Jevil section");
+    settings.Add("Ch1_KeyC", false, "Key C (Survey)", "Ch1_Jevil");
+    settings.Add("Ch1_KeyFixed", false, "Key Fixed (Survey)", "Ch1_Jevil");
+    settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
+    settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle (Survey)", "Ch1_Jevil");
+    settings.Add("Ch1_Jevil_ExitRoom", false, "Enter Jevil room", "Ch1_Jevil");
+    settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (Survey)", "Ch1_Jevil");
+  settings.Add("Ch1_CardCastle", true, "Card Castle section");
+    settings.Add("Ch1_RudinnRangerSkip", false, "Rudinn Ranger Skip", "Ch1_CardCastle");
+    settings.Add("Ch1_HeadHathySkip", false, "Head Hathy Skip", "Ch1_CardCastle");
+    settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
+    settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
+    settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
+    settings.Add("Ch1_King_EndBattle", false, "End King Battle (Survey)", "Ch1_CardCastle");
+    settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
+  settings.Add("Ch1_end", true, "Ending (inaccurate by a couple frames)");
+
   #endregion
 }
 
