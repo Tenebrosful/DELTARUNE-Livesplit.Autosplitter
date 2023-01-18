@@ -113,7 +113,6 @@ startup {
   #region Settings
 
   settings.Add("AC", true, "All Chapters");
-    settings.SetToolTip("AC", "Enabling this will remove auto-reset function");
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
@@ -243,6 +242,7 @@ init {
 
   #region Version Detection
 
+  vars.VersionOutputWarning = false;
   var module = modules.Single(x => String.Equals(x.ModuleName, "Deltarune.exe", StringComparison.OrdinalIgnoreCase));
   string hash = vars.CalcModuleHash(module);
 
@@ -450,8 +450,22 @@ update {
     }
     vars.prevUpdateTime = Environment.TickCount;
 
-  if (version == "") return false; // Disable the autosplitter when game version is unknown
-  if (version == "v1.00 - v1.07") { vars.DebugPrint("Version v1.00 - v1.07 is not longer supported"); return false; }
+  if (version == "") { // Disable the autosplitter when game version is unknown
+    if (!vars.VersionOutputWarning){
+      vars.DebugPrint("Unknown version");
+      MessageBox.Show("This Autosplitter didn't recognized your game version",
+        "Deltarune unkown version");
+    }
+    return false;
+  }
+  if (version == "v1.00 - v1.07") {
+    if (!vars.VersionOutputWarning){
+      vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
+      MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
+        "Deltarune Version not handled");
+    }
+    return false;
+  }
 
   if (current.room != old.room) {
     vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
@@ -485,7 +499,6 @@ onStart {
 
 reset {
   if (!settings.ResetEnabled) return;
-  if (settings["AC"]) return;
 
   if(current.room != old.room) {
     if(version == "SURVEY_PROGRAM" && current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
