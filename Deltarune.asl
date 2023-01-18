@@ -457,7 +457,7 @@ split {
         we can use this to get the frame after the textbox was closed by looking for filechoice > 2
         as this will only be valid in this one case
         */
-        if(settings["pausetimer"]) {
+        if(settings["Ch1_Ch2_PauseTimer"]) {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
@@ -552,10 +552,16 @@ split {
             bool pass = false;
 
             switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
-                case 1:  // Ch1_end (Survey)
+                case 1:  // Ch1_Ending (Survey)
+                    /*
+                    When the final textbox is closed, the game stores global.filechoice in a temp var
+                    it then sets global.filechoice + 3, saves the game, and then sets it back
+                    we can use this to get the frame after the textbox was closed by looking for filechoice > 2
+                    as this will only be valid in this one case
+                    */
                     pass = (current.filechoice > 2);
                     break;
-                case 2:  // Ch1_end (Survey)
+                case 2:  // Ch1_Ending (Survey)
                     /*
                     We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
                     Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
