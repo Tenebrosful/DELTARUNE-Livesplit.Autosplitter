@@ -160,6 +160,8 @@ startup {
     settings.Add("Ch1_Escape_Cell", false, "Exiting Cell", "Ch1_Prison");
     settings.Add("Ch1_Escape_Elevator", true, "Entering Escape Elevator", "Ch1_Prison");
   settings.Add("Ch1_Jevil", false, "Jevil section");
+    settings.Add("Ch1_KeyC", false, "Key C (Survey)", "Ch1_Jevil");
+    settings.Add("Ch1_KeyFixed", false, "Key Fixed (Survey)", "Ch1_Jevil");
     settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
     settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle (Survey)", "Ch1_Jevil");
     settings.Add("Ch1_Jevil_ExitRoom", false, "Enter Jevil room", "Ch1_Jevil");
@@ -453,7 +455,7 @@ split {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
-        return settings["Ch1_end"];
+        return settings["Ch1_Ending"];
       }
 
       // Chapter 2 end (needs to split 2 frames later)
