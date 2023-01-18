@@ -243,6 +243,12 @@ init {
       }
       break;
     case "SURVEY_PROGRAM":
+      vars.checkKeyItems = (Func<int, bool>)((id) => {
+        for (int i = 0; i < 12; i++){
+          if (new DeepPointer("Deltarune.exe", 0x49D598, 0x264, (0x1A00 + (i*0x10))).Deref<double>(game) == id) return true;
+        }
+        return false;
+      });
       vars.startRooms = new object[] { 1 };
       vars.resetRooms = new object[] { 132, 139 };
       vars.splitsVarIndex = new object[] { "done", "maxPlot", "exactPlot", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
@@ -556,6 +562,18 @@ split {
                     We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
                     */
                     pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
+                    break;
+                case 3:  // i-key
+                    pass = vars.checkKeyItems(5);
+                    break;
+                case 4:  // i-keyA
+                    pass = vars.checkKeyItems(4);
+                    break;
+                case 5:  // i-keyB
+                    pass = vars.checkKeyItems(6);
+                    break;
+                case 6:  // i-keyC
+                    pass = vars.checkKeyItems(7);
                     break;
                 case 7: // Ch1_Jevil_EndBattle
                     pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
