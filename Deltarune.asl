@@ -455,6 +455,7 @@ update {
       vars.DebugPrint("Unknown version");
       MessageBox.Show("This Autosplitter didn't recognized your game version",
         "Deltarune unkown version");
+      vars.VersionOutputWarning = true;
     }
     return false;
   }
@@ -463,6 +464,7 @@ update {
       vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
       MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
         "Deltarune Version not handled");
+      vars.VersionOutputWarning = true;
     }
     return false;
   }
@@ -523,7 +525,7 @@ split {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if(settings["Ch1_Ending"] && ((current.chapter == 1 || current.chapter2 == 1) && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0)) {
+      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && ((current.chapter == 1 || current.chapter2 == 1) && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0)) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
         Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
@@ -533,7 +535,7 @@ split {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
-        return true;
+        return settings["Ch1_Ending"];
       }
 
       // Chapter 2 end
