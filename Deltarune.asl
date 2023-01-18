@@ -1,4 +1,4 @@
-// DELTARUNE autosplitter by Tenebrosful (and NERS kinda :keuchrCat:)
+// DELTARUNE autosplitter by Tenebrosful and NERS
 // Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
 state("Deltarune", "v1.15") {
@@ -6,17 +6,23 @@ state("Deltarune", "v1.15") {
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
-  double filechoice : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x110; // used for chapter 1 autoend
-  double filechoice2 : "Deltarune.exe", 0x6FE864, 0x828, 0x78, 0x24, 0x10, 0x858, 0x2F0; // for some reason if you start chapter 2 first and then go into chapter 1 the first pointer doesn't work so i had to find a separate one
+  double filechoice : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x110;
+  double filechoice2 : "Deltarune.exe", 0x6FE864, 0x828, 0x78, 0x24, 0x10, 0x858, 0x2F0;
   
   double chapter : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x120; // used for chapter end checks because they could accidentally get triggered in the other chapter
-  double chapter2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0xA08, 0x340; // again, going into chapter 2 and then chapter 1 breaks the first pointer
+  double chapter2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0xA08, 0x340;
   
-  double textboxesLeft : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x3C0, 0x30, 0x0, 0x330; // used for chapter 2 autoend
+  double textboxesLeft : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x3C0, 0x30, 0x0, 0x330;
+
+  double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x10;
+  double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x858, 0x290;
   
   // selfs
-  double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0; // used for chapter 2 autostart
-  double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0; // for castle town split
+  double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
+  double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
+
+  double jevilDance : "Deltarune.exe", 0x6F0B48, 0x128, 0x24, 0x60, 0x24, 0x10, 0x4EC, 0x0;
+  double jevilDance2 : "Deltarune.exe", 0x43FE48, 0x538, 0xC, 0x140, 0x24, 0x10, 0x4EC, 0x0;
 }
 
 state("Deltarune", "v1.08 - v1.10") {
@@ -52,13 +58,12 @@ state("Deltarune", "SURVEY_PROGRAM") {
   // selfs
   double doorCloseCon : "Deltarune.exe", 0x6ACA80, 0xC0, 0x4, 0x84, 0x60, 0x10, 0x10, 0x0;
   
-  // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases I found so we don't need to use a sigscan
+  // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a sigscan
   double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
   
   double finalTextboxHalt : "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
   double finalTextboxHalt2 : "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
-
 }
 
 startup {
@@ -440,6 +445,12 @@ split {
     case "v1.08 - v1.10":
       // Chapter 1 end
       if((current.chapter == 1 || current.chapter2 == 1) && (current.filechoice == old.filechoice + 3 || current.filechoice2 == old.filechoice2 + 3)) {
+        /*
+        When the final textbox is closed, the game stores global.filechoice in a temp var
+        it then sets global.filechoice + 3, saves the game, and then sets it back
+        we can use this to get the frame after the textbox was closed by looking for filechoice > 2
+        as this will only be valid in this one case
+        */
         if(settings["pausetimer"]) {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
@@ -465,10 +476,26 @@ split {
         if ((vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")] != -1) && (old.room != vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")]))
           continue;
 
+        // is there a current fight requirement?
+        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+            continue;
+
+        // is there an old fight requirement?
+        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")]))
+            continue;
+
         // is there a special flag requirement?
         if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
           bool pass = false;
           switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
+            case 7: // Ch1_Jevil_EndBattle 
+                /*
+                Jevil has a variable named dancelv which sets the sprite/animation he's using
+                0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
+                We use this to determine when he's been pacified
+                */
+                pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+                break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
               break;
@@ -506,11 +533,11 @@ split {
         if ((vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")] != -1) && (current.plot > vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")]))
             continue;
 
-        // is there a current fight requirement ?
+        // is there a current fight requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
             continue;
 
-        // is there an old fight requirement ?
+        // is there an old fight requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")]))
             continue;
         
@@ -519,16 +546,10 @@ split {
             bool pass = false;
 
             switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
-                case 1:  // theendboxclosed
-                    /*
-                    When the final textbox is closed, the game stores global.filechoice in a temp var
-                    it then sets global.filechoice + 3, saves the game, and then sets it back
-                    we can use this to get the frame after the textbox was closed by looking for filechoice > 2
-                    as this will only be valid in this one case
-                    */
+                case 1:  // Ch1_end (Survey)
                     pass = (current.filechoice > 2);
                     break;
-                case 2:  // theendselfdestroyed
+                case 2:  // Ch1_end (Survey)
                     /*
                     We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
                     Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
@@ -536,24 +557,7 @@ split {
                     */
                     pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
                     break;
-                case 3:  // i-key
-                    pass = vars.checkKeyItems(5);
-                    break;
-                case 4:  // i-keyA
-                    pass = vars.checkKeyItems(4);
-                    break;
-                case 5:  // i-keyB
-                    pass = vars.checkKeyItems(6);
-                    break;
-                case 6:  // i-keyC
-                    pass = vars.checkKeyItems(7);
-                    break;
-                case 7: // b-jevilEnd 
-                    /*
-                    Jevil has a variable named dancelv which sets the sprite/animation he's using
-                    0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
-                    We use this to determine when he's been pacified
-                    */
+                case 7: // Ch1_Jevil_EndBattle
                     pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
                     break;
                 case 424: // Ch1_CastleTown_GreatDoor
