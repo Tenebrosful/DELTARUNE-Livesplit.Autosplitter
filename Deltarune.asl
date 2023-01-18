@@ -170,6 +170,7 @@ startup {
     settings.Add("Ch1_King_EndBattle", false, "End King Battle (Survey)", "Ch1_CardCastle");
     settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
   settings.Add("Ch1_end", true, "Ending (inaccurate by a couple frames)");
+  settings.CurrentDefaultParent = null;
 
   #endregion
 }
