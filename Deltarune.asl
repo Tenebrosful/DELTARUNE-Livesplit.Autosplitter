@@ -504,7 +504,7 @@ split {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((current.chapter == 1 || current.chapter2 == 1) && (current.filechoice == old.filechoice + 3 || current.filechoice2 == old.filechoice2 + 3)) {
+      if(settings["Ch1_Ending"] && (current.chapter == 1 || current.chapter2 == 1) && (current.filechoice == old.filechoice + 3 || current.filechoice2 == old.filechoice2 + 3)) {
         /*
         When the final textbox is closed, the game stores global.filechoice in a temp var
         it then sets global.filechoice + 3, saves the game, and then sets it back
@@ -515,11 +515,11 @@ split {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
-        return settings["Ch1_Ending"];
+        return true;
       }
 
       // Chapter 2 end (needs to split 2 frames later)
-      if(vars.ch2EndFrameDelay == 1 || (current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5))) {
+      if(settings["Ch2_Ending"] && (vars.ch2EndFrameDelay == 1 || (current.chapter == 2 || current.chapter2 == 2) && current.room == 31 && ((current.textboxesLeft == 0 && old.textboxesLeft == 5)))) {
         vars.ch2EndFrameDelay += 1;
         return (vars.ch2EndFrameDelay == 2);
       }
