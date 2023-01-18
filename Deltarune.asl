@@ -145,8 +145,8 @@ startup {
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Sussie&Lancer", false, "Sussie & Lancer fight (SURVEY)", "Ch1_Forest");
-      settings.Add("Ch1_Sussie&Lancer_Exit", true, "Sussie & Lancer exit room", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (SURVEY)", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
       settings.Add("Ch1_Escape_Cell", false, "Exiting Cell", "Ch1_Prison");
