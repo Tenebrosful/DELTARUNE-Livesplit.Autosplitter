@@ -192,10 +192,12 @@ startup {
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
       settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber fields", "Ch2_CyberFields");
+      settings.Add("Ch2_TrashWarp", false, "Trash Warp", "Ch2_CyberFields");
     settings.Add("Ch2_CyberCity", true, "Cyber City");
       settings.Add("Ch2_Poppup", false, "Poppup Fight / Skip", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#1", false, "Mice Puzzle #1", "Ch2_CyberCity");
       settings.Add("Ch2_Virovirokun#2", false, "Virovirokun #2 & Ambuy-Lance Fight / Skip", "Ch2_CyberCity");
+      settings.Add("Ch2_FreezeRing", false, "FreezeRing (Snowgrave) /!\ Not Handled now /!\\", "Ch2_CyberCity");
       settings.Add("Ch2_Forcefield", false, "Forcefield", "Ch2_CyberCity");
       settings.Add("Ch2_Werewire#2", false, "Werewire #2 Fight / Skip", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#2", false, "Mice Puzzle #2", "Ch2_CyberCity");
@@ -210,6 +212,7 @@ startup {
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
     settings.Add("Ch2_Mansion", true, "Queen Mansion");
+      settings.Add("Ch2_Mansion_Enter_Snowgrave", false, "Enter Mansion (Snowgrave)", "Ch2_Mansion");
       settings.Add("Ch2_EscapeCell", false, "Escape Cell", "Ch2_Mansion");
       settings.Add("Ch2_LightPuzzle#1", false, "Light Puzzle #1", "Ch2_Mansion");
       settings.Add("Ch2_LightPuzzle#2", false, "Light Puzzle #2", "Ch2_Mansion");
@@ -217,6 +220,9 @@ startup {
       settings.Add("Ch2_Swatchling#1", false, "Swatchling 1", "Ch2_Mansion");
       settings.Add("Ch2_Swatchling#2", false, "Swatchling 2 (Pot Race)", "Ch2_Mansion");
       settings.Add("Ch2_TasqueManager", false, "Tasque Manager", "Ch2_Mansion");
+      settings.Add("Ch2_Disk_Loaded", false, "Loaded Disk (All Bosses)", "Ch2_Mansion");
+      settings.Add("Ch2_SpamtonNEO_Start", false, "Start Spamton NEO (All Bosses)", "Ch2_Mansion");
+      settings.Add("Ch2_SpamtonNEO_End", false, "End Spamton NEO (All Bosses)", "Ch2_Mansion");
       settings.Add("Ch2_MausWheel", false, "MausWheel", "Ch2_Mansion");
       settings.Add("Ch2_DogPipis", false, "After Dog / Pipis Room", "Ch2_Mansion");
       settings.Add("Ch2_Swatchling#3", false, "Swatchling #3", "Ch2_Mansion");
@@ -229,7 +235,8 @@ startup {
       settings.Add("Ch2_Werewerewire", false, "Werewerewire", "Ch2_Mansion");
       settings.Add("Ch2_Queen", true, "Queen", "Ch2_Mansion");
       settings.Add("Ch2_MecaQueen", true, "Meca Queen", "Ch2_Mansion");
-      settings.Add("Ch2_SealFountain", false, "Fountain sealed", "Ch2_Mansion");
+      settings.Add("Ch2_Fountain_Enter", false, "Enter Fountain Room (Spamton NEO Snowgrave)", "Ch2_Mansion");
+      settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Spamton NEO Snowgrave)", "Ch2_Mansion");
     settings.Add("Ch2_Ending", true, "Ending (may be inaccurate if the automasher isn't held)");
   #endregion
 }
