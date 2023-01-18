@@ -113,6 +113,7 @@ startup {
   #region Settings
 
   settings.Add("AC", true, "All Chapters");
+    settings.SetToolTip("AC", "Enabling this will remove auto-reset function");
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
@@ -465,17 +466,15 @@ update {
 }
 
 start {
+  if (!settings.StartEnabled) return;
+  
   if(current.room != old.room) {
-    if(version == "SURVEY_PROGRAM") {
-      if(current.room == 1) return true;
+    if(version == "SURVEY_PROGRAM" && current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
+    else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
+      vars.DebugPrint("START (Start Event for Chapter 1 detected)");
+      return true;
     }
-    else {
-      if(current.chapter == 1 || current.chapter2 == 1) {
-          if(current.room == 282) { vars.DebugPrint("START (Start Event for Chapter 1 detected)"); return true; }
-      }
-    }
-  }
-  else if(version != "SURVEY_PROGRAM") {
+  } else if(version != "SURVEY_PROGRAM"){
     if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("START (Start Event for Chapter 2 detected)"); return true; }
   }
 }
@@ -485,18 +484,17 @@ onStart {
 }
 
 reset {
+  if (!settings.ResetEnabled) return;
+  if (settings["AC"]) return;
+
   if(current.room != old.room) {
-    if(version == "SURVEY_PROGRAM") {
-      if(current.room == 1) return true;
+    if(version == "SURVEY_PROGRAM" && current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
+    else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
+      vars.DebugPrint("RESET (Start Event for Chapter 1 detected)");
+      return true;
     }
-    else {
-      if(current.chapter == 1 || current.chapter2 == 1) {
-          if(current.room == 282) { vars.DebugPrint("RESET (Reset Event for Chapter 1 detected)"); return true; }
-      }
-    }
-  }
-  else if(version != "SURVEY_PROGRAM") {
-    if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("RESET (Reset Event for Chapter 2 detected)"); return true; }
+  } else if(version != "SURVEY_PROGRAM"){
+    if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("RESET (Start Event for Chapter 2 detected)"); return true; }
   }
 }
 
@@ -555,13 +553,13 @@ split {
           bool pass = false;
           switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
             case 7: // Ch1_Jevil_EndBattle 
-                /*
-                Jevil has a variable named dancelv which sets the sprite/animation he's using
-                0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
-                We use this to determine when he's been pacified
-                */
-                pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
-                break;
+              /*
+              Jevil has a variable named dancelv which sets the sprite/animation he's using
+              0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
+              We use this to determine when he's been pacified
+              */
+              pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+              break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
               break;
@@ -585,66 +583,71 @@ split {
 
         // is there a current room requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")] != -1) && (current.room != vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")]))
-            continue;
+          continue;
 
         // is there an old room requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")] != -1) && (old.room != vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")]))
-            continue;
+          continue;
 
         // is there an exact plot requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("exactPlot")] != -1) && (current.plot != vars.splits[splitKey][vars.findSplitVarIndex("exactPlot")]))
-            continue;
+          continue;
 
         // is there a maximum plot requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")] != -1) && (current.plot > vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")]))
-            continue;
+          continue;
 
         // is there a current fight requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
-            continue;
+          continue;
 
         // is there an old fight requirement?
         if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")]))
-            continue;
+          continue;
         
         // is there a special flag requirement?
         if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
-            bool pass = false;
+          bool pass = false;
 
-            switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
-                case 1:  // Ch1_Ending (Survey)
-                    /*
-                    When the final textbox is closed, the game stores global.filechoice in a temp var
-                    it then sets global.filechoice + 3, saves the game, and then sets it back
-                    we can use this to get the frame after the textbox was closed by looking for filechoice > 2
-                    as this will only be valid in this one case
-                    */
-                    pass = (current.filechoice > 2);
-                    break;
-                case 2:  // Ch1_Ending (Survey)
-                    pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
-                    break;
-                case 3:  // i-key
-                    pass = vars.checkKeyItems(5);
-                    break;
-                case 4:  // i-keyA
-                    pass = vars.checkKeyItems(4);
-                    break;
-                case 5:  // i-keyB
-                    pass = vars.checkKeyItems(6);
-                    break;
-                case 6:  // i-keyC
-                    pass = vars.checkKeyItems(7);
-                    break;
-                case 7: // Ch1_Jevil_EndBattle
-                    pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
-                    break;
-                case 424: // Ch1_CastleTown_GreatDoor
-                    pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
-                    break;
-            }
+          switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
+            case 1:  // Ch1_Ending (Survey)
+              /*
+              When the final textbox is closed, the game stores global.filechoice in a temp var
+              it then sets global.filechoice + 3, saves the game, and then sets it back
+              we can use this to get the frame after the textbox was closed by looking for filechoice > 2
+              as this will only be valid in this one case
+              */
+              pass = (current.filechoice > 2);
+              break;
+            case 2:  // Ch1_Ending (Survey)
+              /*
+              We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
+              Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
+              We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
+              */
+              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
+              break;
+            case 3:  // i-key
+              pass = vars.checkKeyItems(5);
+              break;
+            case 4:  // i-keyA
+              pass = vars.checkKeyItems(4);
+              break;
+            case 5:  // i-keyB
+              pass = vars.checkKeyItems(6);
+              break;
+            case 6:  // i-keyC
+              pass = vars.checkKeyItems(7);
+              break;
+            case 7: // Ch1_Jevil_EndBattle
+              pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+              break;
+            case 424: // Ch1_CastleTown_GreatDoor
+              pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
+              break;
+          }
 
-            if (!pass) continue;
+          if (!pass) continue;
         }
 
         // if we get to this point, all requirements are met
