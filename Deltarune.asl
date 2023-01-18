@@ -6,7 +6,7 @@ state("Deltarune", "v1.15") {
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
-  double chapter : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x120; // used for chapter end checks because they could accidentally get triggered in the other chapter
+  double chapter : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x120;
   double chapter2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0xA08, 0x340;
 
   double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x10;
@@ -22,7 +22,7 @@ state("Deltarune", "v1.15") {
   double jevilDance2 : "Deltarune.exe", 0x43FE48, 0x538, 0xC, 0x140, 0x24, 0x10, 0x4EC, 0x0;
 
   double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x140, 0x24, 0x10, 0x4F8, 0x0;
-  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F0B48, 0x10C, 0x2E8, 0x20, 0x24, 0x10, 0xAF8, 0x0; // DOES NOT WORK IF YOU ENTER CHAPTER 1 FIRST
+  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F2CBC, 0x3C, 0x140, 0x140, 0x24, 0x10, 0xAF8, 0x0;
 
   double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x6F0B48, 0x10C, 0x504, 0x20, 0x24, 0x10, 0x0, 0x0;
@@ -38,8 +38,6 @@ state("Deltarune", "v1.08 - v1.10") {
  
   double chapter : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x4C8, 0x5F0;
   double chapter2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x480;
- 
-  double textboxesLeft : "Deltarune.exe", 0x6FCF3C, 0xCB8, 0x78, 0x24, 0x10, 0x624, 0x1F0;
   
   // selfs
   double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
@@ -77,6 +75,8 @@ startup {
 
   vars.DebugPrint("Autosplitter is starting up");
 
+  vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
+
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
         vars.DebugPrint("Calculating hash of "+module.FileName);
@@ -93,6 +93,7 @@ startup {
     });
 
   vars.reactivate = (Func<bool>)(() => {
+    vars.ch2EndCount = 0;
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
@@ -119,6 +120,7 @@ startup {
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
+    settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 savefile");
   settings.CurrentDefaultParent = null;
 
   settings.Add("Ch1", false, "Chapter 1");
@@ -203,8 +205,8 @@ startup {
       settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 Fight", "Ch2_CyberCity");
-      settings.Add("Ch2_Mice", false, "Mice Fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu_Lance #2 fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Mice", false, "Mice fight", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
     settings.Add("Ch2_Mansion", true, "Queen Mansion");
@@ -232,7 +234,7 @@ startup {
       settings.Add("Ch2_GigaQueen", true, "Giga Queen", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Enter", false, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
-    settings.Add("Ch2_Ending", false, "Ending (may not work every time, use with caution)");
+    settings.Add("Ch2_Ending", true, "Ending");
   #endregion
 }
 
@@ -333,6 +335,8 @@ init {
 
         // Ch1_Ending is handled manually
         #endregion
+
+        {"Ch1-Ch2", new object[] {false, -1, 28, -1, -1, -1}},
 
         #region Chapter 2
         {"Ch2_Intro", new object[] {false, -1, 85, -1, -1, -1}},
@@ -489,17 +493,17 @@ update {
   if (version == "") { // Disable the autosplitter when game version is unknown
     if (!vars.VersionOutputWarning){
       vars.DebugPrint("Unknown version");
-      MessageBox.Show("The autosplitter wasn't able to recognize your game version. Restarting the game could fix this issue.",
-        "[DELTARUNE] Unknown Version");
+      MessageBox.Show("This Autosplitter didn't recognized your game version",
+        "Deltarune unkown version");
       vars.VersionOutputWarning = true;
     }
     return false;
   }
   if (version == "v1.00 - v1.07") {
     if (!vars.VersionOutputWarning){
-      vars.DebugPrint("Versions v1.00 - v1.07 are no longer handled");
-      MessageBox.Show("The autosplitter doesn't handle versions v1.00 - v1.07 of the game anymore.",
-        "[DELTARUNE] Unsupported Version");
+      vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
+      MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
+        "Deltarune Version not handled");
       vars.VersionOutputWarning = true;
     }
     return false;
@@ -526,10 +530,10 @@ start {
       if (current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
     }
     else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
-      vars.DebugPrint("START (Start Event for Chapter 1 detected)");
+      vars.DebugPrint("START (Start Room for Chapter 1 detected)");
       return true;
     }
-  } else if(version != "SURVEY_PROGRAM"){
+  } else if(version != "SURVEY_PROGRAM") {
     if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("START (Start Event for Chapter 2 detected)"); return true; }
   }
 }
@@ -545,13 +549,13 @@ reset {
 
   if(current.room != old.room) {
     if(version == "SURVEY_PROGRAM") {
-      if (current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
+      if (current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
     }
     else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
-      vars.DebugPrint("RESET (Start Event for Chapter 1 detected)");
+      vars.DebugPrint("RESET (Start Room for Chapter 1 detected)");
       return true;
     }
-  } else if(version != "SURVEY_PROGRAM"){
+  } else if(version != "SURVEY_PROGRAM") {
     if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("RESET (Start Event for Chapter 2 detected)"); return true; }
   }
 }
@@ -583,8 +587,9 @@ split {
       }
 
       // Chapter 2 end
-      if(settings["Ch2_Ending"] && (current.chapter == 2 || current.chapter2 == 2) && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
-        return true;
+      if(current.room == 31 && settings["Ch2_Ending"] && (current.chapter == 2 || current.chapter2 == 2) && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
+        vars.ch2EndCount ++;
+        return (vars.ch2EndCount == 31); // what a coincidence the room number is also 31 lol
       }
 
       foreach(string splitKey in vars.splits.Keys){
