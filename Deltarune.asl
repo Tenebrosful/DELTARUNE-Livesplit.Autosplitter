@@ -16,6 +16,7 @@ state("Deltarune", "v1.15") {
   
   // selfs
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0; // used for chapter 2 autostart
+  double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0; // for castle town split
 }
 
 state("Deltarune", "v1.08 - v1.10") {
@@ -33,13 +34,14 @@ state("Deltarune", "v1.08 - v1.10") {
   
   // selfs
   double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
+  double doorCloseCon : "Deltarune.exe", 0x6F1394, 0x4, 0x160, 0x1E0, 0x24, 0x10, 0x18, 0x0;
 }
 
 state("Deltarune", "SURVEY_PROGRAM") {
-  //static
+  // static
   uint room : "Deltarune.exe", 0x6AC9F0;
   
-  //globals
+  // globals
   double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
   double plot : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
@@ -47,12 +49,16 @@ state("Deltarune", "SURVEY_PROGRAM") {
   double interact : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x20;
   double choicer : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
 
-  //selfs - Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases I found so we don't need to use a sigscan
+  // selfs
+  double doorCloseCon : "Deltarune.exe", 0x6ACA80, 0xC0, 0x4, 0x84, 0x60, 0x10, 0x10, 0x0;
+  
+  // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases I found so we don't need to use a sigscan
   double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
   
   double finalTextboxHalt : "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
   double finalTextboxHalt2 : "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
+
 }
 
 startup {
@@ -67,18 +73,18 @@ startup {
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
-		vars.DebugPrint("Calculating hash of "+module.FileName);
-		byte[] exeHashBytes = new byte[0];
-		using (var sha = System.Security.Cryptography.MD5.Create())
-		{
-			using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-			{
-				exeHashBytes = sha.ComputeHash(s);
-			}
-		}
-		var hash = exeHashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
-		return hash;
-	});
+        vars.DebugPrint("Calculating hash of "+module.FileName);
+        byte[] exeHashBytes = new byte[0];
+        using (var sha = System.Security.Cryptography.MD5.Create())
+        {
+            using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                exeHashBytes = sha.ComputeHash(s);
+            }
+        }
+        var hash = exeHashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
+        return hash;
+    });
 
   vars.reactivate = (Func<bool>)(() => {
     vars.ch2EndFrameDelay = 0;
@@ -312,7 +318,8 @@ init {
       vars.splitsVarIndex = new object[] { "done", "oldRoom", "currentRoom", "specialCondition" };
       vars.splits = new Dictionary<string, object[]>() {
         {"Ch1_CastleTown_Intro", new object[] {false, 282, 283, -1}},
-        {"Ch1_CastleTown_EnterBed", new object[] {false, 283, 315, -1}}
+        {"Ch1_CastleTown_EnterBed", new object[] {false, 283, 315, -1}},
+        {"Ch1_CastleTown_GreatDoor", new object[] {false, -1, 329, 424}}
       };
 
       if(timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && settings["pausetimer"]) {
@@ -348,7 +355,7 @@ init {
         {"Ch1_CastleTown_Post-Lancer", new object[] {false, -1, -1, 46, 45, -1, -1, -1}},
         {"Ch1_CastleTown_EmptyTown#2", new object[] {false, -1, -1, 45, 47, -1, -1, -1}},
         {"Ch1_CastleTown_DummyRoom", new object[] {false, -1, -1, 47, 48, -1, -1, -1}},
-        {"Ch1_CastleTown_GreatDoor", new object[] {false, -1, -1, 48, 49, -1, -1, -1}},
+        {"Ch1_CastleTown_GreatDoor", new object[] {false, -1, -1, -1, 48, -1, -1, 424}},
 
         // Fields
         // {"savepointroomF", new object[] {false, -1, -1, 49, 50, -1, -1, -1}},
@@ -469,12 +476,12 @@ init {
 
 update {
   // Debug output
-	var timeSinceLastUpdate = Environment.TickCount - vars.prevUpdateTime;
-	if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1)
-	{
-		vars.DebugPrint("Last update was "+timeSinceLastUpdate+"ms ago !");
-	}
-	vars.prevUpdateTime = Environment.TickCount;
+    var timeSinceLastUpdate = Environment.TickCount - vars.prevUpdateTime;
+    if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1)
+    {
+        vars.DebugPrint("Last update was "+timeSinceLastUpdate+"ms ago !");
+    }
+    vars.prevUpdateTime = Environment.TickCount;
 
   if (version == "") return false; // Disable the autosplitter when game version is unknown
   if (version == "v1.00 - v1.07") { vars.DebugPrint("Version v1.00 - v1.07 is not longer supported"); return false; }
@@ -570,6 +577,9 @@ split {
             case 1:
               // Chapter 1 end moved above
               break;
+            case 424: // Ch1_CastleTown_GreatDoor
+              pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
+              break;
           }
 
           if (!pass) continue;
@@ -646,13 +656,16 @@ split {
                 case 6:  // i-keyC
                     pass = vars.checkKeyItems(7);
                     break;
-                case 7: //b-jevilEnd 
+                case 7: // b-jevilEnd 
                     /*
                     Jevil has a variable named dancelv which sets the sprite/animation he's using
                     0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
                     We use this to determine when he's been pacified
                     */
                     pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+                    break;
+                case 424: // Ch1_CastleTown_GreatDoor
+                    pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
                     break;
             }
 
