@@ -188,7 +188,7 @@ startup {
       settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
-      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber Fields", "Ch2_CyberFields");
+      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber fields", "Ch2_CyberFields");
       settings.Add("Ch2_MansionWarp", false, "Mansion Warp", "Ch2_CyberFields");
       settings.Add("Ch2_TrashWarp", false, "Trash Warp", "Ch2_CyberFields");
     settings.Add("Ch2_CyberCity", true, "Cyber City");
@@ -337,8 +337,9 @@ init {
         #endregion
 
         {"Ch1-Ch2", new object[] {false, -1, 28, -1, -1, -1}},
-
+        
         #region Chapter 2
+        
         {"Ch2_Intro", new object[] {false, -1, 85, -1, -1, -1}},
 
         // Cyber Fields
@@ -398,9 +399,7 @@ init {
         {"Ch2_Werewerewire", new object[] {false, -1, 205, -1, -1, -1}},
         {"Ch2_Queen", new object[] {false, -1, 207, -1, -1, -1}},
         {"Ch2_GigaQueen", new object[] {false, 207, 208, -1, -1, -1}},
-        {"Ch2_Fountain_Enter", new object[] {false, 4, 3, -1, -1, -1}},
-        {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
-
+        
         // Ch2_Ending is handled manually
         #endregion
       };
@@ -493,16 +492,16 @@ update {
   if (version == "") { // Disable the autosplitter when game version is unknown
     if (!vars.VersionOutputWarning){
       vars.DebugPrint("Unknown version");
-      MessageBox.Show("This Autosplitter didn't recognize your game version.",
-        "Deltarune unknown version");
+      MessageBox.Show("This Autosplitter didn't recognized your game version",
+        "Deltarune unkown version");
       vars.VersionOutputWarning = true;
     }
     return false;
   }
   if (version == "v1.00 - v1.07") {
     if (!vars.VersionOutputWarning){
-      vars.DebugPrint("Versions v1.00 - v1.07 no longer handled");
-      MessageBox.Show("This Autosplitter doesn't handle Deltarune versions v1.00 to v1.07 anymore.",
+      vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
+      MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
         "Deltarune Version not handled");
       vars.VersionOutputWarning = true;
     }
