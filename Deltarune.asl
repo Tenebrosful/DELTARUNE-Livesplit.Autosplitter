@@ -184,6 +184,7 @@ startup {
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
       settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber fields", "Ch2_CyberFields");
+      settings.Add("Ch2_MansionWarp", false, "Mansion Warp", "Ch2_CyberFields");
       settings.Add("Ch2_TrashWarp", false, "Trash Warp", "Ch2_CyberFields");
     settings.Add("Ch2_CyberCity", true, "Cyber City");
       settings.Add("Ch2_Poppup", false, "Poppup Fight / Skip", "Ch2_CyberCity");
