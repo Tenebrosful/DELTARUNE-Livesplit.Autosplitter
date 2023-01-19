@@ -1,46 +1,50 @@
 // DELTARUNE autosplitter by Tenebrosful and NERS
-// Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
+// Inspired by Narry's autosplitter based on Glacia's Undertale autosplitter (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
 state("Deltarune", "v1.15") {
   // static
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
-  double chapter : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x120; // used for chapter end checks because they could accidentally get triggered in the other chapter
-  double chapter2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0xA08, 0x340;
-
   double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x10;
   double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x858, 0x290;
   
-  double choicer : "Deltarune.exe", 0x6F0BD0, 0x618, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
+  double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
   // selfs
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
 
-  double jevilDance : "Deltarune.exe", 0x6F0B48, 0x128, 0x24, 0x60, 0x24, 0x10, 0x4EC, 0x0;
-  double jevilDance2 : "Deltarune.exe", 0x43FE48, 0x538, 0xC, 0x140, 0x24, 0x10, 0x4EC, 0x0;
+  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
 
   double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x140, 0x24, 0x10, 0x4F8, 0x0;
-  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F0B48, 0x10C, 0x2E8, 0x20, 0x24, 0x10, 0xAF8, 0x0; // DOES NOT WORK IF YOU ENTER CHAPTER 1 FIRST but like let's be real who does that
+  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F2CBC, 0x3C, 0x140, 0x140, 0x24, 0x10, 0xAF8, 0x0;
+
+  double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
+  double loadedDiskGreyBG : "Deltarune.exe", 0x6F0B48, 0x10C, 0x504, 0x20, 0x24, 0x10, 0x0, 0x0;
 }
 
 state("Deltarune", "v1.08 - v1.10") {
   // static
   uint room : "Deltarune.exe", 0x6EF248;
-
+ 
   // globals
-  double filechoice : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x1BC, 0x890;
-  double filechoice2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x310;
- 
-  double chapter : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x4C8, 0x5F0;
-  double chapter2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x480;
- 
-  double textboxesLeft : "Deltarune.exe", 0x6FCF3C, 0xCB8, 0x78, 0x24, 0x10, 0x624, 0x1F0;
+  double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
+  double fight2 : "Deltarune.exe", 0x69696969; // technically not needed but i had to define it in some way for the checks in split{} to work
+
+  double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
   
   // selfs
   double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6F1394, 0x4, 0x160, 0x1E0, 0x24, 0x10, 0x18, 0x0;
+
+  double jevilDance : "Deltarune.exe", 0x6EF220, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x5F4, 0x0;
+
+  double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F1394, 0x4, 0x140, 0x24, 0x10, 0x498, 0x0;
+  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F1394, 0x38, 0x140, 0x140, 0x24, 0x10, 0x498, 0x0;
+
+  double freezeRingTimer : "Deltarune.exe", 0x6EF220, 0x128, 0xF0, 0x20, 0x24, 0x10, 0xC0, 0x0;
+  double loadedDiskGreyBG : "Deltarune.exe", 0x43DE48, 0xA60, 0xC, 0x24, 0x10, 0x3D8, 0x0;
 }
 
 state("Deltarune", "SURVEY_PROGRAM") {
@@ -71,17 +75,17 @@ startup {
   #region Global Functions declaration
 
   vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE]  " + text); });
-
   vars.DebugPrint("Autosplitter is starting up");
+
+  vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
+  vars.answeredYes = true; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
         vars.DebugPrint("Calculating hash of "+module.FileName);
         byte[] exeHashBytes = new byte[0];
-        using (var sha = System.Security.Cryptography.MD5.Create())
-        {
-            using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
+        using (var sha = System.Security.Cryptography.MD5.Create()) {
+            using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                 exeHashBytes = sha.ComputeHash(s);
             }
         }
@@ -90,6 +94,8 @@ startup {
     });
 
   vars.reactivate = (Func<bool>)(() => {
+    vars.ch2EndCount = 0;
+    vars.answeredYes = true;
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
@@ -116,6 +122,7 @@ startup {
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
+    settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 savefile");
   settings.CurrentDefaultParent = null;
 
   settings.Add("Ch1", false, "Chapter 1");
@@ -125,7 +132,7 @@ startup {
       settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
     settings.Add("Ch1_CastleTown", true, "Castle Town section");
       settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerFight", false, "Lancer Fight (SURVEY)", "Ch1_CastleTown");
+      settings.Add("Ch1_LancerFight", false, "Lancer Fight", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
     settings.Add("Ch1_Fields", true, "Fields section");
@@ -133,38 +140,38 @@ startup {
       settings.Add("Ch1_RudinnSkip#2", false, "Rudinn Skip 2", "Ch1_Fields");
       settings.Add("Ch1_RudinnSkip#3", false, "Rudinn Skip 3", "Ch1_Fields");
       settings.Add("Ch1_VandalizedPuzzle", false, "Vandalized Puzzle", "Ch1_Fields");
-      settings.Add("Ch1_KeyA", false, "Key A (Survey)", "Ch1_Fields");
+      settings.Add("Ch1_KeyA", false, "Key A (SURVEY)", "Ch1_Fields");
       settings.Add("Ch1_Fields_Exit", true, "Rudinn Skip 4 / Exiting Fields", "Ch1_Fields");
     settings.Add("Ch1_Checkerboard", true, "Checkerboard");
       settings.Add("Ch1_PawnSkip#1", false, "Pawn Skip 1", "Ch1_Checkerboard");
       settings.Add("Ch1_PawnSkip#2", false, "Pawn Skip 2", "Ch1_Checkerboard");
       settings.Add("Ch1_Checkerboard_Exit", true, "Exiting Checkerboard", "Ch1_Checkerboard");
     settings.Add("Ch1_Forest", true, "Forest section");
-      settings.Add("Ch1_KeyB", false, "Key B (Survey)", "Ch1_Forest");
+      settings.Add("Ch1_KeyB", false, "Key B (SURVEY)", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#1", false, "Bloxer Skip 1", "Ch1_Forest");
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (SURVEY)", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
       settings.Add("Ch1_Escape_Cell", false, "Exiting Cell", "Ch1_Prison");
       settings.Add("Ch1_Escape_Elevator", true, "Entering Escape Elevator", "Ch1_Prison");
     settings.Add("Ch1_Jevil", false, "Jevil section");
-      settings.Add("Ch1_KeyC", false, "Key C (Survey)", "Ch1_Jevil");
-      settings.Add("Ch1_KeyFixed", false, "Key Fixed (Survey)", "Ch1_Jevil");
+      settings.Add("Ch1_KeyC", false, "Key C (SURVEY)", "Ch1_Jevil");
+      settings.Add("Ch1_KeyFixed", false, "Key Fixed (SURVEY)", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle (Survey)", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_ExitRoom", false, "Enter Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (Survey)", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_ExitRoom", false, "Exit Jevil room", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (May not work on Demo sometimes, use with caution)", "Ch1_Jevil");
     settings.Add("Ch1_CardCastle", true, "Card Castle section");
       settings.Add("Ch1_RudinnRangerSkip", false, "Rudinn Ranger Skip", "Ch1_CardCastle");
       settings.Add("Ch1_HeadHathySkip", false, "Head Hathy Skip", "Ch1_CardCastle");
       settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
-      settings.Add("Ch1_King_EndBattle", false, "End King Battle (Survey)", "Ch1_CardCastle");
+      settings.Add("Ch1_King_EndBattle", false, "End King Battle", "Ch1_CardCastle");
       settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
     settings.Add("Ch1_Ending", true, "Ending");
   settings.CurrentDefaultParent = null;
@@ -183,24 +190,24 @@ startup {
       settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
-      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber fields", "Ch2_CyberFields");
+      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber Fields", "Ch2_CyberFields");
       settings.Add("Ch2_MansionWarp", false, "Mansion Warp", "Ch2_CyberFields");
       settings.Add("Ch2_TrashWarp", false, "Trash Warp", "Ch2_CyberFields");
     settings.Add("Ch2_CyberCity", true, "Cyber City");
       settings.Add("Ch2_Poppup", false, "Poppup Fight / Skip", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#1", false, "Mice Puzzle #1", "Ch2_CyberCity");
-      settings.Add("Ch2_Virovirokun#2", false, "Virovirokun #2 & Ambuy-Lance Fight / Skip", "Ch2_CyberCity");
-      settings.Add("Ch2_FreezeRing", false, "FreezeRing (Snowgrave) (Doesn't work yet)", "Ch2_CyberCity");
+      settings.Add("Ch2_Virovirokun#2", false, "Virovirokun #2 & Ambyu-Lance Fight / Skip", "Ch2_CyberCity");
+      settings.Add("Ch2_FreezeRing", false, "Obtain FreezeRing", "Ch2_CyberCity");
       settings.Add("Ch2_Forcefield", false, "Forcefield", "Ch2_CyberCity");
       settings.Add("Ch2_Werewire#2", false, "Werewire #2 Fight / Skip", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#2", false, "Mice Puzzle #2", "Ch2_CyberCity");
       settings.Add("Ch2_CheeseMaze", false, "Cheese Maze", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#3", false, "Mice Puzzle #3", "Ch2_CyberCity");
-      settings.Add("Ch2_Berdly", true, "Berdly", "Ch2_CyberCity");
-      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly (Snowgrave)", "Ch2_CyberCity");
+      settings.Add("Ch2_Berdly", true, "Berdly 2", "Ch2_CyberCity");
+      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambuy-lance#2", false, "Ambuy-lance #2 fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight", "Ch2_CyberCity");
       settings.Add("Ch2_Mice", false, "Mice fight", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
@@ -215,7 +222,7 @@ startup {
       settings.Add("Ch2_Disk_Loaded", false, "Loaded Disk (All Bosses)", "Ch2_Mansion");
       settings.Add("Ch2_SpamtonNEO_Start", false, "Start Spamton NEO (All Bosses)", "Ch2_Mansion");
       settings.Add("Ch2_SpamtonNEO_End", false, "End Spamton NEO (All Bosses)", "Ch2_Mansion");
-      settings.Add("Ch2_MausWheel", false, "MausWheel", "Ch2_Mansion");
+      settings.Add("Ch2_Mauswheel", false, "Mauswheel", "Ch2_Mansion");
       settings.Add("Ch2_DogPipis", false, "After Dog / Pipis Room", "Ch2_Mansion");
       settings.Add("Ch2_Swatchling#3", false, "Swatchling #3", "Ch2_Mansion");
       settings.Add("Ch2_TasqueManager_Snowgrave", false, "Tasque Manager (Snowgrave)", "Ch2_Mansion");
@@ -229,7 +236,7 @@ startup {
       settings.Add("Ch2_GigaQueen", true, "Giga Queen", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Enter", false, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
-    settings.Add("Ch2_Ending", true, "Ending (doesn't work if you enter Chapter 1 first then back out)");
+    settings.Add("Ch2_Ending", true, "Ending");
   #endregion
 }
 
@@ -303,7 +310,7 @@ init {
         {"Ch1_BakeSale", new object[] {false, 362, 363, -1, -1, -1}},
         {"Ch1_BloxerSkip#2", new object[] {false, 365, 366, -1, -1, -1}},
         {"Ch1_Maze_End", new object[] {false, -1, 377, -1, -1, -1}},
-        {"Ch1_Susie&Lancer", new object[] {false, -1, -1, 1, 0, -1}},
+        {"Ch1_Susie&Lancer", new object[] {false, -1, 379, 1, 0, -1}},
         {"Ch1_Susie&Lancer_Exit", new object[] {false, -1, 379, -1, -1, -1}},
         {"Ch1_Captured", new object[] {false, 385, 386, -1, -1, -1}},
 
@@ -312,8 +319,8 @@ init {
         {"Ch1_Escape_Elevator", new object[] {false, 388, 390, -1, -1, -1}},
 
         //Jevil
-        {"Ch1_KeyC", new object[] {false, -1, 64, -1, -1, 6 }},
-        {"Ch1_KeyFixed", new object[] {false, -1, 83, -1, -1, 3 }},
+        {"Ch1_KeyC", new object[] {false, -1, 64, -1, -1, 6}},
+        {"Ch1_KeyFixed", new object[] {false, -1, 83, -1, -1, 3}},
         {"Ch1_Jevil_EnterRoom", new object[] {false, 392, 393, -1, -1, -1}},
         {"Ch1_Jevil_StartBattle", new object[] {false, -1, 393, 0, 1, -1}},
         {"Ch1_Jevil_ExitRoom", new object[] {false, 393, 392, -1, -1, -1}},
@@ -331,13 +338,15 @@ init {
         // Ch1_Ending is handled manually
         #endregion
 
+        {"Ch1-Ch2", new object[] {false, -1, 28, -1, -1, -1}},
+
         #region Chapter 2
         {"Ch2_Intro", new object[] {false, -1, 85, -1, -1, -1}},
 
         // Cyber Fields
         {"Ch2_Pre-CyberFields", new object[] {false, -1, 88, -1, -1, -1}},
         {"Ch2_Tasque", new object[] {false, -1, 93, -1, -1, -1}},
-        {"Ch2_ArcadeGame", new object[] {false, -1, 94, -1, -1, -1}},
+        {"Ch2_ArcadeGame", new object[] {false, 93, 94, -1, -1, -1}},
         {"Ch2_Virovirokun#1", new object[] {false, 95, 96, -1, -1, -1}},
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
         {"Ch2_DJFight", new object[] {false, 98, 106, -1, -1, -1}},
@@ -345,9 +354,9 @@ init {
         {"Ch2_Werewire#1", new object[] {false, -1, 105, -1, -1, -1}},
         {"Ch2_VirovirokunPuzzle", new object[] {false, -1, 100, -1, -1, -1}},
         {"Ch2_Cups", new object[] {false, -1, 101, -1, -1, -1}},
-        {"Ch2_CyberFields_Exit", new object[] {false, -1, 120, -1, -1, -1}},
-        {"Ch2_MansionWarp", new object[] {false, -1, 167, -1, -1, -1}},
-        {"Ch2_TrashWarp", new object[] {false, -1, 120, -1, -1, -1}},
+        {"Ch2_CyberFields_Exit", new object[] {false, 101, 120, -1, -1, -1}},
+        {"Ch2_MansionWarp", new object[] {false, 94, 167, -1, -1, -1}},
+        {"Ch2_TrashWarp", new object[] {false, 94, 120, -1, -1, -1}},
 
         // Cyber City
         {"Ch2_Poppup", new object[] {false, -1, 125, -1, -1, -1}},
@@ -363,7 +372,7 @@ init {
         {"Ch2_BerdlySnowgrave", new object[] {false, 138, 137, -1, -1, -1}},
         {"Ch2_Spamton", new object[] {false, 140, 139, -1, -1, -1}},
         {"Ch2_FullParty", new object[] {false, -1, 143, -1, -1, -1}},
-        {"Ch2_Ambuy-lance#2", new object[] {false, -1, 144, -1, -1, -1}},
+        {"Ch2_Ambyu-lance#2", new object[] {false, -1, 144, -1, -1, -1}},
         {"Ch2_Mice", new object[] {false, -1, 145, -1, -1, -1}},
         {"Ch2_CyberCity_Exit", new object[] {false, -1, 160, -1, -1, -1}},
         {"Ch2_CyberCity_Exit_Snowgrave", new object[] {false, 146, 167, -1, -1, -1}},
@@ -376,10 +385,10 @@ init {
         {"Ch2_Swatchling#1", new object[] {false, -1, 170, -1, -1, -1}},
         {"Ch2_Swatchling#2", new object[] {false, -1, 171, -1, -1, -1}},
         {"Ch2_TasqueManager", new object[] {false, -1, 172, -1, -1, -1}},
-        {"Ch2_Disk_Loaded", new object[] {false, -1, 999, -1, -1, -1}},
+        {"Ch2_Disk_Loaded", new object[] {false, -1, 239, -1, -1, 69}},
         {"Ch2_SpamtonNEO_Start", new object[] {false, -1, 186, 0, 1, -1}},
         {"Ch2_SpamtonNEO_End", new object[] {false, -1, 187, 1, 0, -1}},
-        {"Ch2_MausWheel", new object[] {false, 193, 191, -1, -1, -1}},
+        {"Ch2_Mauswheel", new object[] {false, 193, 191, -1, -1, -1}},
         {"Ch2_DogPipis", new object[] {false, -1, 194, -1, -1, -1}},
         {"Ch2_Swatchling#3", new object[] {false, -1, 196, -1, -1, -1}},
         {"Ch2_TasqueManager_Snowgrave", new object[] {false, -1, 176, -1, -1, -1}},
@@ -391,9 +400,10 @@ init {
         {"Ch2_Werewerewire", new object[] {false, -1, 205, -1, -1, -1}},
         {"Ch2_Queen", new object[] {false, -1, 207, -1, -1, -1}},
         {"Ch2_GigaQueen", new object[] {false, 207, 208, -1, -1, -1}},
-        {"Ch2_Fountain_Enter", new object[] {false, -1, 999, -1, -1, -1}},
-        {"Ch2_Fountain_Exit", new object[] {false, -1, 1, -1, -1, -1}},
+        {"Ch2_Fountain_Enter", new object[] {false, 4, 3, -1, -1, -1}},
+        {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
 
+        // Ch2_Ending is handled manually
         #endregion
       };
 
@@ -465,7 +475,7 @@ init {
         {"Ch1_King_EndBattle", new object[] {false, -1, -1, -1, 128, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, -1, -1, 128, 129, -1, -1, -1}},
 
-        {"Ch1_Ending", new object[] {false, -1, 251, -1, 2, -1, -1, 2  }},
+        {"Ch1_Ending", new object[] {false, -1, 251, -1, 2, -1, -1, 2}},
         #endregion
       };
       break;
@@ -476,26 +486,25 @@ init {
 update {
   // Debug output
     var timeSinceLastUpdate = Environment.TickCount - vars.prevUpdateTime;
-    if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1)
-    {
+    if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1) {
         vars.DebugPrint("Last update was "+timeSinceLastUpdate+"ms ago !");
     }
     vars.prevUpdateTime = Environment.TickCount;
 
-  if (version == "") { // Disable the autosplitter when game version is unknown
-    if (!vars.VersionOutputWarning){
+  if (version == "") { // Disable the autosplitter when the game version is unknown
+    if (!vars.VersionOutputWarning) {
       vars.DebugPrint("Unknown version");
-      MessageBox.Show("This Autosplitter didn't recognized your game version",
-        "Deltarune unkown version");
+      MessageBox.Show("This autosplitter didn't recognize your game version.",
+        "[DELTARUNE] Unknown version");
       vars.VersionOutputWarning = true;
     }
     return false;
   }
   if (version == "v1.00 - v1.07") {
     if (!vars.VersionOutputWarning){
-      vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
-      MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
-        "Deltarune Version not handled");
+      vars.DebugPrint("Versions v1.00 - v1.07 no longer handled");
+      MessageBox.Show("This autosplitter doesn't handle DELTARUNE versions v1.00 to v1.07 anymore.",
+        "[DELTARUNE] Unsupported version");
       vars.VersionOutputWarning = true;
     }
     return false;
@@ -512,6 +521,10 @@ update {
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
   if (((IDictionary<String, object>)current).ContainsKey("fight") && current.fight != old.fight) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
   if (((IDictionary<String, object>)current).ContainsKey("fight2") && current.fight2 != old.fight2) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
+
+  if((version == "SURVEY_PROGRAM" && current.room == 2) || (version != "SURVEY_PROGRAM" && current.room == 283)) {
+    if(current.choicer == 1) vars.answeredYes = false;
+  }
 }
 
 start {
@@ -521,11 +534,11 @@ start {
     if(version == "SURVEY_PROGRAM") {
       if (current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
     }
-    else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
-      vars.DebugPrint("START (Start Event for Chapter 1 detected)");
+    else if(old.room == 420 && current.room == 282) {
+      vars.DebugPrint("START (Start Room for Chapter 1 detected)");
       return true;
     }
-  } else if(version != "SURVEY_PROGRAM"){
+  } else if(version != "SURVEY_PROGRAM") {
     if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("START (Start Event for Chapter 2 detected)"); return true; }
   }
 }
@@ -541,13 +554,13 @@ reset {
 
   if(current.room != old.room) {
     if(version == "SURVEY_PROGRAM") {
-      if (current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
+      if (current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
     }
-    else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
-      vars.DebugPrint("RESET (Start Event for Chapter 1 detected)");
+    else if(old.room == 420 && current.room == 282) {
+      vars.DebugPrint("RESET (Start Room for Chapter 1 detected)");
       return true;
     }
-  } else if(version != "SURVEY_PROGRAM"){
+  } else if(version != "SURVEY_PROGRAM") {
     if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("RESET (Start Event for Chapter 2 detected)"); return true; }
   }
 }
@@ -560,70 +573,90 @@ onReset {
 split {
   if (!settings.SplitEnabled) return;
 
+  int done = vars.findSplitVarIndex("done");
+  int currentRoom = vars.findSplitVarIndex("currentRoom");
+  int oldRoom = vars.findSplitVarIndex("oldRoom");
+  int currentFight = vars.findSplitVarIndex("currentFight");
+  int oldFight = vars.findSplitVarIndex("oldFight");
+  int specialCondition = vars.findSplitVarIndex("specialCondition");
+
   switch(version) {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && ((current.chapter == 1 || current.chapter2 == 1) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0)) {
+      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
         Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
         We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
         */
-        if(settings["Ch1_Ch2_PauseTimer"]) {
-          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-          timer.IsGameTimePaused = true;
+        if(vars.answeredYes == false) {
+            vars.answeredYes = true; // reset the variable if the textbox closes so if they press No they can try again
+            return false;
         }
-
-        return settings["Ch1_Ending"];
+        else {
+            if(settings["Ch1_Ch2_PauseTimer"]) {
+              vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
+              timer.IsGameTimePaused = true;
+            }
+            return settings["Ch1_Ending"];
+        }
       }
 
       // Chapter 2 end
-      if(settings["Ch2_Ending"] && (current.chapter == 2 || current.chapter2 == 2) && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
-        return true;
+      if(settings["Ch2_Ending"] && current.room == 31 && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
+        vars.ch2EndCount ++;
+        return (vars.ch2EndCount == 31);
       }
 
-      foreach(string splitKey in vars.splits.Keys){
-        if (!settings[splitKey] || vars.splits[splitKey][vars.findSplitVarIndex("done")]) // Checking if the split isn't already done or not enabled
+      foreach(string splitKey in vars.splits.Keys) {
+        if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
           continue;
 
         // is there a current room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")] != -1) && (current.room != vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")]))
+        if ((vars.splits[splitKey][currentRoom] != -1) && (current.room != vars.splits[splitKey][currentRoom]))
           continue;
 
         // is there an old room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")] != -1) && (old.room != vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")]))
+        if ((vars.splits[splitKey][oldRoom] != -1) && (old.room != vars.splits[splitKey][oldRoom]))
           continue;
 
         // is there a current fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] || current.fight2 != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+        if ((vars.splits[splitKey][currentFight] != -1) && (current.fight != vars.splits[splitKey][currentFight] && current.fight2 != vars.splits[splitKey][currentFight]))
             continue;
 
         // is there an old fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] || old.fight2 != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+        if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight] && old.fight2 != vars.splits[splitKey][oldFight]))
             continue;
 
         // is there a special flag requirement?
-        if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
+        if (vars.splits[splitKey][specialCondition] != -1) {
           bool pass = false;
-          switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
+          switch((int)vars.splits[splitKey][specialCondition]) {
             case 7: // Ch1_Jevil_EndBattle 
               /*
               Jevil has a variable named dancelv which sets the sprite/animation he's using
               0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
               We use this to determine when he's been pacified
+              The pointers for him are really weird unfortunately I couldn't find one that would work if you died to him or returned to title before the fight
               */
-              pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+              pass = (current.jevilDance == 4);
+              break;
+            case 69: // Ch2_Disk_Loaded
+              pass = (current.loadedDiskGreyBG == 121 && old.loadedDiskGreyBG == 119);
               break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
+              break;
+            case 999: // Ch2_FreezeRing
+              pass = (current.freezeRingTimer == 85 && old.freezeRingTimer == 84);
               break;
           }
 
           if (!pass) continue;
         }
 
-        vars.splits[splitKey][vars.findSplitVarIndex("done")] = true;
+        vars.splits[splitKey][done] = true;
 
         vars.DebugPrint("SPLIT (" + splitKey + ")");
 
@@ -631,41 +664,44 @@ split {
       }
       break;
     case "SURVEY_PROGRAM":
+      int exactPlot = vars.findSplitVarIndex("exactPlot");
+      int maxPlot = vars.findSplitVarIndex("maxPlot");
+
       foreach (string splitKey in vars.splits.Keys) {
 
-        if (!settings[splitKey] || vars.splits[splitKey][vars.findSplitVarIndex("done")]) // Checking if the split isn't already done or not enabled
+        if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
           continue;
 
         // is there a current room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")] != -1) && (current.room != vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")]))
+        if ((vars.splits[splitKey][currentRoom] != -1) && (current.room != vars.splits[splitKey][currentRoom]))
           continue;
 
         // is there an old room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")] != -1) && (old.room != vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")]))
+        if ((vars.splits[splitKey][oldRoom] != -1) && (old.room != vars.splits[splitKey][oldRoom]))
           continue;
 
         // is there an exact plot requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("exactPlot")] != -1) && (current.plot != vars.splits[splitKey][vars.findSplitVarIndex("exactPlot")]))
+        if ((vars.splits[splitKey][exactPlot] != -1) && (current.plot != vars.splits[splitKey][exactPlot]))
           continue;
 
         // is there a maximum plot requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")] != -1) && (current.plot > vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")]))
+        if ((vars.splits[splitKey][maxPlot] != -1) && (current.plot > vars.splits[splitKey][maxPlot]))
           continue;
 
         // is there a current fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+        if ((vars.splits[splitKey][currentFight] != -1) && (current.fight != vars.splits[splitKey][currentFight]))
           continue;
 
         // is there an old fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")]))
+        if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight]))
           continue;
         
         // is there a special flag requirement?
-        if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
+        if (vars.splits[splitKey][specialCondition] != -1) {
           bool pass = false;
 
-          switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
-            case 1:  // Ch1_Ending (Survey)
+          switch((int)vars.splits[splitKey][specialCondition]) {
+            case 1:  // Ch1_Ending (SURVEY)
               /*
               When the final textbox is closed, the game stores global.filechoice in a temp var
               it then sets global.filechoice + 3, saves the game, and then sets it back
@@ -674,13 +710,20 @@ split {
               */
               pass = (current.filechoice > 2);
               break;
-            case 2:  // Ch1_Ending (Survey)
+            case 2:  // Ch1_Ending (SURVEY)
               /*
               We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
               Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
               We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
               */
-              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
+              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)));
+              if(pass) {
+                if(vars.answeredYes == false) {
+                    vars.answeredYes = true;
+                    return false;
+                }   
+                else break;          
+              }
               break;
             case 3:  // i-key
               pass = vars.checkKeyItems(5);
@@ -706,7 +749,7 @@ split {
         }
 
         // if we get to this point, all requirements are met
-        vars.splits[splitKey][vars.findSplitVarIndex("done")] = true;
+        vars.splits[splitKey][done] = true;
 
         vars.DebugPrint("SPLIT (" + splitKey + ")");
 
