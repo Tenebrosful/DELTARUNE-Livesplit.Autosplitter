@@ -308,7 +308,7 @@ init {
         {"Ch1_BakeSale", new object[] {false, 362, 363, -1, -1, -1}},
         {"Ch1_BloxerSkip#2", new object[] {false, 365, 366, -1, -1, -1}},
         {"Ch1_Maze_End", new object[] {false, -1, 377, -1, -1, -1}},
-        {"Ch1_Susie&Lancer", new object[] {false, -1, -1, 1, 0, -1}},
+        {"Ch1_Susie&Lancer", new object[] {false, -1, 379, 1, 0, -1}},
         {"Ch1_Susie&Lancer_Exit", new object[] {false, -1, 379, -1, -1, -1}},
         {"Ch1_Captured", new object[] {false, 385, 386, -1, -1, -1}},
 
@@ -343,8 +343,8 @@ init {
 
         // Cyber Fields
         {"Ch2_Pre-CyberFields", new object[] {false, -1, 88, -1, -1, -1}},
-        {"Ch2_Tasque", new object[] {false, -1, 93, -1, -1, -1}},
-        {"Ch2_ArcadeGame", new object[] {false, -1, 94, -1, -1, -1}},
+        {"Ch2_Tasque", new object[] {false, -1, -1, 93, -1, -1}},
+        {"Ch2_ArcadeGame", new object[] {false, 93, 94, -1, -1, -1}},
         {"Ch2_Virovirokun#1", new object[] {false, 95, 96, -1, -1, -1}},
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
         {"Ch2_DJFight", new object[] {false, 98, 106, -1, -1, -1}},
@@ -352,7 +352,7 @@ init {
         {"Ch2_Werewire#1", new object[] {false, -1, 105, -1, -1, -1}},
         {"Ch2_VirovirokunPuzzle", new object[] {false, -1, 100, -1, -1, -1}},
         {"Ch2_Cups", new object[] {false, -1, 101, -1, -1, -1}},
-        {"Ch2_CyberFields_Exit", new object[] {false, -1, 120, -1, -1, -1}},
+        {"Ch2_CyberFields_Exit", new object[] {false, 101, 120, -1, -1, -1}},
         {"Ch2_MansionWarp", new object[] {false, 94, 167, -1, -1, -1}},
         {"Ch2_TrashWarp", new object[] {false, 94, 120, -1, -1, -1}},
 
@@ -705,7 +705,7 @@ split {
               Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
               We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
               */
-              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
+              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
               break;
             case 3:  // i-key
               pass = vars.checkKeyItems(5);
