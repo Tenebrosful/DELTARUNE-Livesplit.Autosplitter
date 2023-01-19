@@ -9,7 +9,7 @@ state("Deltarune", "v1.15") {
   double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x10;
   double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x858, 0x290;
   
-  double choicer : "Deltarune.exe", 0x6F0BD0, 0x618, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
+  double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
   // selfs
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
@@ -78,6 +78,7 @@ startup {
   vars.DebugPrint("Autosplitter is starting up");
 
   vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
+  vars.answeredYes = true; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
@@ -94,6 +95,7 @@ startup {
 
   vars.reactivate = (Func<bool>)(() => {
     vars.ch2EndCount = 0;
+    vars.answeredYes = true;
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
@@ -519,6 +521,10 @@ update {
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
   if (((IDictionary<String, object>)current).ContainsKey("fight") && current.fight != old.fight) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
   if (((IDictionary<String, object>)current).ContainsKey("fight2") && current.fight2 != old.fight2) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
+
+  if((version == "SURVEY_PROGRAM" && current.room == 2) || (version != "SURVEY_PROGRAM" && current.room == 283)) {
+    if(current.choicer == 1) vars.answeredYes = false;
+  }
 }
 
 start {
@@ -578,18 +584,23 @@ split {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0) {
+      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
         Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
         We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
         */
-        if(settings["Ch1_Ch2_PauseTimer"]) {
-          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-          timer.IsGameTimePaused = true;
+        if(vars.answeredYes == false) {
+            vars.answeredYes = true; // reset the variable if the textbox closes so if they press No they can try again
+            return false;
         }
-
-        return settings["Ch1_Ending"];
+        else {
+            if(settings["Ch1_Ch2_PauseTimer"]) {
+              vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
+              timer.IsGameTimePaused = true;
+            }
+            return settings["Ch1_Ending"];
+        }
       }
 
       // Chapter 2 end
@@ -705,7 +716,14 @@ split {
               Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
               We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
               */
-              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
+              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)));
+              if(pass) {
+                if(vars.answeredYes == false) {
+                    vars.answeredYes = true;
+                    return false;
+                }   
+                else break;          
+              }
               break;
             case 3:  // i-key
               pass = vars.checkKeyItems(5);
