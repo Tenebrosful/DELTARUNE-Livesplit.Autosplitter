@@ -383,7 +383,7 @@ init {
         {"Ch2_Swatchling#1", new object[] {false, -1, 170, -1, -1, -1}},
         {"Ch2_Swatchling#2", new object[] {false, -1, 171, -1, -1, -1}},
         {"Ch2_TasqueManager", new object[] {false, -1, 172, -1, -1, -1}},
-        {"Ch2_Disk_Loaded", new object[] {false, -1, 239, -1, -1, 69}}, // to do later
+        {"Ch2_Disk_Loaded", new object[] {false, -1, 239, -1, -1, 69}},
         {"Ch2_SpamtonNEO_Start", new object[] {false, -1, 186, 0, 1, -1}},
         {"Ch2_SpamtonNEO_End", new object[] {false, -1, 187, 1, 0, -1}},
         {"Ch2_Mauswheel", new object[] {false, 193, 191, -1, -1, -1}},
