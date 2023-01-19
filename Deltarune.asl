@@ -1,14 +1,11 @@
 // DELTARUNE autosplitter by Tenebrosful and NERS
-// Inspired by Narry's Autosplitter based on Glacia's Undertale autosplitter (But I don't understand everything so I made my own) (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
+// Inspired by Narry's autosplitter based on Glacia's Undertale autosplitter (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
 state("Deltarune", "v1.15") {
   // static
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
-  double chapter : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x120;
-  double chapter2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0xA08, 0x340;
-
   double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x10;
   double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x858, 0x290;
   
@@ -18,8 +15,7 @@ state("Deltarune", "v1.15") {
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
 
-  double jevilDance : "Deltarune.exe", 0x6F0B48, 0x128, 0x24, 0x60, 0x24, 0x10, 0x4EC, 0x0;
-  double jevilDance2 : "Deltarune.exe", 0x43FE48, 0x538, 0xC, 0x140, 0x24, 0x10, 0x4EC, 0x0;
+  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
 
   double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x140, 0x24, 0x10, 0x4F8, 0x0;
   double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F2CBC, 0x3C, 0x140, 0x140, 0x24, 0x10, 0xAF8, 0x0;
@@ -31,17 +27,24 @@ state("Deltarune", "v1.15") {
 state("Deltarune", "v1.08 - v1.10") {
   // static
   uint room : "Deltarune.exe", 0x6EF248;
-
-  // globals
-  double filechoice : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x1BC, 0x890;
-  double filechoice2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x310;
  
-  double chapter : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x4C8, 0x5F0;
-  double chapter2 : "Deltarune.exe", 0x4DEDE4, 0x24, 0x10, 0x2DC, 0x480;
+  // globals
+  double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
+  double fight2 : "Deltarune.exe", 0x69696969; // technically not needed but i had to define it in some way for the checks in split{} to work
+
+  double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
   
   // selfs
   double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6F1394, 0x4, 0x160, 0x1E0, 0x24, 0x10, 0x18, 0x0;
+
+  double jevilDance : "Deltarune.exe", 0x6EF220, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x5F4, 0x0;
+
+  double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F1394, 0x4, 0x140, 0x24, 0x10, 0x498, 0x0;
+  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F1394, 0x38, 0x140, 0x140, 0x24, 0x10, 0x498, 0x0;
+
+  double freezeRingTimer : "Deltarune.exe", 0x6EF220, 0x128, 0xF0, 0x20, 0x24, 0x10, 0xC0, 0x0;
+  double loadedDiskGreyBG : "Deltarune.exe", 0x43DE48, 0xA60, 0xC, 0x24, 0x10, 0x3D8, 0x0;
 }
 
 state("Deltarune", "SURVEY_PROGRAM") {
@@ -72,7 +75,6 @@ startup {
   #region Global Functions declaration
 
   vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE]  " + text); });
-
   vars.DebugPrint("Autosplitter is starting up");
 
   vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
@@ -81,10 +83,8 @@ startup {
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
         vars.DebugPrint("Calculating hash of "+module.FileName);
         byte[] exeHashBytes = new byte[0];
-        using (var sha = System.Security.Cryptography.MD5.Create())
-        {
-            using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
+        using (var sha = System.Security.Cryptography.MD5.Create()) {
+            using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                 exeHashBytes = sha.ComputeHash(s);
             }
         }
@@ -130,7 +130,7 @@ startup {
       settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
     settings.Add("Ch1_CastleTown", true, "Castle Town section");
       settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerFight", false, "Lancer Fight (SURVEY)", "Ch1_CastleTown");
+      settings.Add("Ch1_LancerFight", false, "Lancer Fight", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
     settings.Add("Ch1_Fields", true, "Fields section");
@@ -150,7 +150,7 @@ startup {
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (SURVEY)", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
@@ -160,18 +160,18 @@ startup {
       settings.Add("Ch1_KeyC", false, "Key C (SURVEY)", "Ch1_Jevil");
       settings.Add("Ch1_KeyFixed", false, "Key Fixed (SURVEY)", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle (SURVEY)", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_ExitRoom", false, "Enter Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (SURVEY)", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_ExitRoom", false, "Exit Jevil room", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (May not work on Demo sometimes, use with caution)", "Ch1_Jevil");
     settings.Add("Ch1_CardCastle", true, "Card Castle section");
       settings.Add("Ch1_RudinnRangerSkip", false, "Rudinn Ranger Skip", "Ch1_CardCastle");
       settings.Add("Ch1_HeadHathySkip", false, "Head Hathy Skip", "Ch1_CardCastle");
       settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
-      settings.Add("Ch1_King_EndBattle", false, "End King Battle (SURVEY)", "Ch1_CardCastle");
+      settings.Add("Ch1_King_EndBattle", false, "End King Battle", "Ch1_CardCastle");
       settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
-    settings.Add("Ch1_Ending", false, "Ending");
+    settings.Add("Ch1_Ending", true, "Ending");
   settings.CurrentDefaultParent = null;
 
   settings.Add("Ch2", false, "Chapter 2");
@@ -188,7 +188,7 @@ startup {
       settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
-      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber fields", "Ch2_CyberFields");
+      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber Fields", "Ch2_CyberFields");
       settings.Add("Ch2_MansionWarp", false, "Mansion Warp", "Ch2_CyberFields");
       settings.Add("Ch2_TrashWarp", false, "Trash Warp", "Ch2_CyberFields");
     settings.Add("Ch2_CyberCity", true, "Cyber City");
@@ -337,9 +337,8 @@ init {
         #endregion
 
         {"Ch1-Ch2", new object[] {false, -1, 28, -1, -1, -1}},
-        
+
         #region Chapter 2
-        
         {"Ch2_Intro", new object[] {false, -1, 85, -1, -1, -1}},
 
         // Cyber Fields
@@ -399,7 +398,9 @@ init {
         {"Ch2_Werewerewire", new object[] {false, -1, 205, -1, -1, -1}},
         {"Ch2_Queen", new object[] {false, -1, 207, -1, -1, -1}},
         {"Ch2_GigaQueen", new object[] {false, 207, 208, -1, -1, -1}},
-        
+        {"Ch2_Fountain_Enter", new object[] {false, 4, 3, -1, -1, -1}},
+        {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
+
         // Ch2_Ending is handled manually
         #endregion
       };
@@ -472,7 +473,7 @@ init {
         {"Ch1_King_EndBattle", new object[] {false, -1, -1, -1, 128, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, -1, -1, 128, 129, -1, -1, -1}},
 
-        {"Ch1_Ending", new object[] {false, -1, 251, -1, 2, -1, -1, 2  }},
+        {"Ch1_Ending", new object[] {false, -1, 251, -1, 2, -1, -1, 2}},
         #endregion
       };
       break;
@@ -483,26 +484,25 @@ init {
 update {
   // Debug output
     var timeSinceLastUpdate = Environment.TickCount - vars.prevUpdateTime;
-    if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1)
-    {
+    if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1) {
         vars.DebugPrint("Last update was "+timeSinceLastUpdate+"ms ago !");
     }
     vars.prevUpdateTime = Environment.TickCount;
 
-  if (version == "") { // Disable the autosplitter when game version is unknown
-    if (!vars.VersionOutputWarning){
+  if (version == "") { // Disable the autosplitter when the game version is unknown
+    if (!vars.VersionOutputWarning) {
       vars.DebugPrint("Unknown version");
-      MessageBox.Show("This Autosplitter didn't recognized your game version",
-        "Deltarune unkown version");
+      MessageBox.Show("This autosplitter didn't recognize your game version.",
+        "[DELTARUNE] Unknown version");
       vars.VersionOutputWarning = true;
     }
     return false;
   }
   if (version == "v1.00 - v1.07") {
     if (!vars.VersionOutputWarning){
-      vars.DebugPrint("Version v1.00 - v1.07 no longer handled");
-      MessageBox.Show("This Autosplitter doesn't handle anymore Deltarune versions v1.00 to v1.07",
-        "Deltarune Version not handled");
+      vars.DebugPrint("Versions v1.00 - v1.07 no longer handled");
+      MessageBox.Show("This autosplitter doesn't handle DELTARUNE versions v1.00 to v1.07 anymore.",
+        "[DELTARUNE] Unsupported version");
       vars.VersionOutputWarning = true;
     }
     return false;
@@ -528,7 +528,7 @@ start {
     if(version == "SURVEY_PROGRAM") {
       if (current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
     }
-    else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
+    else if(old.room == 420 && current.room == 282) {
       vars.DebugPrint("START (Start Room for Chapter 1 detected)");
       return true;
     }
@@ -550,7 +550,7 @@ reset {
     if(version == "SURVEY_PROGRAM") {
       if (current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
     }
-    else if((current.chapter == 1 || current.chapter2 == 1) && current.room == 282) {
+    else if(old.room == 420 && current.room == 282) {
       vars.DebugPrint("RESET (Start Room for Chapter 1 detected)");
       return true;
     }
@@ -567,11 +567,18 @@ onReset {
 split {
   if (!settings.SplitEnabled) return;
 
+  int done = vars.findSplitVarIndex("done");
+  int currentRoom = vars.findSplitVarIndex("currentRoom");
+  int oldRoom = vars.findSplitVarIndex("oldRoom");
+  int currentFight = vars.findSplitVarIndex("currentFight");
+  int oldFight = vars.findSplitVarIndex("oldFight");
+  int specialCondition = vars.findSplitVarIndex("specialCondition");
+
   switch(version) {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && ((current.chapter == 1 || current.chapter2 == 1) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0)) {
+      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && current.choicer == 0) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
         Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
@@ -586,42 +593,43 @@ split {
       }
 
       // Chapter 2 end
-      if(current.room == 31 && settings["Ch2_Ending"] && (current.chapter == 2 || current.chapter2 == 2) && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
+      if(settings["Ch2_Ending"] && current.room == 31 && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
         vars.ch2EndCount ++;
-        return (vars.ch2EndCount == 31); // what a coincidence the room number is also 31 lol
+        return (vars.ch2EndCount == 31);
       }
 
-      foreach(string splitKey in vars.splits.Keys){
-        if (!settings[splitKey] || vars.splits[splitKey][vars.findSplitVarIndex("done")]) // Checking if the split isn't already done or not enabled
+      foreach(string splitKey in vars.splits.Keys) {
+        if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
           continue;
 
         // is there a current room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")] != -1) && (current.room != vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")]))
+        if ((vars.splits[splitKey][currentRoom] != -1) && (current.room != vars.splits[splitKey][currentRoom]))
           continue;
 
         // is there an old room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")] != -1) && (old.room != vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")]))
+        if ((vars.splits[splitKey][oldRoom] != -1) && (old.room != vars.splits[splitKey][oldRoom]))
           continue;
 
         // is there a current fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] || current.fight2 != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+        if ((vars.splits[splitKey][currentFight] != -1) && (current.fight != vars.splits[splitKey][currentFight] && current.fight2 != vars.splits[splitKey][currentFight]))
             continue;
 
         // is there an old fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] || old.fight2 != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+        if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight] && old.fight2 != vars.splits[splitKey][oldFight]))
             continue;
 
         // is there a special flag requirement?
-        if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
+        if (vars.splits[splitKey][specialCondition] != -1) {
           bool pass = false;
-          switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
+          switch((int)vars.splits[splitKey][specialCondition]) {
             case 7: // Ch1_Jevil_EndBattle 
               /*
               Jevil has a variable named dancelv which sets the sprite/animation he's using
               0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
               We use this to determine when he's been pacified
+              The pointers for him are really weird unfortunately I couldn't find one that would work if you died to him or returned to title before the fight
               */
-              pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+              pass = (current.jevilDance == 4);
               break;
             case 69: // Ch2_Disk_Loaded
               pass = (current.loadedDiskGreyBG == 121 && old.loadedDiskGreyBG == 119);
@@ -637,7 +645,7 @@ split {
           if (!pass) continue;
         }
 
-        vars.splits[splitKey][vars.findSplitVarIndex("done")] = true;
+        vars.splits[splitKey][done] = true;
 
         vars.DebugPrint("SPLIT (" + splitKey + ")");
 
@@ -645,40 +653,43 @@ split {
       }
       break;
     case "SURVEY_PROGRAM":
+      int exactPlot = vars.findSplitVarIndex("exactPlot");
+      int maxPlot = vars.findSplitVarIndex("maxPlot");
+
       foreach (string splitKey in vars.splits.Keys) {
 
-        if (!settings[splitKey] || vars.splits[splitKey][vars.findSplitVarIndex("done")]) // Checking if the split isn't already done or not enabled
+        if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
           continue;
 
         // is there a current room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")] != -1) && (current.room != vars.splits[splitKey][vars.findSplitVarIndex("currentRoom")]))
+        if ((vars.splits[splitKey][currentRoom] != -1) && (current.room != vars.splits[splitKey][currentRoom]))
           continue;
 
         // is there an old room requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")] != -1) && (old.room != vars.splits[splitKey][vars.findSplitVarIndex("oldRoom")]))
+        if ((vars.splits[splitKey][oldRoom] != -1) && (old.room != vars.splits[splitKey][oldRoom]))
           continue;
 
         // is there an exact plot requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("exactPlot")] != -1) && (current.plot != vars.splits[splitKey][vars.findSplitVarIndex("exactPlot")]))
+        if ((vars.splits[splitKey][exactPlot] != -1) && (current.plot != vars.splits[splitKey][exactPlot]))
           continue;
 
         // is there a maximum plot requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")] != -1) && (current.plot > vars.splits[splitKey][vars.findSplitVarIndex("maxPlot")]))
+        if ((vars.splits[splitKey][maxPlot] != -1) && (current.plot > vars.splits[splitKey][maxPlot]))
           continue;
 
         // is there a current fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("currentFight")] != -1) && (current.fight != vars.splits[splitKey][vars.findSplitVarIndex("currentFight")]))
+        if ((vars.splits[splitKey][currentFight] != -1) && (current.fight != vars.splits[splitKey][currentFight]))
           continue;
 
         // is there an old fight requirement?
-        if ((vars.splits[splitKey][vars.findSplitVarIndex("oldFight")] != -1) && (old.fight != vars.splits[splitKey][vars.findSplitVarIndex("oldFight")]))
+        if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight]))
           continue;
         
         // is there a special flag requirement?
-        if (vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")] != -1) {
+        if (vars.splits[splitKey][specialCondition] != -1) {
           bool pass = false;
 
-          switch((int)vars.splits[splitKey][vars.findSplitVarIndex("specialCondition")]) {
+          switch((int)vars.splits[splitKey][specialCondition]) {
             case 1:  // Ch1_Ending (SURVEY)
               /*
               When the final textbox is closed, the game stores global.filechoice in a temp var
@@ -720,7 +731,7 @@ split {
         }
 
         // if we get to this point, all requirements are met
-        vars.splits[splitKey][vars.findSplitVarIndex("done")] = true;
+        vars.splits[splitKey][done] = true;
 
         vars.DebugPrint("SPLIT (" + splitKey + ")");
 
