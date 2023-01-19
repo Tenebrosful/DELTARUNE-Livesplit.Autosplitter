@@ -345,7 +345,7 @@ init {
 
         // Cyber Fields
         {"Ch2_Pre-CyberFields", new object[] {false, -1, 88, -1, -1, -1}},
-        {"Ch2_Tasque", new object[] {false, -1, -1, 93, -1, -1}},
+        {"Ch2_Tasque", new object[] {false, -1, 93, -1, -1, -1}},
         {"Ch2_ArcadeGame", new object[] {false, 93, 94, -1, -1, -1}},
         {"Ch2_Virovirokun#1", new object[] {false, 95, 96, -1, -1, -1}},
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
