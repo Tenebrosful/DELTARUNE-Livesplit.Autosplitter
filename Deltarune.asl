@@ -461,9 +461,9 @@ init {
         //Jevil
         {"Ch1_KeyC", new object[] {false, -1, -1, -1, 64, -1, -1, 6 }},
         {"Ch1_KeyFixed", new object[] {false, -1, -1, -1, 83, -1, -1, 3 }},
-        {"Ch1_Jevil_EnterRoom", new object[] {false, -1, -1, -1, -1, -1, -1, -1}},
+        {"Ch1_Jevil_EnterRoom", new object[] {false, -1, -1, 111, 112, -1, -1, -1}},
         {"Ch1_Jevil_StartBattle", new object[] {false, -1, -1, -1, 112, 0, 1, -1}},
-        {"Ch1_Jevil_ExitRoom", new object[] {false, -1, -1, -1, -1, -1, -1, -1}},
+        {"Ch1_Jevil_ExitRoom", new object[] {false, -1, -1, 112, 111, -1, -1, -1}},
         {"Ch1_Jevil_EndBattle", new object[] {false, -1, -1, -1, 112, -1, 1, 7}},
         
         // Card Castle
@@ -522,8 +522,8 @@ update {
   if (((IDictionary<String, object>)current).ContainsKey("fight") && current.fight != old.fight) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
   if (((IDictionary<String, object>)current).ContainsKey("fight2") && current.fight2 != old.fight2) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
 
-  if((version == "SURVEY_PROGRAM" && current.room == 2) || (version != "SURVEY_PROGRAM" && current.room == 283)) {
-    if(current.choicer == 1) vars.answeredYes = false;
+  if(version != "SURVEY_PROGRAM" && current.room == 283) {
+    if(current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
   }
 }
 
@@ -584,23 +584,16 @@ split {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2) {
+      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && vars.answeredYes) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
-        Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
-        We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
+        Once the box is dismissed, the pointer becomes invalid and as such, the value is no longer 2
         */
-        if(vars.answeredYes == false) {
-            vars.answeredYes = true; // reset the variable if the textbox closes so if they press No they can try again
-            return false;
+        if(settings["Ch1_Ch2_PauseTimer"]) {
+          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
+          timer.IsGameTimePaused = true;
         }
-        else {
-            if(settings["Ch1_Ch2_PauseTimer"]) {
-              vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-              timer.IsGameTimePaused = true;
-            }
-            return settings["Ch1_Ending"];
-        }
+        return settings["Ch1_Ending"];
       }
 
       // Chapter 2 end
@@ -711,19 +704,7 @@ split {
               pass = (current.filechoice > 2);
               break;
             case 2:  // Ch1_Ending (SURVEY)
-              /*
-              We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
-              Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
-              We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
-              */
-              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)));
-              if(pass) {
-                if(vars.answeredYes == false) {
-                    vars.answeredYes = true;
-                    return false;
-                }   
-                else break;          
-              }
+              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
               break;
             case 3:  // i-key
               pass = vars.checkKeyItems(5);
