@@ -6,8 +6,8 @@ state("Deltarune", "v1.15") {
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
-  double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0x154, 0x10, 0x24, 0x10, 0x54, 0x10;
-  double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x858, 0x290;
+  double fight : "Deltarune.exe", 0x4E17F0, 0x38, 0xD4, 0x20, 0x224, 0x10, 0x54, 0x10;
+  double fight2 : "Deltarune.exe", 0x4BB0B0, 0x0, 0x138, 0x24, 0x10, 0x3D8, 0x930; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one
   
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
@@ -30,7 +30,7 @@ state("Deltarune", "v1.08 - v1.10") {
  
   // globals
   double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
-  double fight2 : "Deltarune.exe", 0x69696969; // technically not needed but i had to define it in some way for the checks in split{} to work
+  double fight2 : "Deltarune.exe", 0x69696969; // not needed for these versions (:triumph:) but i had to define it in some way for the checks in split{} to work
 
   double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
   
@@ -519,8 +519,12 @@ update {
     }
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
-  if (((IDictionary<String, object>)current).ContainsKey("fight") && current.fight != old.fight) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
-  if (((IDictionary<String, object>)current).ContainsKey("fight2") && current.fight2 != old.fight2) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
+  if (((IDictionary<String, object>)current).ContainsKey("fight")) { // checks for 0 and 1 to make sure the console doesn't get spammed with random values
+    if((old.fight == 0 && current.fight == 1) || (old.fight == 1 && current.fight == 0)) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
+  }
+  if (((IDictionary<String, object>)current).ContainsKey("fight2")) {
+    if((old.fight2 == 0 && current.fight2 == 1) || (old.fight2 == 1 && current.fight2 == 0)) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
+  }
 
   if(version != "SURVEY_PROGRAM" && current.room == 283) {
     if(current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
