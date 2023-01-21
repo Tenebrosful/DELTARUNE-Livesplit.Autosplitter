@@ -338,7 +338,7 @@ init {
         // Ch1_Ending is handled manually
         #endregion
 
-        {"Ch1-Ch2", new object[] {false, -1, 28, -1, -1, -1}},
+        {"Ch1-Ch2", new object[] {false, 244, 28, -1, -1, 10}},
 
         #region Chapter 2
         {"Ch2_Intro", new object[] {false, -1, 85, -1, -1, -1}},
@@ -536,7 +536,7 @@ start {
   
   if(current.room != old.room) {
     if(version == "SURVEY_PROGRAM") {
-      if (current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
+      if (old.room == 139 && current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
     }
     else if(old.room == 420 && current.room == 282) {
       vars.DebugPrint("START (Start Room for Chapter 1 detected)");
@@ -558,7 +558,7 @@ reset {
 
   if(current.room != old.room) {
     if(version == "SURVEY_PROGRAM") {
-      if (current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
+      if (old.room == 139 && current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
     }
     else if(old.room == 420 && current.room == 282) {
       vars.DebugPrint("RESET (Start Room for Chapter 1 detected)");
@@ -638,6 +638,9 @@ split {
               The pointers for him are really weird unfortunately I couldn't find one that would work if you died to him or returned to title before the fight
               */
               pass = (current.jevilDance == 4);
+              break;
+            case 10: // Ch1-Ch2
+              pass = (old.namerEvent != 75); // this check is in place so that it wouldn't split when starting chapter 2 from a fresh save file when it cuts to black
               break;
             case 69: // Ch2_Disk_Loaded
               pass = (current.loadedDiskGreyBG == 121 && old.loadedDiskGreyBG == 119);
