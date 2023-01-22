@@ -6,8 +6,8 @@ state("Deltarune", "v1.15") {
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
-  double fight : "Deltarune.exe", 0x4E17F0, 0x38, 0xD4, 0x20, 0x224, 0x10, 0x54, 0x10;
-  double fight2 : "Deltarune.exe", 0x4BB0B0, 0x0, 0x138, 0x24, 0x10, 0x3D8, 0x930; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one
+  double fight : "Deltarune.exe", 0x6FE860, 0x30, 0x9C, 0x5F0;
+  double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0xD98, 0x9B0; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one
   
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
@@ -41,7 +41,7 @@ state("Deltarune", "v1.08 - v1.10") {
   double jevilDance : "Deltarune.exe", 0x6EF220, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x5F4, 0x0;
 
   double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F1394, 0x4, 0x140, 0x24, 0x10, 0x498, 0x0;
-  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F1394, 0x38, 0x140, 0x140, 0x24, 0x10, 0x498, 0x0;
+  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F1394, 0x3C, 0x140, 0x140, 0x24, 0x10, 0x498, 0x0;
 
   double freezeRingTimer : "Deltarune.exe", 0x6EF220, 0x128, 0xF0, 0x20, 0x24, 0x10, 0xC0, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x43DE48, 0xA60, 0xC, 0x24, 0x10, 0x3D8, 0x0;
@@ -79,6 +79,7 @@ startup {
 
   vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
   vars.answeredYes = true; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
+  vars.tracabartpeeg = false;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
@@ -96,6 +97,7 @@ startup {
   vars.reactivate = (Func<bool>)(() => {
     vars.ch2EndCount = 0;
     vars.answeredYes = true;
+    vars.tracabartpeeg = false;
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
@@ -122,6 +124,13 @@ startup {
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
+   
+    settings.Add("Ch1_Ch2_PauseTimerOST", false, "(OST%) Pause timer between Chapter 1 and 2");
+      settings.SetToolTip("Ch1_Ch2_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when Don't Forget starts playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
+    
+    settings.Add("Ch2_Ch2_PauseTimer", false, "(TRACABARTPEEG) Pause timer between Chapter 2 Main Route and Snowgrave");
+      settings.SetToolTip("Ch2_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 2, and resumes it when you continue from a previous save in Chapter 2.\nUseful for TRACABARTPEEG Main Route -> Snowgrave. NOTE: This does not work if you have the Chapter 2 OST% Ending split activated!");
+    
     settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 savefile");
   settings.CurrentDefaultParent = null;
 
@@ -174,6 +183,7 @@ startup {
       settings.Add("Ch1_King_EndBattle", false, "End King Battle", "Ch1_CardCastle");
       settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
     settings.Add("Ch1_Ending", true, "Ending");
+    settings.Add("Ch1_EndingOST", false, "Ending (OST%)");
   settings.CurrentDefaultParent = null;
 
   settings.Add("Ch2", false, "Chapter 2");
@@ -237,6 +247,7 @@ startup {
       settings.Add("Ch2_Fountain_Enter", false, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
     settings.Add("Ch2_Ending", true, "Ending");
+    settings.Add("Ch2_EndingOST", false, "Ending (OST%)");
   #endregion
 }
 
@@ -335,7 +346,7 @@ init {
         {"Ch1_King_EndBattle", new object[] {false, -1, 409, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, 409, 410, -1, -1, -1}},
 
-        // Ch1_Ending is handled manually
+        // Ch1_Ending & Ch1_EndingOST are handled manually because of the timer pause
         #endregion
 
         {"Ch1-Ch2", new object[] {false, 244, 28, -1, -1, 10}},
@@ -404,10 +415,11 @@ init {
         {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
 
         // Ch2_Ending is handled manually
+        {"Ch2_EndingOST", new object[] {false, 31, 245, -1, -1, -1}}
         #endregion
       };
 
-      if(timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && settings["Ch1_Ch2_PauseTimer"]) {
+      if(timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"])) {
         var message = MessageBox.Show(
             "LiveSplit uses Game Time for this game. Would you like to change the current timing method to Game Time instead of Real Time?",
             "LiveSplit | DELTARUNE All Chapters", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -512,7 +524,7 @@ update {
 
   if (current.room != old.room) {
     vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
-    if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && settings["Ch1_Ch2_PauseTimer"] && current.room == 28)
+    if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"]) && current.room == 28)
     {
       vars.DebugPrint("ALL CHAPTERS: Chapter 2 started, timer resumed");
       timer.IsGameTimePaused = false;
@@ -526,8 +538,18 @@ update {
     if((old.fight2 == 0 && current.fight2 == 1) || (old.fight2 == 1 && current.fight2 == 0)) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
   }
 
-  if(version != "SURVEY_PROGRAM" && current.room == 283) {
-    if(current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
+  if(version != "SURVEY_PROGRAM") {
+    if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
+
+    if(timer.CurrentPhase != TimerPhase.Ended && timer.IsGameTimePaused == true && settings["Ch2_Ch2_PauseTimer"] && current.room == 31 && !vars.tracabartpeeg) {
+      int doneIndex = vars.findSplitVarIndex("done");
+      foreach(string split in vars.splits.Keys)
+        vars.splits[split][doneIndex] = false;   
+
+      vars.DebugPrint("TRACABARTPEEG: All splits have been reset to initial state for the second run");
+      vars.tracabartpeeg = true;
+      // reset splits so that they can be triggered the next time Chapter 2 is opened
+    }
   }
 }
 
@@ -588,22 +610,39 @@ split {
     case "v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((settings["Ch1_Ending"] || settings["Ch1_Ch2_PauseTimer"]) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && vars.answeredYes) {
+      if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && vars.answeredYes) {
         /*
         We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
         Once the box is dismissed, the pointer becomes invalid and as such, the value is no longer 2
         */
-        if(settings["Ch1_Ch2_PauseTimer"]) {
+        if(settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"]) {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
         }
         return settings["Ch1_Ending"];
       }
 
+      if((settings["Ch1_EndingOST"] || settings["Ch1_Ch2_PauseTimerOST"]) && old.room == 418 && current.room == 421) {
+        // room 418 = deltarune logo room
+        // room 421 = credits room
+        if(settings["Ch1_Ch2_PauseTimerOST"]) {
+          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
+          timer.IsGameTimePaused = true;
+        }
+        return settings["Ch1_EndingOST"];        
+      }
+
       // Chapter 2 end
-      if(settings["Ch2_Ending"] && current.room == 31 && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
+      if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && current.room == 31 && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
         vars.ch2EndCount ++;
-        return (vars.ch2EndCount == 31);
+        if(vars.ch2EndCount == 31) {
+          if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
+            vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
+            timer.IsGameTimePaused = true;
+          } 
+          vars.ch2EndCount = 0;
+          return settings["Ch2_Ending"];         
+        }
       }
 
       foreach(string splitKey in vars.splits.Keys) {
