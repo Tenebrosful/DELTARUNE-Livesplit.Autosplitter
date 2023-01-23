@@ -105,13 +105,14 @@ startup {
     vars.chapter = 0;
     vars.resetSplits();
 
-    vars.DebugPrint("All splits have been reset to initial state");
+    vars.DebugPrint("All values have been reset to initial state");
   });
 
   vars.resetSplits = (Action)(() => {
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
+    vars.DebugPrint("All splits have been reset to initial state");
   });
 
   vars.findSplitVarIndex = (Func<string, int>)((variableName) => { return Array.IndexOf(vars.splitsVarIndex, variableName); });
