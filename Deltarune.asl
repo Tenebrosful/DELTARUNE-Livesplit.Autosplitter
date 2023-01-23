@@ -96,19 +96,22 @@ startup {
         return hash;
     });
 
-  vars.reactivate = (Func<bool>)(() => {
+  vars.reactivate = (Action)(() => {
     vars.ch2EndCount = 0;
     vars.answeredYes = true;
     vars.tracabartpeeg = false;
     vars.fightPointer = -1;
     vars.fightPointerOld = -1;
     vars.chapter = 0;
+    vars.resetSplits();
+
+    vars.DebugPrint("All splits have been reset to initial state");
+  });
+
+  vars.resetSplits = (Action)(() => {
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
-
-    vars.DebugPrint("All splits have been reset to initial state");
-    return true;
   });
 
   vars.findSplitVarIndex = (Func<string, int>)((variableName) => { return Array.IndexOf(vars.splitsVarIndex, variableName); });
@@ -545,9 +548,7 @@ update {
     if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
 
     if(timer.CurrentPhase != TimerPhase.Ended && timer.IsGameTimePaused == true && settings["Ch2_Ch2_PauseTimer"] && current.room == 31 && !vars.tracabartpeeg) {
-      int doneIndex = vars.findSplitVarIndex("done");
-      foreach(string split in vars.splits.Keys)
-        vars.splits[split][doneIndex] = false;   
+      vars.resetSplits();
 
       vars.DebugPrint("TRACABARTPEEG: All splits have been reset to initial state for the second run");
       vars.tracabartpeeg = true;
