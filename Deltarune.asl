@@ -555,8 +555,6 @@ update {
       // reset splits so that they can be triggered the next time Chapter 2 is opened
     }
 
-
-
     switch(version) {
       case "1.15":
         // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
