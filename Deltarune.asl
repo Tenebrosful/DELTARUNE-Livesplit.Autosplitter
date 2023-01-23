@@ -30,7 +30,6 @@ state("Deltarune", "v1.08 - v1.10") {
  
   // globals
   double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
-  double fight2 : "Deltarune.exe", 0x69696969; // not needed for these versions (:triumph:) but i had to define it in some way for the checks in split{} to work
 
   double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
   
@@ -80,6 +79,9 @@ startup {
   vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
   vars.answeredYes = true; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
   vars.tracabartpeeg = false;
+  vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
+  vars.fightPointerOld = -1;
+  vars.chapter = 0;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
   vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
@@ -98,6 +100,9 @@ startup {
     vars.ch2EndCount = 0;
     vars.answeredYes = true;
     vars.tracabartpeeg = false;
+    vars.fightPointer = -1;
+    vars.fightPointerOld = -1;
+    vars.chapter = 0;
     int doneIndex = vars.findSplitVarIndex("done");
     foreach (string split in vars.splits.Keys)
       vars.splits[split][doneIndex] = false;
@@ -253,6 +258,9 @@ startup {
 
 exit {
   vars.DebugPrint("The game just exited");
+  vars.chapter = 0;
+  vars.fightPointer = -1;
+  vars.fightPointerOld = -1;
 }
 
 init {
@@ -531,12 +539,7 @@ update {
     }
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
-  if (((IDictionary<String, object>)current).ContainsKey("fight")) { // checks for 0 and 1 to make sure the console doesn't get spammed with random values
-    if((old.fight == 0 && current.fight == 1) || (old.fight == 1 && current.fight == 0)) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
-  }
-  if (((IDictionary<String, object>)current).ContainsKey("fight2")) {
-    if((old.fight2 == 0 && current.fight2 == 1) || (old.fight2 == 1 && current.fight2 == 0)) vars.DebugPrint("FIGHT 2 " + old.fight2 + " -> " + current.fight2);
-  }
+  if (current.fight != old.fight && version == "SURVEY_PROGRAM") vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
 
   if(version != "SURVEY_PROGRAM") {
     if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
@@ -549,6 +552,39 @@ update {
       vars.DebugPrint("TRACABARTPEEG: All splits have been reset to initial state for the second run");
       vars.tracabartpeeg = true;
       // reset splits so that they can be triggered the next time Chapter 2 is opened
+    }
+
+    if(version == "v1.08 - v1.10") {
+      if(old.fight != current.fight) {
+        vars.fightPointerOld = old.fight;
+        vars.fightPointer = current.fight;
+      }
+    }
+    else {
+      if(vars.fightPointer == old.fight && old.fight != current.fight) {
+        vars.DebugPrint("vars.fightPointer " + old.fight + " -> " + current.fight);
+        vars.fightPointerOld = old.fight;
+        vars.fightPointer = current.fight;
+      }
+      else if(vars.fightPointer == old.fight2 && old.fight2 != current.fight2) {
+        vars.DebugPrint("vars.fightPointer " + old.fight2 + " -> " + current.fight2);
+        vars.fightPointerOld = old.fight2;
+        vars.fightPointer = current.fight2;
+      }
+
+      if(old.room == 281 && current.room == 413) { // entered chapter 1
+        if(vars.chapter == 0) vars.fightPointer = current.fight;
+        else if(vars.chapter == 2) vars.fightPointer = current.fight2;
+        vars.chapter = 1;
+      }
+      else if(old.room == 11 && current.room == 234) { // entered chapter 2
+        if(vars.chapter == 0) vars.fightPointer = current.fight2;
+        else if(vars.chapter == 1) vars.fightPointer = current.fight;
+        vars.chapter = 2;
+      }
+
+      // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
+      // also when chapter switching debugview could be spammed a little bit with wrong values but ignore that it doesn't matter, there's no real point to adding checks for that 
     }
   }
 }
@@ -658,11 +694,11 @@ split {
           continue;
 
         // is there a current fight requirement?
-        if ((vars.splits[splitKey][currentFight] != -1) && (current.fight != vars.splits[splitKey][currentFight] && current.fight2 != vars.splits[splitKey][currentFight]))
+        if ((vars.splits[splitKey][currentFight] != -1) && (vars.fightPointer != vars.splits[splitKey][currentFight]))
             continue;
 
         // is there an old fight requirement?
-        if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight] && old.fight2 != vars.splits[splitKey][oldFight]))
+        if ((vars.splits[splitKey][oldFight] != -1) && (vars.fightPointerOld != vars.splits[splitKey][oldFight]))
             continue;
 
         // is there a special flag requirement?
