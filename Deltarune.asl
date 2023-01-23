@@ -105,7 +105,7 @@ startup {
     vars.chapter = 0;
     vars.resetSplits();
 
-    vars.DebugPrint("All values have been reset to initial state");
+    vars.DebugPrint("All utility variables have been reset to initial state");
   });
 
   vars.resetSplits = (Action)(() => {
