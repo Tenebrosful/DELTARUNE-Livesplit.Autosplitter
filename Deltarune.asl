@@ -542,7 +542,7 @@ update {
     }
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
-  if (current.fight != old.fight && version == "SURVEY_PROGRAM") vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
+  if (version == "SURVEY_PROGRAM" && current.fight != old.fight) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
 
   if(version != "SURVEY_PROGRAM") {
     if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
