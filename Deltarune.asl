@@ -549,9 +549,8 @@ update {
     if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
 
     if(timer.CurrentPhase != TimerPhase.Ended && timer.IsGameTimePaused == true && settings["Ch2_Ch2_PauseTimer"] && current.room == 31 && !vars.tracabartpeeg) {
+      vars.DebugPrint("TRACABARTPEEG: Request reset splits for the second run");
       vars.resetSplits();
-
-      vars.DebugPrint("TRACABARTPEEG: All splits have been reset to initial state for the second run");
       vars.tracabartpeeg = true;
       // reset splits so that they can be triggered the next time Chapter 2 is opened
     }
