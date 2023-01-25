@@ -20,8 +20,10 @@ state("Deltarune", "v1.15") {
   double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x140, 0x24, 0x10, 0x4F8, 0x0;
   double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F2CBC, 0x3C, 0x140, 0x140, 0x24, 0x10, 0xAF8, 0x0;
 
+  double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0;
   double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x6F0B48, 0x10C, 0x504, 0x20, 0x24, 0x10, 0x0, 0x0;
+  double snowgraveTimer : "Deltarune.exe", 0x15F10C, 0xC, 0x3C, 0x54, 0x144, 0x24, 0x10, 0x6C, 0x0;
 }
 
 state("Deltarune", "v1.08 - v1.10") {
@@ -42,8 +44,10 @@ state("Deltarune", "v1.08 - v1.10") {
   double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F1394, 0x4, 0x140, 0x24, 0x10, 0x498, 0x0;
   double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F1394, 0x3C, 0x140, 0x140, 0x24, 0x10, 0x498, 0x0;
 
+  double djFightCon : "Deltarune.exe", 0x436BCC, 0xE0, 0x20, 0x144, 0x144, 0x24, 0x10, 0x258, 0x0;
   double freezeRingTimer : "Deltarune.exe", 0x6EF220, 0x128, 0xF0, 0x20, 0x24, 0x10, 0xC0, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x43DE48, 0xA60, 0xC, 0x24, 0x10, 0x3D8, 0x0;
+  double snowgraveTimer : "Deltarune.exe", 0x436BCC, 0xDC, 0x20, 0x144, 0x144, 0x24, 0x10, 0x15C, 0x0;
 }
 
 state("Deltarune", "SURVEY_PROGRAM") {
@@ -204,8 +208,10 @@ startup {
       settings.Add("Ch2_ArcadeGame", true, "Arcade Game", "Ch2_CyberFields");
       settings.Add("Ch2_Virovirokun#1", false, "Virovirokun #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_Agree2All", false, "Agree 2 All puzzle", "Ch2_CyberFields");
-      settings.Add("Ch2_DJFight", true, "DJ Fight", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShop", false, "DJ Shop", "Ch2_CyberFields");
+      settings.Add("Ch2_DJFightWon", true, "DJ Fight ('BATTLE WON!' text)", "Ch2_CyberFields");
+      settings.Add("Ch2_DJFight", false, "DJ Fight (room change)", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopEnter", false, "Enter DJ Shop Room", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShop", false, "Exit DJ Shop Room", "Ch2_CyberFields");
       settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
@@ -223,7 +229,8 @@ startup {
       settings.Add("Ch2_CheeseMaze", false, "Cheese Maze", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#3", false, "Mice Puzzle #3", "Ch2_CyberCity");
       settings.Add("Ch2_Berdly", true, "Berdly 2", "Ch2_CyberCity");
-      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
+      settings.Add("Ch2_BerdlySnowgraveDamage", false, "Berdly 2 Damages (Snowgrave)", "Ch2_CyberCity");
+      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 Room Change (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
       settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight", "Ch2_CyberCity");
@@ -254,6 +261,7 @@ startup {
       settings.Add("Ch2_Queen", true, "Queen", "Ch2_Mansion");
       settings.Add("Ch2_GigaQueen", true, "Giga Queen", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Enter", false, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
+      settings.Add("Ch2_SpamtonNEO_Damages", true, "Spamton Neo Damages (Snowgrave Spamton NEO)", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
     settings.Add("Ch2_Ending", true, "Ending");
     settings.Add("Ch2_EndingOST", false, "Ending (OST%)");
@@ -368,12 +376,14 @@ init {
 
         // Cyber Fields
         {"Ch2_Pre-CyberFields", new object[] {false, -1, 88, -1, -1, -1}},
-        {"Ch2_Tasque", new object[] {false, -1, 93, -1, -1, -1}},
+        {"Ch2_Tasque", new object[] {false, 91, 93, -1, -1, -1}},
         {"Ch2_ArcadeGame", new object[] {false, 93, 94, -1, -1, -1}},
         {"Ch2_Virovirokun#1", new object[] {false, 95, 96, -1, -1, -1}},
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
+        {"Ch2_DJFightWon", new object[] {false, -1, 98, -1, -1, 11}},
         {"Ch2_DJFight", new object[] {false, 98, 106, -1, -1, -1}},
-        {"Ch2_DJShop", new object[] {false, 237, 99, -1, -1, -1}},
+        {"Ch2_DJShopEnter", new object[] {false, 94, 99, -1, -1, -1}},
+        {"Ch2_DJShop", new object[] {false, 99, 104, -1, -1, -1}},
         {"Ch2_Werewire#1", new object[] {false, -1, 105, -1, -1, -1}},
         {"Ch2_VirovirokunPuzzle", new object[] {false, -1, 100, -1, -1, -1}},
         {"Ch2_Cups", new object[] {false, -1, 101, -1, -1, -1}},
@@ -392,6 +402,7 @@ init {
         {"Ch2_CheeseMaze", new object[] {false, -1, 136, -1, -1, -1}},
         {"Ch2_MicePuzzle#3", new object[] {false, 136, 137, -1, -1, -1}},
         {"Ch2_Berdly", new object[] {false, 138, 139, -1, -1, -1}},
+        {"Ch2_BerdlySnowgraveDamage", new object[] {false, -1, 138, -1, -1, 12}},
         {"Ch2_BerdlySnowgrave", new object[] {false, 138, 137, -1, -1, -1}},
         {"Ch2_Spamton", new object[] {false, 140, 139, -1, -1, -1}},
         {"Ch2_FullParty", new object[] {false, -1, 143, -1, -1, -1}},
@@ -424,12 +435,14 @@ init {
         {"Ch2_Queen", new object[] {false, -1, 207, -1, -1, -1}},
         {"Ch2_GigaQueen", new object[] {false, 207, 208, -1, -1, -1}},
         {"Ch2_Fountain_Enter", new object[] {false, 4, 3, -1, -1, -1}},
+        {"Ch2_SpamtonNEO_Damages", new object[] {false, -1, 3, 1, 0, -1}},
         {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
 
         // Ch2_Ending is handled manually
         {"Ch2_EndingOST", new object[] {false, 31, 245, -1, -1, -1}}
         #endregion
       };
+
 
       if(timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"])) {
         var message = MessageBox.Show(
@@ -543,7 +556,6 @@ update {
     }
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
-  if (version == "SURVEY_PROGRAM" && current.fight != old.fight) vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
 
   if(version != "SURVEY_PROGRAM") {
     if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
@@ -556,7 +568,7 @@ update {
     }
 
     switch(version) {
-      case "1.15":
+      case "v1.15":
         // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
         // also when chapter switching debugview could be spammed a little bit with wrong values but ignore that it doesn't matter, there's no real point to adding checks for that 
         if(vars.fightPointer == old.fight && old.fight != current.fight) {
@@ -713,6 +725,12 @@ split {
               break;
             case 10: // Ch1-Ch2
               pass = (old.namerEvent != 75); // this check is in place so that it wouldn't split when starting chapter 2 from a fresh save file when it cuts to black
+              break;
+            case 11: // Ch2_DJFightWon
+              pass = (old.djFightCon != 18 && current.djFightCon == 18);
+              break;
+            case 12: // Berdly 2 Snowgrave Damages
+              pass = (current.snowgraveTimer == 427 && old.snowgraveTimer != 427);
               break;
             case 69: // Ch2_Disk_Loaded
               pass = (current.loadedDiskGreyBG == 121 && old.loadedDiskGreyBG == 119);
