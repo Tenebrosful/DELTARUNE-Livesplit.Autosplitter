@@ -588,7 +588,6 @@ update {
       vars.tracabartpeeg = true;
       // reset splits so that they can be triggered the next time Chapter 2 is opened
     }
-
   }
 }
 
