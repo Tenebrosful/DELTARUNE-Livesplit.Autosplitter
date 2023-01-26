@@ -210,8 +210,10 @@ startup {
       settings.Add("Ch2_Agree2All", false, "Agree 2 All puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_DJFightWon", true, "DJ Fight ('BATTLE WON!' text)", "Ch2_CyberFields");
       settings.Add("Ch2_DJFight", false, "DJ Fight (room change)", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShopEnter", false, "Enter DJ Shop Room", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShop", false, "Exit DJ Shop Room", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopEnterRoom", false, "Enter DJ Shop Room", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopEnterMenu", false, "Enter DJ Shop Menu", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopExitMenu", false, "Exit DJ Shop Menu", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopExitRoom", false, "Exit DJ Shop Room", "Ch2_CyberFields");
       settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
@@ -382,8 +384,10 @@ init {
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
         {"Ch2_DJFightWon", new object[] {false, -1, 98, -1, -1, 11}},
         {"Ch2_DJFight", new object[] {false, 98, 106, -1, -1, -1}},
-        {"Ch2_DJShopEnter", new object[] {false, 94, 99, -1, -1, -1}},
-        {"Ch2_DJShop", new object[] {false, 99, 104, -1, -1, -1}},
+        {"Ch2_DJShopEnterRoom", new object[] {false, 94, 99, -1, -1, -1}},
+        {"Ch2_DJShopEnterMenu", new object[] {false, 99, 237, -1, -1, -1}},
+        {"Ch2_DJShopExitMenu", new object[] {false, 237, 99, -1, -1, -1}},
+        {"Ch2_DJShopExitRoom", new object[] {false, 99, 104, -1, -1, -1}},
         {"Ch2_Werewire#1", new object[] {false, -1, 105, -1, -1, -1}},
         {"Ch2_VirovirokunPuzzle", new object[] {false, -1, 100, -1, -1, -1}},
         {"Ch2_Cups", new object[] {false, -1, 101, -1, -1, -1}},
@@ -557,6 +561,35 @@ update {
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
 
+  switch(version) { // Handling fight variable, see v1.15
+    case "v1.15":
+      // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
+      // also when chapter switching debugview could be spammed a little bit with wrong values but ignore that it doesn't matter, there's no real point to adding checks for that 
+      if(vars.fightPointer == old.fight && old.fight != current.fight) {
+        vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
+        vars.fightPointerOld = old.fight;
+        vars.fightPointer = current.fight;
+      }
+      else if(vars.fightPointer == old.fight2 && old.fight2 != current.fight2) {
+        vars.DebugPrint("FIGHT " + old.fight2 + " -> " + current.fight2);
+        vars.fightPointerOld = old.fight2;
+        vars.fightPointer = current.fight2;
+      }
+
+      if(old.room == 281 && current.room == 413) { // entered chapter 1
+        if(vars.chapter == 0) vars.fightPointer = current.fight;
+        else if(vars.chapter == 2) vars.fightPointer = current.fight2;
+        vars.chapter = 1;
+      }
+      else if(old.room == 11 && current.room == 234) { // entered chapter 2
+        if(vars.chapter == 0) vars.fightPointer = current.fight2;
+        else if(vars.chapter == 1) vars.fightPointer = current.fight;
+        vars.chapter = 2;
+      }
+      break;
+    default: if(old.fight != current.fight) { vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight); vars.fightPointerOld = old.fight; vars.fightPointer = current.fight; } break;
+  }
+
   if(version != "SURVEY_PROGRAM") {
     if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
 
@@ -565,35 +598,6 @@ update {
       vars.resetSplits();
       vars.tracabartpeeg = true;
       // reset splits so that they can be triggered the next time Chapter 2 is opened
-    }
-
-    switch(version) {
-      case "v1.15":
-        // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
-        // also when chapter switching debugview could be spammed a little bit with wrong values but ignore that it doesn't matter, there's no real point to adding checks for that 
-        if(vars.fightPointer == old.fight && old.fight != current.fight) {
-          vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
-          vars.fightPointerOld = old.fight;
-          vars.fightPointer = current.fight;
-        }
-        else if(vars.fightPointer == old.fight2 && old.fight2 != current.fight2) {
-          vars.DebugPrint("FIGHT " + old.fight2 + " -> " + current.fight2);
-          vars.fightPointerOld = old.fight2;
-          vars.fightPointer = current.fight2;
-        }
-
-        if(old.room == 281 && current.room == 413) { // entered chapter 1
-          if(vars.chapter == 0) vars.fightPointer = current.fight;
-          else if(vars.chapter == 2) vars.fightPointer = current.fight2;
-          vars.chapter = 1;
-        }
-        else if(old.room == 11 && current.room == 234) { // entered chapter 2
-          if(vars.chapter == 0) vars.fightPointer = current.fight2;
-          else if(vars.chapter == 1) vars.fightPointer = current.fight;
-          vars.chapter = 2;
-        }
-        break;
-      default: if(old.fight != current.fight) { vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight); vars.fightPointerOld = old.fight; vars.fightPointer = current.fight; } break;
     }
   }
 }
