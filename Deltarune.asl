@@ -208,8 +208,10 @@ startup {
       settings.Add("Ch2_Agree2All", false, "Agree 2 All puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_DJFightWon", true, "DJ Fight ('BATTLE WON!' text)", "Ch2_CyberFields");
       settings.Add("Ch2_DJFight", false, "DJ Fight (room change)", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShopEnter", false, "Enter DJ Shop Room", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShop", false, "Exit DJ Shop Room", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopEnterRoom", false, "Enter DJ Shop Room", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopEnterMenu", false, "Enter DJ Shop Menu", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopExitMenu", false, "Exit DJ Shop Menu", "Ch2_CyberFields");
+      settings.Add("Ch2_DJShopExitRoom", false, "Exit DJ Shop Room", "Ch2_CyberFields");
       settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
@@ -378,8 +380,10 @@ init {
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
         {"Ch2_DJFightWon", new object[] {false, -1, 98, -1, -1, 11}},
         {"Ch2_DJFight", new object[] {false, 98, 106, -1, -1, -1}},
-        {"Ch2_DJShopEnter", new object[] {false, 94, 99, -1, -1, -1}},
-        {"Ch2_DJShop", new object[] {false, 99, 104, -1, -1, -1}},
+        {"Ch2_DJShopEnterRoom", new object[] {false, 94, 99, -1, -1, -1}},
+        {"Ch2_DJShopEnterMenu", new object[] {false, 99, 237, -1, -1, -1}},
+        {"Ch2_DJShopExitMenu", new object[] {false, 237, 99, -1, -1, -1}},
+        {"Ch2_DJShopExitRoom", new object[] {false, 99, 104, -1, -1, -1}},
         {"Ch2_Werewire#1", new object[] {false, -1, 105, -1, -1, -1}},
         {"Ch2_VirovirokunPuzzle", new object[] {false, -1, 100, -1, -1, -1}},
         {"Ch2_Cups", new object[] {false, -1, 101, -1, -1, -1}},
