@@ -78,7 +78,7 @@ startup {
   vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE]  " + text); });
   vars.DebugPrint("Autosplitter is starting up");
 
-  vars.ch2EndCount = 0; // the pointer is used for multiple textboxes so we just count up by 1 every time it changes lmao
+  vars.tempCount = 0; // used for ch1 cell exit split (it triggers twice, once when susie exits it and once when everyone exits it) & ch2 end (the pointer is used for multiple textboxes so we just count up by 1 every time it changes)
   vars.answeredYes = true; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
   vars.tracabartpeeg = false;
   vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
@@ -99,7 +99,7 @@ startup {
     });
 
   vars.reactivate = (Action)(() => {
-    vars.ch2EndCount = 0;
+    vars.tempCount = 0;
     vars.answeredYes = true;
     vars.tracabartpeeg = false;
     vars.fightPointer = -1;
@@ -344,7 +344,7 @@ init {
         {"Ch1_Captured", new object[] {false, 385, 386, -1, -1, -1}},
 
         //Escape
-        {"Ch1_Escape_Cell", new object[] {false, 386, 387, -1, -1, -1}},
+        {"Ch1_Escape_Cell", new object[] {false, 386, 387, -1, -1, 8}},
         {"Ch1_Escape_Elevator", new object[] {false, 388, 390, -1, -1, -1}},
 
         //Jevil
@@ -489,7 +489,7 @@ init {
         {"Ch1_Captured", new object[] {false, -1, -1, 104, 105, -1, -1, -1}},
 
         //Escape
-        {"Ch1_Escape_Cell", new object[] {false, -1, -1, 105, 106, -1, -1, -1}},
+        {"Ch1_Escape_Cell", new object[] {false, -1, -1, 105, 106, -1, -1, 8}},
         {"Ch1_Escape_Elevator", new object[] {false, -1, -1, 107, 109, -1, -1, -1}},
 
         //Jevil
@@ -678,13 +678,13 @@ split {
 
       // Chapter 2 end
       if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && current.room == 31 && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
-        vars.ch2EndCount ++;
-        if(vars.ch2EndCount == 31) {
+        vars.tempCount ++;
+        if(vars.tempCount == 31) {
           if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
             vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
             timer.IsGameTimePaused = true;
           } 
-          vars.ch2EndCount = 0;
+          vars.tempCount = 0;
           return settings["Ch2_Ending"];         
         }
       }
@@ -721,6 +721,13 @@ split {
               The pointers for him are really weird unfortunately I couldn't find one that would work if you died to him or returned to title before the fight
               */
               pass = (current.jevilDance == 4);
+              break;
+            case 8: // Ch1_Escape_Cell
+              pass = (vars.tempCount == 1);
+              
+              if(pass) vars.tempCount = 0;
+              else vars.tempCount ++;
+              
               break;
             case 10: // Ch1-Ch2
               pass = (old.namerEvent != 75); // this check is in place so that it wouldn't split when starting chapter 2 from a fresh save file when it cuts to black
@@ -813,6 +820,13 @@ split {
               break;
             case 7: // Ch1_Jevil_EndBattle
               pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+              break;
+            case 8: // Ch1_Escape_Cell
+              pass = (vars.tempCount == 1);
+              
+              if(pass) vars.tempCount = 0;
+              else vars.tempCount ++;
+              
               break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
