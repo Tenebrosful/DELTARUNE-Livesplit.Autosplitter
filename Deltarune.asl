@@ -9,7 +9,7 @@ state("Deltarune", "v1.15") {
   double fight : "Deltarune.exe", 0x6FE860, 0x30, 0x9C, 0x5F0;
   double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0xD98, 0x9B0; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one
   
-  double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
+  double choicer : "Deltarune.exe", 0x4BB0C8, 0x15C, 0x0;
 
   // selfs
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
@@ -17,7 +17,7 @@ state("Deltarune", "v1.15") {
 
   double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
 
-  double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x140, 0x24, 0x10, 0x4F8, 0x0;
+  double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x144, 0x140, 0x140, 0x24, 0x10, 0x4F8, 0x0;
   double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F2CBC, 0x3C, 0x140, 0x140, 0x24, 0x10, 0xAF8, 0x0;
 
   double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0;
@@ -79,7 +79,7 @@ startup {
   vars.DebugPrint("Autosplitter is starting up");
 
   vars.tempCount = 0; // used for ch1 cell exit split (it triggers twice, once when susie exits it and once when everyone exits it) & ch2 end (the pointer is used for multiple textboxes so we just count up by 1 every time it changes)
-  vars.answeredYes = true; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
+  vars.answeredYes = false; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
   vars.tracabartpeeg = false;
   vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
   vars.fightPointerOld = -1;
@@ -100,7 +100,7 @@ startup {
 
   vars.reactivate = (Action)(() => {
     vars.tempCount = 0;
-    vars.answeredYes = true;
+    vars.answeredYes = false;
     vars.tracabartpeeg = false;
     vars.fightPointer = -1;
     vars.fightPointerOld = -1;
