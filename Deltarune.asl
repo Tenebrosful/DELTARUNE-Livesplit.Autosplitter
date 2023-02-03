@@ -569,17 +569,19 @@ update {
         vars.fightPointer = current.fight2;
       }
 
-      if(old.room == 281 && current.room == 413) { // entered chapter 1
-        if(vars.chapter == 0) vars.fightPointer = current.fight;
-        else if(vars.chapter == 2) vars.fightPointer = current.fight2;
-        vars.DebugPrint("Chapter " + vars.chapter + " -> 1");
-        vars.chapter = 1;
-      }
-      else if(old.room == 11 && current.room == 234) { // entered chapter 2
-        if(vars.chapter == 0) vars.fightPointer = current.fight2;
-        else if(vars.chapter == 1) vars.fightPointer = current.fight;
-        vars.DebugPrint("Chapter " + vars.chapter + " -> 2");
-        vars.chapter = 2;
+      if(old.room == 279) { // chapter select room
+        if(current.room == 281) { // chapter 1 initialization room
+          if(vars.chapter == 0) vars.fightPointer = current.fight;
+          else if(vars.chapter == 2) vars.fightPointer = current.fight2;
+          vars.DebugPrint("CHAPTER " + vars.chapter + " -> 1");
+          vars.chapter = 1;
+        }
+        else if(current.room == 11) { // chapter 2 initialization room
+          if(vars.chapter == 0) vars.fightPointer = current.fight2;
+          else if(vars.chapter == 1) vars.fightPointer = current.fight;
+          vars.DebugPrint("CHAPTER " + vars.chapter + " -> 2");
+          vars.chapter = 2;
+        }
       }
       break;
     default: if(old.fight != current.fight) { vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight); vars.fightPointerOld = old.fight; vars.fightPointer = current.fight; } break;
