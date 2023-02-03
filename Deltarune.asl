@@ -1,7 +1,7 @@
 // DELTARUNE autosplitter by Tenebrosful and NERS
 // Inspired by Narry's autosplitter based on Glacia's Undertale autosplitter (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
-state("Deltarune", "v1.15") {
+state("Deltarune", "v1.13 - v1.15") {
   // static
   uint room : "Deltarune.exe", 0x6F0B70;
 
@@ -286,7 +286,7 @@ init {
 
   switch(hash) {
     case "A9DB8B7FB6333B5E267F574F46076B3F":
-      version = "v1.15";
+      version = "v1.13 - v1.15";
       break;
     case "4D09627E1FA123D12DDF1A496C489F73":
       version = "SURVEY_PROGRAM";
@@ -312,7 +312,7 @@ init {
 
   #region Version variables (Splits, Start Rooms, Reset Rooms, ...)
   switch(version) {
-    case "v1.15":
+    case "v1.13 - v1.15":
     case "v1.08 - v1.10":
       vars.splitsVarIndex = new object[] { "done", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
       vars.splits = new Dictionary<string, object[]>() {
@@ -555,7 +555,7 @@ update {
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
 
   switch(version) { // Handling fight variable, see v1.15
-    case "v1.15":
+    case "v1.13 - v1.15":
       // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
       // also when chapter switching debugview could be spammed a little bit with wrong values but ignore that it doesn't matter, there's no real point to adding checks for that 
       if(vars.fightPointer == old.fight && old.fight != current.fight) {
@@ -653,7 +653,7 @@ split {
   int specialCondition = vars.findSplitVarIndex("specialCondition");
 
   switch(version) {
-    case "v1.15":
+    case "v1.13 - v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
       if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && vars.answeredYes) {
