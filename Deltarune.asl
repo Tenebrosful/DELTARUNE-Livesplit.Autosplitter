@@ -6,8 +6,10 @@ state("Deltarune", "v1.13 - v1.15") {
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
+  string128 textboxMsg : "Deltarune.exe", 0x6FE774, 0x8, 0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0; // using the actual textbox string instead of the halt state seems to work better for end splits shayyYippee
+  
   double fight : "Deltarune.exe", 0x6FE860, 0x30, 0x9C, 0x5F0;
-  double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0xD98, 0x9B0; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one
+  double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0xD98, 0x9B0; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one (not like it matters though cuz they're broken at the moment)
   
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
@@ -16,9 +18,6 @@ state("Deltarune", "v1.13 - v1.15") {
   double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
 
   double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
-
-  double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F2CBC, 0x4, 0x140, 0x24, 0x10, 0x4F8, 0x0;
-  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F2CBC, 0x3C, 0x140, 0x140, 0x24, 0x10, 0xAF8, 0x0;
 
   double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0;
   double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
@@ -30,6 +29,8 @@ state("Deltarune", "v1.08 - v1.10") {
   uint room : "Deltarune.exe", 0x6EF248;
  
   // globals
+  string128 textboxMsg : "Deltarune.exe", 0x6FCE4C, 0x8, 0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0;
+
   double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
 
   double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
@@ -39,9 +40,6 @@ state("Deltarune", "v1.08 - v1.10") {
   double doorCloseCon : "Deltarune.exe", 0x6F1394, 0x4, 0x160, 0x1E0, 0x24, 0x10, 0x18, 0x0;
 
   double jevilDance : "Deltarune.exe", 0x6EF220, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x5F4, 0x0;
-
-  double finalTextboxHalt_ch1 : "Deltarune.exe", 0x6F1394, 0x4, 0x140, 0x24, 0x10, 0x498, 0x0;
-  double finalTextboxHalt_ch2 : "Deltarune.exe", 0x6F1394, 0x3C, 0x140, 0x140, 0x24, 0x10, 0x498, 0x0;
 
   double djFightCon : "Deltarune.exe", 0x436BCC, 0xE0, 0x20, 0x144, 0x144, 0x24, 0x10, 0x258, 0x0;
   double freezeRingTimer : "Deltarune.exe", 0x43DE48, 0xC18, 0xC, 0x24, 0x10, 0xC0, 0x0;
@@ -53,6 +51,8 @@ state("Deltarune", "SURVEY_PROGRAM") {
   uint room : "Deltarune.exe", 0x6AC9F0;
   
   // globals
+  string128 textboxMsg : "Deltarune.exe", 0x48BDEC, 0x6C, 0x178, 0x60, 0x10, 0x208, 0x0, 0x0, 0x0;
+
   double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
   double plot : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
@@ -66,9 +66,6 @@ state("Deltarune", "SURVEY_PROGRAM") {
   // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a sigscan
   double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
-  
-  double finalTextboxHalt : "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
-  double finalTextboxHalt2 : "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
 }
 
 startup {
@@ -78,8 +75,7 @@ startup {
   vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE]  " + text); });
   vars.DebugPrint("Autosplitter is starting up");
 
-  vars.tempCount = 0; // used for ch1 cell exit split (it triggers twice, once when susie exits it and once when everyone exits it) & ch2 end (the pointer is used for multiple textboxes so we just count up by 1 every time it changes)
-  vars.answeredYes = false; // for chapter 1 auto end check, the value changes from 1 to 0 right after you select "No" so putting "current.choicer == 0" would still make it split
+  vars.tempCount = 0; // used for ch1 cell exit split (it triggers twice, once when susie exits it and once when everyone exits it)
   vars.tracabartpeeg = false;
   vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
   vars.fightPointerOld = -1;
@@ -100,7 +96,6 @@ startup {
 
   vars.reactivate = (Action)(() => {
     vars.tempCount = 0;
-    vars.answeredYes = false;
     vars.tracabartpeeg = false;
     vars.fightPointer = -1;
     vars.fightPointerOld = -1;
@@ -152,7 +147,7 @@ startup {
       settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
     settings.Add("Ch1_CastleTown", true, "Castle Town section");
       settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerFight", false, "Lancer Fight", "Ch1_CastleTown");
+      settings.Add("Ch1_LancerFight", false, "Lancer Fight (may not work on Demo sometimes)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
     settings.Add("Ch1_Fields", true, "Fields section");
@@ -172,7 +167,7 @@ startup {
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (may not work on Demo sometimes)", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
@@ -206,8 +201,8 @@ startup {
       settings.Add("Ch2_ArcadeGame", true, "Arcade Game", "Ch2_CyberFields");
       settings.Add("Ch2_Virovirokun#1", false, "Virovirokun #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_Agree2All", false, "Agree 2 All puzzle", "Ch2_CyberFields");
-      settings.Add("Ch2_DJFightWon", true, "DJ Fight ('BATTLE WON!' text)", "Ch2_CyberFields");
-      settings.Add("Ch2_DJFight", false, "DJ Fight (room change)", "Ch2_CyberFields");
+      settings.Add("Ch2_DJFightWon", false, "DJ Fight ('BATTLE WON!' text) (may not work sometimes)", "Ch2_CyberFields");
+      settings.Add("Ch2_DJFight", true, "DJ Fight (room change)", "Ch2_CyberFields");
       settings.Add("Ch2_DJShopEnterRoom", false, "Enter DJ Shop Room", "Ch2_CyberFields");
       settings.Add("Ch2_DJShopEnterMenu", false, "Enter DJ Shop Menu", "Ch2_CyberFields");
       settings.Add("Ch2_DJShopExitMenu", false, "Exit DJ Shop Menu", "Ch2_CyberFields");
@@ -232,8 +227,8 @@ startup {
       settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight", "Ch2_CyberCity");
-      settings.Add("Ch2_Mice", false, "Mice fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight (may not work sometimes)", "Ch2_CyberCity");
+      settings.Add("Ch2_Mice", false, "Mice fight (may not work sometimes)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
     settings.Add("Ch2_Mansion", true, "Queen Mansion");
@@ -588,8 +583,6 @@ update {
   }
 
   if(version != "SURVEY_PROGRAM") {
-    if(current.room == 283 && current.finalTextboxHalt_ch1 == 5) vars.answeredYes = (current.choicer == 0);
-
     if(timer.CurrentPhase != TimerPhase.Ended && timer.IsGameTimePaused == true && settings["Ch2_Ch2_PauseTimer"] && current.room == 31 && !vars.tracabartpeeg) {
       vars.DebugPrint("TRACABARTPEEG: Request reset splits for the second run");
       vars.resetSplits();
@@ -656,11 +649,7 @@ split {
     case "v1.13 - v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
-      if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && current.room == 283 && old.finalTextboxHalt_ch1 == 2 && current.finalTextboxHalt_ch1 != 2 && vars.answeredYes) {
-        /*
-        We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
-        Once the box is dismissed, the pointer becomes invalid and as such, the value is no longer 2
-        */
+      if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && (old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null) {
         if(settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"]) {
           vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
           timer.IsGameTimePaused = true;
@@ -679,16 +668,12 @@ split {
       }
 
       // Chapter 2 end
-      if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && current.room == 31 && old.finalTextboxHalt_ch2 == 2 && current.finalTextboxHalt_ch2 != 2) {
-        vars.tempCount ++;
-        if(vars.tempCount == 31) {
-          if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
-            vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
-            timer.IsGameTimePaused = true;
-          } 
-          vars.tempCount = 0;
-          return settings["Ch2_Ending"];         
-        }
+      if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && (old.textboxMsg == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.textboxMsg == @"\E1* ... they're already&||asleep.../%") && current.textboxMsg == null) {
+        if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
+          vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
+          timer.IsGameTimePaused = true;
+        } 
+        return settings["Ch2_Ending"];       
       }
 
       foreach(string splitKey in vars.splits.Keys) {
@@ -806,7 +791,7 @@ split {
               pass = (current.filechoice > 2);
               break;
             case 2:  // Ch1_Ending (SURVEY)
-              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
+              pass = ((old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null);
               break;
             case 3:  // i-key
               pass = vars.checkKeyItems(5);
