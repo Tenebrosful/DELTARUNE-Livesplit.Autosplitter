@@ -1,15 +1,15 @@
 // DELTARUNE autosplitter by Tenebrosful and NERS
 // Inspired by Narry's autosplitter based on Glacia's Undertale autosplitter (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
-state("Deltarune", "v1.13 - v1.15") {
+state("Deltarune", "v1.12 - v1.15") {
   // static
   uint room : "Deltarune.exe", 0x6F0B70;
 
   // globals
   string128 textboxMsg : "Deltarune.exe", 0x6FE774, 0x8, 0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
   
-  double fight : "Deltarune.exe", 0x6FE860, 0x30, 0x9C, 0x5F0;
-  double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0xD98, 0x9B0; // going into chapter 2 then chapter 1 breaks the first pointer so i had to find a second one (not like it matters though cuz they're broken at the moment)
+  double fight : "Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0x660;
+  double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0xAD0; // going into chapter 2 then chapter 1 breaks the first pointer (and vice-versa) so i had to find a second one
   
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
@@ -17,9 +17,9 @@ state("Deltarune", "v1.13 - v1.15") {
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
 
-  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
+  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0; // breaks if you die to him or return to title, need to fix that someday maybe (same with v1.08 - v1.10)
 
-  double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0;
+  double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0; // same here
   double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x6F0B48, 0x10C, 0x504, 0x20, 0x24, 0x10, 0x0, 0x0;
 }
@@ -79,6 +79,7 @@ startup {
   vars.tracabartpeeg = false;
   vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
   vars.fightPointerOld = -1;
+  vars.fightPointerUsed = 0;
   vars.chapter = 0;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
@@ -99,6 +100,7 @@ startup {
     vars.tracabartpeeg = false;
     vars.fightPointer = -1;
     vars.fightPointerOld = -1;
+    vars.fightPointerUsed = 0;
     vars.chapter = 0;
     vars.resetSplits();
 
@@ -147,7 +149,7 @@ startup {
       settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
     settings.Add("Ch1_CastleTown", true, "Castle Town section");
       settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerFight", false, "Lancer Fight (may not work on Demo sometimes)", "Ch1_CastleTown");
+      settings.Add("Ch1_LancerFight", false, "Lancer fight", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
     settings.Add("Ch1_Fields", true, "Fields section");
@@ -167,7 +169,7 @@ startup {
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (may not work on Demo sometimes)", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
@@ -179,7 +181,7 @@ startup {
       settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_ExitRoom", false, "Exit Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (May not work on Demo sometimes, use with caution)", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (may not work on Demo sometimes, use with caution)", "Ch1_Jevil");
     settings.Add("Ch1_CardCastle", true, "Card Castle section");
       settings.Add("Ch1_RudinnRangerSkip", false, "Rudinn Ranger Skip", "Ch1_CardCastle");
       settings.Add("Ch1_HeadHathySkip", false, "Head Hathy Skip", "Ch1_CardCastle");
@@ -227,8 +229,8 @@ startup {
       settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight (may not work sometimes)", "Ch2_CyberCity");
-      settings.Add("Ch2_Mice", false, "Mice fight (may not work sometimes)", "Ch2_CyberCity");
+      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Mice", false, "Mice fight", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
     settings.Add("Ch2_Mansion", true, "Queen Mansion");
@@ -254,7 +256,8 @@ startup {
       settings.Add("Ch2_Werewerewire", false, "Werewerewire", "Ch2_Mansion");
       settings.Add("Ch2_Queen", true, "Queen", "Ch2_Mansion");
       settings.Add("Ch2_GigaQueen", true, "Giga Queen", "Ch2_Mansion");
-      settings.Add("Ch2_Fountain_Enter", false, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
+      settings.Add("Ch2_Fountain_Enter", true, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
+      settings.Add("Ch2_SnowgraveNEO", true, "End Spamton NEO (Snowgrave)", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
     settings.Add("Ch2_Ending", true, "Ending");
     settings.Add("Ch2_EndingOST", false, "Ending (OST%)");
@@ -266,6 +269,7 @@ exit {
   vars.chapter = 0;
   vars.fightPointer = -1;
   vars.fightPointerOld = -1;
+  vars.fightPointerUsed = 0;
 }
 
 init {
@@ -281,18 +285,20 @@ init {
 
   switch(hash) {
     case "A9DB8B7FB6333B5E267F574F46076B3F":
-      version = "v1.13 - v1.15";
+      version = "v1.12 - v1.15";
       break;
     case "4D09627E1FA123D12DDF1A496C489F73":
       version = "SURVEY_PROGRAM";
+      vars.fightPointerUsed = 1;
       break;
     default:
       switch(module.ModuleMemorySize) {
         case 7495680:
           version = "v1.08 - v1.10";
+          vars.fightPointerUsed = 1;
           break;
         case 7491584:
-          version = "v1.00 - v1.07";
+          version = "v1.00 - v1.07 (Unsupported)";
           break;
         default:
           vars.DebugPrint("Unable to recognize the game version");
@@ -307,7 +313,7 @@ init {
 
   #region Version variables (Splits, Start Rooms, Reset Rooms, ...)
   switch(version) {
-    case "v1.13 - v1.15":
+    case "v1.12 - v1.15":
     case "v1.08 - v1.10":
       vars.splitsVarIndex = new object[] { "done", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
       vars.splits = new Dictionary<string, object[]>() {
@@ -429,6 +435,7 @@ init {
         {"Ch2_Queen", new object[] {false, -1, 207, -1, -1, -1}},
         {"Ch2_GigaQueen", new object[] {false, 207, 208, -1, -1, -1}},
         {"Ch2_Fountain_Enter", new object[] {false, 4, 3, -1, -1, -1}},
+        {"Ch2_SnowgraveNEO", new object[] {false, -1, 3, 1, 0, -1}},
         {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
 
         // Ch2_Ending is handled manually
@@ -529,10 +536,10 @@ update {
     }
     return false;
   }
-  if (version == "v1.00 - v1.07") {
-    if (!vars.VersionOutputWarning){
-      vars.DebugPrint("Versions v1.00 - v1.07 no longer handled");
-      MessageBox.Show("This autosplitter doesn't handle DELTARUNE versions v1.00 to v1.07 anymore.",
+  if (version == "v1.00 - v1.07 (Unsupported)") {
+    if (!vars.VersionOutputWarning) {
+      vars.DebugPrint("Versions v1.00 - v1.07 are no longer handled");
+      MessageBox.Show("This autosplitter doesn't handle DELTARUNE versions v1.00 - v1.07 anymore.",
         "[DELTARUNE] Unsupported version");
       vars.VersionOutputWarning = true;
     }
@@ -549,16 +556,14 @@ update {
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
 
-  switch(version) { // Handling fight variable, see v1.15
-    case "v1.13 - v1.15":
-      // i really couldn't think of a better way to go about this, sigscanning is out of the question as chapter switching breaks it entirely
-      // also when chapter switching debugview could be spammed a little bit with wrong values but ignore that it doesn't matter, there's no real point to adding checks for that 
-      if(vars.fightPointer == old.fight && old.fight != current.fight) {
+  switch(version) { // Handling the fight pointers, see v1.12 - v1.15 state()
+    case "v1.12 - v1.15":
+      if(vars.fightPointerUsed == 1 && old.fight != current.fight) {
         vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
         vars.fightPointerOld = old.fight;
         vars.fightPointer = current.fight;
       }
-      else if(vars.fightPointer == old.fight2 && old.fight2 != current.fight2) {
+      else if(vars.fightPointerUsed == 2 && old.fight2 != current.fight2) {
         vars.DebugPrint("FIGHT " + old.fight2 + " -> " + current.fight2);
         vars.fightPointerOld = old.fight2;
         vars.fightPointer = current.fight2;
@@ -566,20 +571,24 @@ update {
 
       if(old.room == 279) { // chapter select room
         if(current.room == 281) { // chapter 1 initialization room
-          if(vars.chapter == 0) vars.fightPointer = current.fight;
-          else if(vars.chapter == 2) vars.fightPointer = current.fight2;
-          vars.DebugPrint("CHAPTER " + vars.chapter + " -> 1");
+          if(vars.chapter == 0) vars.fightPointerUsed = 1;
+          vars.DebugPrint(vars.chapter != 1 ? "CHAPTER " + vars.chapter + " -> 1" : "CHAPTER 1 - Returning to Title");
           vars.chapter = 1;
         }
         else if(current.room == 11) { // chapter 2 initialization room
-          if(vars.chapter == 0) vars.fightPointer = current.fight2;
-          else if(vars.chapter == 1) vars.fightPointer = current.fight;
-          vars.DebugPrint("CHAPTER " + vars.chapter + " -> 2");
+          if(vars.chapter == 0) vars.fightPointerUsed = 2;
+          vars.DebugPrint(vars.chapter != 2 ? "CHAPTER " + vars.chapter + " -> 2" : "CHAPTER 2 - Returning to Title");
           vars.chapter = 2;
         }
       }
       break;
-    default: if(old.fight != current.fight) { vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight); vars.fightPointerOld = old.fight; vars.fightPointer = current.fight; } break;
+    default: 
+      if(old.fight != current.fight) { 
+        vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight); 
+        vars.fightPointerOld = old.fight; 
+        vars.fightPointer = current.fight;
+      }
+      break;
   }
 
   if(version != "SURVEY_PROGRAM") {
@@ -646,7 +655,7 @@ split {
   int specialCondition = vars.findSplitVarIndex("specialCondition");
 
   switch(version) {
-    case "v1.13 - v1.15":
+    case "v1.12 - v1.15":
     case "v1.08 - v1.10":
       // Chapter 1 end
       if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && (old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null) {
