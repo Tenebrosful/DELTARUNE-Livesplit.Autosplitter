@@ -8,8 +8,8 @@ state("Deltarune", "v1.12 - v1.15") {
   // globals
   string128 textboxMsg : "Deltarune.exe", 0x6FE774, 0x8, 0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
   
-  double fight : "Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0x660;
-  double fight2 : "Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0xAD0; // going into chapter 2 then chapter 1 breaks the first pointer (and vice-versa) so i had to find a second one
+  double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0xD4, 0x20, 0x24, 0x10, 0x54, 0x10;
+  double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x3D8, 0x930; // going into chapter 2 then chapter 1 breaks the first pointer (and vice-versa) so i had to find a second one
   
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
@@ -79,7 +79,7 @@ startup {
   vars.tracabartpeeg = false;
   vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
   vars.fightPointerOld = -1;
-  vars.fightPointerUsed = 0;
+  vars.pointersUsed = 1;
   vars.chapter = 0;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
@@ -100,7 +100,7 @@ startup {
     vars.tracabartpeeg = false;
     vars.fightPointer = -1;
     vars.fightPointerOld = -1;
-    vars.fightPointerUsed = 0;
+    vars.pointersUsed = 0;
     vars.chapter = 0;
     vars.resetSplits();
 
@@ -157,14 +157,14 @@ startup {
       settings.Add("Ch1_RudinnSkip#2", false, "Rudinn Skip 2", "Ch1_Fields");
       settings.Add("Ch1_RudinnSkip#3", false, "Rudinn Skip 3", "Ch1_Fields");
       settings.Add("Ch1_VandalizedPuzzle", false, "Vandalized Puzzle", "Ch1_Fields");
-      settings.Add("Ch1_KeyA", false, "Key A (SURVEY)", "Ch1_Fields");
+      settings.Add("Ch1_KeyA", false, "Key A", "Ch1_Fields");
       settings.Add("Ch1_Fields_Exit", true, "Rudinn Skip 4 / Exiting Fields", "Ch1_Fields");
     settings.Add("Ch1_Checkerboard", true, "Checkerboard");
       settings.Add("Ch1_PawnSkip#1", false, "Pawn Skip 1", "Ch1_Checkerboard");
       settings.Add("Ch1_PawnSkip#2", false, "Pawn Skip 2", "Ch1_Checkerboard");
       settings.Add("Ch1_Checkerboard_Exit", true, "Exiting Checkerboard", "Ch1_Checkerboard");
     settings.Add("Ch1_Forest", true, "Forest section");
-      settings.Add("Ch1_KeyB", false, "Key B (SURVEY)", "Ch1_Forest");
+      settings.Add("Ch1_KeyB", false, "Key B", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#1", false, "Bloxer Skip 1", "Ch1_Forest");
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
@@ -176,8 +176,8 @@ startup {
       settings.Add("Ch1_Escape_Cell", false, "Exiting Cell", "Ch1_Prison");
       settings.Add("Ch1_Escape_Elevator", true, "Entering Escape Elevator", "Ch1_Prison");
     settings.Add("Ch1_Jevil", false, "Jevil section");
-      settings.Add("Ch1_KeyC", false, "Key C (SURVEY)", "Ch1_Jevil");
-      settings.Add("Ch1_KeyFixed", false, "Key Fixed (SURVEY)", "Ch1_Jevil");
+      settings.Add("Ch1_KeyC", false, "Key C", "Ch1_Jevil");
+      settings.Add("Ch1_KeyFixed", false, "Key Fixed", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_ExitRoom", false, "Exit Jevil room", "Ch1_Jevil");
@@ -269,7 +269,7 @@ exit {
   vars.chapter = 0;
   vars.fightPointer = -1;
   vars.fightPointerOld = -1;
-  vars.fightPointerUsed = 0;
+  vars.pointersUsed = 0;
 }
 
 init {
@@ -289,13 +289,11 @@ init {
       break;
     case "4D09627E1FA123D12DDF1A496C489F73":
       version = "SURVEY_PROGRAM";
-      vars.fightPointerUsed = 1;
       break;
     default:
       switch(module.ModuleMemorySize) {
         case 7495680:
           version = "v1.08 - v1.10";
-          vars.fightPointerUsed = 1;
           break;
         case 7491584:
           version = "v1.00 - v1.07 (Unsupported)";
@@ -330,12 +328,14 @@ init {
         {"Ch1_RudinnSkip#2", new object[] {false, -1, 335, -1, -1, -1}},
         {"Ch1_RudinnSkip#3", new object[] {false, -1, 337, -1, -1, -1}},
         {"Ch1_VandalizedPuzzle", new object[] {false, -1, 344, -1, -1, -1}},
+        {"Ch1_KeyA", new object[] {false, -1, 414, -1, -1, 4}},
         {"Ch1_Fields_Exit", new object[] {false, -1, 346, -1, -1, -1}},
         //Checkboard
         {"Ch1_PawnSkip#1", new object[] {false, -1, 348, -1, -1, -1}},
         {"Ch1_PawnSkip#2", new object[] {false, -1, 352, -1, -1, -1}},
         {"Ch1_Checkerboard_Exit", new object[] {false, -1, 354, -1, -1, -1}},
         //Forest
+        {"Ch1_KeyB", new object[] {false, -1, 366, -1, -1, 5}},
         {"Ch1_BloxerSkip#1", new object[] {false, -1, 362, -1, -1, -1}},
         {"Ch1_BakeSale", new object[] {false, 362, 363, -1, -1, -1}},
         {"Ch1_BloxerSkip#2", new object[] {false, 365, 366, -1, -1, -1}},
@@ -349,8 +349,8 @@ init {
         {"Ch1_Escape_Elevator", new object[] {false, 388, 390, -1, -1, -1}},
 
         //Jevil
-        {"Ch1_KeyC", new object[] {false, -1, 64, -1, -1, 6}},
-        {"Ch1_KeyFixed", new object[] {false, -1, 83, -1, -1, 3}},
+        {"Ch1_KeyC", new object[] {false, -1, 345, -1, -1, 6}},
+        {"Ch1_KeyFixed", new object[] {false, -1, 364, -1, -1, 3}},
         {"Ch1_Jevil_EnterRoom", new object[] {false, 392, 393, -1, -1, -1}},
         {"Ch1_Jevil_StartBattle", new object[] {false, -1, 393, 0, 1, -1}},
         {"Ch1_Jevil_ExitRoom", new object[] {false, 393, 392, -1, -1, -1}},
@@ -453,12 +453,6 @@ init {
       }
       break;
     case "SURVEY_PROGRAM":
-      vars.checkKeyItems = (Func<int, bool>)((id) => {
-        for (int i = 0; i < 12; i++){
-          if (new DeepPointer("Deltarune.exe", 0x49D598, 0x264, (0x1A00 + (i*0x10))).Deref<double>(game) == id) return true;
-        }
-        return false;
-      });
       vars.splitsVarIndex = new object[] { "done", "maxPlot", "exactPlot", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
       vars.splits = new Dictionary<string, object[]>() {
         #region Chapter 1
@@ -495,8 +489,8 @@ init {
         {"Ch1_Escape_Elevator", new object[] {false, -1, -1, 107, 109, -1, -1, -1}},
 
         //Jevil
-        {"Ch1_KeyC", new object[] {false, -1, -1, -1, 64, -1, -1, 6 }},
-        {"Ch1_KeyFixed", new object[] {false, -1, -1, -1, 83, -1, -1, 3 }},
+        {"Ch1_KeyC", new object[] {false, -1, -1, -1, 64, -1, -1, 6}},
+        {"Ch1_KeyFixed", new object[] {false, -1, -1, -1, 83, -1, -1, 3}},
         {"Ch1_Jevil_EnterRoom", new object[] {false, -1, -1, 111, 112, -1, -1, -1}},
         {"Ch1_Jevil_StartBattle", new object[] {false, -1, -1, -1, 112, 0, 1, -1}},
         {"Ch1_Jevil_ExitRoom", new object[] {false, -1, -1, 112, 111, -1, -1, -1}},
@@ -517,6 +511,33 @@ init {
       break;
   }
   #endregion
+
+  vars.checkKeyItems = (Func<double, bool>)((id) => {
+    switch(version) {
+      case "v1.12 - v1.15":
+        if(vars.pointersUsed == 1) {
+          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0xA74, 0x10, 0xE4, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }      
+        }
+        else if(vars.pointersUsed == 2) {
+          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0x0, 0x64, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }
+        }
+        break;
+
+      case "v1.08 - v1.10":
+        if(vars.pointersUsed == 1) {
+          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x108, 0x0, 0x64, (0xA00 + (i*0x10))).Deref<double>(game) == id) return true; }     
+        }
+        else if(vars.pointersUsed == 2) {
+          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x48C, 0x20, 0xE4, (0x900 + (i*0x10))).Deref<double>(game) == id) return true; }
+        }
+        break;
+
+      case "SURVEY_PROGRAM":
+        for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x49D598, 0x264, (0x1A00 + (i*0x10))).Deref<double>(game) == id) return true; }
+        break;
+    }
+    return false;
+  });
 }
 
 update {
@@ -556,27 +577,28 @@ update {
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
 
-  switch(version) { // Handling the fight pointers, see v1.12 - v1.15 state()
+  switch(version) { // Handling variables with multiple pointers
     case "v1.12 - v1.15":
-      if(vars.fightPointerUsed == 1 && old.fight != current.fight) {
+      if(vars.pointersUsed == 1 && old.fight != current.fight) {
         vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
         vars.fightPointerOld = old.fight;
         vars.fightPointer = current.fight;
       }
-      else if(vars.fightPointerUsed == 2 && old.fight2 != current.fight2) {
+      else if(vars.pointersUsed == 2 && old.fight2 != current.fight2) {
         vars.DebugPrint("FIGHT " + old.fight2 + " -> " + current.fight2);
         vars.fightPointerOld = old.fight2;
         vars.fightPointer = current.fight2;
       }
-
+      goto case "v1.08 - v1.10";
+    case "v1.08 - v1.10":
       if(old.room == 279) { // chapter select room
         if(current.room == 281) { // chapter 1 initialization room
-          if(vars.chapter == 0) vars.fightPointerUsed = 1;
+          if(vars.chapter == 0) vars.pointersUsed = 1;
           vars.DebugPrint(vars.chapter != 1 ? "CHAPTER " + vars.chapter + " -> 1" : "CHAPTER 1 - Returning to Title");
           vars.chapter = 1;
         }
         else if(current.room == 11) { // chapter 2 initialization room
-          if(vars.chapter == 0) vars.fightPointerUsed = 2;
+          if(vars.chapter == 0) vars.pointersUsed = 2;
           vars.DebugPrint(vars.chapter != 2 ? "CHAPTER " + vars.chapter + " -> 2" : "CHAPTER 2 - Returning to Title");
           vars.chapter = 2;
         }
@@ -709,6 +731,18 @@ split {
         if (vars.splits[splitKey][specialCondition] != -1) {
           bool pass = false;
           switch((int)vars.splits[splitKey][specialCondition]) {
+            case 3:  // Ch1_KeyFixed
+              pass = vars.checkKeyItems(5);
+              break;
+            case 4:  // Ch1_KeyA
+              pass = vars.checkKeyItems(4);
+              break;
+            case 5:  // Ch1_KeyB
+              pass = vars.checkKeyItems(6);
+              break;
+            case 6:  // Ch1_KeyC
+              pass = vars.checkKeyItems(7);
+              break;
             case 7: // Ch1_Jevil_EndBattle 
               /*
               Jevil has a variable named dancelv which sets the sprite/animation he's using
@@ -802,16 +836,16 @@ split {
             case 2:  // Ch1_Ending (SURVEY)
               pass = ((old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null);
               break;
-            case 3:  // i-key
+            case 3:  // Ch1_KeyFixed
               pass = vars.checkKeyItems(5);
               break;
-            case 4:  // i-keyA
+            case 4:  // Ch1_KeyA
               pass = vars.checkKeyItems(4);
               break;
-            case 5:  // i-keyB
+            case 5:  // Ch1_KeyB
               pass = vars.checkKeyItems(6);
               break;
-            case 6:  // i-keyC
+            case 6:  // Ch1_KeyC
               pass = vars.checkKeyItems(7);
               break;
             case 7: // Ch1_Jevil_EndBattle
