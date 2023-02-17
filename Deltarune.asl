@@ -79,7 +79,7 @@ startup {
   vars.tracabartpeeg = false;
   vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
   vars.fightPointerOld = -1;
-  vars.pointersUsed = 1;
+  vars.pointersUsed = 0;
   vars.chapter = 0;
 
   // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
