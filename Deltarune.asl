@@ -200,7 +200,8 @@ startup {
     settings.Add("Ch2_CyberFields", true, "Cyber Fields");
       settings.Add("Ch2_Pre-CyberFields", false, "Pre-Cyber Fields (after slide)", "Ch2_CyberFields");
       settings.Add("Ch2_Tasque", false, "Tasque Fight / Skip", "Ch2_CyberFields");
-      settings.Add("Ch2_ArcadeGame", true, "Arcade Game", "Ch2_CyberFields");
+      settings.Add("Ch2_ArcadeGameText", false, "Arcade Game (textbox close)", "Ch2_CyberFields");
+      settings.Add("Ch2_ArcadeGame", true, "Arcade Game (room change)", "Ch2_CyberFields");
       settings.Add("Ch2_Virovirokun#1", false, "Virovirokun #1 Fight / Skip", "Ch2_CyberFields");
       settings.Add("Ch2_Agree2All", false, "Agree 2 All puzzle", "Ch2_CyberFields");
       settings.Add("Ch2_DJFightWon", false, "DJ Fight ('BATTLE WON!' text) (may not work sometimes)", "Ch2_CyberFields");
@@ -376,6 +377,7 @@ init {
         // Cyber Fields
         {"Ch2_Pre-CyberFields", new object[] {false, -1, 88, -1, -1, -1}},
         {"Ch2_Tasque", new object[] {false, 91, 93, -1, -1, -1}},
+        {"Ch2_ArcadeGameText", new object[] {false, -1, 93, -1, -1, 73}},
         {"Ch2_ArcadeGame", new object[] {false, 93, 94, -1, -1, -1}},
         {"Ch2_Virovirokun#1", new object[] {false, 95, 96, -1, -1, -1}},
         {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
@@ -767,6 +769,9 @@ split {
               break;
             case 69: // Ch2_Disk_Loaded
               pass = (current.loadedDiskGreyBG == 121 && old.loadedDiskGreyBG == 119);
+              break;
+            case 73: // Ch2_ArcadeGameText
+              pass = ((old.textboxMsg == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.textboxMsg == @"\EH* C'mon^1, let's go after&||her!/%") && current.textboxMsg == null);
               break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
