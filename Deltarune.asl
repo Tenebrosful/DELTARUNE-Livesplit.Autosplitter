@@ -8,9 +8,6 @@ state("Deltarune", "v1.12 - v1.15") {
   // globals
   string128 textboxMsg : "Deltarune.exe", 0x6FE774, 0x8, 0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
   
-  double fight : "Deltarune.exe", 0x4E17F0, 0x34, 0xD4, 0x20, 0x24, 0x10, 0x54, 0x10;
-  double fight2 : "Deltarune.exe", 0x4E06B8, 0x24, 0x10, 0x3D8, 0x930; // going into chapter 2 then chapter 1 breaks the first pointer (and vice-versa) so i had to find a second one
-  
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
   // selfs
@@ -77,8 +74,6 @@ startup {
 
   vars.tempCount = 0; // used for ch1 cell exit split (it triggers twice, once when susie exits it and once when everyone exits it)
   vars.tracabartpeeg = false;
-  vars.fightPointer = -1; // had to do a weird workaround in update{} to make sure the correct fight pointer was used
-  vars.fightPointerOld = -1;
   vars.pointersUsed = 0;
   vars.chapter = 0;
 
@@ -98,8 +93,6 @@ startup {
   vars.reactivate = (Action)(() => {
     vars.tempCount = 0;
     vars.tracabartpeeg = false;
-    vars.fightPointer = -1;
-    vars.fightPointerOld = -1;
     vars.pointersUsed = 0;
     vars.chapter = 0;
     vars.resetSplits();
@@ -149,7 +142,7 @@ startup {
       settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
     settings.Add("Ch1_CastleTown", true, "Castle Town section");
       settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerFight", false, "Lancer fight", "Ch1_CastleTown");
+      settings.Add("Ch1_LancerFight", false, "Lancer fight (< v1.12)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
     settings.Add("Ch1_Fields", true, "Fields section");
@@ -169,7 +162,7 @@ startup {
       settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight", "Ch1_Forest");
+      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (< v1.12)", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
@@ -179,7 +172,7 @@ startup {
       settings.Add("Ch1_KeyC", false, "Key C", "Ch1_Jevil");
       settings.Add("Ch1_KeyFixed", false, "Key Fixed", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle", "Ch1_Jevil");
+      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle (< v1.12)", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_ExitRoom", false, "Exit Jevil room", "Ch1_Jevil");
       settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (may not work on Demo sometimes, use with caution)", "Ch1_Jevil");
     settings.Add("Ch1_CardCastle", true, "Card Castle section");
@@ -188,7 +181,7 @@ startup {
       settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
-      settings.Add("Ch1_King_EndBattle", false, "End King Battle", "Ch1_CardCastle");
+      settings.Add("Ch1_King_EndBattle", false, "End King Battle (< v1.12)", "Ch1_CardCastle");
       settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
     settings.Add("Ch1_Ending", true, "Ending");
     settings.Add("Ch1_EndingOST", false, "Ending (OST%)");
@@ -230,8 +223,8 @@ startup {
       settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight", "Ch2_CyberCity");
-      settings.Add("Ch2_Mice", false, "Mice fight", "Ch2_CyberCity");
+      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight (< v1.12)", "Ch2_CyberCity");
+      settings.Add("Ch2_Mice", false, "Mice fight (< v1.12)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
       settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
     settings.Add("Ch2_Mansion", true, "Queen Mansion");
@@ -243,8 +236,8 @@ startup {
       settings.Add("Ch2_Swatchling#2", false, "Swatchling 2 (Pot Race)", "Ch2_Mansion");
       settings.Add("Ch2_TasqueManager", false, "Tasque Manager", "Ch2_Mansion");
       settings.Add("Ch2_Disk_Loaded", false, "Loaded Disk (All Bosses)", "Ch2_Mansion");
-      settings.Add("Ch2_SpamtonNEO_Start", false, "Start Spamton NEO (All Bosses)", "Ch2_Mansion");
-      settings.Add("Ch2_SpamtonNEO_End", false, "End Spamton NEO (All Bosses)", "Ch2_Mansion");
+      settings.Add("Ch2_SpamtonNEO_Start", false, "Start Spamton NEO (All Bosses) (< v1.12)", "Ch2_Mansion");
+      settings.Add("Ch2_SpamtonNEO_End", false, "End Spamton NEO (All Bosses) (< v1.12)", "Ch2_Mansion");
       settings.Add("Ch2_Mauswheel", false, "Mauswheel", "Ch2_Mansion");
       settings.Add("Ch2_DogPipis", false, "After Dog / Pipis Room", "Ch2_Mansion");
       settings.Add("Ch2_Swatchling#3", false, "Swatchling #3", "Ch2_Mansion");
@@ -258,7 +251,7 @@ startup {
       settings.Add("Ch2_Queen", true, "Queen", "Ch2_Mansion");
       settings.Add("Ch2_GigaQueen", true, "Giga Queen", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Enter", true, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
-      settings.Add("Ch2_SnowgraveNEO", true, "End Spamton NEO (Snowgrave)", "Ch2_Mansion");
+      settings.Add("Ch2_SnowgraveNEO", true, "End Spamton NEO (Snowgrave) (< v1.12)", "Ch2_Mansion");
       settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
     settings.Add("Ch2_Ending", true, "Ending");
     settings.Add("Ch2_EndingOST", false, "Ending (OST%)");
@@ -268,8 +261,6 @@ startup {
 exit {
   vars.DebugPrint("The game just exited");
   vars.chapter = 0;
-  vars.fightPointer = -1;
-  vars.fightPointerOld = -1;
   vars.pointersUsed = 0;
 }
 
@@ -579,41 +570,6 @@ update {
   }
   if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
 
-  switch(version) { // Handling variables with multiple pointers
-    case "v1.12 - v1.15":
-      if(vars.pointersUsed == 1 && old.fight != current.fight) {
-        vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight);
-        vars.fightPointerOld = old.fight;
-        vars.fightPointer = current.fight;
-      }
-      else if(vars.pointersUsed == 2 && old.fight2 != current.fight2) {
-        vars.DebugPrint("FIGHT " + old.fight2 + " -> " + current.fight2);
-        vars.fightPointerOld = old.fight2;
-        vars.fightPointer = current.fight2;
-      }
-      goto case "v1.08 - v1.10";
-    case "v1.08 - v1.10":
-      if(old.room == 279) { // chapter select room
-        if(current.room == 281) { // chapter 1 initialization room
-          if(vars.chapter == 0) vars.pointersUsed = 1;
-          vars.DebugPrint(vars.chapter != 1 ? "CHAPTER " + vars.chapter + " -> 1" : "CHAPTER 1 - Returning to Title");
-          vars.chapter = 1;
-        }
-        else if(current.room == 11) { // chapter 2 initialization room
-          if(vars.chapter == 0) vars.pointersUsed = 2;
-          vars.DebugPrint(vars.chapter != 2 ? "CHAPTER " + vars.chapter + " -> 2" : "CHAPTER 2 - Returning to Title");
-          vars.chapter = 2;
-        }
-      }
-      break;
-    default: 
-      if(old.fight != current.fight) { 
-        vars.DebugPrint("FIGHT " + old.fight + " -> " + current.fight); 
-        vars.fightPointerOld = old.fight; 
-        vars.fightPointer = current.fight;
-      }
-      break;
-  }
 
   if(version != "SURVEY_PROGRAM") {
     if(timer.CurrentPhase != TimerPhase.Ended && timer.IsGameTimePaused == true && settings["Ch2_Ch2_PauseTimer"] && current.room == 31 && !vars.tracabartpeeg) {
@@ -621,6 +577,19 @@ update {
       vars.resetSplits();
       vars.tracabartpeeg = true;
       // reset splits so that they can be triggered the next time Chapter 2 is opened
+    }
+
+    if(old.room == 279) { // chapter select room
+      if(current.room == 281) { // chapter 1 initialization room
+        if(vars.chapter == 0) vars.pointersUsed = 1;
+        vars.DebugPrint(vars.chapter != 1 ? "CHAPTER " + vars.chapter + " -> 1" : "CHAPTER 1 - Returning to Title");
+        vars.chapter = 1;
+      }
+      else if(current.room == 11) { // chapter 2 initialization room
+        if(vars.chapter == 0) vars.pointersUsed = 2;
+        vars.DebugPrint(vars.chapter != 2 ? "CHAPTER " + vars.chapter + " -> 2" : "CHAPTER 2 - Returning to Title");
+        vars.chapter = 2;
+      }
     }
   }
 }
@@ -722,11 +691,11 @@ split {
           continue;
 
         // is there a current fight requirement?
-        if ((vars.splits[splitKey][currentFight] != -1) && (vars.fightPointer != vars.splits[splitKey][currentFight]))
+        if ((vars.splits[splitKey][currentFight] != -1) && (version == "v1.12 - v1.15" || current.fight != vars.splits[splitKey][currentFight]))
             continue;
 
         // is there an old fight requirement?
-        if ((vars.splits[splitKey][oldFight] != -1) && (vars.fightPointerOld != vars.splits[splitKey][oldFight]))
+        if ((vars.splits[splitKey][oldFight] != -1) && (version == "v1.12 - v1.15" || current.fight != vars.splits[splitKey][oldFight]))
             continue;
 
         // is there a special flag requirement?
