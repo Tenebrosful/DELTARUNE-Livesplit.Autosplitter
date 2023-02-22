@@ -182,6 +182,7 @@ startup {
       settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
+      settings.Add("Ch1_LastCastleRoom_Exit", false, "Exiting Card Castle's L shaped room", "Ch1_CardCastle");
       settings.Add("Ch1_King_EndBattle", false, "End King Battle (< v1.12)", "Ch1_CardCastle");
       settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
     settings.Add("Ch1_Ending", true, "Ending");
@@ -355,6 +356,7 @@ init {
         {"Ch1_Shopping", new object[] {false, -1, 406, -1, -1, -1}},
         {"Ch1_Throne_Enter", new object[] {false, -1, 407, -1, -1, -1}},
         {"Ch1_Throne_Exit", new object[] {false, 407, 408, -1, -1, -1}},
+        {"Ch1_LastCastleRoom_Exit", new object[] {false, 408, 409, -1, -1, -1}},
         {"Ch1_King_EndBattle", new object[] {false, -1, 409, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, 409, 410, -1, -1, -1}},
 
@@ -496,6 +498,7 @@ init {
         {"Ch1_Shopping", new object[] {false, -1, -1, 123, 125, -1, -1, -1}},
         {"Ch1_Throne_Enter", new object[] {false, -1, -1, 125, 126, -1, -1, -1}},
         {"Ch1_Throne_Exit", new object[] {false, -1, -1, 126, 127, -1, -1, -1}},
+        {"Ch1_LastCastleRoom_Exit", new object[] {false, -1, -1, 127, 128, -1}},
         {"Ch1_King_EndBattle", new object[] {false, -1, -1, -1, 128, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, -1, -1, 128, 129, -1, -1, -1}},
 
@@ -563,8 +566,7 @@ update {
 
   if (current.room != old.room) {
     vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
-    if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"]) && current.room == 28)
-    {
+    if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"]) && current.room == 28) {
       vars.DebugPrint("ALL CHAPTERS: Chapter 2 started, timer resumed");
       timer.IsGameTimePaused = false;
     }
@@ -720,7 +722,6 @@ split {
               Jevil has a variable named dancelv which sets the sprite/animation he's using
               0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
               We use this to determine when he's been pacified
-              The pointers for him are really weird unfortunately I couldn't find one that would work if you died to him or returned to title before the fight
               */
               pass = (current.jevilDance == 4);
               break;
