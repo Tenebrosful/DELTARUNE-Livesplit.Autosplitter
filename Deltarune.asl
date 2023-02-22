@@ -48,8 +48,6 @@ state("Deltarune", "SURVEY_PROGRAM") {
   uint room : "Deltarune.exe", 0x6AC9F0;
   
   // globals
-  string128 textboxMsg : "Deltarune.exe", 0x48BDEC, 0x6C, 0x178, 0x60, 0x10, 0x208, 0x0, 0x0, 0x0;
-
   double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
   double plot : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
@@ -63,6 +61,9 @@ state("Deltarune", "SURVEY_PROGRAM") {
   // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a sigscan
   double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
+
+  double finalTextboxHalt : "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
+  double finalTextboxHalt2 : "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
 }
 
 startup {
@@ -808,7 +809,7 @@ split {
               pass = (current.filechoice > 2);
               break;
             case 2:  // Ch1_Ending (SURVEY)
-              pass = ((old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null);
+              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
               break;
             case 3:  // Ch1_KeyFixed
               pass = vars.checkKeyItems(5);
