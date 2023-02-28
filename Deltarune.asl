@@ -73,7 +73,7 @@ startup {
   vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE]  " + text); });
   vars.DebugPrint("Autosplitter is starting up");
 
-  vars.tempCount = 0; // used for ch1 cell exit split (it triggers twice, once when susie exits it and once when everyone exits it)
+  vars.tempVar = 0; // used for ch1 cell exit split, and also a couple of extra checks (make this 1234 to force a split)
   vars.tracabartpeeg = false;
   vars.pointersUsed = 0;
   vars.chapter = 0;
@@ -92,7 +92,7 @@ startup {
     });
 
   vars.reactivate = (Action)(() => {
-    vars.tempCount = 0;
+    vars.tempVar = 0;
     vars.tracabartpeeg = false;
     vars.pointersUsed = 0;
     vars.chapter = 0;
@@ -167,8 +167,8 @@ startup {
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
       settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
     settings.Add("Ch1_Prison", true, "Prison section");
-      settings.Add("Ch1_Escape_Cell", false, "Exiting Cell", "Ch1_Prison");
-      settings.Add("Ch1_Escape_Elevator", true, "Entering Escape Elevator", "Ch1_Prison");
+      settings.Add("Ch1_Escape_Cell", true, "Exiting Cell", "Ch1_Prison");
+      settings.Add("Ch1_Escape_Elevator", false, "Entering Escape Elevator", "Ch1_Prison");
     settings.Add("Ch1_Jevil", false, "Jevil section");
       settings.Add("Ch1_KeyC", false, "Key C", "Ch1_Jevil");
       settings.Add("Ch1_KeyFixed", false, "Key Fixed", "Ch1_Jevil");
@@ -575,11 +575,36 @@ update {
 
 
   if(version != "SURVEY_PROGRAM") {
-    if(timer.CurrentPhase != TimerPhase.Ended && timer.IsGameTimePaused == true && settings["Ch2_Ch2_PauseTimer"] && current.room == 31 && !vars.tracabartpeeg) {
-      vars.DebugPrint("TRACABARTPEEG: Request reset splits for the second run");
-      vars.resetSplits();
-      vars.tracabartpeeg = true;
-      // reset splits so that they can be triggered the next time Chapter 2 is opened
+    // Moved these checks here so they can still work if the "Split" option is disabled in LiveSplit (ty ashmichda for telling me about this :keuchrCat:)
+    // Chapter 1 end
+    if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && (old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null) {
+      if(settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"]) {
+        vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
+        timer.IsGameTimePaused = true;
+      }
+      if(settings["Ch1_Ending"]) vars.tempVar = 1234;
+    }
+
+    if((settings["Ch1_EndingOST"] || settings["Ch1_Ch2_PauseTimerOST"]) && old.room == 418 && current.room == 421) {
+      // room 418 = deltarune logo room
+      // room 421 = credits room
+      if(settings["Ch1_Ch2_PauseTimerOST"]) {
+        vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
+        timer.IsGameTimePaused = true;
+      }
+      if(settings["Ch1_EndingOST"]) vars.tempVar = 1234;        
+    }
+
+    // Chapter 2 end
+    if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && (old.textboxMsg == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.textboxMsg == @"\E1* ... they're already&||asleep.../%") && current.textboxMsg == null) {
+      if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
+        vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
+        timer.IsGameTimePaused = true;
+        vars.DebugPrint("TRACABARTPEEG: Request reset splits for the second run");
+        vars.resetSplits(); // reset splits so that they can be triggered the next time chapter 2 is opened
+        vars.tracabartpeeg = true;
+      } 
+      if(settings["Ch2_Ending"]) vars.tempVar = 1234;       
     }
 
     if(old.room == 279) { // chapter select room
@@ -642,6 +667,10 @@ onReset {
 
 split {
   if (!settings.SplitEnabled) return;
+  if (vars.tempVar == 1234) {
+    vars.tempVar = 0;
+    return true;
+  }
 
   int done = vars.findSplitVarIndex("done");
   int currentRoom = vars.findSplitVarIndex("currentRoom");
@@ -653,34 +682,6 @@ split {
   switch(version) {
     case "v1.12 - v1.15":
     case "v1.08 - v1.10":
-      // Chapter 1 end
-      if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && (old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null) {
-        if(settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"]) {
-          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-          timer.IsGameTimePaused = true;
-        }
-        return settings["Ch1_Ending"];
-      }
-
-      if((settings["Ch1_EndingOST"] || settings["Ch1_Ch2_PauseTimerOST"]) && old.room == 418 && current.room == 421) {
-        // room 418 = deltarune logo room
-        // room 421 = credits room
-        if(settings["Ch1_Ch2_PauseTimerOST"]) {
-          vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-          timer.IsGameTimePaused = true;
-        }
-        return settings["Ch1_EndingOST"];        
-      }
-
-      // Chapter 2 end
-      if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && (old.textboxMsg == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.textboxMsg == @"\E1* ... they're already&||asleep.../%") && current.textboxMsg == null) {
-        if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
-          vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
-          timer.IsGameTimePaused = true;
-        } 
-        return settings["Ch2_Ending"];       
-      }
-
       foreach(string splitKey in vars.splits.Keys) {
         if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
           continue;
@@ -726,10 +727,10 @@ split {
               pass = (current.jevilDance == 4);
               break;
             case 8: // Ch1_Escape_Cell
-              pass = (vars.tempCount == 1);
+              pass = (vars.tempVar == 1);
               
-              if(pass) vars.tempCount = 0;
-              else vars.tempCount ++;
+              if(pass) vars.tempVar = 0;
+              else vars.tempVar ++;
               
               break;
             case 10: // Ch1-Ch2
@@ -828,10 +829,10 @@ split {
               pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
               break;
             case 8: // Ch1_Escape_Cell
-              pass = (vars.tempCount == 1);
+              pass = (vars.tempVar == 1);
               
-              if(pass) vars.tempCount = 0;
-              else vars.tempCount ++;
+              if(pass) vars.tempVar = 0;
+              else vars.tempVar ++;
               
               break;
             case 424: // Ch1_CastleTown_GreatDoor
