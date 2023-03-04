@@ -180,9 +180,12 @@ startup {
       settings.Add("Ch1_RudinnRangerSkip", false, "Rudinn Ranger Skip", "Ch1_CardCastle");
       settings.Add("Ch1_HeadHathySkip", false, "Head Hathy Skip", "Ch1_CardCastle");
       settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
+      settings.Add("Ch1_KRound2_StartBattle", false, "Start K Round 2 Battle (< v1.12)", "Ch1_CardCastle");
+      settings.Add("Ch1_KRound2_EndBattle", false, "End K Round 2 Battle (< v1.12)", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
       settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
       settings.Add("Ch1_LastCastleRoom_Exit", false, "Exiting Card Castle's L shaped room", "Ch1_CardCastle");
+      settings.Add("Ch1_King_StartBattle", false, "Start King Battle (< v1.12)", "Ch1_CardCastle");
       settings.Add("Ch1_King_EndBattle", false, "End King Battle (< v1.12)", "Ch1_CardCastle");
       settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
     settings.Add("Ch1_Ending", true, "Ending");
@@ -354,9 +357,12 @@ init {
         {"Ch1_RudinnRangerSkip", new object[] {false, -1, 397, -1, -1, -1}},
         {"Ch1_HeadHathySkip", new object[] {false, -1, 401, -1, -1, -1}},
         {"Ch1_Shopping", new object[] {false, -1, 406, -1, -1, -1}},
+        {"Ch1_KRound2_StartBattle", new object[] {false, -1, 406, 0, 1, -1}},
+        {"Ch1_KRound2_EndBattle", new object[] {false, -1, 406, 1, 0, -1}},
         {"Ch1_Throne_Enter", new object[] {false, -1, 407, -1, -1, -1}},
         {"Ch1_Throne_Exit", new object[] {false, 407, 408, -1, -1, -1}},
         {"Ch1_LastCastleRoom_Exit", new object[] {false, 408, 409, -1, -1, -1}},
+        {"Ch1_King_StartBattle", new object[] {false, -1, 409, 0, 1, -1}},
         {"Ch1_King_EndBattle", new object[] {false, -1, 409, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, 409, 410, -1, -1, -1}},
 
@@ -496,9 +502,12 @@ init {
         {"Ch1_RudinnRangerSkip", new object[] {false, -1, -1, 114, 116, -1, -1, -1}},
         {"Ch1_HeadHathySkip", new object[] {false, -1, -1, 118, 120, -1, -1, -1}},
         {"Ch1_Shopping", new object[] {false, -1, -1, 123, 125, -1, -1, -1}},
+        {"Ch1_KRound2_StartBattle", new object[] {false, -1, -1, -1, 125, 0, 1, -1}},
+        {"Ch1_KRound2_EndBattle", new object[] {false, -1, -1, -1, 125, 1, 0, -1}},
         {"Ch1_Throne_Enter", new object[] {false, -1, -1, 125, 126, -1, -1, -1}},
         {"Ch1_Throne_Exit", new object[] {false, -1, -1, 126, 127, -1, -1, -1}},
-        {"Ch1_LastCastleRoom_Exit", new object[] {false, -1, -1, 127, 128, -1}},
+        {"Ch1_LastCastleRoom_Exit", new object[] {false, -1, -1, 127, 128, -1, -1, -1}},
+        {"Ch1_King_StartBattle", new object[] {false, -1, -1, -1, 128, 0, 1, -1}},
         {"Ch1_King_EndBattle", new object[] {false, -1, -1, -1, 128, 1, 0, -1}},
         {"Ch1_King_ExitBattleRoom", new object[] {false, -1, -1, 128, 129, -1, -1, -1}},
 
