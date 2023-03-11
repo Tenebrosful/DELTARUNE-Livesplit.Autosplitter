@@ -766,7 +766,7 @@ split {
             case 73: // Ch2_ArcadeGameText
               pass = ((old.textboxMsg == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.textboxMsg == @"\EH* C'mon^1, let's go after&||her!/%") && current.textboxMsg == null);
               break;
-            case 100: // Ch1_CastleTown_LancerBikeExplosion
+            case 100: // Ch1_LancerBikeExplosion
               pass = (old.lancerCon == 46 && current.lancerCon == 47);
               break;
             case 424: // Ch1_CastleTown_GreatDoor
@@ -862,7 +862,7 @@ split {
               else vars.tempVar ++;
               
               break;
-            case 100: // Ch1_CastleTown_LancerBikeExplosion
+            case 100: // Ch1_LancerBikeExplosion
               pass = (old.lancerCon == 46 && current.lancerCon == 47);
               break;
             case 424: // Ch1_CastleTown_GreatDoor
