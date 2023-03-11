@@ -1,6 +1,8 @@
 // DELTARUNE autosplitter by Tenebrosful and NERS
 // Inspired by Narry's autosplitter based on Glacia's Undertale autosplitter (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 
+// some selfs (especially timers and con variables) seem to be unreliable especially on demo, haven't found a fix for them yet (jevilDance, djFightCon, snowgraveTimer)
+
 state("Deltarune", "v1.12 - v1.15") {
   // static
   uint room : "Deltarune.exe", 0x6F0B70;
@@ -12,12 +14,14 @@ state("Deltarune", "v1.12 - v1.15") {
 
   // selfs
   double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
+  double lancerCon : "Deltarune.exe", 0x6F0B48, 0x128, 0x510, 0x20, 0x24, 0x10, 0x138, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
 
-  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0; // breaks if you die to him or return to title, need to fix that someday maybe (same with v1.08 - v1.10)
+  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
 
-  double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0; // same here
+  double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0;
   double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
+  double snowgraveTimer : "Deltarune.exe", 0x6FE864, 0xD60, 0x68, 0x140, 0x140, 0x24, 0x10, 0x6C, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x6F0B48, 0x10C, 0x504, 0x20, 0x24, 0x10, 0x0, 0x0;
 }
 
@@ -34,12 +38,14 @@ state("Deltarune", "v1.08 - v1.10") {
   
   // selfs
   double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
+  double lancerCon : "Deltarune.exe", 0x6EF220, 0x128, 0x510, 0x20, 0x24, 0x10, 0xD8, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x43DE48, 0x7C8, 0xC, 0x24, 0x10, 0x18, 0x0;
 
   double jevilDance : "Deltarune.exe", 0x6EF220, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x5F4, 0x0;
 
   double djFightCon : "Deltarune.exe", 0x436BCC, 0xE0, 0x20, 0x144, 0x144, 0x24, 0x10, 0x258, 0x0;
   double freezeRingTimer : "Deltarune.exe", 0x43DE48, 0xC18, 0xC, 0x24, 0x10, 0xC0, 0x0;
+  double snowgraveTimer : "Deltarune.exe", 0x6F1394, 0x4, 0x144, 0x144, 0x144, 0x24, 0x10, 0x15C, 0x0;
   double loadedDiskGreyBG : "Deltarune.exe", 0x43DE48, 0xA60, 0xC, 0x24, 0x10, 0x3D8, 0x0;
 }
 
@@ -56,6 +62,7 @@ state("Deltarune", "SURVEY_PROGRAM") {
   double choicer : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
 
   // selfs
+  double lancerCon : "Deltarune.exe", 0x6AEB80, 0x18, 0x60, 0x10, 0x10, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6ACA80, 0xC0, 0x4, 0x84, 0x60, 0x10, 0x10, 0x0;
   
   // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a sigscan
@@ -143,6 +150,7 @@ startup {
       settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
     settings.Add("Ch1_CastleTown", true, "Castle Town section");
       settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
+      settings.Add("Ch1_LancerBikeExplosion", false, "Lancer Bike Explosion", "Ch1_CastleTown");
       settings.Add("Ch1_LancerFight", false, "Lancer fight (< v1.12)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
       settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
@@ -160,7 +168,7 @@ startup {
     settings.Add("Ch1_Forest", true, "Forest section");
       settings.Add("Ch1_KeyB", false, "Key B", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#1", false, "Bloxer Skip 1", "Ch1_Forest");
-      settings.Add("Ch1_BakeSale", false, "Bake Sale", "Ch1_Forest");
+      settings.Add("Ch1_BakeSale", false, "Exit Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (< v1.12)", "Ch1_Forest");
@@ -225,7 +233,8 @@ startup {
       settings.Add("Ch2_CheeseMaze", false, "Cheese Maze", "Ch2_CyberCity");
       settings.Add("Ch2_MicePuzzle#3", false, "Mice Puzzle #3", "Ch2_CyberCity");
       settings.Add("Ch2_Berdly", true, "Berdly 2", "Ch2_CyberCity");
-      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave)", "Ch2_CyberCity");
+      settings.Add("Ch2_BerdlySnowgraveDMG", false, "Berdly 2 (Snowgrave - damage numbers) (may not work sometimes)", "Ch2_CyberCity");
+      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave - room leave)", "Ch2_CyberCity");
       settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
       settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
       settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight (< v1.12)", "Ch2_CyberCity");
@@ -317,6 +326,7 @@ init {
         {"Ch1_Survey", new object[] {false, 282, 283, -1, -1, -1}},
         {"Ch1_School", new object[] {false, -1, 315, -1, -1, -1}},
         {"Ch1_Pre-CastleTown", new object[] {false, -1, 325, -1, -1, -1}},
+        {"Ch1_LancerBikeExplosion", new object[] {false, -1, 327, -1, -1, 100}},
         {"Ch1_LancerFight", new object[] {false, -1, 327, 1, 0, -1}},
         {"Ch1_CastleTown_DoorClose", new object[] {false, -1, 329, -1, -1, 424}},
         {"Ch1_CastleTown_RoomChange", new object[] {false, 329, 330, -1, -1, -1}},
@@ -334,7 +344,7 @@ init {
         //Forest
         {"Ch1_KeyB", new object[] {false, -1, 366, -1, -1, 5}},
         {"Ch1_BloxerSkip#1", new object[] {false, -1, 362, -1, -1, -1}},
-        {"Ch1_BakeSale", new object[] {false, 362, 363, -1, -1, -1}},
+        {"Ch1_BakeSale", new object[] {false, 363, 365, -1, -1, -1}},
         {"Ch1_BloxerSkip#2", new object[] {false, 365, 366, -1, -1, -1}},
         {"Ch1_Maze_End", new object[] {false, -1, 377, -1, -1, -1}},
         {"Ch1_Susie&Lancer", new object[] {false, -1, 379, 1, 0, -1}},
@@ -405,6 +415,7 @@ init {
         {"Ch2_CheeseMaze", new object[] {false, -1, 136, -1, -1, -1}},
         {"Ch2_MicePuzzle#3", new object[] {false, 136, 137, -1, -1, -1}},
         {"Ch2_Berdly", new object[] {false, 138, 139, -1, -1, -1}},
+        {"Ch2_BerdlySnowgraveDMG", new object[] {false, 138, -1, -1, -1, 9999}},
         {"Ch2_BerdlySnowgrave", new object[] {false, 138, 137, -1, -1, -1}},
         {"Ch2_Spamton", new object[] {false, 140, 139, -1, -1, -1}},
         {"Ch2_FullParty", new object[] {false, -1, 143, -1, -1, -1}},
@@ -462,6 +473,7 @@ init {
         {"Ch1_Survey", new object[] {false, -1, -1, 1, 2, -1, -1, -1}},
         {"Ch1_School", new object[] {false, -1, -1, -1, 34, -1, -1, -1}},
         {"Ch1_Pre-CastleTown", new object[] {false, -1, -1, 44, 45, -1, -1, -1}},
+        {"Ch1_LancerBikeExplosion", new object[] {false, -1, -1, -1, 46, -1, -1, 100}},
         {"Ch1_LancerFight", new object[] {false, -1, -1, -1, 46, 1, 0, -1}},
         {"Ch1_CastleTown_DoorClose", new object[] {false, -1, -1, -1, 48, -1, -1, 424}},
         {"Ch1_CastleTown_RoomChange", new object[] {false, -1, -1, 48, 49, -1, -1, -1}},
@@ -754,11 +766,17 @@ split {
             case 73: // Ch2_ArcadeGameText
               pass = ((old.textboxMsg == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.textboxMsg == @"\EH* C'mon^1, let's go after&||her!/%") && current.textboxMsg == null);
               break;
+            case 100: // Ch1_CastleTown_LancerBikeExplosion
+              pass = (old.lancerCon == 46 && current.lancerCon == 47);
+              break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
               break;
             case 999: // Ch2_FreezeRing
-              pass = (current.freezeRingTimer == 85 && old.freezeRingTimer == 84);
+              pass = (current.freezeRingTimer == 85 && old.freezeRingTimer != 85);
+              break;
+            case 9999: // Ch2_BerdlySnowgraveDMG
+              pass = (current.snowgraveTimer == 422 && old.snowgraveTimer != 422);
               break;
           }
 
@@ -843,6 +861,9 @@ split {
               if(pass) vars.tempVar = 0;
               else vars.tempVar ++;
               
+              break;
+            case 100: // Ch1_CastleTown_LancerBikeExplosion
+              pass = (old.lancerCon == 46 && current.lancerCon == 47);
               break;
             case 424: // Ch1_CastleTown_GreatDoor
               pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
