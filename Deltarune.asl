@@ -170,6 +170,7 @@ startup {
       settings.Add("Ch1_BloxerSkip#1", false, "Bloxer Skip 1", "Ch1_Forest");
       settings.Add("Ch1_BakeSale", false, "Exit Bake Sale", "Ch1_Forest");
       settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
+      settings.Add("Ch1_ThrashMachine", false, "Exit Thrash Machine Room", "Ch1_Forest");
       settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (< v1.12)", "Ch1_Forest");
       settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
@@ -346,6 +347,7 @@ init {
         {"Ch1_BloxerSkip#1", new object[] {false, -1, 362, -1, -1, -1}},
         {"Ch1_BakeSale", new object[] {false, 363, 365, -1, -1, -1}},
         {"Ch1_BloxerSkip#2", new object[] {false, 365, 366, -1, -1, -1}},
+        {"Ch1_ThrashMachine", new object[] {false, 368, 369, -1, -1, -1}},
         {"Ch1_Maze_End", new object[] {false, -1, 377, -1, -1, -1}},
         {"Ch1_Susie&Lancer", new object[] {false, -1, 379, 1, 0, -1}},
         {"Ch1_Susie&Lancer_Exit", new object[] {false, -1, 379, -1, -1, -1}},
@@ -493,6 +495,7 @@ init {
         {"Ch1_BloxerSkip#1", new object[] {false, -1, -1, 79, 81, -1, -1, -1}},
         {"Ch1_BakeSale", new object[] {false, -1, -1, 82, 84, -1, -1, -1}},
         {"Ch1_BloxerSkip#2", new object[] {false, -1, -1, 84, 85, -1, -1, -1}},
+        {"Ch1_ThrashMachine", new object[] {false, -1, -1, 87, 88, -1, -1, -1}},
         {"Ch1_Maze_End", new object[] {false, -1, -1, 96, 97, -1, -1, -1}},
         {"Ch1_Susie&Lancer", new object[] {false, -1, -1, -1, 97, 1, 0, -1}},
         {"Ch1_Susie&Lancer_Exit", new object[] {false, -1, -1, 97, 98, -1, -1, -1}},
