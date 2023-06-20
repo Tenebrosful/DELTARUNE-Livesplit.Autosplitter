@@ -1,22 +1,9 @@
 {
-  "cSpell.words": [
-    "Ambuy",
-    "automasher",
-    "Berdly",
-    "Bloxer",
-    "Giga",
-    "Hathy",
-    "Maus",
-    "Meca",
-    "Poppup",
-    "Rudinn",
-    "Snowgrave",
-    "Spamton",
-    "Swatchling",
-    "Tasque",
-    "Textbox",
-    "Virovirokun",
-    "Werewerewire",
-    "Werewire"
-  ]
+  "editor.formatOnSave": true,
+  "editor.tabSize": 4,
+  "files.associations": {
+    "*.asl": "csharp"
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
 }
