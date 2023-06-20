@@ -13,5 +13,5 @@ jobs:
         with:
           files: |
             **/*.{asl,md}
-          root: ../../..
+          root: ../../../
           verbose: true
