@@ -9,7 +9,7 @@ state("Deltarune", "v1.12 - v1.15") {
 
   // globals
   string128 textboxMsg : "Deltarune.exe", 0x6FE774, 0x8, 0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
-  
+
   double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
 
   // selfs
@@ -28,14 +28,14 @@ state("Deltarune", "v1.12 - v1.15") {
 state("Deltarune", "v1.08 - v1.10") {
   // static
   uint room : "Deltarune.exe", 0x6EF248;
- 
+
   // globals
   string128 textboxMsg : "Deltarune.exe", 0x6FCE4C, 0x8, 0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0;
 
   double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
 
   double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
-  
+
   // selfs
   double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
   double lancerCon : "Deltarune.exe", 0x6EF220, 0x128, 0x510, 0x20, 0x24, 0x10, 0xD8, 0x0;
@@ -52,7 +52,7 @@ state("Deltarune", "v1.08 - v1.10") {
 state("Deltarune", "SURVEY_PROGRAM") {
   // static
   uint room : "Deltarune.exe", 0x6AC9F0;
-  
+
   // globals
   double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
@@ -64,7 +64,7 @@ state("Deltarune", "SURVEY_PROGRAM") {
   // selfs
   double lancerCon : "Deltarune.exe", 0x6AEB80, 0x18, 0x60, 0x10, 0x10, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6ACA80, 0xC0, 0x4, 0x84, 0x60, 0x10, 0x10, 0x0;
-  
+
   // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a sigscan
   double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
@@ -133,13 +133,13 @@ startup {
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
-   
+
     settings.Add("Ch1_Ch2_PauseTimerOST", false, "(OST%) Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when Don't Forget starts playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
-    
+
     settings.Add("Ch2_Ch2_PauseTimer", false, "(TRACABARTPEEG) Pause timer between Chapter 2 Main Route and Snowgrave");
       settings.SetToolTip("Ch2_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 2, and resumes it when you continue from a previous save in Chapter 2.\nUseful for TRACABARTPEEG Main Route -> Snowgrave. NOTE: This does not work if you have the Chapter 2 OST% Ending split activated!");
-    
+
     settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 savefile");
   settings.CurrentDefaultParent = null;
 
@@ -364,7 +364,7 @@ init {
         {"Ch1_Jevil_StartBattle", new object[] {false, -1, 393, 0, 1, -1}},
         {"Ch1_Jevil_ExitRoom", new object[] {false, 393, 392, -1, -1, -1}},
         {"Ch1_Jevil_EndBattle", new object[] {false, -1, 393, -1, -1, 7}},
-        
+
         // Card Castle
         {"Ch1_RudinnRangerSkip", new object[] {false, -1, 397, -1, -1, -1}},
         {"Ch1_HeadHathySkip", new object[] {false, -1, 401, -1, -1, -1}},
@@ -462,7 +462,7 @@ init {
         var message = MessageBox.Show(
             "LiveSplit uses Game Time for this game. Would you like to change the current timing method to Game Time instead of Real Time?",
             "LiveSplit | DELTARUNE All Chapters", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-      
+
         if (message == DialogResult.Yes)
             timer.CurrentTimingMethod = TimingMethod.GameTime;
       }
@@ -512,7 +512,7 @@ init {
         {"Ch1_Jevil_StartBattle", new object[] {false, -1, -1, -1, 112, 0, 1, -1}},
         {"Ch1_Jevil_ExitRoom", new object[] {false, -1, -1, 112, 111, -1, -1, -1}},
         {"Ch1_Jevil_EndBattle", new object[] {false, -1, -1, -1, 112, -1, 1, 7}},
-        
+
         // Card Castle
         {"Ch1_RudinnRangerSkip", new object[] {false, -1, -1, 114, 116, -1, -1, -1}},
         {"Ch1_HeadHathySkip", new object[] {false, -1, -1, 118, 120, -1, -1, -1}},
@@ -537,7 +537,7 @@ init {
     switch(version) {
       case "v1.12 - v1.15":
         if(vars.pointersUsed == 1) {
-          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0xA74, 0x10, 0xE4, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }      
+          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0xA74, 0x10, 0xE4, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }
         }
         else if(vars.pointersUsed == 2) {
           for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0x0, 0x64, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }
@@ -546,7 +546,7 @@ init {
 
       case "v1.08 - v1.10":
         if(vars.pointersUsed == 1) {
-          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x108, 0x0, 0x64, (0xA00 + (i*0x10))).Deref<double>(game) == id) return true; }     
+          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x108, 0x0, 0x64, (0xA00 + (i*0x10))).Deref<double>(game) == id) return true; }
         }
         else if(vars.pointersUsed == 2) {
           for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x48C, 0x20, 0xE4, (0x900 + (i*0x10))).Deref<double>(game) == id) return true; }
@@ -616,7 +616,7 @@ update {
         vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
         timer.IsGameTimePaused = true;
       }
-      if(settings["Ch1_EndingOST"]) vars.tempVar = 1234;        
+      if(settings["Ch1_EndingOST"]) vars.tempVar = 1234;
     }
 
     // Chapter 2 end
@@ -627,8 +627,8 @@ update {
         vars.DebugPrint("TRACABARTPEEG: Request reset splits for the second run");
         vars.resetSplits(); // reset splits so that they can be triggered the next time chapter 2 is opened
         vars.tracabartpeeg = true;
-      } 
-      if(settings["Ch2_Ending"]) vars.tempVar = 1234;       
+      }
+      if(settings["Ch2_Ending"]) vars.tempVar = 1234;
     }
 
     if(old.room == 279) { // chapter select room
@@ -648,7 +648,7 @@ update {
 
 start {
   if (!settings.StartEnabled) return;
-  
+
   if(current.room != old.room) {
     if(version == "SURVEY_PROGRAM") {
       if (old.room == 139 && current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
@@ -742,7 +742,7 @@ split {
             case 6:  // Ch1_KeyC
               pass = vars.checkKeyItems(7);
               break;
-            case 7: // Ch1_Jevil_EndBattle 
+            case 7: // Ch1_Jevil_EndBattle
               /*
               Jevil has a variable named dancelv which sets the sprite/animation he's using
               0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
@@ -752,10 +752,10 @@ split {
               break;
             case 8: // Ch1_Escape_Cell
               pass = (vars.tempVar == 1);
-              
+
               if(pass) vars.tempVar = 0;
               else vars.tempVar ++;
-              
+
               break;
             case 10: // Ch1-Ch2
               pass = (old.namerEvent != 75); // this check is in place so that it wouldn't split when starting chapter 2 from a fresh save file when it cuts to black
@@ -825,7 +825,7 @@ split {
         // is there an old fight requirement?
         if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight]))
           continue;
-        
+
         // is there a special flag requirement?
         if (vars.splits[splitKey][specialCondition] != -1) {
           bool pass = false;
@@ -860,10 +860,10 @@ split {
               break;
             case 8: // Ch1_Escape_Cell
               pass = (vars.tempVar == 1);
-              
+
               if(pass) vars.tempVar = 0;
               else vars.tempVar ++;
-              
+
               break;
             case 100: // Ch1_LancerBikeExplosion
               pass = (old.lancerCon == 46 && current.lancerCon == 47);
