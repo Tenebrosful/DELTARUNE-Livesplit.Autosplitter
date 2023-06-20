@@ -14,5 +14,4 @@ jobs:
           files: |
             **/*.{asl,md}
           root: ../../..
-          config: ../../../cspell.json
           verbose: true
