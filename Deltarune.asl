@@ -96,10 +96,10 @@ startup
     settings.CurrentDefaultParent = "AC";
 
     settings.Add("AC_PauseTimer", true, "Pause timer between chapters");
-      settings.SetToolTip("AC_PauseTimer", "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save in the next chapter.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCar:)");
+      settings.SetToolTip("AC_PauseTimer", "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save in the next chapter.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself)");
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
       settings.SetToolTip("AC_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when the credits songs start playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
-    settings.Add("AC_Continue", false, "Split on starting a chapter from a previous savefile");
+    settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
@@ -140,7 +140,7 @@ startup
     settings.Add("Ch2_BerdlyLeave",       true, "Exit Berdly 2 room (Main Route)");
     settings.Add("Ch2_SpamtonLeave",     false, "Exit Spamton room");
     settings.Add("Ch2_CyberCity_Exit",    true, "Exit Cyber City (captured by Queen)");
-    settings.Add("Ch2_Mansion_Entrance", false, "Enter Mansion (entrance savepoint room)");
+    settings.Add("Ch2_Mansion_Entrance", false, "Enter Mansion (entrance save point room)");
     settings.Add("Ch2_AcidLake_Enter",    true, "Enter Acid Lake");
     settings.Add("Ch2_AcidLake_Exit",     true, "Exit Acid Lake");
     settings.Add("Ch2_Queen",             true, "Exit Queen room");
@@ -218,7 +218,7 @@ init
     Func<int, string, IntPtr> scan = (o, sig) =>
     {
         IntPtr ptr = scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
-        if(ptr == IntPtr.Zero) throw new NullReferenceException("Sigscanning failed!");
+        if(ptr == IntPtr.Zero) throw new NullReferenceException("Signature scanning failed!");
         return ptr;
     };
     IntPtr ptrRoomArray = scan(2, "8B 3D ???????? 2B EF");
@@ -439,19 +439,19 @@ split
     }
 
     int done      = 0,
-        oldroom   = 1,
-        newroom   = 2,
-        oldfight  = 3,
-        newfight  = 4,
+        oldRoom   = 1,
+        newRoom   = 2,
+        oldFight  = 3,
+        newFight  = 4,
         condition = 5;
 
     foreach(string splitKey in vars.splits.Keys)
     {
         if((!settings[splitKey] || vars.splits[splitKey][done]) ||
-           (vars.splits[splitKey][oldroom] != null && old.roomName != vars.splits[splitKey][oldroom]) ||
-           (vars.splits[splitKey][newroom] != null && current.roomName != vars.splits[splitKey][newroom]) ||
-           (vars.splits[splitKey][oldfight] != -1 && old.fight != vars.splits[splitKey][oldfight]) ||
-           (vars.splits[splitKey][newfight] != -1 && current.fight != vars.splits[splitKey][newfight])) continue;
+           (vars.splits[splitKey][oldRoom] != null && old.roomName != vars.splits[splitKey][oldRoom]) ||
+           (vars.splits[splitKey][newRoom] != null && current.roomName != vars.splits[splitKey][newRoom]) ||
+           (vars.splits[splitKey][oldFight] != -1 && old.fight != vars.splits[splitKey][oldFight]) ||
+           (vars.splits[splitKey][newFight] != -1 && current.fight != vars.splits[splitKey][newFight])) continue;
 
         bool pass = false;
         switch((int)vars.splits[splitKey][condition])
