@@ -57,7 +57,7 @@ state("Deltarune", "SURVEY_PROGRAM") {
   double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
   double plot : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
-  double filechoice : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
+  double fileChoice : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
   double interact : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x20;
   double choicer : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
 
@@ -65,7 +65,7 @@ state("Deltarune", "SURVEY_PROGRAM") {
   double lancerCon : "Deltarune.exe", 0x6AEB80, 0x18, 0x60, 0x10, 0x10, 0x0;
   double doorCloseCon : "Deltarune.exe", 0x6ACA80, 0xC0, 0x4, 0x84, 0x60, 0x10, 0x10, 0x0;
 
-  // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a sigscan
+  // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a signature scan
   double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
 
@@ -132,7 +132,7 @@ startup {
   settings.Add("AC", true, "All Chapters");
   settings.CurrentDefaultParent = "AC";
     settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
-      settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCat:)");
+      settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself)");
 
     settings.Add("Ch1_Ch2_PauseTimerOST", false, "(OST%) Pause timer between Chapter 1 and 2");
       settings.SetToolTip("Ch1_Ch2_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when Don't Forget starts playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
@@ -140,7 +140,7 @@ startup {
     settings.Add("Ch2_Ch2_PauseTimer", false, "(TRACABARTPEEG) Pause timer between Chapter 2 Main Route and Snowgrave");
       settings.SetToolTip("Ch2_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 2, and resumes it when you continue from a previous save in Chapter 2.\nUseful for TRACABARTPEEG Main Route -> Snowgrave. NOTE: This does not work if you have the Chapter 2 OST% Ending split activated!");
 
-    settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 savefile");
+    settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 save file");
   settings.CurrentDefaultParent = null;
 
   settings.Add("Ch1", false, "Chapter 1");
@@ -338,7 +338,7 @@ init {
         {"Ch1_VandalizedPuzzle", new object[] {false, -1, 344, -1, -1, -1}},
         {"Ch1_KeyA", new object[] {false, -1, 414, -1, -1, 4}},
         {"Ch1_Fields_Exit", new object[] {false, -1, 346, -1, -1, -1}},
-        //Checkboard
+        //Checkerboard
         {"Ch1_PawnSkip#1", new object[] {false, -1, 348, -1, -1, -1}},
         {"Ch1_PawnSkip#2", new object[] {false, -1, 352, -1, -1, -1}},
         {"Ch1_Checkerboard_Exit", new object[] {false, -1, 354, -1, -1, -1}},
@@ -486,7 +486,7 @@ init {
         {"Ch1_VandalizedPuzzle", new object[] {false, -1, -1, 62, 63, -1, -1, -1}},
         {"Ch1_KeyA", new object[] {false, -1, -1, -1, 133, -1, -1, 4}},
         {"Ch1_Fields_Exit", new object[] {false, -1, -1, 63, 65, -1, -1, -1}},
-        //Checkboard
+        //Checkerboard
         {"Ch1_PawnSkip#1", new object[] {false, -1, -1, 66, 67, -1, -1, -1}},
         {"Ch1_PawnSkip#2", new object[] {false, -1, -1, 70, 71, -1, -1, -1}},
         {"Ch1_Checkerboard_Exit", new object[] {false, -1, -1, 72, 73, -1, -1, -1}},
@@ -599,7 +599,7 @@ update {
 
 
   if(version != "SURVEY_PROGRAM") {
-    // Moved these checks here so they can still work if the "Split" option is disabled in LiveSplit (ty ashmichda for telling me about this :keuchrCat:)
+    // Moved these checks here so they can still work if the "Split" option is disabled in LiveSplit (ty ashmichda for telling me about this)
     // Chapter 1 end
     if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && (old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null) {
       if(settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"]) {
@@ -833,12 +833,12 @@ split {
           switch((int)vars.splits[splitKey][specialCondition]) {
             case 1:  // Ch1_Ending (SURVEY)
               /*
-              When the final textbox is closed, the game stores global.filechoice in a temp var
-              it then sets global.filechoice + 3, saves the game, and then sets it back
-              we can use this to get the frame after the textbox was closed by looking for filechoice > 2
-              as this will only be valid in this one case
+              When the final textbox is closed, the game stores global.fileChoice in a temp var it then sets global.fileChoice + 3,
+              saves the game, and then sets it back we can use this to get the frame after the textbox was closed by looking
+              for fileChoice > 2 as this will only be valid in this one case
               */
-              pass = (current.filechoice > 2);
+              pass = (current.fileChoice
+           > 2);
               break;
             case 2:  // Ch1_Ending (SURVEY)
               pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
