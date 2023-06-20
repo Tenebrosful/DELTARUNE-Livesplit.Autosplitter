@@ -13,5 +13,3 @@ jobs:
         with:
           files: |
             **/*.{asl,md}
-          verbose: true
-          incremental_files_only: false
