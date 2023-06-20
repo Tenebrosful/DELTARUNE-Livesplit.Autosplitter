@@ -2,6 +2,7 @@ name: 'Check spelling'
 on: # rebuild any PRs and main branch changes
   pull_request:
   push:
+    branches: [main, release]
 
 jobs:
   spellcheck: # run the action
