@@ -1,892 +1,521 @@
-// DELTARUNE autosplitter by Tenebrosful and NERS
-// Inspired by Narry's autosplitter based on Glacia's Undertale autosplitter (https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
+state("Deltarune", "CH1 SURVEY_PROGRAM")
+{
+    double plot    : 0x48E5DC, 0x27C, 0x488, 0x500;
+    double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;
 
-// some selfs (especially timers and con variables) seem to be unreliable especially on demo, haven't found a fix for them yet (jevilDance, djFightCon, snowgraveTimer)
+    double lancerCon         : 0x6AEB80, 0x18, 0x60, 0x10, 0x10,  0x0;
+    double doorCloseCon      : 0x6ACA80, 0xC0, 0x4,  0x84, 0x60,  0x10, 0x10, 0x0;
+    double jevilDance        : 0x48BDEC, 0x78, 0x60, 0x10, 0x10,  0x0;
+    double jevilDance2       : 0x48BDEC, 0x7C, 0x60, 0x10, 0x10,  0x0;
+    double finalTextboxHalt  : 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
+    double finalTextboxHalt2 : 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
 
-state("Deltarune", "v1.12 - v1.15") {
-  // static
-  uint room : "Deltarune.exe", 0x6F0B70;
-
-  // globals
-  string128 textboxMsg : "Deltarune.exe", 0x6FE774, 0x8, 0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
-
-  double choicer : "Deltarune.exe", 0x6F0B48, 0x80, 0x140, 0x24, 0x10, 0x15C, 0x0;
-
-  // selfs
-  double namerEvent : "Deltarune.exe", 0x43FE48, 0x630, 0xC, 0x140, 0x24, 0x10, 0xFC, 0x0;
-  double lancerCon : "Deltarune.exe", 0x6F0B48, 0x128, 0x510, 0x20, 0x24, 0x10, 0x138, 0x0;
-  double doorCloseCon : "Deltarune.exe", 0x6F0BD0, 0x524, 0x84, 0x24, 0x10, 0x18, 0x0;
-
-  double jevilDance : "Deltarune.exe", 0x6F0B48, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x4EC, 0x0;
-
-  double djFightCon : "Deltarune.exe", 0x438BCC, 0x1F0, 0xDC, 0x20, 0x144, 0x24, 0x10, 0x2B8, 0x0;
-  double freezeRingTimer : "Deltarune.exe", 0x43FE48, 0xC20, 0xC, 0x144, 0x24, 0x10, 0x120, 0x0;
-  double snowgraveTimer : "Deltarune.exe", 0x6FE864, 0xD60, 0x68, 0x140, 0x140, 0x24, 0x10, 0x6C, 0x0;
-  double loadedDiskGreyBG : "Deltarune.exe", 0x6F0B48, 0x10C, 0x504, 0x20, 0x24, 0x10, 0x0, 0x0;
+    float kingPos : 0x48BDEC, 0x60, 0xB4;
 }
 
-state("Deltarune", "v1.08 - v1.10") {
-  // static
-  uint room : "Deltarune.exe", 0x6EF248;
+state("Deltarune", "CH1-2 v1.08 - v1.10")
+{
+    double fight      : 0x6FCF38, 0x30, 0x4F8,  0x0;
+    double topEnemyHP : 0x6FCF38, 0x30, 0x2B38, 0x0, 0x64, 0x0;
 
-  // globals
-  string128 textboxMsg : "Deltarune.exe", 0x6FCE4C, 0x8, 0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0;
+    double lancerCon        : 0x6EF220, 0x128, 0x510, 0x20, 0x24, 0x10,  0xD8, 0x0;
+    double doorCloseCon     : 0x43DE48, 0x7C8, 0xC,   0x24, 0x10, 0x18,  0x0;
+    double namerEvent       : 0x6EF220, 0xD4,  0x5C,  0x20, 0x24, 0x10,  0x9C, 0x0;
+    double freezeRingTimer  : 0x43DE48, 0xC18, 0xC,   0x24, 0x10, 0xC0,  0x0;
+    double snowgrave        : 0x6EF220, 0xF4,  0x24,  0x5C, 0x20, 0x24,  0x10, 0x120, 0x0;
+    double loadedDiskGreyBG : 0x43DE48, 0xA60, 0xC,   0x24, 0x10, 0x3D8, 0x0;
 
-  double fight : "Deltarune.exe", 0x6FCF38, 0x30, 0x4F8, 0x0;
+    float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
-  double choicer : "Deltarune.exe", 0x6EF220, 0x80, 0x140, 0x24, 0x10, 0xA8, 0x0;
-
-  // selfs
-  double namerEvent : "Deltarune.exe", 0x6EF220, 0xD4, 0x5C, 0x20, 0x24, 0x10, 0x9C, 0x0;
-  double lancerCon : "Deltarune.exe", 0x6EF220, 0x128, 0x510, 0x20, 0x24, 0x10, 0xD8, 0x0;
-  double doorCloseCon : "Deltarune.exe", 0x43DE48, 0x7C8, 0xC, 0x24, 0x10, 0x18, 0x0;
-
-  double jevilDance : "Deltarune.exe", 0x6EF220, 0xD8, 0x15C, 0x20, 0x24, 0x10, 0x5F4, 0x0;
-
-  double djFightCon : "Deltarune.exe", 0x436BCC, 0xE0, 0x20, 0x144, 0x144, 0x24, 0x10, 0x258, 0x0;
-  double freezeRingTimer : "Deltarune.exe", 0x43DE48, 0xC18, 0xC, 0x24, 0x10, 0xC0, 0x0;
-  double snowgraveTimer : "Deltarune.exe", 0x6F1394, 0x4, 0x144, 0x144, 0x144, 0x24, 0x10, 0x15C, 0x0;
-  double loadedDiskGreyBG : "Deltarune.exe", 0x43DE48, 0xA60, 0xC, 0x24, 0x10, 0x3D8, 0x0;
+    string128 textboxMsg : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0;
+    string128 sound      : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;
 }
 
-state("Deltarune", "SURVEY_PROGRAM") {
-  // static
-  uint room : "Deltarune.exe", 0x6AC9F0;
+state("Deltarune", "CH1-2 v1.12 - v1.15")
+{
+    double fight      : 0x4E06B8, 0x24, 0x10,  0x1584, 0x20;
+    double topEnemyHP : 0x6FE860, 0x30, 0xD98, 0x0,    0x64, 0x0;
 
-  // globals
-  double money : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
-  double fight : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
-  double plot : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
-  double fileChoice : "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
-  double interact : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x20;
-  double choicer : "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
+    double lancerCon        : 0x6F0B48, 0x128, 0x510, 0x20,  0x24, 0x10, 0x138, 0x0;
+    double doorCloseCon     : 0x6F0BD0, 0x524, 0x84,  0x24,  0x10, 0x18, 0x0;
+    double namerEvent       : 0x43FE48, 0x630, 0xC,   0x140, 0x24, 0x10, 0xFC,  0x0;
+    double freezeRingTimer  : 0x43FE48, 0xC20, 0xC,   0x144, 0x24, 0x10, 0x120, 0x0;
+    double snowgrave        : 0x43FE48, 0x330, 0xC,   0x144, 0x24, 0x10, 0x18C, 0x0;
+    double loadedDiskGreyBG : 0x6F0B48, 0x10C, 0x504, 0x20,  0x24, 0x10, 0x0,   0x0;
 
-  // selfs
-  double lancerCon : "Deltarune.exe", 0x6AEB80, 0x18, 0x60, 0x10, 0x10, 0x0;
-  double doorCloseCon : "Deltarune.exe", 0x6ACA80, 0xC0, 0x4, 0x84, 0x60, 0x10, 0x10, 0x0;
+    float kingPos : 0x6F2CBC, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
-  // Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases Narry found so we don't need to use a signature scan
-  double jevilDance : "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
-  double jevilDance2 : "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
-
-  double finalTextboxHalt : "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
-  double finalTextboxHalt2 : "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
+    string128 textboxMsg : 0x6FE774, 0x8,  0x144, 0x144, 0x140, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
+    string128 sound      : 0x4E20B4, 0x58, 0xC0,  0x40,  0x0;
 }
 
-startup {
+startup
+{
+    vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE] " + text); });
+    vars.tempVar = 0;
+    vars.forceSplit = false;
+    vars.chapter = 0;
+    vars.ACContinueRooms = new[,]
+    {
+        {null, null},                            //
+        {"PLACE_MENU_ch1", "PLACE_CONTACT_ch1"}, // Chapter 1
+        {"PLACE_MENU_ch2", "room_krisroom_ch2"}, // Chapter 1 -> 2
+        {null, null},                            // Chapter 2 -> 3
+        {null, null},                            // Chapter 3 -> 4
+        {null, null},                            // Chapter 4 -> 5
+        {null, null},                            // Chapter 5 -> 6
+        {null, null}                             // Chapter 6 -> 7
+    };
+    vars.OSTRooms = new[,]
+    {
+        {null, null},                         //
+        {"PLACE_LOGO_ch1",    "room_ed_ch1"}, // Chapter 1
+        {"room_torhouse_ch2", "room_ed_ch2"}, // Chapter 2
+        {null, null},                         // Chapter 3
+        {null, null},                         // Chapter 4
+        {null, null},                         // Chapter 5
+        {null, null},                         // Chapter 6
+        {null, null}                          // Chapter 7
+    };
 
-  #region Global Functions declaration
-
-  vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE]  " + text); });
-  vars.DebugPrint("Autosplitter is starting up");
-
-  vars.tempVar = 0; // used for ch1 cell exit split, and also a couple of extra checks (make this 1234 to force a split)
-  vars.tracabartpeeg = false;
-  vars.pointersUsed = 0;
-  vars.chapter = 0;
-
-  // Based on: https://github.com/NoTeefy/LiveSnips/blob/master/src/snippets/checksum(hashing)/checksum.asl, used to calculate the hash of the game to detect the version
-  vars.CalcModuleHash = (Func<ProcessModuleWow64Safe, string>)((module) => {
-        vars.DebugPrint("Calculating hash of "+module.FileName);
-        byte[] exeHashBytes = new byte[0];
-        using (var sha = System.Security.Cryptography.MD5.Create()) {
-            using (var s = File.Open(module.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
-                exeHashBytes = sha.ComputeHash(s);
-            }
-        }
-        var hash = exeHashBytes.Select(x => x.ToString("X2")).Aggregate((a, b) => a + b);
-        return hash;
+    vars.resetVars = (Action)(() =>
+    {
+        vars.tempVar = 0;
+        vars.forceSplit = false;
+        vars.DebugPrint("All variables have been reset to initial state");
     });
 
-  vars.reactivate = (Action)(() => {
-    vars.tempVar = 0;
-    vars.tracabartpeeg = false;
-    vars.pointersUsed = 0;
+    vars.resetSplits = (Action)(() =>
+    {
+        foreach(string split in vars.splits.Keys) vars.splits[split][0] = false;
+        vars.DebugPrint("All splits have been reset to initial state");
+    });
+
+    // -------------------------------------------------------------------------------------------
+    settings.Add("AC", true, "All Chapters");
+    settings.CurrentDefaultParent = "AC";
+
+    settings.Add("AC_PauseTimer", true, "Pause timer between chapters");
+      settings.SetToolTip("AC_PauseTimer", "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save in the next chapter.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself :keuchrCar:)");
+    settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
+      settings.SetToolTip("AC_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when the credits songs start playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
+    settings.Add("AC_Continue", false, "Split on starting a chapter from a previous savefile");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    settings.Add("Ch1", false, "Chapter 1: The Beginning");
+    settings.CurrentDefaultParent = "Ch1";
+
+    settings.Add("Ch1_School",                 true, "Enter Dark World (True Reset)");
+    settings.Add("Ch1_Lancer_BikeExplosion",  false, "Lancer Bike Explosion");
+    settings.Add("Ch1_CastleTown_DoorClose",   true, "Exit Castle Town (door close)");
+    settings.Add("Ch1_CastleTown_RoomChange", false, "Exit Castle Town (room change)");
+    settings.Add("Ch1_Fields_Exit",            true, "Exit Fields");
+    settings.Add("Ch1_Checkerboard_Exit",      true, "Exit Checkerboard");
+    settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
+    settings.Add("Ch1_Susie&Lancer_Exit",      true, "Exit Forest (Susie & Lancer room)");
+    settings.Add("Ch1_Escape_Cell",            true, "Exit Prison Cell");
+    settings.Add("Ch1_Throne_Exit",            true, "Exit Card Castle (throne room)");
+    settings.Add("Ch1_King_EndBattle",         true, "End King battle");
+    settings.Add("Ch1_Ending",                 true, "Ending");
+    settings.Add("Ch1_EndingOST",             false, "Ending (OST%)");
+
+    settings.Add("Ch1_AB", true, "All Bosses Splits");
+    settings.CurrentDefaultParent = "Ch1_AB";
+     settings.Add("Ch1_Jevil_EnterRoom", true, "Enter Jevil room");
+     settings.Add("Ch1_Jevil_EndBattle", true, "End Jevil battle");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
+    settings.CurrentDefaultParent = "Ch2";
+
+    settings.Add("Ch2_Library",           true, "Enter Dark World (True Reset)");
+    settings.Add("Ch2_ArcadeGameText",   false, "Arcade Game (textbox close)");
+    settings.Add("Ch2_ArcadeGameLeave",  false, "Arcade Game (room change)");
+    settings.Add("Ch2_DJFight",           true, "End DJ battle");
+    settings.Add("Ch2_DJShopRoom",       false, "Enter DJ Shop Room");
+    settings.Add("Ch2_CyberFields_Exit",  true, "Exit Cyber Fields");
+    settings.Add("Ch2_TrashZoneWarp",     true, "Trash Zone Warp");
+    settings.Add("Ch2_MansionWarp",       true, "Mansion Warp");
+    settings.Add("Ch2_Mouse2Puzzle",     false, "Exit Mouse 2 Puzzle room");
+    settings.Add("Ch2_BerdlyLeave",       true, "Exit Berdly 2 room (Main Route)");
+    settings.Add("Ch2_SpamtonLeave",     false, "Exit Spamton room");
+    settings.Add("Ch2_CyberCity_Exit",    true, "Exit Cyber City (captured by Queen)");
+    settings.Add("Ch2_Mansion_Entrance", false, "Enter Mansion (entrance savepoint room)");
+    settings.Add("Ch2_AcidLake_Enter",    true, "Enter Acid Lake");
+    settings.Add("Ch2_AcidLake_Exit",     true, "Exit Acid Lake");
+    settings.Add("Ch2_Queen",             true, "Exit Queen room");
+    settings.Add("Ch2_GigaQueen",         true, "End Giga Queen battle");
+    settings.Add("Ch2_Fountain_Enter",   false, "Enter Fountain");
+    settings.Add("Ch2_Fountain_Exit",    false, "Exit Fountain");
+    settings.Add("Ch2_Ending",            true, "Ending");
+    settings.Add("Ch2_EndingOST",        false, "Ending (OST%)");
+
+    settings.Add("Ch2_AB", true, "All Bosses Splits");
+    settings.CurrentDefaultParent = "Ch2_AB";
+     settings.Add("Ch2_Disk_Loaded",    true, "Obtain Loaded Disk");
+     settings.Add("Ch2_SpamtonNEO_End", true, "End basement Spamton NEO battle");
+    settings.CurrentDefaultParent = "Ch2";
+
+    settings.Add("Ch2_WR", true, "Weird Route Splits");
+    settings.CurrentDefaultParent = "Ch2_WR";
+     settings.Add("Ch2_FreezeRing",       true, "Obtain FreezeRing");
+     settings.Add("Ch2_SGBerdly",         true, "Snowgrave Berdly");
+     settings.Add("Ch2_SGSpamtonNEO_End", true, "End fountain Spamton NEO battle");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    /*
+    settings.Add("Ch3", false, "Chapter 3: Home Sweet Home");
+    settings.CurrentDefaultParent = "Ch3";
+
+    settings.Add("Ch3_Ending",     true, "Ending");
+    settings.Add("Ch3_EndingOST", false, "Ending (OST%)");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    settings.Add("Ch4", false, "Chapter 4: Sending Prayers");
+    settings.CurrentDefaultParent = "Ch4";
+
+    settings.Add("Ch4_Ending",     true, "Ending");
+    settings.Add("Ch4_EndingOST", false, "Ending (OST%)");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    settings.Add("Ch5", false, "Chapter 5: The Prophecy");
+    settings.CurrentDefaultParent = "Ch5";
+
+    settings.Add("Ch5_Ending",     true, "Ending");
+    settings.Add("Ch5_EndingOST", false, "Ending (OST%)");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    settings.Add("Ch6", false, "Chapter 6: Lost in Thought");
+    settings.CurrentDefaultParent = "Ch6";
+
+    settings.Add("Ch6_Ending",     true, "Ending");
+    settings.Add("Ch6_EndingOST", false, "Ending (OST%)");
+    settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
+    settings.Add("Ch7", false, "Chapter 7: Don't Forget");
+    settings.CurrentDefaultParent = "Ch7";
+
+    settings.Add("Ch7_Ending",     true, "Ending");
+    settings.Add("Ch7_EndingOST", false, "Ending (OST%)");
+    settings.CurrentDefaultParent = null;
+    */
+    // -------------------------------------------------------------------------------------------
+}
+
+exit
+{
+    vars.resetVars();
     vars.chapter = 0;
-    vars.resetSplits();
-
-    vars.DebugPrint("All utility variables have been reset to initial state");
-  });
-
-  vars.resetSplits = (Action)(() => {
-    int doneIndex = vars.findSplitVarIndex("done");
-    foreach (string split in vars.splits.Keys)
-      vars.splits[split][doneIndex] = false;
-    vars.DebugPrint("All splits have been reset to initial state");
-  });
-
-  vars.findSplitVarIndex = (Func<string, int>)((variableName) => { return Array.IndexOf(vars.splitsVarIndex, variableName); });
-
-  #endregion
-
-  #region Global Variables declaration
-
-  vars.prevUpdateTime = -1; // Previous time that the autosplitter updated to detect lags
-  vars.splits = new Dictionary<string, object[]>() {};
-  vars.splitsVarIndex = new object[] {};
-
-  #endregion
-
-  #region Settings
-
-  settings.Add("AC", true, "All Chapters");
-  settings.CurrentDefaultParent = "AC";
-    settings.Add("Ch1_Ch2_PauseTimer", true, "Pause timer between Chapter 1 and 2");
-      settings.SetToolTip("Ch1_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 1, and resumes it when you continue from a previous save in Chapter 2.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself)");
-
-    settings.Add("Ch1_Ch2_PauseTimerOST", false, "(OST%) Pause timer between Chapter 1 and 2");
-      settings.SetToolTip("Ch1_Ch2_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when Don't Forget starts playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
-
-    settings.Add("Ch2_Ch2_PauseTimer", false, "(TRACABARTPEEG) Pause timer between Chapter 2 Main Route and Snowgrave");
-      settings.SetToolTip("Ch2_Ch2_PauseTimer", "This setting pauses the timer when you end Chapter 2, and resumes it when you continue from a previous save in Chapter 2.\nUseful for TRACABARTPEEG Main Route -> Snowgrave. NOTE: This does not work if you have the Chapter 2 OST% Ending split activated!");
-
-    settings.Add("Ch1-Ch2", false, "Split on starting Chapter 2 from a Chapter 1 save file");
-  settings.CurrentDefaultParent = null;
-
-  settings.Add("Ch1", false, "Chapter 1");
-  settings.CurrentDefaultParent = "Ch1";
-    settings.Add("Ch1_Intro", false, "Introduction");
-      settings.Add("Ch1_Survey", true, "Survey", "Ch1_Intro");
-      settings.Add("Ch1_School", true, "School / Bed Skip", "Ch1_Intro");
-    settings.Add("Ch1_CastleTown", true, "Castle Town section");
-      settings.Add("Ch1_Pre-CastleTown", false, "Pre-Castle Town (after chase slide)", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerBikeExplosion", false, "Lancer Bike Explosion", "Ch1_CastleTown");
-      settings.Add("Ch1_LancerFight", false, "Lancer fight (< v1.12)", "Ch1_CastleTown");
-      settings.Add("Ch1_CastleTown_DoorClose", true, "Castle Town (door close)", "Ch1_CastleTown");
-      settings.Add("Ch1_CastleTown_RoomChange", false, "Castle Town (room change)", "Ch1_CastleTown");
-    settings.Add("Ch1_Fields", true, "Fields section");
-      settings.Add("Ch1_RudinnSkip#1", false, "Rudinn Skip 1", "Ch1_Fields");
-      settings.Add("Ch1_RudinnSkip#2", false, "Rudinn Skip 2", "Ch1_Fields");
-      settings.Add("Ch1_RudinnSkip#3", false, "Rudinn Skip 3", "Ch1_Fields");
-      settings.Add("Ch1_VandalizedPuzzle", false, "Vandalized Puzzle", "Ch1_Fields");
-      settings.Add("Ch1_KeyA", false, "Key A", "Ch1_Fields");
-      settings.Add("Ch1_Fields_Exit", true, "Rudinn Skip 4 / Exiting Fields", "Ch1_Fields");
-    settings.Add("Ch1_Checkerboard", true, "Checkerboard");
-      settings.Add("Ch1_PawnSkip#1", false, "Pawn Skip 1", "Ch1_Checkerboard");
-      settings.Add("Ch1_PawnSkip#2", false, "Pawn Skip 2", "Ch1_Checkerboard");
-      settings.Add("Ch1_Checkerboard_Exit", true, "Exiting Checkerboard", "Ch1_Checkerboard");
-    settings.Add("Ch1_Forest", true, "Forest section");
-      settings.Add("Ch1_KeyB", false, "Key B", "Ch1_Forest");
-      settings.Add("Ch1_BloxerSkip#1", false, "Bloxer Skip 1", "Ch1_Forest");
-      settings.Add("Ch1_BakeSale", false, "Exit Bake Sale", "Ch1_Forest");
-      settings.Add("Ch1_BloxerSkip#2", false, "Bloxer Skip 2", "Ch1_Forest");
-      settings.Add("Ch1_ThrashMachine", false, "Exit Thrash Machine Room", "Ch1_Forest");
-      settings.Add("Ch1_Maze_End", false, "Maze end", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer", false, "Susie & Lancer fight (< v1.12)", "Ch1_Forest");
-      settings.Add("Ch1_Susie&Lancer_Exit", true, "Susie & Lancer exit room", "Ch1_Forest");
-      settings.Add("Ch1_Captured", false, "Captured", "Ch1_Forest");
-    settings.Add("Ch1_Prison", true, "Prison section");
-      settings.Add("Ch1_Escape_Cell", true, "Exiting Cell", "Ch1_Prison");
-      settings.Add("Ch1_Escape_Elevator", false, "Entering Escape Elevator", "Ch1_Prison");
-    settings.Add("Ch1_Jevil", false, "Jevil section");
-      settings.Add("Ch1_KeyC", false, "Key C", "Ch1_Jevil");
-      settings.Add("Ch1_KeyFixed", false, "Key Fixed", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_StartBattle", false, "Start Jevil Battle (< v1.12)", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_ExitRoom", false, "Exit Jevil room", "Ch1_Jevil");
-      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil Battle (may not work on Demo sometimes, use with caution)", "Ch1_Jevil");
-    settings.Add("Ch1_CardCastle", true, "Card Castle section");
-      settings.Add("Ch1_RudinnRangerSkip", false, "Rudinn Ranger Skip", "Ch1_CardCastle");
-      settings.Add("Ch1_HeadHathySkip", false, "Head Hathy Skip", "Ch1_CardCastle");
-      settings.Add("Ch1_Shopping", false, "After the shop, before K Round", "Ch1_CardCastle");
-      settings.Add("Ch1_KRound2_StartBattle", false, "Start K Round 2 Battle (< v1.12)", "Ch1_CardCastle");
-      settings.Add("Ch1_KRound2_EndBattle", false, "End K Round 2 Battle (< v1.12)", "Ch1_CardCastle");
-      settings.Add("Ch1_Throne_Enter", false, "Entering Card Castle's Throne room", "Ch1_CardCastle");
-      settings.Add("Ch1_Throne_Exit", true, "Exiting Card Castle's Throne room", "Ch1_CardCastle");
-      settings.Add("Ch1_LastCastleRoom_Exit", false, "Exiting Card Castle's L shaped room", "Ch1_CardCastle");
-      settings.Add("Ch1_King_StartBattle", false, "Start King Battle (< v1.12)", "Ch1_CardCastle");
-      settings.Add("Ch1_King_EndBattle", false, "End King Battle (< v1.12)", "Ch1_CardCastle");
-      settings.Add("Ch1_King_ExitBattleRoom", true, "Exit King Battle Room", "Ch1_CardCastle");
-    settings.Add("Ch1_Ending", true, "Ending");
-    settings.Add("Ch1_EndingOST", false, "Ending (OST%)");
-  settings.CurrentDefaultParent = null;
-
-  settings.Add("Ch2", false, "Chapter 2");
-  settings.CurrentDefaultParent = "Ch2";
-    settings.Add("Ch2_Intro", false, "Introduction / Bed Skip");
-    settings.Add("Ch2_CyberFields", true, "Cyber Fields");
-      settings.Add("Ch2_Pre-CyberFields", false, "Pre-Cyber Fields (after slide)", "Ch2_CyberFields");
-      settings.Add("Ch2_Tasque", false, "Tasque Fight / Skip", "Ch2_CyberFields");
-      settings.Add("Ch2_ArcadeGameText", false, "Arcade Game (textbox close)", "Ch2_CyberFields");
-      settings.Add("Ch2_ArcadeGame", true, "Arcade Game (room change)", "Ch2_CyberFields");
-      settings.Add("Ch2_Virovirokun#1", false, "Virovirokun #1 Fight / Skip", "Ch2_CyberFields");
-      settings.Add("Ch2_Agree2All", false, "Agree 2 All puzzle", "Ch2_CyberFields");
-      settings.Add("Ch2_DJFightWon", false, "DJ Fight ('BATTLE WON!' text) (may not work sometimes)", "Ch2_CyberFields");
-      settings.Add("Ch2_DJFight", true, "DJ Fight (room change)", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShopEnterRoom", false, "Enter DJ Shop Room", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShopEnterMenu", false, "Enter DJ Shop Menu", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShopExitMenu", false, "Exit DJ Shop Menu", "Ch2_CyberFields");
-      settings.Add("Ch2_DJShopExitRoom", false, "Exit DJ Shop Room", "Ch2_CyberFields");
-      settings.Add("Ch2_Werewire#1", false, "Werewire #1 Fight / Skip", "Ch2_CyberFields");
-      settings.Add("Ch2_VirovirokunPuzzle", false, "Virovirokun Puzzle", "Ch2_CyberFields");
-      settings.Add("Ch2_Cups", false, "Cups", "Ch2_CyberFields");
-      settings.Add("Ch2_CyberFields_Exit", true, "Exit Cyber Fields", "Ch2_CyberFields");
-      settings.Add("Ch2_MansionWarp", false, "Mansion Warp", "Ch2_CyberFields");
-      settings.Add("Ch2_TrashWarp", false, "Trash Warp", "Ch2_CyberFields");
-    settings.Add("Ch2_CyberCity", true, "Cyber City");
-      settings.Add("Ch2_Poppup", false, "Poppup Fight / Skip", "Ch2_CyberCity");
-      settings.Add("Ch2_MicePuzzle#1", false, "Mice Puzzle #1", "Ch2_CyberCity");
-      settings.Add("Ch2_Virovirokun#2", false, "Virovirokun #2 & Ambyu-Lance Fight / Skip", "Ch2_CyberCity");
-      settings.Add("Ch2_FreezeRing", false, "Obtain FreezeRing", "Ch2_CyberCity");
-      settings.Add("Ch2_Forcefield", false, "Forcefield", "Ch2_CyberCity");
-      settings.Add("Ch2_Werewire#2", false, "Werewire #2 Fight / Skip", "Ch2_CyberCity");
-      settings.Add("Ch2_MicePuzzle#2", false, "Mice Puzzle #2", "Ch2_CyberCity");
-      settings.Add("Ch2_CheeseMaze", false, "Cheese Maze", "Ch2_CyberCity");
-      settings.Add("Ch2_MicePuzzle#3", false, "Mice Puzzle #3", "Ch2_CyberCity");
-      settings.Add("Ch2_Berdly", true, "Berdly 2", "Ch2_CyberCity");
-      settings.Add("Ch2_BerdlySnowgraveDMG", false, "Berdly 2 (Snowgrave - damage numbers) (may not work sometimes)", "Ch2_CyberCity");
-      settings.Add("Ch2_BerdlySnowgrave", true, "Berdly 2 (Snowgrave - room leave)", "Ch2_CyberCity");
-      settings.Add("Ch2_Spamton", true, "Spamton", "Ch2_CyberCity");
-      settings.Add("Ch2_FullParty", false, "Full party", "Ch2_CyberCity");
-      settings.Add("Ch2_Ambyu-lance#2", false, "Ambyu-Lance #2 fight (< v1.12)", "Ch2_CyberCity");
-      settings.Add("Ch2_Mice", false, "Mice fight (< v1.12)", "Ch2_CyberCity");
-      settings.Add("Ch2_CyberCity_Exit", true, "Exit Cyber City (Captured)", "Ch2_CyberCity");
-      settings.Add("Ch2_CyberCity_Exit_Snowgrave", false, "Exit Cyber City (Snowgrave)", "Ch2_CyberCity");
-    settings.Add("Ch2_Mansion", true, "Queen Mansion");
-      settings.Add("Ch2_EscapeCell", false, "Escape Cell", "Ch2_Mansion");
-      settings.Add("Ch2_LightPuzzle#1", false, "Light Puzzle #1", "Ch2_Mansion");
-      settings.Add("Ch2_LightPuzzle#2", false, "Light Puzzle #2", "Ch2_Mansion");
-      settings.Add("Ch2_LightPuzzle#3", false, "Light Puzzle #3", "Ch2_Mansion");
-      settings.Add("Ch2_Swatchling#1", false, "Swatchling 1", "Ch2_Mansion");
-      settings.Add("Ch2_Swatchling#2", false, "Swatchling 2 (Pot Race)", "Ch2_Mansion");
-      settings.Add("Ch2_TasqueManager", false, "Tasque Manager", "Ch2_Mansion");
-      settings.Add("Ch2_Disk_Loaded", false, "Loaded Disk (All Bosses)", "Ch2_Mansion");
-      settings.Add("Ch2_SpamtonNEO_Start", false, "Start Spamton NEO (All Bosses) (< v1.12)", "Ch2_Mansion");
-      settings.Add("Ch2_SpamtonNEO_End", false, "End Spamton NEO (All Bosses) (< v1.12)", "Ch2_Mansion");
-      settings.Add("Ch2_Mauswheel", false, "Mauswheel", "Ch2_Mansion");
-      settings.Add("Ch2_DogPipis", false, "After Dog / Pipis Room", "Ch2_Mansion");
-      settings.Add("Ch2_Swatchling#3", false, "Swatchling #3", "Ch2_Mansion");
-      settings.Add("Ch2_TasqueManager_Snowgrave", false, "Tasque Manager (Snowgrave)", "Ch2_Mansion");
-      settings.Add("Ch2_AcidLake", true, "Acid Lake", "Ch2_Mansion");
-        settings.Add("Ch2_AcidLake_Enter", true, "Entering Acid Lake", "Ch2_AcidLake");
-        settings.Add("Ch2_AcidLake_Blocked", false, "Blocked by Hand", "Ch2_AcidLake");
-        settings.Add("Ch2_AcidLake_Unblocked", false, "Unblocked by Hand", "Ch2_AcidLake");
-        settings.Add("Ch2_AcidLake_Exit", true, "Exit Acid Lake", "Ch2_AcidLake");
-      settings.Add("Ch2_Werewerewire", false, "Werewerewire", "Ch2_Mansion");
-      settings.Add("Ch2_Queen", true, "Queen", "Ch2_Mansion");
-      settings.Add("Ch2_GigaQueen", true, "Giga Queen", "Ch2_Mansion");
-      settings.Add("Ch2_Fountain_Enter", true, "Enter Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
-      settings.Add("Ch2_SnowgraveNEO", true, "End Spamton NEO (Snowgrave) (< v1.12)", "Ch2_Mansion");
-      settings.Add("Ch2_Fountain_Exit", false, "Exit Fountain Room (Snowgrave Spamton NEO)", "Ch2_Mansion");
-    settings.Add("Ch2_Ending", true, "Ending");
-    settings.Add("Ch2_EndingOST", false, "Ending (OST%)");
-  #endregion
 }
 
-exit {
-  vars.DebugPrint("The game just exited");
-  vars.chapter = 0;
-  vars.pointersUsed = 0;
-}
+init
+{
+    var module = modules.First();
+    int mms = module.ModuleMemorySize;
 
-init {
-  vars.DebugPrint("Autosplitter is initializing");
+    // Massive thanks to Jujstme and Ero for this (finding room names)
+    var scanner = new SignatureScanner(game, module.BaseAddress, module.ModuleMemorySize);
+    Func<int, string, IntPtr> scan = (o, sig) =>
+    {
+        IntPtr ptr = scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
+        if(ptr == IntPtr.Zero) throw new NullReferenceException("Sigscanning failed!");
+        return ptr;
+    };
+    IntPtr ptrRoomArray = scan(2, "8B 3D ???????? 2B EF");
+    vars.ptrRoomId = scan(2, "FF 35 ???????? E8 ???????? 83 C4 04 50 68");
+    vars.getRoomName = (Func<string>)(() =>
+    {
+        IntPtr arrayMain = game.ReadPointer(ptrRoomArray);
+        if(arrayMain == IntPtr.Zero) return string.Empty;
 
-  #region Version Detection
+        IntPtr arrayItem = game.ReadPointer(arrayMain + game.ReadValue<int>((IntPtr)vars.ptrRoomId) * 4);
+        if(arrayItem == IntPtr.Zero) return string.Empty;
+        return game.ReadString(arrayItem, 64);
+    });
 
-  vars.VersionOutputWarning = false;
-  var module = modules.Single(x => String.Equals(x.ModuleName, "Deltarune.exe", StringComparison.OrdinalIgnoreCase));
-  string hash = vars.CalcModuleHash(module);
+    switch(mms)
+    {
+        case 7954432:
+            version = "CH1 SURVEY_PROGRAM";
+            vars.chapter = 1;
+            break;
 
-  vars.DebugPrint("Module Size = " + module.ModuleMemorySize + " Hash = " + hash);
-
-  switch(hash) {
-    case "A9DB8B7FB6333B5E267F574F46076B3F":
-      version = "v1.12 - v1.15";
-      break;
-    case "4D09627E1FA123D12DDF1A496C489F73":
-      version = "SURVEY_PROGRAM";
-      break;
-    default:
-      switch(module.ModuleMemorySize) {
         case 7495680:
-          version = "v1.08 - v1.10";
-          break;
-        case 7491584:
-          version = "v1.00 - v1.07 (Unsupported)";
-          break;
-        default:
-          vars.DebugPrint("Unable to recognize the game version");
-          return;
-      }
-    break;
-  }
+            version = "CH1-2 v1.08 - v1.10";
+            break;
 
-  vars.DebugPrint("Detected version: " + version);
+        case 7503872:
+            version = "CH1-2 v1.12 - v1.15";
+            break;
+    }
+    vars.DebugPrint("Detected game version: " + version + " (" + mms + ")");
 
-  #endregion
+    vars.splits = new Dictionary<string, object[]>()
+    {
+        // Ending splits are handled manually in update{}
+        // Object variables in order: done, old room, new room, old fight, new fight, special condition
+        {"Ch1_School",                new object[] {false, "room_insidecloset_ch1",       "room_dark1_ch1",               -1, -1, 0}},
+        {"Ch1_Lancer_BikeExplosion",  new object[] {false, null,                          "room_castle_front_ch1",        -1, -1, 1}},
+        {"Ch1_CastleTown_DoorClose",  new object[] {false, null,                          "room_castle_darkdoor_ch1",     -1, -1, 2}},
+        {"Ch1_CastleTown_RoomChange", new object[] {false, "room_castle_darkdoor_ch1",    "room_field_start_ch1",         -1, -1, 0}},
+        {"Ch1_Fields_Exit",           new object[] {false, "room_field4_ch1",             "room_field_checkers4_ch1",     -1, -1, 0}},
+        {"Ch1_Checkerboard_Exit",     new object[] {false, "room_field_checkersboss_ch1", "room_forest_savepoint1_ch1",   -1, -1, 0}},
+        {"Ch1_BakeSale_Enter",        new object[] {false, "room_forest_area3_ch1",       "room_forest_savepoint2_ch1",   -1, -1, 0}},
+        {"Ch1_Susie&Lancer_Exit",     new object[] {false, "room_forest_fightsusie_ch1",  "room_forest_afterthrash2_ch1", -1, -1, 0}},
+        {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",     -1, -1, 3}},
+        {"Ch1_Jevil_EnterRoom",       new object[] {false, "room_cc_prison_prejoker_ch1", "room_cc_joker_ch1",            -1, -1, 0}},
+        {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",            -1, -1, 4}},
+        {"Ch1_Throne_Exit",           new object[] {false, "room_cc_throneroom_ch1",      "room_cc_preroof_ch1",          -1, -1, 0}},
+        {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",       -1, -1, 5}},
 
-  #region Version variables (Splits, Start Rooms, Reset Rooms, ...)
-  switch(version) {
-    case "v1.12 - v1.15":
-    case "v1.08 - v1.10":
-      vars.splitsVarIndex = new object[] { "done", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
-      vars.splits = new Dictionary<string, object[]>() {
-        #region Chapter 1
-        // Castle Town
-        {"Ch1_Survey", new object[] {false, 282, 283, -1, -1, -1}},
-        {"Ch1_School", new object[] {false, -1, 315, -1, -1, -1}},
-        {"Ch1_Pre-CastleTown", new object[] {false, -1, 325, -1, -1, -1}},
-        {"Ch1_LancerBikeExplosion", new object[] {false, -1, 327, -1, -1, 100}},
-        {"Ch1_LancerFight", new object[] {false, -1, 327, 1, 0, -1}},
-        {"Ch1_CastleTown_DoorClose", new object[] {false, -1, 329, -1, -1, 424}},
-        {"Ch1_CastleTown_RoomChange", new object[] {false, 329, 330, -1, -1, -1}},
-        // Fields
-        {"Ch1_RudinnSkip#1", new object[] {false, -1, 333, -1, -1, -1}},
-        {"Ch1_RudinnSkip#2", new object[] {false, -1, 335, -1, -1, -1}},
-        {"Ch1_RudinnSkip#3", new object[] {false, -1, 337, -1, -1, -1}},
-        {"Ch1_VandalizedPuzzle", new object[] {false, -1, 344, -1, -1, -1}},
-        {"Ch1_KeyA", new object[] {false, -1, 414, -1, -1, 4}},
-        {"Ch1_Fields_Exit", new object[] {false, -1, 346, -1, -1, -1}},
-        //Checkerboard
-        {"Ch1_PawnSkip#1", new object[] {false, -1, 348, -1, -1, -1}},
-        {"Ch1_PawnSkip#2", new object[] {false, -1, 352, -1, -1, -1}},
-        {"Ch1_Checkerboard_Exit", new object[] {false, -1, 354, -1, -1, -1}},
-        //Forest
-        {"Ch1_KeyB", new object[] {false, -1, 366, -1, -1, 5}},
-        {"Ch1_BloxerSkip#1", new object[] {false, -1, 362, -1, -1, -1}},
-        {"Ch1_BakeSale", new object[] {false, 363, 365, -1, -1, -1}},
-        {"Ch1_BloxerSkip#2", new object[] {false, 365, 366, -1, -1, -1}},
-        {"Ch1_ThrashMachine", new object[] {false, 368, 369, -1, -1, -1}},
-        {"Ch1_Maze_End", new object[] {false, -1, 377, -1, -1, -1}},
-        {"Ch1_Susie&Lancer", new object[] {false, -1, 379, 1, 0, -1}},
-        {"Ch1_Susie&Lancer_Exit", new object[] {false, -1, 379, -1, -1, -1}},
-        {"Ch1_Captured", new object[] {false, 385, 386, -1, -1, -1}},
+        {"Ch2_Library",          new object[] {false, "room_library_ch2",                            "room_dw_cyber_intro_1_ch2",            -1, -1,  0}},
+        {"Ch2_ArcadeGameText",   new object[] {false, null,                                          "room_dw_cyber_queen_boxing_ch2",       -1, -1,  6}},
+        {"Ch2_ArcadeGameLeave",  new object[] {false, "room_dw_cyber_queen_boxing_ch2",              "room_dw_cyber_musical_door_ch2",       -1, -1,  0}},
+        {"Ch2_DJFight",          new object[] {false, null,                                          "room_dw_cyber_music_final_ch2",         1,  0,  0}},
+        {"Ch2_DJShopRoom",       new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_cyber_musical_shop_ch2",       -1, -1,  0}},
+        {"Ch2_CyberFields_Exit", new object[] {false, null,                                          "room_dw_cyber_rollercoaster_ch2",      -1, -1,  7}},
+        {"Ch2_TrashZoneWarp",    new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_city_intro_ch2",               -1, -1,  0}},
+        {"Ch2_MansionWarp",      new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_mansion_fire_paintings_ch2",   -1, -1,  3}},
+        {"Ch2_FreezeRing",       new object[] {false, null,                                          "room_dw_city_big_2_ch2",               -1, -1,  8}},
+        {"Ch2_Mouse2Puzzle",     new object[] {false, "room_dw_city_mice2_ch2",                      "room_dw_city_cheesemaze_ch2",          -1, -1,  0}},
+        {"Ch2_SGBerdly",         new object[] {false, null,                                          "room_dw_city_berdly_ch2",              -1, -1,  9}},
+        {"Ch2_BerdlyLeave",      new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_traffic_4_ch2",           -1, -1,  0}},
+        {"Ch2_SpamtonLeave",     new object[] {false, "room_dw_city_spamton_alley_ch2",              "room_dw_city_traffic_4_ch2",           -1, -1,  0}},
+        {"Ch2_CyberCity_Exit",   new object[] {false, "room_dw_city_mansion_front_ch2",              "room_dw_mansion_krisroom_ch2",         -1, -1,  0}},
+        {"Ch2_Mansion_Entrance", new object[] {false, "room_dw_mansion_dining_a_ch2",                "room_dw_mansion_entrance_ch2",         -1, -1,  0}},
+        {"Ch2_Disk_Loaded",      new object[] {false, null,                                          "room_shop_ch2_spamton_ch2",            -1, -1, 10}},
+        {"Ch2_SpamtonNEO_End",   new object[] {false, "room_dw_mansion_b_east_ch2",                  "room_dw_mansion_b_east_a_ch2",         -1, -1,  0}},
+        {"Ch2_AcidLake_Enter",   new object[] {false, "room_dw_mansion_east_3f_ch2",                 "room_dw_mansion_acid_tunnel_ch2",      -1, -1,  0}},
+        {"Ch2_AcidLake_Exit",    new object[] {false, "room_dw_mansion_acid_tunnel_loop_rouxls_ch2", "room_dw_mansion_acid_tunnel_exit_ch2", -1, -1,  0}},
+        {"Ch2_Queen",            new object[] {false, "room_dw_mansion_east_4f_d_ch2",               "room_dw_mansion_top_ch2",              -1, -1,  0}},
+        {"Ch2_GigaQueen",        new object[] {false, "room_dw_mansion_top_ch2",                     "room_dw_mansion_top_post_ch2",         -1, -1,  0}},
+        {"Ch2_Fountain_Enter",   new object[] {false, null,                                          "room_dw_mansion_fountain_ch2",         -1, -1,  0}},
+        {"Ch2_SGSpamtonNEO_End", new object[] {false, null,                                          "room_dw_mansion_fountain_ch2",          1,  0,  0}},
+        {"Ch2_Fountain_Exit",    new object[] {false, "room_dw_mansion_fountain_ch2",                "room_lw_computer_lab_ch2",             -1, -1,  0}}
+    };
 
-        //Escape
-        {"Ch1_Escape_Cell", new object[] {false, 386, 387, -1, -1, 8}},
-        {"Ch1_Escape_Elevator", new object[] {false, 388, 390, -1, -1, -1}},
-
-        //Jevil
-        {"Ch1_KeyC", new object[] {false, -1, 345, -1, -1, 6}},
-        {"Ch1_KeyFixed", new object[] {false, -1, 364, -1, -1, 3}},
-        {"Ch1_Jevil_EnterRoom", new object[] {false, 392, 393, -1, -1, -1}},
-        {"Ch1_Jevil_StartBattle", new object[] {false, -1, 393, 0, 1, -1}},
-        {"Ch1_Jevil_ExitRoom", new object[] {false, 393, 392, -1, -1, -1}},
-        {"Ch1_Jevil_EndBattle", new object[] {false, -1, 393, -1, -1, 7}},
-
-        // Card Castle
-        {"Ch1_RudinnRangerSkip", new object[] {false, -1, 397, -1, -1, -1}},
-        {"Ch1_HeadHathySkip", new object[] {false, -1, 401, -1, -1, -1}},
-        {"Ch1_Shopping", new object[] {false, -1, 406, -1, -1, -1}},
-        {"Ch1_KRound2_StartBattle", new object[] {false, -1, 406, 0, 1, -1}},
-        {"Ch1_KRound2_EndBattle", new object[] {false, -1, 406, 1, 0, -1}},
-        {"Ch1_Throne_Enter", new object[] {false, -1, 407, -1, -1, -1}},
-        {"Ch1_Throne_Exit", new object[] {false, 407, 408, -1, -1, -1}},
-        {"Ch1_LastCastleRoom_Exit", new object[] {false, 408, 409, -1, -1, -1}},
-        {"Ch1_King_StartBattle", new object[] {false, -1, 409, 0, 1, -1}},
-        {"Ch1_King_EndBattle", new object[] {false, -1, 409, 1, 0, -1}},
-        {"Ch1_King_ExitBattleRoom", new object[] {false, 409, 410, -1, -1, -1}},
-
-        // Ch1_Ending & Ch1_EndingOST are handled manually because of the timer pause
-        #endregion
-
-        {"Ch1-Ch2", new object[] {false, 244, 28, -1, -1, 10}},
-
-        #region Chapter 2
-        {"Ch2_Intro", new object[] {false, -1, 85, -1, -1, -1}},
-
-        // Cyber Fields
-        {"Ch2_Pre-CyberFields", new object[] {false, -1, 88, -1, -1, -1}},
-        {"Ch2_Tasque", new object[] {false, 91, 93, -1, -1, -1}},
-        {"Ch2_ArcadeGameText", new object[] {false, -1, 93, -1, -1, 73}},
-        {"Ch2_ArcadeGame", new object[] {false, 93, 94, -1, -1, -1}},
-        {"Ch2_Virovirokun#1", new object[] {false, 95, 96, -1, -1, -1}},
-        {"Ch2_Agree2All", new object[] {false, 96, 95, -1, -1, -1}},
-        {"Ch2_DJFightWon", new object[] {false, -1, 98, -1, -1, 11}},
-        {"Ch2_DJFight", new object[] {false, 98, 106, -1, -1, -1}},
-        {"Ch2_DJShopEnterRoom", new object[] {false, 94, 99, -1, -1, -1}},
-        {"Ch2_DJShopEnterMenu", new object[] {false, 99, 237, -1, -1, -1}},
-        {"Ch2_DJShopExitMenu", new object[] {false, 237, 99, -1, -1, -1}},
-        {"Ch2_DJShopExitRoom", new object[] {false, 99, 104, -1, -1, -1}},
-        {"Ch2_Werewire#1", new object[] {false, -1, 105, -1, -1, -1}},
-        {"Ch2_VirovirokunPuzzle", new object[] {false, -1, 100, -1, -1, -1}},
-        {"Ch2_Cups", new object[] {false, -1, 101, -1, -1, -1}},
-        {"Ch2_CyberFields_Exit", new object[] {false, 101, 120, -1, -1, -1}},
-        {"Ch2_MansionWarp", new object[] {false, 94, 167, -1, -1, -1}},
-        {"Ch2_TrashWarp", new object[] {false, 94, 120, -1, -1, -1}},
-
-        // Cyber City
-        {"Ch2_Poppup", new object[] {false, -1, 125, -1, -1, -1}},
-        {"Ch2_MicePuzzle#1", new object[] {false, -1, 127, -1, -1, -1}},
-        {"Ch2_Virovirokun#2", new object[] {false, -1, 128, -1, -1, -1}},
-        {"Ch2_FreezeRing", new object[] {false, -1, 129, -1, -1, 999}},
-        {"Ch2_Forcefield", new object[] {false, -1, 130, -1, -1, -1}},
-        {"Ch2_Werewire#2", new object[] {false, -1, 133, -1, -1, -1}},
-        {"Ch2_MicePuzzle#2", new object[] {false, -1, 135, -1, -1, -1}},
-        {"Ch2_CheeseMaze", new object[] {false, -1, 136, -1, -1, -1}},
-        {"Ch2_MicePuzzle#3", new object[] {false, 136, 137, -1, -1, -1}},
-        {"Ch2_Berdly", new object[] {false, 138, 139, -1, -1, -1}},
-        {"Ch2_BerdlySnowgraveDMG", new object[] {false, 138, -1, -1, -1, 9999}},
-        {"Ch2_BerdlySnowgrave", new object[] {false, 138, 137, -1, -1, -1}},
-        {"Ch2_Spamton", new object[] {false, 140, 139, -1, -1, -1}},
-        {"Ch2_FullParty", new object[] {false, -1, 143, -1, -1, -1}},
-        {"Ch2_Ambyu-lance#2", new object[] {false, -1, 144, -1, -1, -1}},
-        {"Ch2_Mice", new object[] {false, -1, 145, -1, -1, -1}},
-        {"Ch2_CyberCity_Exit", new object[] {false, -1, 160, -1, -1, -1}},
-        {"Ch2_CyberCity_Exit_Snowgrave", new object[] {false, 146, 167, -1, -1, -1}},
-
-        // Mansion
-        {"Ch2_EscapeCell", new object[] {false, -1, 163, -1, -1, -1}},
-        {"Ch2_LightPuzzle#1", new object[] {false, -1, 164, -1, -1, -1}},
-        {"Ch2_LightPuzzle#2", new object[] {false, -1, 165, -1, -1, -1}},
-        {"Ch2_LightPuzzle#3", new object[] {false, -1, 166, -1, -1, -1}},
-        {"Ch2_Swatchling#1", new object[] {false, -1, 170, -1, -1, -1}},
-        {"Ch2_Swatchling#2", new object[] {false, -1, 171, -1, -1, -1}},
-        {"Ch2_TasqueManager", new object[] {false, -1, 172, -1, -1, -1}},
-        {"Ch2_Disk_Loaded", new object[] {false, -1, 239, -1, -1, 69}},
-        {"Ch2_SpamtonNEO_Start", new object[] {false, -1, 186, 0, 1, -1}},
-        {"Ch2_SpamtonNEO_End", new object[] {false, -1, 187, 1, 0, -1}},
-        {"Ch2_Mauswheel", new object[] {false, 193, 191, -1, -1, -1}},
-        {"Ch2_DogPipis", new object[] {false, -1, 194, -1, -1, -1}},
-        {"Ch2_Swatchling#3", new object[] {false, -1, 196, -1, -1, -1}},
-        {"Ch2_TasqueManager_Snowgrave", new object[] {false, -1, 176, -1, -1, -1}},
-          // Acid Lake
-          {"Ch2_AcidLake_Enter", new object[] {false, -1, 200, -1, -1, -1}},
-          {"Ch2_AcidLake_Blocked", new object[] {false, -1, 212, -1, -1, -1}},
-          {"Ch2_AcidLake_Unblocked", new object[] {false, -1, 202, -1, -1, -1}},
-          {"Ch2_AcidLake_Exit", new object[] {false, -1, 203, -1, -1, -1}},
-        {"Ch2_Werewerewire", new object[] {false, -1, 205, -1, -1, -1}},
-        {"Ch2_Queen", new object[] {false, -1, 207, -1, -1, -1}},
-        {"Ch2_GigaQueen", new object[] {false, 207, 208, -1, -1, -1}},
-        {"Ch2_Fountain_Enter", new object[] {false, 4, 3, -1, -1, -1}},
-        {"Ch2_SnowgraveNEO", new object[] {false, -1, 3, 1, 0, -1}},
-        {"Ch2_Fountain_Exit", new object[] {false, 3, 54, -1, -1, -1}},
-
-        // Ch2_Ending is handled manually
-        {"Ch2_EndingOST", new object[] {false, 31, 245, -1, -1, -1}}
-        #endregion
-      };
-
-      if(timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"])) {
-        var message = MessageBox.Show(
+    if(version != "CH1 SURVEY_PROGRAM" && timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]))
+    {
+        var message = MessageBox.Show
+        (
             "LiveSplit uses Game Time for this game. Would you like to change the current timing method to Game Time instead of Real Time?",
-            "LiveSplit | DELTARUNE All Chapters", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            "LiveSplit | DELTARUNE All Chapters", MessageBoxButtons.YesNo, MessageBoxIcon.Question
+        );
 
-        if (message == DialogResult.Yes)
+        if(message == DialogResult.Yes)
             timer.CurrentTimingMethod = TimingMethod.GameTime;
-      }
-      break;
-    case "SURVEY_PROGRAM":
-      vars.splitsVarIndex = new object[] { "done", "maxPlot", "exactPlot", "oldRoom", "currentRoom", "oldFight", "currentFight", "specialCondition" };
-      vars.splits = new Dictionary<string, object[]>() {
-        #region Chapter 1
-        // Castle Town
-        {"Ch1_Survey", new object[] {false, -1, -1, 1, 2, -1, -1, -1}},
-        {"Ch1_School", new object[] {false, -1, -1, -1, 34, -1, -1, -1}},
-        {"Ch1_Pre-CastleTown", new object[] {false, -1, -1, 44, 45, -1, -1, -1}},
-        {"Ch1_LancerBikeExplosion", new object[] {false, -1, -1, -1, 46, -1, -1, 100}},
-        {"Ch1_LancerFight", new object[] {false, -1, -1, -1, 46, 1, 0, -1}},
-        {"Ch1_CastleTown_DoorClose", new object[] {false, -1, -1, -1, 48, -1, -1, 424}},
-        {"Ch1_CastleTown_RoomChange", new object[] {false, -1, -1, 48, 49, -1, -1, -1}},
-        // Fields
-        {"Ch1_RudinnSkip#1", new object[] {false, -1, -1, 51, 52, -1, -1, -1}},
-        {"Ch1_RudinnSkip#2", new object[] {false, -1, -1, 52, 54, -1, -1, -1}},
-        {"Ch1_RudinnSkip#3", new object[] {false, -1, -1, 55, 56, -1, -1, -1}},
-        {"Ch1_VandalizedPuzzle", new object[] {false, -1, -1, 62, 63, -1, -1, -1}},
-        {"Ch1_KeyA", new object[] {false, -1, -1, -1, 133, -1, -1, 4}},
-        {"Ch1_Fields_Exit", new object[] {false, -1, -1, 63, 65, -1, -1, -1}},
-        //Checkerboard
-        {"Ch1_PawnSkip#1", new object[] {false, -1, -1, 66, 67, -1, -1, -1}},
-        {"Ch1_PawnSkip#2", new object[] {false, -1, -1, 70, 71, -1, -1, -1}},
-        {"Ch1_Checkerboard_Exit", new object[] {false, -1, -1, 72, 73, -1, -1, -1}},
-        //Forest
-        {"Ch1_KeyB", new object[] {false, -1, -1, -1, 85, -1, -1, 5}},
-        {"Ch1_BloxerSkip#1", new object[] {false, -1, -1, 79, 81, -1, -1, -1}},
-        {"Ch1_BakeSale", new object[] {false, -1, -1, 82, 84, -1, -1, -1}},
-        {"Ch1_BloxerSkip#2", new object[] {false, -1, -1, 84, 85, -1, -1, -1}},
-        {"Ch1_ThrashMachine", new object[] {false, -1, -1, 87, 88, -1, -1, -1}},
-        {"Ch1_Maze_End", new object[] {false, -1, -1, 96, 97, -1, -1, -1}},
-        {"Ch1_Susie&Lancer", new object[] {false, -1, -1, -1, 97, 1, 0, -1}},
-        {"Ch1_Susie&Lancer_Exit", new object[] {false, -1, -1, 97, 98, -1, -1, -1}},
-        {"Ch1_Captured", new object[] {false, -1, -1, 104, 105, -1, -1, -1}},
+    }
+}
 
-        //Escape
-        {"Ch1_Escape_Cell", new object[] {false, -1, -1, 105, 106, -1, -1, 8}},
-        {"Ch1_Escape_Elevator", new object[] {false, -1, -1, 107, 109, -1, -1, -1}},
+update
+{
+    current.room = game.ReadValue<int>((IntPtr)vars.ptrRoomId);
+    current.roomName = vars.getRoomName();
 
-        //Jevil
-        {"Ch1_KeyC", new object[] {false, -1, -1, -1, 64, -1, -1, 6}},
-        {"Ch1_KeyFixed", new object[] {false, -1, -1, -1, 83, -1, -1, 3}},
-        {"Ch1_Jevil_EnterRoom", new object[] {false, -1, -1, 111, 112, -1, -1, -1}},
-        {"Ch1_Jevil_StartBattle", new object[] {false, -1, -1, -1, 112, 0, 1, -1}},
-        {"Ch1_Jevil_ExitRoom", new object[] {false, -1, -1, 112, 111, -1, -1, -1}},
-        {"Ch1_Jevil_EndBattle", new object[] {false, -1, -1, -1, 112, -1, 1, 7}},
+    if(vars.chapter > 0)
+    {
+        int ch = vars.chapter;
+        string chapterStr = ("_ch" + ch);
+        if(!current.roomName.EndsWith(chapterStr)) current.roomName += chapterStr;
 
-        // Card Castle
-        {"Ch1_RudinnRangerSkip", new object[] {false, -1, -1, 114, 116, -1, -1, -1}},
-        {"Ch1_HeadHathySkip", new object[] {false, -1, -1, 118, 120, -1, -1, -1}},
-        {"Ch1_Shopping", new object[] {false, -1, -1, 123, 125, -1, -1, -1}},
-        {"Ch1_KRound2_StartBattle", new object[] {false, -1, -1, -1, 125, 0, 1, -1}},
-        {"Ch1_KRound2_EndBattle", new object[] {false, -1, -1, -1, 125, 1, 0, -1}},
-        {"Ch1_Throne_Enter", new object[] {false, -1, -1, 125, 126, -1, -1, -1}},
-        {"Ch1_Throne_Exit", new object[] {false, -1, -1, 126, 127, -1, -1, -1}},
-        {"Ch1_LastCastleRoom_Exit", new object[] {false, -1, -1, 127, 128, -1, -1, -1}},
-        {"Ch1_King_StartBattle", new object[] {false, -1, -1, -1, 128, 0, 1, -1}},
-        {"Ch1_King_EndBattle", new object[] {false, -1, -1, -1, 128, 1, 0, -1}},
-        {"Ch1_King_ExitBattleRoom", new object[] {false, -1, -1, 128, 129, -1, -1, -1}},
-
-        {"Ch1_Ending", new object[] {false, -1, 251, -1, 2, -1, -1, 2}},
-        #endregion
-      };
-      break;
-  }
-  #endregion
-
-  vars.checkKeyItems = (Func<double, bool>)((id) => {
-    switch(version) {
-      case "v1.12 - v1.15":
-        if(vars.pointersUsed == 1) {
-          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0xA74, 0x10, 0xE4, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }
+        string or = old.roomName, cr = current.roomName;
+        bool endCondition = false;
+        switch(ch)
+        {
+            case 1:
+                if(version == "CH1 SURVEY_PROGRAM")
+                    endCondition = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0 && current.plot == 251);
+                else
+                    endCondition = ((old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null);
+                break;
+            case 2:
+                endCondition = ((old.textboxMsg == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.textboxMsg == @"\E1* ... they're already&||asleep.../%") && current.textboxMsg == null);
+                break;
+            /*
+            case 3: break;
+            case 4: break;
+            case 5: break;
+            case 6: break;
+            case 7: break;
+            */
         }
-        else if(vars.pointersUsed == 2) {
-          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FE860, 0x30, 0x4F8, 0x0, 0x64, (0xE00 + (i*0x10))).Deref<double>(game) == id) return true; }
-        }
-        break;
-
-      case "v1.08 - v1.10":
-        if(vars.pointersUsed == 1) {
-          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x108, 0x0, 0x64, (0xA00 + (i*0x10))).Deref<double>(game) == id) return true; }
-        }
-        else if(vars.pointersUsed == 2) {
-          for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x6FCF38, 0x30, 0x48C, 0x20, 0xE4, (0x900 + (i*0x10))).Deref<double>(game) == id) return true; }
-        }
-        break;
-
-      case "SURVEY_PROGRAM":
-        for(int i = 0; i < 12; i++) { if(new DeepPointer("Deltarune.exe", 0x49D598, 0x264, (0x1A00 + (i*0x10))).Deref<double>(game) == id) return true; }
-        break;
-    }
-    return false;
-  });
-}
-
-update {
-  // Debug output
-    var timeSinceLastUpdate = Environment.TickCount - vars.prevUpdateTime;
-    if (timeSinceLastUpdate > 500 && vars.prevUpdateTime != -1) {
-        vars.DebugPrint("Last update was "+timeSinceLastUpdate+"ms ago !");
-    }
-    vars.prevUpdateTime = Environment.TickCount;
-
-  if (version == "") { // Disable the autosplitter when the game version is unknown
-    if (!vars.VersionOutputWarning) {
-      vars.DebugPrint("Unknown version");
-      MessageBox.Show("This autosplitter didn't recognize your game version.",
-        "[DELTARUNE] Unknown version");
-      vars.VersionOutputWarning = true;
-    }
-    return false;
-  }
-  if (version == "v1.00 - v1.07 (Unsupported)") {
-    if (!vars.VersionOutputWarning) {
-      vars.DebugPrint("Versions v1.00 - v1.07 are no longer handled");
-      MessageBox.Show("This autosplitter doesn't handle DELTARUNE versions v1.00 - v1.07 anymore.",
-        "[DELTARUNE] Unsupported version");
-      vars.VersionOutputWarning = true;
-    }
-    return false;
-  }
-
-  if (current.room != old.room) {
-    vars.DebugPrint("ROOM " + old.room + " -> " + current.room);
-    if(version != "SURVEY_PROGRAM" && timer.IsGameTimePaused == true && (settings["Ch1_Ch2_PauseTimer"] || settings["Ch1_Ch2_PauseTimerOST"] || settings["Ch2_Ch2_PauseTimer"]) && current.room == 28) {
-      vars.DebugPrint("ALL CHAPTERS: Chapter 2 started, timer resumed");
-      timer.IsGameTimePaused = false;
-    }
-  }
-  if (((IDictionary<String, object>)current).ContainsKey("plot") && current.plot != old.plot) vars.DebugPrint("PLOT " + old.plot + " -> " + current.plot);
-
-
-  if(version != "SURVEY_PROGRAM") {
-    // Moved these checks here so they can still work if the "Split" option is disabled in LiveSplit (ty ashmichda for telling me about this)
-    // Chapter 1 end
-    if((settings["Ch1_Ending"] || (settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"])) && (old.textboxMsg == @"＊ (ねむることにした)/%" || old.textboxMsg == @"* (You decided to go to bed.)/%") && current.textboxMsg == null) {
-      if(settings["Ch1_Ch2_PauseTimer"] && !settings["Ch1_Ch2_PauseTimerOST"]) {
-        vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-        timer.IsGameTimePaused = true;
-      }
-      if(settings["Ch1_Ending"]) vars.tempVar = 1234;
-    }
-
-    if((settings["Ch1_EndingOST"] || settings["Ch1_Ch2_PauseTimerOST"]) && old.room == 418 && current.room == 421) {
-      // room 418 = deltarune logo room
-      // room 421 = credits room
-      if(settings["Ch1_Ch2_PauseTimerOST"]) {
-        vars.DebugPrint("ALL CHAPTERS: Chapter 1 ended, timer paused");
-        timer.IsGameTimePaused = true;
-      }
-      if(settings["Ch1_EndingOST"]) vars.tempVar = 1234;
-    }
-
-    // Chapter 2 end
-    if((settings["Ch2_Ending"] || (settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"])) && (old.textboxMsg == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.textboxMsg == @"\E1* ... they're already&||asleep.../%") && current.textboxMsg == null) {
-      if(settings["Ch2_Ch2_PauseTimer"] && !settings["Ch2_EndingOST"]) {
-        vars.DebugPrint("ALL CHAPTERS: Chapter 2 ended, timer paused");
-        timer.IsGameTimePaused = true;
-        vars.DebugPrint("TRACABARTPEEG: Request reset splits for the second run");
-        vars.resetSplits(); // reset splits so that they can be triggered the next time chapter 2 is opened
-        vars.tracabartpeeg = true;
-      }
-      if(settings["Ch2_Ending"]) vars.tempVar = 1234;
-    }
-
-    if(old.room == 279) { // chapter select room
-      if(current.room == 281) { // chapter 1 initialization room
-        if(vars.chapter == 0) vars.pointersUsed = 1;
-        vars.DebugPrint(vars.chapter != 1 ? "CHAPTER " + vars.chapter + " -> 1" : "CHAPTER 1 - Returning to Title");
-        vars.chapter = 1;
-      }
-      else if(current.room == 11) { // chapter 2 initialization room
-        if(vars.chapter == 0) vars.pointersUsed = 2;
-        vars.DebugPrint(vars.chapter != 2 ? "CHAPTER " + vars.chapter + " -> 2" : "CHAPTER 2 - Returning to Title");
-        vars.chapter = 2;
-      }
-    }
-  }
-}
-
-start {
-  if (!settings.StartEnabled) return;
-
-  if(current.room != old.room) {
-    if(version == "SURVEY_PROGRAM") {
-      if (old.room == 139 && current.room == 1) { vars.DebugPrint("START (Start Room detected)"); return true; }
-    }
-    else if(old.room == 420 && current.room == 282) {
-      vars.DebugPrint("START (Start Room for Chapter 1 detected)");
-      return true;
-    }
-  } else if(version != "SURVEY_PROGRAM") {
-    if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("START (Start Event for Chapter 2 detected)"); return true; }
-  }
-}
-
-onStart {
-  vars.DebugPrint("START !");
-  timer.IsGameTimePaused = true;
-  timer.IsGameTimePaused = false;
-}
-
-reset {
-  if (!settings.ResetEnabled) return;
-
-  if(current.room != old.room) {
-    if(version == "SURVEY_PROGRAM") {
-      if (old.room == 139 && current.room == 1) { vars.DebugPrint("RESET (Start Room detected)"); return true; }
-    }
-    else if(old.room == 420 && current.room == 282) {
-      vars.DebugPrint("RESET (Start Room for Chapter 1 detected)");
-      return true;
-    }
-  } else if(version != "SURVEY_PROGRAM") {
-    if(current.namerEvent == 75 && old.namerEvent == 74) { vars.DebugPrint("RESET (Start Event for Chapter 2 detected)"); return true; }
-  }
-}
-
-onReset {
-  vars.DebugPrint("RESET !");
-  vars.reactivate();
-}
-
-split {
-  if (!settings.SplitEnabled) return;
-  if (vars.tempVar == 1234) {
-    vars.tempVar = 0;
-    return true;
-  }
-
-  int done = vars.findSplitVarIndex("done");
-  int currentRoom = vars.findSplitVarIndex("currentRoom");
-  int oldRoom = vars.findSplitVarIndex("oldRoom");
-  int currentFight = vars.findSplitVarIndex("currentFight");
-  int oldFight = vars.findSplitVarIndex("oldFight");
-  int specialCondition = vars.findSplitVarIndex("specialCondition");
-
-  switch(version) {
-    case "v1.12 - v1.15":
-    case "v1.08 - v1.10":
-      foreach(string splitKey in vars.splits.Keys) {
-        if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
-          continue;
-
-        // is there a current room requirement?
-        if ((vars.splits[splitKey][currentRoom] != -1) && (current.room != vars.splits[splitKey][currentRoom]))
-          continue;
-
-        // is there an old room requirement?
-        if ((vars.splits[splitKey][oldRoom] != -1) && (old.room != vars.splits[splitKey][oldRoom]))
-          continue;
-
-        // is there a current fight requirement?
-        if ((vars.splits[splitKey][currentFight] != -1) && (version == "v1.12 - v1.15" || current.fight != vars.splits[splitKey][currentFight]))
-            continue;
-
-        // is there an old fight requirement?
-        if ((vars.splits[splitKey][oldFight] != -1) && (version == "v1.12 - v1.15" || current.fight != vars.splits[splitKey][oldFight]))
-            continue;
-
-        // is there a special flag requirement?
-        if (vars.splits[splitKey][specialCondition] != -1) {
-          bool pass = false;
-          switch((int)vars.splits[splitKey][specialCondition]) {
-            case 3:  // Ch1_KeyFixed
-              pass = vars.checkKeyItems(5);
-              break;
-            case 4:  // Ch1_KeyA
-              pass = vars.checkKeyItems(4);
-              break;
-            case 5:  // Ch1_KeyB
-              pass = vars.checkKeyItems(6);
-              break;
-            case 6:  // Ch1_KeyC
-              pass = vars.checkKeyItems(7);
-              break;
-            case 7: // Ch1_Jevil_EndBattle
-              /*
-              Jevil has a variable named dancelv which sets the sprite/animation he's using
-              0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
-              We use this to determine when he's been pacified
-              */
-              pass = (current.jevilDance == 4);
-              break;
-            case 8: // Ch1_Escape_Cell
-              pass = (vars.tempVar == 1);
-
-              if(pass) vars.tempVar = 0;
-              else vars.tempVar ++;
-
-              break;
-            case 10: // Ch1-Ch2
-              pass = (old.namerEvent != 75); // this check is in place so that it wouldn't split when starting chapter 2 from a fresh save file when it cuts to black
-              break;
-            case 11: // Ch2_DJFightWon
-              pass = (old.djFightCon != 18 && current.djFightCon == 18);
-              break;
-            case 69: // Ch2_Disk_Loaded
-              pass = (current.loadedDiskGreyBG == 121 && old.loadedDiskGreyBG == 119);
-              break;
-            case 73: // Ch2_ArcadeGameText
-              pass = ((old.textboxMsg == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.textboxMsg == @"\EH* C'mon^1, let's go after&||her!/%") && current.textboxMsg == null);
-              break;
-            case 100: // Ch1_LancerBikeExplosion
-              pass = (old.lancerCon == 46 && current.lancerCon == 47);
-              break;
-            case 424: // Ch1_CastleTown_GreatDoor
-              pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
-              break;
-            case 999: // Ch2_FreezeRing
-              pass = (current.freezeRingTimer == 85 && old.freezeRingTimer != 85);
-              break;
-            case 9999: // Ch2_BerdlySnowgraveDMG
-              pass = (current.snowgraveTimer == 422 && old.snowgraveTimer != 422);
-              break;
-          }
-
-          if (!pass) continue;
+        if(endCondition)
+        {
+            if(settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
+            {
+                vars.DebugPrint("ALL CHAPTERS: Chapter " + ch + " ended, timer paused");
+                timer.IsGameTimePaused = true;
+                vars.resetSplits();
+            }
+            vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
 
-        vars.splits[splitKey][done] = true;
+        else if(or == vars.OSTRooms[ch, 0] && cr == vars.OSTRooms[ch, 1])
+        {
+            if(settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
+            {
+                vars.DebugPrint("(OST%) ALL CHAPTERS: Chapter " + ch + " ended, timer paused");
+                timer.IsGameTimePaused = true;
+                vars.resetSplits();
+            }
+            vars.forceSplit = settings["Ch" + ch + "_EndingOST"];
+        }
 
-        vars.DebugPrint("SPLIT (" + splitKey + ")");
+        if(or == vars.ACContinueRooms[ch, 0] && cr == vars.ACContinueRooms[ch, 1] && timer.IsGameTimePaused)
+        {
+            vars.DebugPrint("ALL CHAPTERS: Chapter " + ch + " started, timer resumed");
+            timer.IsGameTimePaused = false;
+            vars.forceSplit = settings["AC_Continue"];
+        }
+    }
 
+    if(old.room != current.room)
+    {
+        vars.DebugPrint("ROOM: " + old.room + " (" + old.roomName + ")" + " -> " + current.room + " (" + current.roomName + ")");
+
+        if(old.roomName == "room_cc_prison_cells_ch1" && current.roomName == "room_cc_prisonlancer_ch1" && settings["Ch1_Escape_Cell"]) vars.tempVar ++;
+        else if(old.roomName == "room_dw_cyber_musical_door_ch2" && current.roomName == "room_dw_mansion_entrance_ch2" && settings["Ch2_MansionWarp"]) vars.tempVar = 2;
+
+        switch(version)
+        {
+            case "CH1-2 v1.08 - v1.10":
+            case "CH1-2 v1.12 - v1.15":
+                if(current.room == 0 || current.room == 10 || current.room == 279 || current.room == 280) vars.chapter = 0;
+                else if(current.room >= 281 && current.room <= 426) vars.chapter = 1;
+                else if(current.room >= 1 && current.room < 281) vars.chapter = 2;
+                break;
+        }
+    }
+}
+
+start
+{
+    if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
+    {
+        vars.DebugPrint("START (Start Room for Chapter 1 detected)");
         return true;
-      }
-      break;
-    case "SURVEY_PROGRAM":
-      int exactPlot = vars.findSplitVarIndex("exactPlot");
-      int maxPlot = vars.findSplitVarIndex("maxPlot");
+    }
 
-      foreach (string splitKey in vars.splits.Keys) {
-
-        if (!settings[splitKey] || vars.splits[splitKey][done]) // Checking if the split isn't already done or not enabled
-          continue;
-
-        // is there a current room requirement?
-        if ((vars.splits[splitKey][currentRoom] != -1) && (current.room != vars.splits[splitKey][currentRoom]))
-          continue;
-
-        // is there an old room requirement?
-        if ((vars.splits[splitKey][oldRoom] != -1) && (old.room != vars.splits[splitKey][oldRoom]))
-          continue;
-
-        // is there an exact plot requirement?
-        if ((vars.splits[splitKey][exactPlot] != -1) && (current.plot != vars.splits[splitKey][exactPlot]))
-          continue;
-
-        // is there a maximum plot requirement?
-        if ((vars.splits[splitKey][maxPlot] != -1) && (current.plot > vars.splits[splitKey][maxPlot]))
-          continue;
-
-        // is there a current fight requirement?
-        if ((vars.splits[splitKey][currentFight] != -1) && (current.fight != vars.splits[splitKey][currentFight]))
-          continue;
-
-        // is there an old fight requirement?
-        if ((vars.splits[splitKey][oldFight] != -1) && (old.fight != vars.splits[splitKey][oldFight]))
-          continue;
-
-        // is there a special flag requirement?
-        if (vars.splits[splitKey][specialCondition] != -1) {
-          bool pass = false;
-
-          switch((int)vars.splits[splitKey][specialCondition]) {
-            case 1:  // Ch1_Ending (SURVEY)
-              /*
-              When the final textbox is closed, the game stores global.fileChoice in a temp var it then sets global.fileChoice + 3,
-              saves the game, and then sets it back we can use this to get the frame after the textbox was closed by looking
-              for fileChoice > 2 as this will only be valid in this one case
-              */
-              pass = (current.fileChoice
-           > 2);
-              break;
-            case 2:  // Ch1_Ending (SURVEY)
-              pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0);
-              break;
-            case 3:  // Ch1_KeyFixed
-              pass = vars.checkKeyItems(5);
-              break;
-            case 4:  // Ch1_KeyA
-              pass = vars.checkKeyItems(4);
-              break;
-            case 5:  // Ch1_KeyB
-              pass = vars.checkKeyItems(6);
-              break;
-            case 6:  // Ch1_KeyC
-              pass = vars.checkKeyItems(7);
-              break;
-            case 7: // Ch1_Jevil_EndBattle
-              pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
-              break;
-            case 8: // Ch1_Escape_Cell
-              pass = (vars.tempVar == 1);
-
-              if(pass) vars.tempVar = 0;
-              else vars.tempVar ++;
-
-              break;
-            case 100: // Ch1_LancerBikeExplosion
-              pass = (old.lancerCon == 46 && current.lancerCon == 47);
-              break;
-            case 424: // Ch1_CastleTown_GreatDoor
-              pass = (current.doorCloseCon == 21 && old.doorCloseCon == 7);
-              break;
-          }
-
-          if (!pass) continue;
-        }
-
-        // if we get to this point, all requirements are met
-        vars.splits[splitKey][done] = true;
-
-        vars.DebugPrint("SPLIT (" + splitKey + ")");
-
+    else if(version != "CH1 SURVEY_PROGRAM" && old.namerEvent == 74 && current.namerEvent == 75)
+    {
+        vars.DebugPrint("START (Start Event for Chapter " + vars.chapter + " detected)");
         return true;
-      }
-    break;
-  }
+    }
 }
 
-onSplit {
-  vars.DebugPrint("SPLIT !");
+onStart
+{
+    timer.IsGameTimePaused = true;  // Weird workaround for
+    timer.IsGameTimePaused = false; // split times not showing up with Game Time
+}
+
+reset
+{
+    if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
+    {
+        vars.DebugPrint("RESET (Start Room for Chapter 1 detected)");
+        return true;
+    }
+
+    else if(version != "CH1 SURVEY_PROGRAM" && old.namerEvent == 74 && current.namerEvent == 75)
+    {
+        vars.DebugPrint("RESET (Start Event for Chapter " + vars.chapter + " detected)");
+        return true;
+    }
+}
+
+onReset
+{
+    vars.resetVars();
+    vars.resetSplits();
+}
+
+split
+{
+    if(vars.forceSplit)
+    {
+        vars.forceSplit = false;
+        return true;
+    }
+
+    int done      = 0,
+        oldroom   = 1,
+        newroom   = 2,
+        oldfight  = 3,
+        newfight  = 4,
+        condition = 5;
+
+    foreach(string splitKey in vars.splits.Keys)
+    {
+        if((!settings[splitKey] || vars.splits[splitKey][done]) ||
+           (vars.splits[splitKey][oldroom] != null && old.roomName != vars.splits[splitKey][oldroom]) ||
+           (vars.splits[splitKey][newroom] != null && current.roomName != vars.splits[splitKey][newroom]) ||
+           (vars.splits[splitKey][oldfight] != -1 && old.fight != vars.splits[splitKey][oldfight]) ||
+           (vars.splits[splitKey][newfight] != -1 && current.fight != vars.splits[splitKey][newfight])) continue;
+
+        bool pass = false;
+        switch((int)vars.splits[splitKey][condition])
+        {
+            case 0:
+                pass = true;
+                break;
+
+            case 1: // Ch1_Lancer_BikeExplosion
+                pass = (old.lancerCon == 46 && current.lancerCon == 47);
+                break;
+
+            case 2: // Ch1_CastleTown_DoorClose
+                pass = (old.doorCloseCon == 7 && current.doorCloseCon == 21);
+                break;
+
+            case 3: // Ch1_Escape_Cell, Ch2_MansionWarp
+                if(vars.tempVar == 2)
+                {
+                    pass = true;
+                    vars.tempVar = 0;
+                }
+                break;
+
+            case 4: // Ch1_Jevil_EndBattle
+                if(version == "CH1 SURVEY_PROGRAM")
+                    pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+                else
+                    pass = (current.sound == "snd_spare_ch1" || current.topEnemyHP <= 0);
+                break;
+
+            case 5: // Ch1_King_EndBattle
+                if(version == "CH1 SURVEY_PROGRAM")
+                    pass = (Math.Round(old.kingPos) == 1028 && Math.Round(current.kingPos) == 1024);
+                else
+                    pass = (old.kingPos == 680 && current.kingPos >= 1020 && current.kingPos <= 1030);
+                break;
+
+            case 6: // Ch2_ArcadeGameText
+                pass = ((old.textboxMsg == @"\EH* C'mon^1, let's go after&||her!/%" || old.textboxMsg == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%") && current.textboxMsg == null);
+                break;
+
+            case 7: // Ch2_CyberFields_Exit
+                pass = (old.sound == "snd_queen_laugh_0" && current.sound == "snd_sussurprise");
+                break;
+
+            case 8: // Ch2_FreezeRing
+                pass = (old.freezeRingTimer != 85 && current.freezeRingTimer == 85);
+                break;
+
+            case 9: // Ch2_SGBerdly
+                pass = (current.snowgrave > 1500 && current.snowgrave < 2500 && current.sound == "snd_bell");
+                break;
+
+            case 10: // Ch2_Disk_Loaded
+                pass = (old.loadedDiskGreyBG == 119 && current.loadedDiskGreyBG == 121);
+                break;
+        }
+
+        if(pass)
+        {
+            vars.splits[splitKey][done] = true;
+            vars.DebugPrint("SPLIT (" + splitKey + ")");
+            return true;
+        }
+    }
 }
