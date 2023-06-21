@@ -96,9 +96,14 @@ startup
     settings.CurrentDefaultParent = "AC";
 
     settings.Add("AC_PauseTimer", true, "Pause timer between chapters");
-      settings.SetToolTip("AC_PauseTimer", "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save in the next chapter.\n\nNOTE: For this to work, Game Time must be enabled\n(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself)");
+      settings.SetToolTip("AC_PauseTimer",
+        "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save in the next chapter.\n\n"
+        + "NOTE: For this to work, Game Time must be enabled\n"
+        + "(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can just do it yourself)");
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
-      settings.SetToolTip("AC_PauseTimerOST", "This setting is the same as the above one, however it pauses the timer when the credits songs start playing instead.\nUseful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
+      settings.SetToolTip("AC_PauseTimerOST",
+        "This setting is the same as the above one, however it pauses the timer when the credits songs start playing instead.\n"
+        + "Useful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
@@ -294,7 +299,8 @@ init
         {"Ch2_Fountain_Exit",    new object[] {false, "room_dw_mansion_fountain_ch2",                "room_lw_computer_lab_ch2",             -1, -1,  0}}
     };
 
-    if(version != "CH1 SURVEY_PROGRAM" && timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]))
+    if(version != "CH1 SURVEY_PROGRAM" && timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime
+        && (settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]))
     {
         var message = MessageBox.Show
         (
