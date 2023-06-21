@@ -16,3 +16,4 @@ jobs:
       uses: docker://avtodev/markdown-lint:v1 # fastest way
       with:
         args: '.'
+        rules: './markdownlint.json'
