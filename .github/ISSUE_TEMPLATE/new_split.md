@@ -16,5 +16,7 @@ assignees: ''
 - [ ] Fight related
 - [ ] Other
 
+**In which speedrun category that will be used ?**
+
 **Describe when it should split**
 <!-- A clear and concise description of what you want to happen. -->
