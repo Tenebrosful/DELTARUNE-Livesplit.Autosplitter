@@ -88,7 +88,7 @@ init {
             {"boxPushingPuzzle", new object[] {false, -1, -1, 62, 63, -1, -1, -1  }},
             {"rudinn4skip", new object[] {false, -1, -1, 63, 65, -1, -1, -1  }},
 
-            //Checkboard
+            //Checkerboard
             {"whiteTiles#1", new object[] {false, -1, -1, 65, 66, -1, -1, -1  }},
             {"ponman1skip", new object[] {false, -1, -1, 66, 67, -1, -1, -1  }},
             {"whiteTiles#2", new object[] {false, -1, -1, 67, 68, -1, -1, -1  }},
@@ -121,9 +121,9 @@ init {
             {"mazeRoomSusie", new object[] {false, -1, -1, 93, 94, -1, -1, -1  }},
             {"mazeRoomSecondPart", new object[] {false, -1, -1, 94, 96, -1, -1, -1  }},
             {"savePointRoomFo#3", new object[] {false, -1, -1, 96, 97, -1, -1, -1  }},
-            {"pre-susielancer", new object[] {false, -1, -1, -1, 97, 0, 1, -1  }},
-            {"susielancer", new object[] {false, -1, -1, -1, 97, 1, 0, -1  }},
-            {"post-susielancer", new object[] {false, -1, -1, 97, 98, -1, -1, -1  }},
+            {"pre-susie&lancer", new object[] {false, -1, -1, -1, 97, 0, 1, -1  }},
+            {"susie&lancer", new object[] {false, -1, -1, -1, 97, 1, 0, -1  }},
+            {"post-susie&lancer", new object[] {false, -1, -1, 97, 98, -1, -1, -1  }},
 
             //Escape
             {"autoscroller#1", new object[] {false, -1, -1, 98, 99, -1, -1, -1  }},
@@ -133,8 +133,8 @@ init {
             {"chase1roomFo", new object[] {false, -1, -1, 102, 103, -1, -1, -1  }},
             {"chase2roomFo", new object[] {false, -1, -1, 103, 104, -1, -1, -1  }},
             {"capturedCutscene", new object[] {false, -1, -1, 104, 105, -1, -1, -1  }},
-            {"prizonPuzzle", new object[] {false, -1, -1, 105, 106, -1, -1, -1  }},
-            {"pre-susiefight", new object[] {false, -1, -1, -1, 106, 0, 1, -1  }},
+            {"prisonPuzzle", new object[] {false, -1, -1, 105, 106, -1, -1, -1  }},
+            {"pre-susieFight", new object[] {false, -1, -1, -1, 106, 0, 1, -1  }},
             {"susieFight", new object[] {false, -1, -1, -1, 106, 1, 0, -1  }},
             {"post-susieFight", new object[] {false, -1, -1, 106, 105, -1, -1, -1  }},
             {"escapePrisonCutscene", new object[] {false, -1, -1, 105, 106, -1, -1, 9  }},
@@ -158,7 +158,7 @@ init {
 
             //Chaos King
             {"cardCastleThrone", new object[] {false, -1, -1, 126, 127, -1, -1, -1  }},
-            {"pre-kingroom", new object[] {false, -1, -1, 127, 128, -1, -1, -1  }},
+            {"pre-kingRoom", new object[] {false, -1, -1, 127, 128, -1, -1, -1  }},
             {"pre-king", new object[] {false, -1, -1, -1, 128, 0, 1, -1  }},
             {"king", new object[] {false, -1, -1, -1, 128, 1, 0, -1  }},
             {"post-king", new object[] {false, -1, -1, 128, 129, -1, -1, -1  }},
@@ -177,7 +177,7 @@ init {
             {"torielHouse#1", new object[] {false, -1, -1, 5, 3, -1, -1, -1  }},
             {"torielHouse#2", new object[] {false, -1, -1, 3, 2, -1, -1, -1  }},
 
-            //Ends on the textwriter being discarded
+            //Ends on the text writer being discarded
             {"theEnd", new object[] {false, -1, 251, -1, 2, -1, -1, 2  }},
         };
     break;
@@ -288,7 +288,7 @@ split {
               bool pass = false;
 
               switch((int)vars.splits[goal][vars.special]) {
-                  case 1:  // theendboxclosed
+                  case 1:  // theEndBoxClosed
                       /*
                       When the final textbox is closed, the game stores global.fileChoice in a temp var
                       it then sets global.fileChoice + 3, saves the game, and then sets it back
@@ -297,10 +297,10 @@ split {
                       */
                       pass = (current.fileChoice > 2);
                       break;
-                  case 2:  // theendselfdestroyed
+                  case 2:  // theEndSelfDestroyed
                       /*
-                      We dig out the haltstate of the final textbox. When it's in state 2, it's done writing.
-                      Once the box is dismised, the pointer becomes invalid and as such, the value is no longer 2
+                      We dig out the haltState of the final textbox. When it's in state 2, it's done writing.
+                      Once the box is dismissed, the pointer becomes invalid and as such, the value is no longer 2
                       We also check to make sure they took choice 0 and not choice 1 to ensure they chose yes and not no.
                       */
                       pass = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2))  && current.choicer == 0);
@@ -325,12 +325,12 @@ split {
                       */
                       pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
                       break;
-                  case 8: //puzzleroom#2
-                      pass = vars.splits["puzzleroom#1"][vars.done];
+                  case 8: //puzzleRoom#2
+                      pass = vars.splits["puzzleRoom#1"][vars.done];
                       break;
 
-                  case 9: //escapeprisoncutscene
-                      pass = vars.splits["prizonpuzzle"][vars.done];
+                  case 9: //escapePrisonCutscene
+                      pass = vars.splits["prisonPuzzle"][vars.done];
                       break;
               }
 
