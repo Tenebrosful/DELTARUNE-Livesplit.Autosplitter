@@ -1,24 +1,57 @@
 {
+    "blanks-around-fences": true,
+    "blanks-around-headers": true,
+    "blanks-around-lists": true,
+    "code-block-style": true,
     "code-fence-style": {
         "style": "backtick"
     },
+    "commands-show-output": true,
     "emphasis-style": {
         "style": "asterisk"
     },
+    "fenced-code-language": true,
+    "header-increment": true,
+    "header-start-left": true,
     "header-style": {
         "style": "atx"
     },
+    "hr-style": true,
     "line-length": {
         "code_block_line_length": 120,
         "line_length": 120
     },
+    "link-fragments": true,
+    "link-image-reference-definitions": true,
+    "list-indent": true,
+    "list-marker-space": true,
+    "no-alt-text": true,
+    "no-bare-urls": true,
+    "no-blanks-blockquote": true,
     "no-duplicate-header": {
         "allow_different_nesting": true
     },
+    "no-emphasis-as-header": true,
+    "no-empty-links": true,
     "no-hard-tabs": {
         "spaces_per_tab": 2
     },
+    "no-inline-html": true,
+    "no-missing-space-atx": true,
+    "no-multiple-blanks": true,
+    "no-multiple-space-atx": true,
+    "no-multiple-space-blockquote": true,
+    "no-reversed-links": true,
+    "no-space-in-code": true,
+    "no-space-in-emphasis": true,
+    "no-space-in-links": true,
+    "no-trailing-punctuation": true,
+    "no-trailing-spaces": true,
+    "reference-links-images": true,
+    "single-h1": true,
+    "single-trailing-newline": true,
     "strong-style": {
         "style": "asterisk"
-    }
+    },
+    "ul-indent": true
 }
