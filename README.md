@@ -6,13 +6,27 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 - Chapter 1&2 Demo v1.08+
 
 ## How to install
-//Todo
+
+To use the Autosplitter, follow these easy steps:
+
+1. Open your splits and go in "Edit Split"
+2. Insert "DELTARUNE" on the Game Name section
+3. You should now have access to the autosplitter and be able to activate it.
+   
+![Edit Split Section](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/assets/80283205/53f02807-9869-410f-8947-f797c937950c)
+
 
 ## How to use
-//Todo
+
+To use and configure the autosplitter, just click "Settings" and enable the location you want the autosplitter to split on.
+
+![Settings Section](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/assets/80283205/bcbe7bb0-edac-450e-9447-a8cca599e10d)
+
+#### be careful that if you enable the All Chapters section, you will have to put your Livesplit to In-Game Time (IGT) otherwise some functionalities might not work.
 
 ## Want to help with / request something?
-//Todo
+Want to get in touch with the developers ? 
+In that case, we recommend you to join the Deltarune Speedrunning community Discord server "Fast Little Boys" (shorten FLB) with the link below and ping one of the developers in the channel #autosplitter-feedback.
 
 ## FLB Discord
 [**Click to join**](https://discord.gg/W6uckvkuer)
