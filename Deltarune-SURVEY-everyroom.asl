@@ -5,7 +5,7 @@
 state("Deltarune", "SURVEY_PROGRAM") {
   //static
   uint room :   "Deltarune.exe", 0x6AC9F0;
-  
+
   //globals
   double money :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
@@ -17,10 +17,10 @@ state("Deltarune", "SURVEY_PROGRAM") {
   //selfs - Finding reliable pointers to these values is really weird so here's a few paths that appear to cover all the test cases I found so we don't need to use a sigscan
   double jevilDance :   "Deltarune.exe", 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;
   double jevilDance2 :   "Deltarune.exe", 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
-  
+
   double finalTextboxHalt :   "Deltarune.exe", 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
   double finalTextboxHalt2 :   "Deltarune.exe", 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
-  
+
 }
 
 init {
@@ -218,7 +218,7 @@ start {
       break;
   }
 
-  return false;  
+  return false;
 }
 
 reset {
@@ -244,7 +244,7 @@ reset {
 update {
   current.phase = timer.CurrentPhase;
 
-  if (vars.firstRun) 
+  if (vars.firstRun)
     vars.firstRun = false;
   else
     if ((current.phase == TimerPhase.Running) && (old.phase == TimerPhase.NotRunning))
@@ -282,7 +282,7 @@ split {
           // is there an old fight requirement ?
           if ((vars.splits[goal][vars.oldFight] != -1) && (old.fight != vars.splits[goal][vars.oldFight]))
               continue;
-          
+
           // is there a special flag requirement?
           if (vars.splits[goal][vars.special] != -1) {
               bool pass = false;
@@ -317,7 +317,7 @@ split {
                   case 6:  // i-keyC
                       pass = vars.checkKeyItems(7);
                       break;
-                  case 7: //b-jevilEnd 
+                  case 7: //b-jevilEnd
                       /*
                       Jevil has a variable named dancelv which sets the sprite/animation he's using
                       0 - Default, 1 - Bounce, 2 - Sad, 3 - Teleports, 4 - Dead
