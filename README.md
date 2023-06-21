@@ -9,6 +9,8 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 ## How to install
 
+### Easy way
+
 To use the Autosplitter, follow these easy steps:
 
 1. Open your splits and go in "Edit Split"
@@ -16,6 +18,15 @@ To use the Autosplitter, follow these easy steps:
 3. You should now have access to the autosplitter and be able to activate it.
 
 ![Edit Split Section](/assets/quickInstall.png)
+
+### Manual way (also for developers)
+
+1. Download the [latest release of the autosplitter](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/releases)
+or clone the repository
+2. Open LiveSplit and add in your layout the component "Control -> Scriptable Auto Splitter"
+3. Insert in "Script Path" the path to the autosplitter file
+
+> The autosplitter file will auto-refresh when you save it
 
 ## How to use
 
@@ -31,8 +42,12 @@ like the Pause Timer might not work
 ## Want to help with / request something?
 
 Want to get in touch with the developers ?
-In that case, we recommend you to join the Deltarune Speedrunning community Discord server["Fast Little Boys"](https://discord.gg/W6uckvkuer)
+In that case, we recommend you to join the Deltarune Speedrunning community Discord server ["Fast Little Boys"](https://discord.gg/W6uckvkuer)
 (shorten FLB) with the link below and ping one of the developers in the channel #autosplitter-feedback.
+
+You can also create an issue on this repository by clicking on the "[Issues](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/issues)"
+tab and then on "New Issue".
+That can be made to report a bug or to request a new feature / new split.
 
 ## Credits
 
