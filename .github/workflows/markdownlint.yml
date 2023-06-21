@@ -5,8 +5,8 @@ on: # rebuild any PRs and main branch changes
     branches: [main, release]
 
 jobs:
-  lint-changelog:
-    name: Lint changelog file
+  lint-markdown:
+    name: Lint markdown file
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
