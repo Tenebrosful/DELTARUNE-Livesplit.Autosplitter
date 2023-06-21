@@ -7,6 +7,9 @@
         "gaming-terms",
         "softwareTerms"
     ],
+    "ignorePaths": [
+        "**/*.yml"
+    ],
     "words": [
         "afterthrash",
         "Ambuy",
@@ -18,6 +21,7 @@
         "autosplitter",
         "autosplitting",
         "Berdly",
+        "blockquote",
         "Bloxer",
         "checkersboss",
         "cheesemaze",
