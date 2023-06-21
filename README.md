@@ -17,7 +17,7 @@ To use the Autosplitter, follow these easy steps:
 2. Insert `Deltarune` or `Deltarune Category Extensions` on the Game Name section
 3. You should now have access to the autosplitter and be able to activate it.
 
-![Edit Split Section](/assets/quickInstall.png)
+![Split edition header with the Game Name and the suggested autosplitter](/assets/quickInstall.png)
 
 ### Manual way (also for developers)
 
@@ -26,13 +26,15 @@ or clone the repository
 2. Open LiveSplit and add in your layout the component `Control -> Scriptable Auto Splitter`
 3. Insert in `Script Path` the path to the autosplitter file
 
+![Layout Editor with the path Control > Scriptable Auto Splitter when adding a new component](/assets/manualInstall.png)
+
 > The autosplitter file will auto-refresh when you save it
 
 ## How to use
 
 To use and configure the autosplitter, just click `Settings` and enable the location you want the autosplitter to split on.
 
-![Settings Section](/assets/options.png)
+![Settings options with Start, Split, Reset and individual split that can be enable or disable](/assets/options.png)
 
 ### All Chapters (Pause Timer)
 
