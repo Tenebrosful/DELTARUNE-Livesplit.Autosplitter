@@ -13,3 +13,4 @@ jobs:
         with:
           files: |
             **/*.{asl,md}
+          incremental_files_only: false
