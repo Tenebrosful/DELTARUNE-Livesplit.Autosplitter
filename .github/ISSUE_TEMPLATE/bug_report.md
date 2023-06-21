@@ -19,9 +19,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Game Version**
-[ ] 1.15
-[ ] 1.08 to 1.10
-[ ] SURVEY
+- [ ] 1.15
+- [ ] 1.08 to 1.10
+- [ ] SURVEY
 
 **Additional context**
 Add any other context about the problem here.
