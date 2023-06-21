@@ -10,7 +10,7 @@ state("Deltarune", "SURVEY_PROGRAM") {
   double money :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x470;
   double fight :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x490;
   double plot :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x500;
-  double filechoice :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
+  double fileChoice :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x488, 0x4D0;
   double interact :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x20;
   double choicer :   "Deltarune.exe", 0x48E5DC, 0x27C, 0x28, 0x40;
 
@@ -290,12 +290,12 @@ split {
               switch((int)vars.splits[goal][vars.special]) {
                   case 1:  // theendboxclosed
                       /*
-                      When the final textbox is closed, the game stores global.filechoice in a temp var
-                      it then sets global.filechoice + 3, saves the game, and then sets it back
-                      we can use this to get the frame after the textbox was closed by looking for filechoice > 2
+                      When the final textbox is closed, the game stores global.fileChoice in a temp var
+                      it then sets global.fileChoice + 3, saves the game, and then sets it back
+                      we can use this to get the frame after the textbox was closed by looking for fileChoice > 2
                       as this will only be valid in this one case
                       */
-                      pass = (current.filechoice > 2);
+                      pass = (current.fileChoice > 2);
                       break;
                   case 2:  // theendselfdestroyed
                       /*
