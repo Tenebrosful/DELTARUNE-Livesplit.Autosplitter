@@ -13,7 +13,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 To use the Autosplitter, follow these easy steps:
 
-1. Open your splits and go in `Edit Split`
+1. Open your splits and go in `Edit Splits`
 2. Insert `Deltarune` or `Deltarune Category Extensions` on the Game Name section
 3. You should now have access to the autosplitter and be able to activate it.
 
@@ -38,12 +38,12 @@ To use and configure the autosplitter, just click `Settings` and enable the loca
 
 ### All Chapters (Pause Timer)
 
-If you enable the All Chapters section, you will have to put your Livesplit to In-Game Time (IGT) otherwise some functionalities
-like the Pause Timer might not work
+If you enable the All Chapters section, you will have to put your LiveSplit to In-Game Time (IGT) otherwise some functionalities
+like the timer pause might not work.
 
 ## Want to help with / request something?
 
-Want to get in touch with the developers ?
+Want to get in touch with the developers?
 In that case, we recommend you to join the Deltarune Speedrunning community Discord server ["Fast Little Boys"](https://discord.gg/W6uckvkuer)
 (shorten FLB) with the link below and ping one of the developers in the channel #autosplitter-feedback.
 
