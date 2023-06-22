@@ -1,0 +1,19 @@
+name: 'Lint markdown files'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches: [main, release]
+
+jobs:
+  lint-markdown:
+    name: Lint markdown file
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Lint markdown files
+      uses: avto-dev/markdown-lint@v1
+      with:
+        args: '.'
+        config: '.markdownlint.json'
