@@ -51,6 +51,7 @@ state("Deltarune", "CH1-2 v1.12 - v1.15")
 
 startup
 {
+    refreshRate = 30;
     vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE] " + text); });
     vars.tempVar = 0;
     vars.forceSplit = false;
