@@ -10,7 +10,7 @@ state("Deltarune", "CH1 SURVEY_PROGRAM")
     double finalTextboxHalt  : 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0;
     double finalTextboxHalt2 : 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
 
-    float kingPos : 0x48BDEC, 0x60, 0xB4;
+    float kingPos : 0x6AEB80, 0x4, 0x178, 0x80, 0xC8, 0x8, 0xB4;
 }
 
 state("Deltarune", "CH1-2 v1.08 - v1.10")
@@ -491,10 +491,7 @@ split
                 break;
 
             case 5: // Ch1_King_EndBattle
-                if(version == "CH1 SURVEY_PROGRAM")
-                    pass = (Math.Round(old.kingPos) == 1028 && Math.Round(current.kingPos) == 1024);
-                else
-                    pass = (old.kingPos == 680 && current.kingPos >= 1020 && current.kingPos <= 1030);
+                pass = (old.kingPos == 680 && current.kingPos >= 1020 && current.kingPos <= 1030);
                 break;
 
             case 6: // Ch2_ArcadeGameText
