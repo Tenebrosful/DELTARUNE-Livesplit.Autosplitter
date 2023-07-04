@@ -120,7 +120,9 @@ startup
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Susie&Lancer_Exit",      true, "Exit Forest (Susie & Lancer room)");
     settings.Add("Ch1_Escape_Cell",            true, "Exit Prison Cell");
-    settings.Add("Ch1_Throne_Exit",            true, "Exit Card Castle (throne room)");
+    settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 room");
+    settings.Add("Ch1_Throne_Exit",            true, "Exit Throne Room");
+    settings.Add("Ch1_PreKing_Exit",          false, "Exit Pre-King room");
     settings.Add("Ch1_King_EndBattle",         true, "End King battle");
     settings.Add("Ch1_Ending",                 true, "Ending");
     settings.Add("Ch1_EndingOST",             false, "Ending (OST%)");
@@ -138,7 +140,7 @@ startup
     settings.Add("Ch2_ArcadeGameText",   false, "Arcade Game (textbox close)");
     settings.Add("Ch2_ArcadeGameLeave",  false, "Arcade Game (room change)");
     settings.Add("Ch2_DJFight",           true, "End DJ battle");
-    settings.Add("Ch2_DJShopRoom",       false, "Enter DJ Shop Room");
+    settings.Add("Ch2_DJShopRoom",       false, "Enter DJ Shop room");
     settings.Add("Ch2_CyberFields_Exit",  true, "Exit Cyber Fields");
     settings.Add("Ch2_TrashZoneWarp",     true, "Trash Zone Warp");
     settings.Add("Ch2_MansionWarp",       true, "Mansion Warp");
@@ -271,7 +273,9 @@ init
         {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",     -1, -1, 3}},
         {"Ch1_Jevil_EnterRoom",       new object[] {false, "room_cc_prison_prejoker_ch1", "room_cc_joker_ch1",            -1, -1, 0}},
         {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",            -1, -1, 4}},
+        {"Ch1_KRound2_Exit",          new object[] {false, "room_cc_6f_ch1",              "room_cc_throneroom_ch1",       -1, -1, 0}},
         {"Ch1_Throne_Exit",           new object[] {false, "room_cc_throneroom_ch1",      "room_cc_preroof_ch1",          -1, -1, 0}},
+        {"Ch1_PreKing_Exit",          new object[] {false, "room_cc_preroof_ch1",         "room_cc_kingbattle_ch1",       -1, -1, 0}},
         {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",       -1, -1, 5}},
 
         {"Ch2_Library",          new object[] {false, "room_library_ch2",                            "room_dw_cyber_intro_1_ch2",            -1, -1,  0}},
