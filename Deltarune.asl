@@ -18,11 +18,12 @@ state("Deltarune", "CH1-2 v1.08 - v1.10")
     double fight      : 0x6FCF38, 0x30, 0x4F8,  0x0;
     double topEnemyHP : 0x6FCF38, 0x30, 0x2B38, 0x0, 0x64, 0x0;
 
-    double lancerCon        : 0x6EF220, 0x128, 0x510, 0x20, 0x24, 0x10,  0xD8, 0x0;
+    double lancerCon        : 0x6EF220, 0x128, 0x510, 0x20, 0x24, 0x10,  0xD8,  0x0;
     double doorCloseCon     : 0x43DE48, 0x7C8, 0xC,   0x24, 0x10, 0x18,  0x0;
-    double namerEvent       : 0x6EF220, 0xD4,  0x5C,  0x20, 0x24, 0x10,  0x9C, 0x0;
+    double namerEvent       : 0x6EF220, 0xD4,  0x5C,  0x20, 0x24, 0x10,  0x9C,  0x0;
+    double namerEvent110    : 0x6EF220, 0xD4,  0x5C,  0x20, 0x24, 0x10,  0x2F4, 0x0; // For version 1.10 specifically
     double freezeRingTimer  : 0x43DE48, 0xC18, 0xC,   0x24, 0x10, 0xC0,  0x0;
-    double snowgrave        : 0x6EF220, 0xF4,  0x24,  0x5C, 0x20, 0x24,  0x10, 0x120, 0x0;
+    double snowgrave        : 0x6EF220, 0xF4,  0x24,  0x5C, 0x20, 0x24,  0x10,  0x120, 0x0;
     double loadedDiskGreyBG : 0x43DE48, 0xA60, 0xC,   0x24, 0x10, 0x3D8, 0x0;
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
@@ -407,7 +408,7 @@ start
         return true;
     }
 
-    else if(version != "CH1 SURVEY_PROGRAM" && old.namerEvent == 74 && current.namerEvent == 75)
+    else if(version != "CH1 SURVEY_PROGRAM" && ((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)))
     {
         vars.DebugPrint("START (Start Event for Chapter " + vars.chapter + " detected)");
         return true;
@@ -428,7 +429,7 @@ reset
         return true;
     }
 
-    else if(version != "CH1 SURVEY_PROGRAM" && old.namerEvent == 74 && current.namerEvent == 75)
+    else if(version != "CH1 SURVEY_PROGRAM" && ((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)))
     {
         vars.DebugPrint("RESET (Start Event for Chapter " + vars.chapter + " detected)");
         return true;
