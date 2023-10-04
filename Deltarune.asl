@@ -408,10 +408,20 @@ start
         return true;
     }
 
-    else if(version != "CH1 SURVEY_PROGRAM" && ((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)))
+    else if(version != "CH1 SURVEY_PROGRAM")
     {
-        vars.DebugPrint("START (Start Event for Chapter " + vars.chapter + " detected)");
-        return true;
+        if(version == "CH1-2 v1.08 - v1.10")
+        {
+            if((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)) vars.tempVar = 1;
+        }
+        else if(old.namerEvent == 74 && current.namerEvent == 75) vars.tempVar = 1;
+        
+        if(vars.tempVar == 1)
+        {
+            vars.DebugPrint("START (Start Event for Chapter " + vars.chapter + " detected)");
+            vars.tempVar = 0;
+            return true;
+        }
     }
 }
 
@@ -429,10 +439,20 @@ reset
         return true;
     }
 
-    else if(version != "CH1 SURVEY_PROGRAM" && ((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)))
+    else if(version != "CH1 SURVEY_PROGRAM")
     {
-        vars.DebugPrint("RESET (Start Event for Chapter " + vars.chapter + " detected)");
-        return true;
+        if(version == "CH1-2 v1.08 - v1.10")
+        {
+            if((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)) vars.tempVar = 1;
+        }
+        else if(old.namerEvent == 74 && current.namerEvent == 75) vars.tempVar = 1;
+        
+        if(vars.tempVar == 1)
+        {
+            vars.DebugPrint("RESET (Start Event for Chapter " + vars.chapter + " detected)");
+            vars.tempVar = 0;
+            return true;
+        }
     }
 }
 
