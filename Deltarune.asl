@@ -55,6 +55,7 @@ startup
     refreshRate = 30;
     vars.DebugPrint = (Action<string>)((text) => { print("[DELTARUNE] " + text); });
     vars.tempVar = 0;
+    vars.startEvent = false;
     vars.forceSplit = false;
     vars.chapter = 0;
     vars.ACContinueRooms = new[,]
@@ -83,6 +84,7 @@ startup
     vars.resetVars = (Action)(() =>
     {
         vars.tempVar = 0;
+        vars.startEvent = false;
         vars.forceSplit = false;
         vars.DebugPrint("All variables have been reset to initial state");
     });
@@ -411,15 +413,14 @@ start
     else if(version != "CH1 SURVEY_PROGRAM")
     {
         if(version == "CH1-2 v1.08 - v1.10")
-        {
-            if((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)) vars.tempVar = 1;
-        }
-        else if(old.namerEvent == 74 && current.namerEvent == 75) vars.tempVar = 1;
+            vars.startEvent = (old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75);
+        else
+            vars.startEvent = old.namerEvent == 74 && current.namerEvent == 75;
         
-        if(vars.tempVar == 1)
+        if(vars.startEvent)
         {
             vars.DebugPrint("START (Start Event for Chapter " + vars.chapter + " detected)");
-            vars.tempVar = 0;
+            vars.startEvent = false;
             return true;
         }
     }
@@ -442,15 +443,14 @@ reset
     else if(version != "CH1 SURVEY_PROGRAM")
     {
         if(version == "CH1-2 v1.08 - v1.10")
-        {
-            if((old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75)) vars.tempVar = 1;
-        }
-        else if(old.namerEvent == 74 && current.namerEvent == 75) vars.tempVar = 1;
+            vars.startEvent = (old.namerEvent == 74 && current.namerEvent == 75) || (old.namerEvent110 == 74 && current.namerEvent110 == 75);
+        else
+            vars.startEvent = old.namerEvent == 74 && current.namerEvent == 75;
         
-        if(vars.tempVar == 1)
+        if(vars.startEvent)
         {
             vars.DebugPrint("RESET (Start Event for Chapter " + vars.chapter + " detected)");
-            vars.tempVar = 0;
+            vars.startEvent = false;
             return true;
         }
     }
