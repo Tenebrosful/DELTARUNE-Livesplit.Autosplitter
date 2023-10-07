@@ -140,28 +140,28 @@ startup
     settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
     settings.CurrentDefaultParent = "Ch2";
 
-    settings.Add("Ch2_Library",           true,  "Enter Dark World (True Reset)");
-    settings.Add("Ch2_ArcadeGameText",   false,  "Arcade Game (textbox close)");
-    settings.Add("Ch2_ArcadeGameLeave",  false,  "Arcade Game (room change)");
-    settings.Add("Ch2_DJFight",           true,  "End DJ battle");
-    settings.Add("Ch2_DJShopRoom",       false,  "Enter DJ Shop room");
-    settings.Add("Ch2_CyberFields_Exit",  true,  "Exit Cyber Fields");
-    settings.Add("Ch2_TrashZoneWarp",     true,  "Trash Zone Warp");
-    settings.Add("Ch2_MansionWarp",       true,  "Mansion Warp");
-    settings.Add("Ch2_Mouse2Puzzle",     false,  "Exit Mouse 2 Puzzle room");
-    settings.Add("Ch2_Berdly_EndFight",   true,  "End Berdly 2 battle");
-    settings.Add("Ch2_Berdly_Leave",      false, "Exit Berdly 2 room (Main Route)");
-    settings.Add("Ch2_SpamtonLeave",     false,  "Exit Spamton room");
-    settings.Add("Ch2_CyberCity_Exit",    true,  "Exit Cyber City (captured by Queen)");
-    settings.Add("Ch2_Mansion_Entrance", false,  "Enter Mansion (entrance save point room)");
-    settings.Add("Ch2_AcidLake_Enter",    true,  "Enter Acid Lake");
-    settings.Add("Ch2_AcidLake_Exit",     true,  "Exit Acid Lake");
-    settings.Add("Ch2_Queen",             true,  "Exit Queen room");
-    settings.Add("Ch2_GigaQueen",         true,  "End Giga Queen battle");
-    settings.Add("Ch2_Fountain_Enter",   false,  "Enter Fountain");
-    settings.Add("Ch2_Fountain_Exit",    false,  "Exit Fountain");
-    settings.Add("Ch2_Ending",            true,  "Ending");
-    settings.Add("Ch2_EndingOST",        false,  "Ending (OST%)");
+    settings.Add("Ch2_Library",           true, "Enter Dark World (True Reset)");
+    settings.Add("Ch2_ArcadeGameText",   false, "Arcade Game (textbox close)");
+    settings.Add("Ch2_ArcadeGameLeave",  false, "Arcade Game (room change)");
+    settings.Add("Ch2_DJFight",           true, "End DJ battle");
+    settings.Add("Ch2_DJShopRoom",       false, "Enter DJ Shop room");
+    settings.Add("Ch2_CyberFields_Exit",  true, "Exit Cyber Fields");
+    settings.Add("Ch2_TrashZoneWarp",     true, "Trash Zone Warp");
+    settings.Add("Ch2_MansionWarp",       true, "Mansion Warp");
+    settings.Add("Ch2_Mouse2Puzzle",     false, "Exit Mouse 2 Puzzle room");
+    settings.Add("Ch2_Berdly_EndFight",   true, "End Berdly 2 battle");
+    settings.Add("Ch2_Berdly_Leave",     false, "Exit Berdly 2 room (Main Route)");
+    settings.Add("Ch2_SpamtonLeave",     false, "Exit Spamton room");
+    settings.Add("Ch2_CyberCity_Exit",    true, "Exit Cyber City (captured by Queen)");
+    settings.Add("Ch2_Mansion_Entrance", false, "Enter Mansion (entrance save point room)");
+    settings.Add("Ch2_AcidLake_Enter",    true, "Enter Acid Lake");
+    settings.Add("Ch2_AcidLake_Exit",     true, "Exit Acid Lake");
+    settings.Add("Ch2_Queen",             true, "Exit Queen room");
+    settings.Add("Ch2_GigaQueen",         true, "End Giga Queen battle");
+    settings.Add("Ch2_Fountain_Enter",   false, "Enter Fountain");
+    settings.Add("Ch2_Fountain_Exit",    false, "Exit Fountain");
+    settings.Add("Ch2_Ending",            true, "Ending");
+    settings.Add("Ch2_EndingOST",        false, "Ending (OST%)");
 
     settings.Add("Ch2_AB", true, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch2_AB";
@@ -297,7 +297,7 @@ init
         {"Ch2_Mouse2Puzzle",       new object[] {false, "room_dw_city_mice2_ch2",                      "room_dw_city_cheesemaze_ch2",          -1, -1,  0}},
         {"Ch2_SGBerdly",           new object[] {false, null,                                          "room_dw_city_berdly_ch2",              -1, -1,  9}},
         {"Ch2_SGBerdly_LeaveRoom", new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_poppup_ch2",              -1, -1,  0}},
-        {"Ch2_Berdly_Leave",        new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_traffic_4_ch2",           -1, -1,  0}},
+        {"Ch2_Berdly_Leave",       new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_traffic_4_ch2",           -1, -1,  0}},
         {"Ch2_Berdly_EndFight",    new object[] {false, null,                                          "room_dw_city_berdly_ch2",               1,  0,  0}},
         {"Ch2_SpamtonLeave",       new object[] {false, "room_dw_city_spamton_alley_ch2",              "room_dw_city_traffic_4_ch2",           -1, -1,  0}},
         {"Ch2_CyberCity_Exit",     new object[] {false, "room_dw_city_mansion_front_ch2",              "room_dw_mansion_krisroom_ch2",         -1, -1,  0}},
