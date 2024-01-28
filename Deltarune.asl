@@ -385,7 +385,7 @@ update
 
         switch(version)
         {
-            case "Demo v1.09":
+            case "Demo v1.08 / v1.09":
             case "Demo v1.10":
             case "Demo Steam Beta":
                 if(current.room == 0 || current.room == 10 || current.room == 279 || current.room == 280) vars.chapter = 0;
