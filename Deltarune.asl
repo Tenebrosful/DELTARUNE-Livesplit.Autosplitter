@@ -60,7 +60,7 @@ state("DELTARUNE", "Demo v1.10")
 state("DELTARUNE", "Demo Steam Beta")
 {
     double money   : 0x6FE860, 0x30, 0x1584, 0x0;
-    double fight   : 0x6FE860, 0x30, 0x1584, 0x20;
+    double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
     double chapter : 0x6FE860, 0x30, 0x2F34, 0x80;
 
     double lancerCon        : 0x6F0B48, 0x128, 0x510, 0x20,  0x24, 0x10, 0x138, 0x0;
@@ -127,8 +127,11 @@ startup
 
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
 
+    /*
     settings.Add("AC_DarkDollars", false, "Show dark dollars amount");
      settings.SetToolTip("AC_DarkDollars", "A new row will appear on your layout with the current amount of dark dollars.");
+     // Not actually allowed yet so I'll comment it out until a decision is made
+    */
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
     settings.Add("Ch1", true, "Chapter 1: The Beginning");
@@ -247,24 +250,38 @@ init
 {
     var module = modules.First();
     int mms = module.ModuleMemorySize;
+    vars.x64 = game.Is64Bit();
 
     // Thanks to Jujstme and Ero for this (finding room names)
     var scanner = new SignatureScanner(game, module.BaseAddress, module.ModuleMemorySize);
     Func<int, string, IntPtr> scan = (o, sig) =>
     {
-        IntPtr ptr = scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
+        IntPtr ptr = vars.x64 // It's possible that the game may be on the new 64-bit only GameMaker runtime in the future, so I added this just in case
+            ? scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr + p.ReadValue<int>(addr) + 0x4) })
+            : scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
+
         if(ptr == IntPtr.Zero) throw new NullReferenceException("[DELTARUNE] Signature scanning failed");
         print("[DELTARUNE] Signature found at " + ptr.ToString("X"));
         return ptr;
     };
-    IntPtr ptrRoomArray = scan(2, "8B 3D ?? ?? ?? ?? 2B EF");
-    vars.ptrRoomId = scan(2, "FF 35 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 50 68");
+    
+    IntPtr ptrRoomArray = vars.x64 
+        ? scan(5, "74 0C 48 8B 05 ?? ?? ?? ?? 48 8B 04 D0")
+        : scan(2, "8B 3D ?? ?? ?? ?? 2B EF");
+
+    vars.ptrRoomID = vars.x64 
+        ? scan(9, "48 8B 05 ?? ?? ?? ?? 89 3D ?? ?? ?? ??")
+        : scan(2, "FF 35 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 50 68");
+
     vars.getRoomName = (Func<string>)(() =>
     {
         IntPtr arrayMain = game.ReadPointer(ptrRoomArray);
         if(arrayMain == IntPtr.Zero) return string.Empty;
 
-        IntPtr arrayItem = game.ReadPointer(arrayMain + game.ReadValue<int>((IntPtr)vars.ptrRoomId) * 4);
+        IntPtr arrayItem = vars.x64 
+            ? game.ReadPointer(arrayMain + game.ReadValue<int>((IntPtr)vars.ptrRoomID) * 8)
+            : game.ReadPointer(arrayMain + game.ReadValue<int>((IntPtr)vars.ptrRoomID) * 4);
+
         if(arrayItem == IntPtr.Zero) return string.Empty;
         return game.ReadString(arrayItem, 64);
     });
@@ -378,8 +395,9 @@ update
     if(version == "Unknown")
         return false;
 
-    current.room = game.ReadValue<int>((IntPtr)vars.ptrRoomId);
+    current.room = game.ReadValue<int>((IntPtr)vars.ptrRoomID);
     current.roomName = vars.getRoomName();
+
     if(version == "SURVEY_PROGRAM")
         current.chapter = 1;
 
@@ -434,8 +452,10 @@ update
             vars.forceSplit = settings["AC_Continue"];
         }
 
+        /*
         if(old.money != current.money && current.money % 1 == 0 && settings["AC_DarkDollars"]) // "current.money % 1 == 0" is used to check if there are no decimals, since when you start the game it takes random values until you enter a chapter
             vars.setText("Dark Dollars", ("D$ " + current.money));
+        */
     }
 
     if(old.room != current.room)
@@ -543,6 +563,7 @@ split
             case 4: // Ch1_Jevil_EndBattle
                 if(version == "SURVEY_PROGRAM")
                     pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
+
                 else
                     pass = (old.song.EndsWith(@"mus\joker.ogg") && current.song == null);
                 break;
