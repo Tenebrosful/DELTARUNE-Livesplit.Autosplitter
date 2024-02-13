@@ -36,7 +36,7 @@ To use and configure the autosplitter, just click `Settings` and enable the loca
 
 ![Settings options with Start, Split, Reset and individual splits that can be enabled or disabled](/assets/options.png)
 
-### All Chapters (Pause Timer)
+### All Chapters
 
 If you enable the All Chapters section, you will have to put your LiveSplit to In-Game Time (IGT) otherwise some functionalities
 like the timer pause might not work.
@@ -44,8 +44,8 @@ like the timer pause might not work.
 ## Want to help with / request something?
 
 Want to get in touch with the developers?
-In that case, we recommend you to join the Deltarune Speedrunning community Discord server ["Fast Little Boys"](https://discord.gg/W6uckvkuer)
-(shorten FLB) with the link below and ping one of the developers in the channel #autosplitter-feedback.
+In that case, we recommend you join the Deltarune Speedrunning community Discord server ["Fast Little Boys"](https://discord.gg/W6uckvkuer)
+(FLB) and ping one of the developers in the channel #autosplitter-feedback.
 
 You can also create an issue on this repository by clicking on the [Issues](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/issues)
 tab and then on `New Issue`.
