@@ -34,7 +34,7 @@ or clone the repository
 
 To use and configure the autosplitter, just click `Settings` and enable the location you want the autosplitter to split on.
 
-![Settings options with Start, Split, Reset and individual split that can be enable or disable](/assets/options.png)
+![Settings options with Start, Split, Reset and individual split that can be enabled or disabled](/assets/options.png)
 
 ### All Chapters (Pause Timer)
 
@@ -59,4 +59,4 @@ that was based on **Glacia's** UNDERTALE Autosplitter
 - [**NERS**](https://github.com/NERS1111) (Development, Memory pointers, In-Game Time, Testing)
 - [**Vintagix**](https://github.com/VintagixDev) (Development, Testing)
 - [**Jujstme**](https://github.com/jujstme) (Sigscanning for room names)
-- [**Ero**](https://github.com/just-ero) (Sigscanning for room names)
+- [**Ero**](https://github.com/just-ero) (Sigscanning for room names, Text component code)
