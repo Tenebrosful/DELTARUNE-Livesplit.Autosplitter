@@ -59,4 +59,4 @@ that was based on **Glacia's** UNDERTALE Autosplitter
 - [**NERS**](https://github.com/NERS1111) (Development, Memory pointers, In-Game Time, Testing)
 - [**Vintagix**](https://github.com/VintagixDev) (Development, Testing)
 - [**Jujstme**](https://github.com/jujstme) (Sigscanning for room names)
-- [**Ero**](https://github.com/just-ero) (Sigscanning for room names, Text component code)
+- [**Ero**](https://github.com/just-ero) (Sigscanning for room names)
