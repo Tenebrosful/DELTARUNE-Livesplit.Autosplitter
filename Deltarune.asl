@@ -2,7 +2,6 @@
 
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
-    double money   : 0x48E5DC, 0x27C, 0x488, 0x470; // global.gold
     double plot    : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
     double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
 
@@ -18,7 +17,6 @@ state("DELTARUNE", "SURVEY_PROGRAM")
 
 state("DELTARUNE", "Demo v1.08 / v1.09")
 {
-    double money   : 0x6FCF38, 0x30, 0x1008, 0x20;
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
 
@@ -38,7 +36,6 @@ state("DELTARUNE", "Demo v1.08 / v1.09")
 
 state("DELTARUNE", "Demo v1.10")
 {
-    double money   : 0x6FCF38, 0x30, 0x1008, 0x20;
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0;
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0;
 
@@ -59,7 +56,6 @@ state("DELTARUNE", "Demo v1.10")
 
 state("DELTARUNE", "Demo Steam Beta")
 {
-    double money   : 0x6FE860, 0x30, 0x1584, 0x0;
     double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
     double chapter : 0x6FE860, 0x30, 0x2F34, 0x80;
 
@@ -126,12 +122,6 @@ startup
         "Useful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
 
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
-
-    /*
-    settings.Add("AC_DarkDollars", false, "Show dark dollars amount");
-     settings.SetToolTip("AC_DarkDollars", "A new row will appear on your layout with the current amount of dark dollars.");
-     // Not actually allowed yet so I'll comment it out until a decision is made
-    */
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
     settings.Add("Ch1", true, "Chapter 1: The Beginning");
@@ -208,41 +198,10 @@ startup
      settings.Add("Ch2_SGBerdly_LeaveRoom", false, "Exit Berdly 2 room (Weird Route)");
      settings.Add("Ch2_SGSpamtonNEO_End",   false, "End fountain Spamton NEO battle");
     settings.CurrentDefaultParent = null;
-
-    // Thanks to Ero for this
-    var cache = new Dictionary<string, LiveSplit.UI.Components.ILayoutComponent>();
-    vars.setText = (Action<string, object>)((text1, text2) =>
-    {
-        LiveSplit.UI.Components.ILayoutComponent lc;
-        if(!cache.TryGetValue(text1, out lc))
-        {
-            lc = LiveSplit.UI.Components.ComponentManager.LoadLayoutComponent("LiveSplit.Text.dll", timer);
-            cache[text1] = lc;
-        }
-
-        if(!timer.Layout.LayoutComponents.Contains(lc))
-            timer.Layout.LayoutComponents.Add(lc);
-
-        dynamic tc = lc.Component;
-        tc.Settings.Text1 = text1;
-        tc.Settings.Text2 = text2.ToString();
-    });
-
-    vars.removeAllTexts = (Action)(() =>
-    {
-        foreach(var lc in cache.Values)
-            timer.Layout.LayoutComponents.Remove(lc);
-    });
-}
-
-shutdown
-{
-    vars.removeAllTexts();
 }
 
 exit
 {
-    vars.removeAllTexts();
     vars.resetVars();
 }
 
@@ -451,11 +410,6 @@ update
             timer.IsGameTimePaused = false;
             vars.forceSplit = settings["AC_Continue"];
         }
-
-        /*
-        if(old.money != current.money && current.money % 1 == 0 && settings["AC_DarkDollars"]) // "current.money % 1 == 0" is used to check if there are no decimals, since when you start the game it takes random values until you enter a chapter
-            vars.setText("Dark Dollars", ("D$ " + current.money));
-        */
     }
 
     if(old.room != current.room)
