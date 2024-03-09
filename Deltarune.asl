@@ -215,7 +215,7 @@ init
     Func<int, string, IntPtr> scan = (o, sig) =>
     {
         IntPtr ptr = vars.x64 // It's possible that the game may be on the new 64-bit only GameMaker runtime in the future, so I added this just in case
-            ? scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr + p.ReadValue<int>(addr) + 0x4) })
+            ? scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => addr + p.ReadValue<int>(addr) + 0x4 })
             : scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
 
         if(ptr == IntPtr.Zero) throw new NullReferenceException("[DELTARUNE] Signature scanning failed");
