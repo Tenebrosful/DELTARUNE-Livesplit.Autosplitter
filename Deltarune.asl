@@ -464,7 +464,8 @@ reset
 onReset
 {
     vars.resetVars();
-    vars.resetSplits();
+    if(game != null)
+        vars.resetSplits();
 }
 
 split
