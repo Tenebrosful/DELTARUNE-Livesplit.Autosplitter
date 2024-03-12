@@ -2,9 +2,11 @@
 
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
+    // Global
     double plot    : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
     double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
 
+    // Self
     double lancerCon         : 0x48BDEC, 0x10, 0x60, 0x10, 0x10,  0x0; // obj_darkcastle_event.con
     double doorCloseCon      : 0x48BDEC, 0xC,  0x60, 0x10, 0x10,  0x0; // obj_darkdoorevent.con
     double jevilDance        : 0x48BDEC, 0x78, 0x60, 0x10, 0x10,  0x0; // obj_joker_body.dancelv
