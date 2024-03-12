@@ -123,7 +123,7 @@ startup
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
-    settings.Add("Ch1", true, "Chapter 1: The Beginning");
+    settings.Add("Ch1", false, "Chapter 1: The Beginning");
     settings.CurrentDefaultParent = "Ch1";
 
     settings.Add("Ch1_School",                false, "Enter Dark World (True Reset)");
@@ -142,7 +142,7 @@ startup
     settings.Add("Ch1_King_Exit",             false, "Exit King room");
     settings.Add("Ch1_Fountain_Enter",        false, "Enter Fountain");
     settings.Add("Ch1_Fountain_Exit",         false, "Exit Fountain");
-    settings.Add("Ch1_Ending",                 true, "Ending");
+    settings.Add("Ch1_Ending",                false, "Ending");
     settings.Add("Ch1_EndingOST",             false, "(OST%) Ending");
 
     settings.Add("Ch1_AB", false, "All Bosses Splits");
@@ -153,7 +153,7 @@ startup
      settings.Add("Ch1_Jevil_LeaveRoom", false, "Exit Jevil room");
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
-    settings.Add("Ch2", true, "Chapter 2: A Cyber's World");
+    settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
     settings.CurrentDefaultParent = "Ch2";
 
     settings.Add("Ch2_Library",          false, "Enter Dark World (True Reset)");
@@ -179,7 +179,7 @@ startup
     settings.Add("Ch2_GigaQueen",        false, "End Giga Queen battle");
     settings.Add("Ch2_Fountain_Enter",   false, "Enter Fountain");
     settings.Add("Ch2_Fountain_Exit",    false, "Exit Fountain");
-    settings.Add("Ch2_Ending",            true, "Ending");
+    settings.Add("Ch2_Ending",           false, "Ending");
     settings.Add("Ch2_EndingOST",        false, "(OST%) Ending");
 
     settings.Add("Ch2_AB", false, "All Bosses Splits");
