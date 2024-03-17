@@ -199,6 +199,7 @@ startup
      settings.Add("Ch2_SGBerdly_LeaveRoom", false, "Exit Berdly 2 room (Weird Route)");
      settings.Add("Ch2_SGSpamtonNEO_End",   false, "End fountain Spamton NEO battle");
     settings.CurrentDefaultParent = null;
+    // -------------------------------------------------------------------------------------------
 }
 
 exit
