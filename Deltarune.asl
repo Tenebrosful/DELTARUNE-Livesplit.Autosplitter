@@ -2,10 +2,11 @@
 
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
-    double money   : 0x48E5DC, 0x27C, 0x488, 0x470; // global.gold
+    // Global
     double plot    : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
     double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
 
+    // Self
     double lancerCon         : 0x48BDEC, 0x10, 0x60, 0x10, 0x10,  0x0; // obj_darkcastle_event.con
     double doorCloseCon      : 0x48BDEC, 0xC,  0x60, 0x10, 0x10,  0x0; // obj_darkdoorevent.con
     double jevilDance        : 0x48BDEC, 0x78, 0x60, 0x10, 0x10,  0x0; // obj_joker_body.dancelv
@@ -18,15 +19,14 @@ state("DELTARUNE", "SURVEY_PROGRAM")
 
 state("DELTARUNE", "Demo v1.08 / v1.09")
 {
-    double money   : 0x6FCF38, 0x30, 0x1008, 0x20;
-    double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
+    double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
 
     double lancerCon        : 0x6EF220, 0x128, 0x510, 0x20, 0x24,  0x10, 0xD8,  0x0;
     double doorCloseCon     : 0x6EF220, 0x84,  0x24,  0x10, 0x18,  0x0;       
     double namerEvent       : 0x6EF220, 0xD4,  0x5C,  0x20, 0x24,  0x10, 0x9C,  0x0;                   // DEVICE_NAMER.EVENT
     double loadedDiskGreyBG : 0x6EF220, 0x84,  0x24,  0x10, 0x3D8, 0x0;                                // obj_shop_ch2_spamton.greybgtimer
-    double freezeRingTimer  : 0x6EF220, 0x128, 0xF0,  0x20, 0x24,  0x10, 0xC0,  0x0;                   // obj_weirdEvent_addison_city_big_2.timer
+    double freezeRingTimer  : 0x6EF220, 0x128, 0x24,  0xA0, 0x24,  0x10, 0xC0,  0x0;                   // obj_weirdEvent_addison_city_big_2.timer
     double snowgrave        : 0x6EF220, 0xF4,  0x27C, 0x6C, 0x5C,  0x20, 0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
@@ -38,15 +38,14 @@ state("DELTARUNE", "Demo v1.08 / v1.09")
 
 state("DELTARUNE", "Demo v1.10")
 {
-    double money   : 0x6FCF38, 0x30, 0x1008, 0x20;
-    double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0;
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0;
+    double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0;
 
     double lancerCon        : 0x6EF220, 0x128, 0x510, 0x20, 0x24,  0x10, 0xD8,  0x0;
     double doorCloseCon     : 0x6EF220, 0x84,  0x24,  0x10, 0x18,  0x0;
     double namerEvent       : 0x6EF220, 0xD4,  0x5C,  0x20, 0x24,  0x10, 0x2F4, 0x0;
     double loadedDiskGreyBG : 0x6EF220, 0x84,  0x24,  0x10, 0x87C, 0x0;
-    double freezeRingTimer  : 0x6EF220, 0x128, 0xF0,  0x20, 0x24,  0x10, 0xC0,  0x0;
+    double freezeRingTimer  : 0x6EF220, 0x128, 0x24,  0xA0, 0x24,  0x10, 0xC0,  0x0;
     double snowgrave        : 0x6EF220, 0xF4,  0x27C, 0x6C, 0x5C,  0x20, 0x144, 0x24, 0x10, 0xC0, 0x0;
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
@@ -54,20 +53,18 @@ state("DELTARUNE", "Demo v1.10")
     string32  sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;
     string128 text  : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0;
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;
-
 }
 
 state("DELTARUNE", "Demo Steam Beta")
 {
-    double money   : 0x6FE860, 0x30, 0x1584, 0x0;
-    double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
     double chapter : 0x6FE860, 0x30, 0x2F34, 0x80;
+    double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
 
     double lancerCon        : 0x6F0B48, 0x128, 0x510, 0x20, 0x24, 0x10, 0x138, 0x0;
     double doorCloseCon     : 0x6F0B48, 0x84,  0x24,  0x10, 0x18, 0x0;
     double namerEvent       : 0x6F0B48, 0xD4,  0x5C,  0x20, 0x24, 0x10, 0xFC,  0x0;
     double loadedDiskGreyBG : 0x6F0B48, 0x84,  0x24,  0x10, 0x0,  0x0;
-    double freezeRingTimer  : 0x6F0B48, 0x128, 0xF0,  0x20, 0x24, 0x10, 0x120, 0x0;
+    double freezeRingTimer  : 0x6F0B48, 0x128, 0x24,  0xA0, 0x24, 0x10, 0x120, 0x0;
     double snowgrave        : 0x6F0B48, 0xF4,  0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0x120, 0x0;
 
     float kingPos : 0x6F2CBC, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
@@ -126,15 +123,9 @@ startup
         "Useful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
 
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
-
-    /*
-    settings.Add("AC_DarkDollars", false, "Show dark dollars amount");
-     settings.SetToolTip("AC_DarkDollars", "A new row will appear on your layout with the current amount of dark dollars.");
-     // Not actually allowed yet so I'll comment it out until a decision is made
-    */
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
-    settings.Add("Ch1", true, "Chapter 1: The Beginning");
+    settings.Add("Ch1", false, "Chapter 1: The Beginning");
     settings.CurrentDefaultParent = "Ch1";
 
     settings.Add("Ch1_School",                false, "Enter Dark World (True Reset)");
@@ -153,7 +144,7 @@ startup
     settings.Add("Ch1_King_Exit",             false, "Exit King room");
     settings.Add("Ch1_Fountain_Enter",        false, "Enter Fountain");
     settings.Add("Ch1_Fountain_Exit",         false, "Exit Fountain");
-    settings.Add("Ch1_Ending",                 true, "Ending");
+    settings.Add("Ch1_Ending",                false, "Ending");
     settings.Add("Ch1_EndingOST",             false, "(OST%) Ending");
 
     settings.Add("Ch1_AB", false, "All Bosses Splits");
@@ -164,7 +155,7 @@ startup
      settings.Add("Ch1_Jevil_LeaveRoom", false, "Exit Jevil room");
     settings.CurrentDefaultParent = null;
     // -------------------------------------------------------------------------------------------
-    settings.Add("Ch2", true, "Chapter 2: A Cyber's World");
+    settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
     settings.CurrentDefaultParent = "Ch2";
 
     settings.Add("Ch2_Library",          false, "Enter Dark World (True Reset)");
@@ -190,7 +181,7 @@ startup
     settings.Add("Ch2_GigaQueen",        false, "End Giga Queen battle");
     settings.Add("Ch2_Fountain_Enter",   false, "Enter Fountain");
     settings.Add("Ch2_Fountain_Exit",    false, "Exit Fountain");
-    settings.Add("Ch2_Ending",            true, "Ending");
+    settings.Add("Ch2_Ending",           false, "Ending");
     settings.Add("Ch2_EndingOST",        false, "(OST%) Ending");
 
     settings.Add("Ch2_AB", false, "All Bosses Splits");
@@ -208,41 +199,11 @@ startup
      settings.Add("Ch2_SGBerdly_LeaveRoom", false, "Exit Berdly 2 room (Weird Route)");
      settings.Add("Ch2_SGSpamtonNEO_End",   false, "End fountain Spamton NEO battle");
     settings.CurrentDefaultParent = null;
-
-    // Thanks to Ero for this
-    var cache = new Dictionary<string, LiveSplit.UI.Components.ILayoutComponent>();
-    vars.setText = (Action<string, object>)((text1, text2) =>
-    {
-        LiveSplit.UI.Components.ILayoutComponent lc;
-        if(!cache.TryGetValue(text1, out lc))
-        {
-            lc = LiveSplit.UI.Components.ComponentManager.LoadLayoutComponent("LiveSplit.Text.dll", timer);
-            cache[text1] = lc;
-        }
-
-        if(!timer.Layout.LayoutComponents.Contains(lc))
-            timer.Layout.LayoutComponents.Add(lc);
-
-        dynamic tc = lc.Component;
-        tc.Settings.Text1 = text1;
-        tc.Settings.Text2 = text2.ToString();
-    });
-
-    vars.removeAllTexts = (Action)(() =>
-    {
-        foreach(var lc in cache.Values)
-            timer.Layout.LayoutComponents.Remove(lc);
-    });
-}
-
-shutdown
-{
-    vars.removeAllTexts();
+    // -------------------------------------------------------------------------------------------
 }
 
 exit
 {
-    vars.removeAllTexts();
     vars.resetVars();
 }
 
@@ -257,7 +218,7 @@ init
     Func<int, string, IntPtr> scan = (o, sig) =>
     {
         IntPtr ptr = vars.x64 // It's possible that the game may be on the new 64-bit only GameMaker runtime in the future, so I added this just in case
-            ? scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr + p.ReadValue<int>(addr) + 0x4) })
+            ? scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => addr + p.ReadValue<int>(addr) + 0x4 })
             : scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
 
         if(ptr == IntPtr.Zero) throw new NullReferenceException("[DELTARUNE] Signature scanning failed");
@@ -451,11 +412,6 @@ update
             timer.IsGameTimePaused = false;
             vars.forceSplit = settings["AC_Continue"];
         }
-
-        /*
-        if(old.money != current.money && current.money % 1 == 0 && settings["AC_DarkDollars"]) // "current.money % 1 == 0" is used to check if there are no decimals, since when you start the game it takes random values until you enter a chapter
-            vars.setText("Dark Dollars", ("D$ " + current.money));
-        */
     }
 
     if(old.room != current.room)
@@ -511,7 +467,8 @@ reset
 onReset
 {
     vars.resetVars();
-    vars.resetSplits();
+    if(game != null)
+        vars.resetSplits();
 }
 
 split
