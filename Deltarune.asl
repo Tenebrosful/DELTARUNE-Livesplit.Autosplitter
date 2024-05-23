@@ -330,9 +330,9 @@ init
         {"Ch2_AcidLake_Exit",      new object[] {false, "room_dw_mansion_acid_tunnel_loop_rouxls_ch2", "room_dw_mansion_acid_tunnel_exit_ch2",        -1, -1,  0}},
         {"Ch2_Queen",              new object[] {false, "room_dw_mansion_east_4f_d_ch2",               "room_dw_mansion_top_ch2",                     -1, -1,  0}},
         {"Ch2_GigaQueen",          new object[] {false, "room_dw_mansion_top_ch2",                     "room_dw_mansion_top_post_ch2",                -1, -1,  0}},
-        {"Ch2_Fountain_Enter",     new object[] {false, null,                                          "room_dw_mansion_fountain_ch2",                -1, -1,  0}},
+        {"Ch2_Fountain_Enter",     new object[] {false, null,                                          null,                                          -1, -1, 12}},
         {"Ch2_SGSpamtonNEO_End",   new object[] {false, null,                                          "room_dw_mansion_fountain_ch2",                 1,  0,  0}},
-        {"Ch2_Fountain_Exit",      new object[] {false, "room_dw_mansion_fountain_ch2",                "room_lw_computer_lab_ch2",                    -1, -1,  0}}
+        {"Ch2_Fountain_Exit",      new object[] {false, null,                                          "room_lw_computer_lab_ch2",                    -1, -1, 13}}
     };
 
     if(version != "SURVEY_PROGRAM" && timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]))
@@ -548,6 +548,14 @@ split
 
             case 11: // Ch2_SpamtonNEO_End
                 pass = (old.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && current.song == null);
+                break;
+
+            case 12: // Ch2_Fountain_Enter
+                pass = (current.roomName == "room_cc_fountain_ch2" || current.roomName == "room_dw_mansion_fountain_ch2");
+                break;
+
+            case 13: // Ch2_Fountain_Exit
+                pass = (old.roomName == "room_cc_fountain_ch2" || old.roomName == "room_dw_mansion_fountain_ch2");
                 break;
         }
 
