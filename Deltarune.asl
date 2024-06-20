@@ -7,14 +7,14 @@ state("DELTARUNE", "SURVEY_PROGRAM")
     double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
 
     // Self
-    double lancerCon         : 0x48BDEC, 0x10, 0x60, 0x10, 0x10,  0x0; // obj_darkcastle_event.con
-    double doorCloseCon      : 0x48BDEC, 0xC,  0x60, 0x10, 0x10,  0x0; // obj_darkdoorevent.con
-    double jevilDance        : 0x48BDEC, 0x78, 0x60, 0x10, 0x10,  0x0; // obj_joker_body.dancelv
-    double jevilDance2       : 0x48BDEC, 0x7C, 0x60, 0x10, 0x10,  0x0;
-    double finalTextboxHalt  : 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0; // obj_writer.halt
-    double finalTextboxHalt2 : 0x48BDEC, 0x9C, 0x60, 0x10, 0x274, 0x0;
+    double lancerCon    : 0x48BDEC, 0x4,  0x60, 0x10, 0x10, 0x6D0; // obj_darkcastle_event.con
+    double doorCloseCon : 0x48BDEC, 0xC,  0x60, 0x10, 0x10, 0x0;   // obj_darkdoorevent.con
+    double jevilDance   : 0x48BDEC, 0x78, 0x60, 0x10, 0x10, 0x0;   // obj_joker_body.dancelv
+    double jevilDance2  : 0x48BDEC, 0x7C, 0x60, 0x10, 0x10, 0x0;
 
     float kingPos : 0x6AEB80, 0x4, 0x178, 0x80, 0xC8, 0x8, 0xB4;
+
+    string128 text : 0x49D510, 0x188C, 0xD40, 0x4, 0x20, 0x60, 0x10, 0x208, 0x0, 0x0, 0x0;
 }
 
 state("DELTARUNE", "Demo v1.08 / v1.09")
@@ -370,11 +370,7 @@ update
         switch(ch)
         {
             case 1:
-                if(version == "SURVEY_PROGRAM")
-                    endCondition = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0 && current.plot == 251);
-               
-                else
-                    endCondition = ((old.text == @"＊ (ねむることにした)/%" || old.text == @"* (You decided to go to bed.)/%") && current.text == null);
+                endCondition = ((old.text == @"＊ (ねむることにした)/%" || old.text == @"* (You decided to go to bed.)/%") && current.text == null);
                 break;
                 
             case 2:
