@@ -2,10 +2,6 @@
 
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
-    // Global
-    double plot    : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
-    double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
-
     // Self
     double lancerCon    : 0x48BDEC, 0x4,  0x60, 0x10, 0x10, 0x6D0; // obj_darkcastle_event.con
     double doorCloseCon : 0x48BDEC, 0xC,  0x60, 0x10, 0x10, 0x0;   // obj_darkdoorevent.con
@@ -19,6 +15,7 @@ state("DELTARUNE", "SURVEY_PROGRAM")
 
 state("DELTARUNE", "Demo v1.08 / v1.09")
 {
+    // Global
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
 
