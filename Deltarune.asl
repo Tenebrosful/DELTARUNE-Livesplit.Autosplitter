@@ -19,7 +19,6 @@ state("DELTARUNE", "SURVEY_PROGRAM")
 
 state("DELTARUNE", "Demo v1.08 / v1.09")
 {
-    // Global
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
 
