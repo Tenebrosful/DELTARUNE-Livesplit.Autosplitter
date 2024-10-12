@@ -17,7 +17,7 @@ state("DELTARUNE", "SURVEY_PROGRAM")
     float kingPos : 0x6AEB80, 0x4, 0x178, 0x80, 0xC8, 0x8, 0xB4;
 }
 
-state("DELTARUNE", "Demo v1.08 / v1.09")
+state("DELTARUNE", "Demo v1.08/v1.09")
 {
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
@@ -265,7 +265,7 @@ init
                 version = "Demo v1.10";
 
             else
-                version = "Demo v1.08 / v1.09";
+                version = "Demo v1.08/v1.09";
             break;
 
         default:
