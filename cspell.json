@@ -87,12 +87,14 @@
         "torhouse",
         "toriel",
         "tracabartpeeg",
-        "TZCF",
         "Undertale",
         "unusedroom",
         "Vintagix",
         "Virovirokun",
         "Werewerewire",
         "Werewire"
+    ],
+    "ignoreWords": [
+        "TZCF"
     ]
 }
