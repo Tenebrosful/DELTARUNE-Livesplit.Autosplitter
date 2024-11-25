@@ -17,7 +17,7 @@ state("DELTARUNE", "SURVEY_PROGRAM")
     float kingPos : 0x6AEB80, 0x4, 0x178, 0x80, 0xC8, 0x8, 0xB4;
 }
 
-state("DELTARUNE", "Demo v1.08 / v1.09")
+state("DELTARUNE", "Demo v1.08/v1.09")
 {
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
@@ -53,7 +53,7 @@ state("DELTARUNE", "Demo v1.10")
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;
 }
 
-state("DELTARUNE", "Demo Steam Beta")
+state("DELTARUNE", "Demo v1.12-v1.15")
 {
     double chapter : 0x6FE860, 0x30, 0x2F34, 0x80;
     double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
@@ -132,6 +132,7 @@ startup
     settings.Add("Ch1_Fields_Exit",           false, "Exit Fields");
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
+    settings.Add("Ch1_Egg",                   false, "Obtain Egg");
     settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer room)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 room");
@@ -146,6 +147,9 @@ startup
 
     settings.Add("Ch1_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch1_AB";
+     settings.Add("Ch1_CFWarp",          false, "Warp from Castle to Fields");
+     settings.Add("Ch1_FBWarp",          false, "Warp from Fields to Bake Sale");
+     settings.Add("Ch1_BCWarp",          false, "Warp from Bake Sale to Castle");
      settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room");
      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil battle");
       settings.SetToolTip("Ch1_Jevil_EndBattle", @"This autosplit does not work if you remove Jevil's battle theme from the game files (mus\joker.ogg) in non-SURVEY_PROGRAM versions.");
@@ -162,8 +166,13 @@ startup
     settings.Add("Ch2_DJShopRoom",       false, "Enter DJ Shop room");
     settings.Add("Ch2_Ragger2",          false, "Exit Ragger2 room");
     settings.Add("Ch2_CyberFields_Exit", false, "Exit Cyber Fields");
-    settings.Add("Ch2_TrashZoneWarp",    false, "Trash Zone Warp");
-    settings.Add("Ch2_MansionWarp",      false, "Mansion Warp");
+    settings.Add("Ch2_TrashZoneWarp",    false, "Warp from Cyber Fields to Trash Zone");
+    settings.Add("Ch2_MansionWarp",      false, "Warp from Cyber Fields to Mansion");
+    settings.Add("Ch2_TZCFWarp",         false, "Warp from Trash Zone to Cyber Fields");
+    settings.Add("Ch2_TZMWarp",          false, "Warp from Trash Zone to Mansion");
+    settings.Add("Ch2_MCFWarp",          false, "Warp from Mansion to Cyber Fields");
+    settings.Add("Ch2_MTZWarp",          false, "Warp from Mansion to Trash Zone");
+    settings.Add("Ch2_Egg",              false, "Obtain Egg");
     settings.Add("Ch2_Mouse2Puzzle",     false, "Exit Mouse 2 Puzzle room");
     settings.Add("Ch2_Berdly_Leave",     false, "Exit Berdly 2 room (Main Route)");
     settings.Add("Ch2_SpamtonLeave",     false, "Exit Spamton room");
@@ -215,7 +224,7 @@ init
     var scanner = new SignatureScanner(game, module.BaseAddress, module.ModuleMemorySize);
     Func<int, string, IntPtr> scan = (o, sig) =>
     {
-        IntPtr ptr = vars.x64 // It's possible that the game may be on the new 64-bit only GameMaker runtime in the future, so I added this just in case
+        IntPtr ptr = vars.x64
             ? scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => addr + p.ReadValue<int>(addr) + 0x4 })
             : scanner.Scan(new SigScanTarget(o, sig) { OnFound = (p, s, addr) => p.ReadPointer(addr) });
 
@@ -252,7 +261,7 @@ init
             break;
 
         case 7503872:
-            version = "Demo Steam Beta";
+            version = "Demo v1.12-v1.15";
             break;
 
         case 7495680:
@@ -265,7 +274,7 @@ init
                 version = "Demo v1.10";
 
             else
-                version = "Demo v1.08 / v1.09";
+                version = "Demo v1.08/v1.09";
             break;
 
         default:
@@ -273,7 +282,8 @@ init
 
             MessageBox.Show
             (
-                "This version of DELTARUNE is not supported by the autosplitter.\nIf you are playing an older version, update your game.\nIf not, please wait until the autosplitter receives an update.",
+                "This version of DELTARUNE is not supported by the autosplitter.\nIf you are playing an older version, update your game.\nIf not, please wait until the autosplitter receives an update.\n\n" +
+                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.15.",
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
             break;
@@ -291,31 +301,40 @@ init
         {"Ch1_Fields_Exit",           new object[] {false, "room_field4_ch1",             "room_field_checkers4_ch1",      -1, -1, 0}},
         {"Ch1_Checkerboard_Exit",     new object[] {false, "room_field_checkersboss_ch1", "room_forest_savepoint1_ch1",    -1, -1, 0}},
         {"Ch1_BakeSale_Enter",        new object[] {false, "room_forest_area3_ch1",       "room_forest_savepoint2_ch1",    -1, -1, 0}},
+        {"Ch1_Egg",                   new object[] {false, null,                          "room_man_ch1",                  -1, -1, 3}},
         {"Ch1_SusieLancer_Exit",      new object[] {false, "room_forest_fightsusie_ch1",  "room_forest_afterthrash2_ch1",  -1, -1, 0}},
-        {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",      -1, -1, 3}},
+        {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",      -1, -1, 4}},
+        {"Ch1_CFWarp",                new object[] {false, "room_forest_fightsusie_ch1",  "room_field3_ch1",               -1, -1, 0}},
+        {"Ch1_FBWarp",                new object[] {false, "room_field3_ch1",             "room_forest_savepoint2_ch1",    -1, -1, 0}},
+        {"Ch1_BCWarp",                new object[] {false, "room_forest_savepoint2_ch1",  "room_forest_fightsusie_ch1",    -1, -1, 0}},
         {"Ch1_Jevil_EnterRoom",       new object[] {false, "room_cc_prison_prejoker_ch1", "room_cc_joker_ch1",             -1, -1, 0}},
-        {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",             -1, -1, 4}},
+        {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",             -1, -1, 5}},
         {"Ch1_Jevil_LeaveRoom",       new object[] {false, "room_cc_joker_ch1",           "room_cc_prison_prejoker_ch1",   -1, -1, 0}},
         {"Ch1_KRound2_Exit",          new object[] {false, "room_cc_6f_ch1",              "room_cc_throneroom_ch1",        -1, -1, 0}},
         {"Ch1_Throne_Exit",           new object[] {false, "room_cc_throneroom_ch1",      "room_cc_preroof_ch1",           -1, -1, 0}},
         {"Ch1_PreKing_Exit",          new object[] {false, "room_cc_preroof_ch1",         "room_cc_kingbattle_ch1",        -1, -1, 0}},
-        {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",        -1, -1, 5}},
+        {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",        -1, -1, 6}},
         {"Ch1_King_Exit",             new object[] {false, "room_cc_kingbattle_ch1",      "room_cc_prefountain_ch1",       -1, -1, 0}},
         {"Ch1_Fountain_Enter",        new object[] {false, "room_cc_prefountain_ch1",     "room_cc_fountain_ch1",          -1, -1, 0}},
         {"Ch1_Fountain_Exit",         new object[] {false, "room_cc_fountain_ch1",        "room_school_unusedroom_ch1",    -1, -1, 0}},
 
         {"Ch2_Library",            new object[] {false, "room_library_ch2",                            "room_dw_cyber_intro_1_ch2",                   -1, -1,  0}},
-        {"Ch2_ArcadeGameText",     new object[] {false, null,                                          "room_dw_cyber_queen_boxing_ch2",              -1, -1,  6}},
+        {"Ch2_ArcadeGameText",     new object[] {false, null,                                          "room_dw_cyber_queen_boxing_ch2",              -1, -1,  7}},
         {"Ch2_ArcadeGameLeave",    new object[] {false, "room_dw_cyber_queen_boxing_ch2",              "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
         {"Ch2_DJFight",            new object[] {false, null,                                          "room_dw_cyber_music_final_ch2",                1,  0,  0}},
         {"Ch2_DJShopRoom",         new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_cyber_musical_shop_ch2",              -1, -1,  0}},
         {"Ch2_Ragger2",            new object[] {false, "room_dw_cyber_teacup_final_ch2",              "room_dw_cyber_rollercoaster_ch2",             -1, -1,  0}},
-        {"Ch2_CyberFields_Exit",   new object[] {false, null,                                          "room_dw_cyber_rollercoaster_ch2",             -1, -1,  7}},
+        {"Ch2_CyberFields_Exit",   new object[] {false, null,                                          "room_dw_cyber_rollercoaster_ch2",             -1, -1,  8}},
         {"Ch2_TrashZoneWarp",      new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_city_intro_ch2",                      -1, -1,  0}},
         {"Ch2_MansionWarp",        new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_mansion_entrance_ch2",                -1, -1,  0}},
-        {"Ch2_FreezeRing",         new object[] {false, null,                                          "room_dw_city_big_2_ch2",                      -1, -1,  8}},
+        {"Ch2_TZCFWarp",           new object[] {false, "room_dw_city_intro_ch2",                      "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
+        {"Ch2_TZMWarp",            new object[] {false, "room_dw_city_intro_ch2",                      "room_dw_mansion_entrance_ch2",                -1, -1,  0}},
+        {"Ch2_MCFWarp",            new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
+        {"Ch2_MTZWarp",            new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_city_intro_ch2",                      -1, -1,  0}},
+        {"Ch2_FreezeRing",         new object[] {false, null,                                          "room_dw_city_big_2_ch2",                      -1, -1,  9}},
+        {"Ch2_Egg",                new object[] {false, null,                                          "room_dw_city_man_ch2",                        -1, -1, 10}},
         {"Ch2_Mouse2Puzzle",       new object[] {false, "room_dw_city_mice2_ch2",                      "room_dw_city_cheesemaze_ch2",                 -1, -1,  0}},
-        {"Ch2_SGBerdly",           new object[] {false, null,                                          "room_dw_city_berdly_ch2",                     -1, -1,  9}},
+        {"Ch2_SGBerdly",           new object[] {false, null,                                          "room_dw_city_berdly_ch2",                     -1, -1, 11}},
         {"Ch2_SGBerdly_LeaveRoom", new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_poppup_ch2",                     -1, -1,  0}},
         {"Ch2_Berdly_Leave",       new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_traffic_4_ch2",                  -1, -1,  0}},
         {"Ch2_SpamtonLeave",       new object[] {false, "room_dw_city_spamton_alley_ch2",              "room_dw_city_traffic_4_ch2",                  -1, -1,  0}},
@@ -324,17 +343,17 @@ init
         {"Ch2_Mansion_Exit",       new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_mansion_fire_paintings_ch2",          -1, -1,  0}},
         {"Ch2_TasqueManager",      new object[] {false, "room_dw_mansion_tasquePaintings_ch2",         "room_dw_mansion_traffic_ch2",                 -1, -1,  0}},
         {"Ch2_Mauswheel",          new object[] {false, "room_dw_mansion_kitchen_ch2",                 "room_dw_mansion_east_2f_transformed_new_ch2", -1, -1,  0}},
-        {"Ch2_Disk_Loaded",        new object[] {false, null,                                          "room_shop_ch2_spamton_ch2",                   -1, -1, 10}},
-        {"Ch2_Disk_Inserted",      new object[] {false, null,                                          "room_dw_mansion_b_east_b_ch2",                -1, -1, 11}},
-        {"Ch2_SpamtonNEO_End",     new object[] {false, null,                                          "room_dw_mansion_b_east_ch2",                  -1, -1, 12}},
+        {"Ch2_Disk_Loaded",        new object[] {false, null,                                          "room_shop_ch2_spamton_ch2",                   -1, -1, 12}},
+        {"Ch2_Disk_Inserted",      new object[] {false, null,                                          "room_dw_mansion_b_east_b_ch2",                -1, -1, 13}},
+        {"Ch2_SpamtonNEO_End",     new object[] {false, null,                                          "room_dw_mansion_b_east_ch2",                  -1, -1, 14}},
         {"Ch2_SpamtonNEO_Leave",   new object[] {false, "room_dw_mansion_b_east_ch2",                  "room_dw_mansion_b_east_a_ch2",                -1, -1,  0}},
         {"Ch2_AcidLake_Enter",     new object[] {false, "room_dw_mansion_east_3f_ch2",                 "room_dw_mansion_acid_tunnel_ch2",             -1, -1,  0}},
         {"Ch2_AcidLake_Exit",      new object[] {false, "room_dw_mansion_acid_tunnel_loop_rouxls_ch2", "room_dw_mansion_acid_tunnel_exit_ch2",        -1, -1,  0}},
         {"Ch2_Queen",              new object[] {false, "room_dw_mansion_east_4f_d_ch2",               "room_dw_mansion_top_ch2",                     -1, -1,  0}},
         {"Ch2_GigaQueen",          new object[] {false, "room_dw_mansion_top_ch2",                     "room_dw_mansion_top_post_ch2",                -1, -1,  0}},
-        {"Ch2_Fountain_Enter",     new object[] {false, null,                                          null,                                          -1, -1, 13}},
+        {"Ch2_Fountain_Enter",     new object[] {false, null,                                          null,                                          -1, -1, 15}},
         {"Ch2_SGSpamtonNEO_End",   new object[] {false, null,                                          "room_dw_mansion_fountain_ch2",                 1,  0,  0}},
-        {"Ch2_Fountain_Exit",      new object[] {false, null,                                          "room_lw_computer_lab_ch2",                    -1, -1, 14}}
+        {"Ch2_Fountain_Exit",      new object[] {false, null,                                          "room_lw_computer_lab_ch2",                    -1, -1, 16}}
     };
 
     if(version != "SURVEY_PROGRAM" && timer.CurrentPhase == TimerPhase.NotRunning && timer.CurrentTimingMethod == TimingMethod.RealTime && (settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]))
@@ -508,7 +527,11 @@ split
                 pass = (old.doorCloseCon == 7 && current.doorCloseCon == 21);
                 break;
 
-            case 3: // Ch1_Escape_Cell
+            case 3: // Ch1_Egg
+                pass = ((old.text == @"＊ (タマゴを　手に入れた)/%" || old.text == @"* (You received an Egg.)/%") && current.text == null);
+                break;           
+
+            case 4: // Ch1_Escape_Cell
                 if(vars.tempVar == 2)
                 {
                     vars.tempVar = 0;
@@ -516,7 +539,7 @@ split
                 }
                 break;
 
-            case 4: // Ch1_Jevil_EndBattle
+            case 5: // Ch1_Jevil_EndBattle
                 if(version == "SURVEY_PROGRAM")
                     pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
 
@@ -524,43 +547,47 @@ split
                     pass = (old.song.EndsWith(@"mus\joker.ogg") && current.song == null);
                 break;
 
-            case 5: // Ch1_King_EndBattle
+            case 6: // Ch1_King_EndBattle
                 pass = (old.kingPos == 680 && current.kingPos >= 1020 && current.kingPos <= 1030);
                 break;
 
-            case 6: // Ch2_ArcadeGameText
+            case 7: // Ch2_ArcadeGameText
                 pass = ((old.text == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text == @"\EH* C'mon^1, let's go after&||her!/%") && current.text == null);
                 break;
 
-            case 7: // Ch2_CyberFields_Exit
+            case 8: // Ch2_CyberFields_Exit
                 pass = (old.sound == "snd_queen_laugh_0" && current.sound == "snd_sussurprise");
                 break;
 
-            case 8: // Ch2_FreezeRing
+            case 9: // Ch2_FreezeRing
                 pass = ((old.text == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text == @"* (You got the FreezeRing.)/%") && current.text == null);
                 break;
 
-            case 9: // Ch2_SGBerdly
+            case 10: // Ch2_Egg
+                pass = ((old.text == @"＊ タマゴを　手に入れた。/%" || old.text == @"* You got the Egg./%") && current.text == null);
+                break;   
+
+            case 11: // Ch2_SGBerdly
                 pass = (old.snowgrave <= 125 && current.snowgrave >= 125);
                 break;
 
-            case 10: // Ch2_Disk_Loaded
+            case 12: // Ch2_Disk_Loaded
                 pass = (old.loadedDiskGreyBG <= 121 && current.loadedDiskGreyBG == 121);
                 break;
 
-            case 11: // Ch2_Disk_Inserted
+            case 13: // Ch2_Disk_Inserted
                 pass = ((old.text == @"＊ (なにも起こらなかった)/%" || old.text == @"* (Nothing happened.)/%") && current.text == null);
                 break;
 
-            case 12: // Ch2_SpamtonNEO_End
+            case 14: // Ch2_SpamtonNEO_End
                 pass = (old.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && current.song == null);
                 break;
 
-            case 13: // Ch2_Fountain_Enter
+            case 15: // Ch2_Fountain_Enter
                 pass = (current.roomName == "room_cc_fountain_ch2" || current.roomName == "room_dw_mansion_fountain_ch2");
                 break;
 
-            case 14: // Ch2_Fountain_Exit
+            case 16: // Ch2_Fountain_Exit
                 pass = (old.roomName == "room_cc_fountain_ch2" || old.roomName == "room_dw_mansion_fountain_ch2");
                 break;
         }
