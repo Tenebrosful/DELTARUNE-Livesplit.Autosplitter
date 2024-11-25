@@ -332,7 +332,7 @@ init
         {"Ch2_MCFWarp",            new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
         {"Ch2_MTZWarp",            new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_city_intro_ch2",                      -1, -1,  0}},
         {"Ch2_FreezeRing",         new object[] {false, null,                                          "room_dw_city_big_2_ch2",                      -1, -1,  9}},
-        {"Ch2_Egg",                new object[] {false, null,                                          "room_dw_city_man_ch2",                        -1, -1, 10}},
+        {"Ch2_Egg",                new object[] {false, null,                                          null,                                          -1, -1, 10}},
         {"Ch2_Mouse2Puzzle",       new object[] {false, "room_dw_city_mice2_ch2",                      "room_dw_city_cheesemaze_ch2",                 -1, -1,  0}},
         {"Ch2_SGBerdly",           new object[] {false, null,                                          "room_dw_city_berdly_ch2",                     -1, -1, 11}},
         {"Ch2_SGBerdly_LeaveRoom", new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_poppup_ch2",                     -1, -1,  0}},
@@ -564,7 +564,7 @@ split
                 break;
 
             case 10: // Ch2_Egg
-                pass = ((old.text == @"＊ タマゴを　手に入れた。/%" || old.text == @"* You got the Egg./%") && current.text == null);
+                pass = ((current.roomName == "room_dw_cyber_musical_door_ch2" || current.roomName == "room_dw_city_man_ch2") && (old.text == @"＊ タマゴを　手に入れた。/%" || old.text == @"* You got the Egg./%") && current.text == null);
                 break;   
 
             case 11: // Ch2_SGBerdly
