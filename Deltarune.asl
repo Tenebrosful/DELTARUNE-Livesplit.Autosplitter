@@ -564,7 +564,7 @@ split
                 break;
 
             case 10: // Ch2_Egg
-                pass = ((current.roomName == "room_dw_cyber_musical_door_ch2" || current.roomName == "room_dw_city_man_ch2") && (old.text == @"＊ タマゴを　手に入れた。/%" || old.text == @"* You got the Egg./%") && current.text == null);
+                pass = ((current.roomName == "room_dw_cyber_musical_door_ch2" || current.roomName == "room_dw_city_man_ch2") && old.sound != "snd_egg" && current.sound == "snd_egg");
                 break;   
 
             case 11: // Ch2_SGBerdly
