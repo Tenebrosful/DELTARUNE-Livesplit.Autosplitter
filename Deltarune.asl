@@ -452,7 +452,6 @@ update
                 print("[DELTARUNE] (OST%) All Chapters: Chapter " + ch + " ended, timer paused");
                 timer.IsGameTimePaused = true;
             }
-            vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_EndingOST"];
         }
 
