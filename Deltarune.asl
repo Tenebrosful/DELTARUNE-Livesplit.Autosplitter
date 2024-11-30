@@ -29,7 +29,7 @@ state("DELTARUNE", "Demo v1.08/v1.09")
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
     string32  sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;                        // Full path to the current sound (highest priority)
-    string128 text  : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0; // Current textbox text, formatting included
+    string128 text  : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0; // obj_writer.mystring
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;                              // Full path to the current song
 }
 
@@ -252,8 +252,8 @@ init
         : scan(2, "8B 3D ?? ?? ?? ?? 2B EF");
     
     vars.ptrRoomID = vars.x64 
-        ? scan(12, "E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 89 3D ?? ?? ?? ??")
-        : scan(2,  "FF 35 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 50 68");
+        ? scan(6, "48 ?? ?? ?? 3B 35 ?? ?? ?? ?? 41 ?? ?? ?? 49 ?? ?? E8 ?? ?? ?? ?? FF")
+        : scan(2, "FF 35 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 04 50 68");
     
     vars.getRoomName = (Func<string>)(() =>
     {
@@ -467,7 +467,7 @@ update
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
                 timer.IsGameTimePaused = false;
             }
-            vars.forceSplit = settings["AC_Continue"];
+            vars.forceSplit = (settings["AC_Continue"] && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
         }
     }
 
