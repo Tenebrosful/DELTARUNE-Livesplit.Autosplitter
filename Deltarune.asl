@@ -467,7 +467,7 @@ update
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
                 timer.IsGameTimePaused = false;
             }
-            vars.forceSplit = settings["AC_Continue"];
+            vars.forceSplit = (settings["AC_Continue"] && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
         }
     }
 
