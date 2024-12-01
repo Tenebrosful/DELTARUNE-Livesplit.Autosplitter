@@ -534,6 +534,8 @@ onReset
 
 split
 {
+    if(current.chapter == 0) return;
+
     if(vars.forceSplit)
     {
         vars.forceSplit = false;
