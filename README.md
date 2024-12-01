@@ -32,7 +32,8 @@ or clone the repository;
 
 ## How to use
 
-To use and configure the autosplitter, just click `Settings` and enable the locations you want the autosplitter to split on.
+To use and configure the autosplitter, just click `Settings` and enable the locations you want the autosplitter
+to split on.
 
 ![Settings options with Start, Split, Reset and individual splits that can be enabled or disabled](/assets/options.png)
 
