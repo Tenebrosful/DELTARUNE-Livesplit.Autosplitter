@@ -312,7 +312,8 @@ init
     // Object variables in order: done, old room, new room, old fight, new fight, special condition
     vars.splits = new Dictionary<double, Dictionary<string, object[]>>()
     {
-        {1, new Dictionary<string, object[]> {
+        {1, new Dictionary<string, object[]>
+        {
             {"Ch1_School",                new object[] {false, "room_insidecloset_ch1",       "room_dark1_ch1",                -1, -1, 0}},
             {"Ch1_CastleTown_DoorClose",  new object[] {false, null,                          "room_castle_darkdoor_ch1",      -1, -1, 1}},
             {"Ch1_CastleTown_RoomChange", new object[] {false, "room_castle_darkdoor_ch1",    "room_field_start_ch1",          -1, -1, 0}},
@@ -336,7 +337,9 @@ init
             {"Ch1_Fountain_Enter",        new object[] {false, "room_cc_prefountain_ch1",     "room_cc_fountain_ch1",          -1, -1, 0}},
             {"Ch1_Fountain_Exit",         new object[] {false, "room_cc_fountain_ch1",        "room_school_unusedroom_ch1",    -1, -1, 0}}
         }},
-        {2, new Dictionary<string, object[]> {
+
+        {2, new Dictionary<string, object[]>
+        {
             {"Ch2_Library",            new object[] {false, "room_library_ch2",                            "room_dw_cyber_intro_1_ch2",                   -1, -1,  0}},
             {"Ch2_ArcadeGameText",     new object[] {false, null,                                          "room_dw_cyber_queen_boxing_ch2",              -1, -1,  6}},
             {"Ch2_ArcadeGameLeave",    new object[] {false, "room_dw_cyber_queen_boxing_ch2",              "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
@@ -471,7 +474,7 @@ update
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
                 timer.IsGameTimePaused = false;
             }
-            vars.forceSplit = (settings["AC_Continue"] && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
+            vars.forceSplit = (settings["AC_Continue"] && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0) && old.namerEvent != 75); // Fix for Ch1 splitting when starting and Ch2+ splitting on the cut to black after starting
         }
     }
 
@@ -534,13 +537,14 @@ onReset
 
 split
 {
-    if(current.chapter == 0) return;
-
     if(vars.forceSplit)
     {
         vars.forceSplit = false;
         return true;
     }
+    
+    if(current.chapter == 0) // Don't try to split if on Chapter Select
+        return;
 
     int done      = 0,
         oldRoom   = 1,
