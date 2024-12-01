@@ -474,7 +474,14 @@ update
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
                 timer.IsGameTimePaused = false;
             }
-            vars.forceSplit = (settings["AC_Continue"] && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0) && old.namerEvent != 75); // Fix for Ch1 splitting when starting and Ch2+ splitting on the cut to black after starting
+            if(settings["AC_Continue"])
+            {
+                if(current.chapter == 1)
+                    vars.forceSplit = (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
+                
+                else
+                    vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
+            }
         }
     }
 
