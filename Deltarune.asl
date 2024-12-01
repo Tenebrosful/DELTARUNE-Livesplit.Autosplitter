@@ -310,7 +310,7 @@ init
 
     // Ending splits are handled manually in update{}
     // Object variables in order: done, old room, new room, old fight, new fight, special condition
-    vars.splits = new Dictionary<int, Dictionary<string, object[]>>()
+    vars.splits = new Dictionary<double, Dictionary<string, object[]>>()
     {
         {1, new Dictionary<string, object[]> {
             {"Ch1_School",                new object[] {false, "room_insidecloset_ch1",       "room_dark1_ch1",                -1, -1, 0}},
