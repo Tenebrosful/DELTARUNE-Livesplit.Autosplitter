@@ -11,35 +11,36 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 ### Easy way
 
-To use the Autosplitter, follow these easy steps:
+To use the autosplitter, follow these easy steps:
 
-1. Open your splits and go in `Edit Splits`
-2. Insert `Deltarune` or `Deltarune Category Extensions` on the Game Name section
+1. Open your splits and go in `Edit Splits`;
+2. Insert `Deltarune` or `Deltarune Category Extensions` as the Game Name;
 3. You should now have access to the autosplitter and be able to activate it.
 
-![Split edition header with the Game Name and the suggested autosplitter](/assets/quickInstall.png)
+![Splits Editor header with the Game Name and the suggested autosplitter](/assets/quickInstall.png)
 
 ### Manual way (also for developers)
 
 1. Download the [latest release of the autosplitter](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/releases)
-or clone the repository
-2. Open LiveSplit and add in your layout the component `Control -> Scriptable Auto Splitter`
-3. Insert in `Script Path` the path to the autosplitter file
+or clone the repository;
+2. Open LiveSplit and add the component `Control -> Scriptable Auto Splitter` on your layout;
+3. Insert the path to the autosplitter file in `Script Path`.
 
-![Layout Editor with the path Control > Scriptable Auto Splitter when adding a new component](/assets/manualInstall.png)
+![Layout Editor with Control -> Scriptable Auto Splitter selected](/assets/manualInstall.png)
 
-> The autosplitter file will auto-refresh when you save it
+> The autosplitter file will auto-refresh when you save it.
 
 ## How to use
 
-To use and configure the autosplitter, just click `Settings` and enable the location you want the autosplitter to split on.
+To use and configure the autosplitter, just click `Settings` and enable the locations you want the autosplitter
+to split on.
 
 ![Settings options with Start, Split, Reset and individual splits that can be enabled or disabled](/assets/options.png)
 
 ### All Chapters
 
 If you enable the All Chapters section, you will have to put your LiveSplit to In-Game Time (IGT) otherwise some functionalities
-like the timer pause might not work.
+like the timer pause will not work.
 
 ## Want to help with / request something?
 
