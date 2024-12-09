@@ -132,7 +132,7 @@ startup
 
     vars.resetSplits = (Action)(() =>
     {
-        foreach (int chapter in vars.splits.Keys)
+        foreach(int chapter in vars.splits.Keys)
             foreach(string split in vars.splits[chapter].Keys)
                 vars.splits[chapter][split][0] = false;
 
