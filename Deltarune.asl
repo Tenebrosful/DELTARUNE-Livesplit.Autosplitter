@@ -75,7 +75,7 @@ state("DELTARUNE", "Demo v1.16/v1.17")
     double doorCloseCon     : 0x8B2790, 0xE0,  0x48,  0x10, 0x40,  0x0;
     double namerEvent       : 0x8B2790, 0x178, 0x70,  0x38, 0x48,  0x10, 0x240, 0x0;
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10, 0x2C0, 0x0;
-    double snowgrave        : 0x8B2790, 0x178, 0x178, 0x98, 0x278, 0x28, 0x38, 0x48, 0x10, 0x1D0, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x78,  0x38, 0x198, 0x48, 0x10, 0x1D0, 0x0;
 
     float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
 
@@ -86,6 +86,25 @@ state("DELTARUNE", "Demo v1.16/v1.17")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
+state("DELTARUNE", "Demo v1.19")
+{
+    double fight_ch1 : 0x6A1CA8, 0x48, 0x10, 0x5D0, 0x0;
+    double fight_ch2 : 0x6A1CA8, 0x48, 0x10, 0x620, 0x50;
+
+    double doorCloseCon     : 0x8B2790, 0xE0,  0x48,  0x10, 0x0,   0x0;
+    double namerEvent       : 0x8B2790, 0x178, 0x70,  0x38, 0x48,  0x10, 0x3B0, 0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10, 0x3C0, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x78,  0x38, 0x198, 0x48, 0x10, 0x130, 0x0;
+
+    float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
+
+    string32  sound     : 0x6A3818, 0x60, 0xD0,  0x58, 0x0;
+    string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0xF0,  0x0, 0x0, 0x0;
+    string128 text_ch2  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x5F0, 0x0, 0x0, 0x0;
+    string256 song      : 0x6A2F90, 0x0,  0x0,   0x0;
+    string256 directory : 0x8D06E0, 0x0;
+}
+
 startup
 {
     refreshRate = 30;
@@ -93,13 +112,13 @@ startup
     vars.forceSplit = false;
     vars.ACContinueRooms = new[,]
     {
-        {null, null},                            //
+        {null, null},
         {"PLACE_MENU_ch1", "PLACE_CONTACT_ch1"}, // Chapter 1
         {"PLACE_MENU_ch2", "room_krisroom_ch2"}  // Chapter 1 -> 2
     };
     vars.OSTRooms = new[,]
     {
-        {null, null},                         //
+        {null, null},
         {"PLACE_LOGO_ch1",    "room_ed_ch1"}, // Chapter 1
         {"room_torhouse_ch2", "room_ed_ch2"}  // Chapter 2
     };
@@ -113,7 +132,7 @@ startup
 
     vars.resetSplits = (Action)(() =>
     {
-        foreach (int chapter in vars.splits.Keys)
+        foreach(int chapter in vars.splits.Keys)
             foreach(string split in vars.splits[chapter].Keys)
                 vars.splits[chapter][split][0] = false;
 
@@ -269,6 +288,10 @@ init
         return game.ReadString(arrayItem, 64);
     });
 
+    string hash;
+    using(var md5 = System.Security.Cryptography.MD5.Create())
+        using(var fs = File.OpenRead(modules.First().FileName))
+            hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
     switch(mms)
     {
         case 7954432:
@@ -276,11 +299,6 @@ init
             break;
 
         case 7495680:
-            string hash;
-            using(var md5 = System.Security.Cryptography.MD5.Create())
-                using(var fs = File.OpenRead(modules.First().FileName))
-                    hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
-
             if(hash != "DCFB86F7A80D9906BBBAFA1B2C224848")
                 version = "Demo v1.08/v1.09";
             else
@@ -292,7 +310,10 @@ init
             break;
 
         case 9650176:
-            version = "Demo v1.16/v1.17";
+            if(hash != "14AF94E0435EB4CBE3BB5A03AB4218C4")
+                version = "Demo v1.16/v1.17";
+            else
+                version = "Demo v1.19";
             break;
 
         default:
@@ -301,12 +322,12 @@ init
             MessageBox.Show
             (
                 "This version of DELTARUNE is not supported by the autosplitter.\nIf you are playing an older version, update your game.\nIf not, please wait until the autosplitter receives an update.\n\n" +
-                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.17.",
+                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19.",
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
             break;
     }
-    print("[DELTARUNE] Detected game version: " + version + " (" + mms + ")");
+    print("[DELTARUNE] Detected game version: " + version + " (" + mms + " / " + hash + ")");
 
     // Ending splits are handled manually in update{}
     // Object variables in order: done, old room, new room, old fight, new fight, special condition
@@ -314,28 +335,28 @@ init
     {
         {1, new Dictionary<string, object[]>
         {
-            {"Ch1_School",                new object[] {false, "room_insidecloset_ch1",       "room_dark1_ch1",                -1, -1, 0}},
-            {"Ch1_CastleTown_DoorClose",  new object[] {false, null,                          "room_castle_darkdoor_ch1",      -1, -1, 1}},
-            {"Ch1_CastleTown_RoomChange", new object[] {false, "room_castle_darkdoor_ch1",    "room_field_start_ch1",          -1, -1, 0}},
-            {"Ch1_Fields_Exit",           new object[] {false, "room_field4_ch1",             "room_field_checkers4_ch1",      -1, -1, 0}},
-            {"Ch1_Checkerboard_Exit",     new object[] {false, "room_field_checkersboss_ch1", "room_forest_savepoint1_ch1",    -1, -1, 0}},
-            {"Ch1_BakeSale_Enter",        new object[] {false, "room_forest_area3_ch1",       "room_forest_savepoint2_ch1",    -1, -1, 0}},
-            {"Ch1_Egg",                   new object[] {false, null,                          "room_man_ch1",                  -1, -1, 2}},
-            {"Ch1_SusieLancer_Exit",      new object[] {false, "room_forest_fightsusie_ch1",  "room_forest_afterthrash2_ch1",  -1, -1, 0}},
-            {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",      -1, -1, 3}},
-            {"Ch1_CFWarp",                new object[] {false, "room_forest_fightsusie_ch1",  "room_field3_ch1",               -1, -1, 0}},
-            {"Ch1_FBWarp",                new object[] {false, "room_field3_ch1",             "room_forest_savepoint2_ch1",    -1, -1, 0}},
-            {"Ch1_BCWarp",                new object[] {false, "room_forest_savepoint2_ch1",  "room_forest_fightsusie_ch1",    -1, -1, 0}},
-            {"Ch1_Jevil_EnterRoom",       new object[] {false, "room_cc_prison_prejoker_ch1", "room_cc_joker_ch1",             -1, -1, 0}},
-            {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",             -1, -1, 4}},
-            {"Ch1_Jevil_LeaveRoom",       new object[] {false, "room_cc_joker_ch1",           "room_cc_prison_prejoker_ch1",   -1, -1, 0}},
-            {"Ch1_KRound2_Exit",          new object[] {false, "room_cc_6f_ch1",              "room_cc_throneroom_ch1",        -1, -1, 0}},
-            {"Ch1_Throne_Exit",           new object[] {false, "room_cc_throneroom_ch1",      "room_cc_preroof_ch1",           -1, -1, 0}},
-            {"Ch1_PreKing_Exit",          new object[] {false, "room_cc_preroof_ch1",         "room_cc_kingbattle_ch1",        -1, -1, 0}},
-            {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",        -1, -1, 5}},
-            {"Ch1_King_Exit",             new object[] {false, "room_cc_kingbattle_ch1",      "room_cc_prefountain_ch1",       -1, -1, 0}},
-            {"Ch1_Fountain_Enter",        new object[] {false, "room_cc_prefountain_ch1",     "room_cc_fountain_ch1",          -1, -1, 0}},
-            {"Ch1_Fountain_Exit",         new object[] {false, "room_cc_fountain_ch1",        "room_school_unusedroom_ch1",    -1, -1, 0}}
+            {"Ch1_School",                new object[] {false, "room_insidecloset_ch1",       "room_dark1_ch1",               -1, -1, 0}},
+            {"Ch1_CastleTown_DoorClose",  new object[] {false, null,                          "room_castle_darkdoor_ch1",     -1, -1, 1}},
+            {"Ch1_CastleTown_RoomChange", new object[] {false, "room_castle_darkdoor_ch1",    "room_field_start_ch1",         -1, -1, 0}},
+            {"Ch1_Fields_Exit",           new object[] {false, "room_field4_ch1",             "room_field_checkers4_ch1",     -1, -1, 0}},
+            {"Ch1_Checkerboard_Exit",     new object[] {false, "room_field_checkersboss_ch1", "room_forest_savepoint1_ch1",   -1, -1, 0}},
+            {"Ch1_BakeSale_Enter",        new object[] {false, "room_forest_area3_ch1",       "room_forest_savepoint2_ch1",   -1, -1, 0}},
+            {"Ch1_Egg",                   new object[] {false, null,                          "room_man_ch1",                 -1, -1, 2}},
+            {"Ch1_SusieLancer_Exit",      new object[] {false, "room_forest_fightsusie_ch1",  "room_forest_afterthrash2_ch1", -1, -1, 0}},
+            {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",     -1, -1, 3}},
+            {"Ch1_CFWarp",                new object[] {false, "room_forest_fightsusie_ch1",  "room_field3_ch1",              -1, -1, 0}},
+            {"Ch1_FBWarp",                new object[] {false, "room_field3_ch1",             "room_forest_savepoint2_ch1",   -1, -1, 0}},
+            {"Ch1_BCWarp",                new object[] {false, "room_forest_savepoint2_ch1",  "room_forest_fightsusie_ch1",   -1, -1, 0}},
+            {"Ch1_Jevil_EnterRoom",       new object[] {false, "room_cc_prison_prejoker_ch1", "room_cc_joker_ch1",            -1, -1, 0}},
+            {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",            -1, -1, 4}},
+            {"Ch1_Jevil_LeaveRoom",       new object[] {false, "room_cc_joker_ch1",           "room_cc_prison_prejoker_ch1",  -1, -1, 0}},
+            {"Ch1_KRound2_Exit",          new object[] {false, "room_cc_6f_ch1",              "room_cc_throneroom_ch1",       -1, -1, 0}},
+            {"Ch1_Throne_Exit",           new object[] {false, "room_cc_throneroom_ch1",      "room_cc_preroof_ch1",          -1, -1, 0}},
+            {"Ch1_PreKing_Exit",          new object[] {false, "room_cc_preroof_ch1",         "room_cc_kingbattle_ch1",       -1, -1, 0}},
+            {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",       -1, -1, 5}},
+            {"Ch1_King_Exit",             new object[] {false, "room_cc_kingbattle_ch1",      "room_cc_prefountain_ch1",      -1, -1, 0}},
+            {"Ch1_Fountain_Enter",        new object[] {false, "room_cc_prefountain_ch1",     "room_cc_fountain_ch1",         -1, -1, 0}},
+            {"Ch1_Fountain_Exit",         new object[] {false, "room_cc_fountain_ch1",        "room_school_unusedroom_ch1",   -1, -1, 0}}
         }},
 
         {2, new Dictionary<string, object[]>
