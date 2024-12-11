@@ -290,7 +290,7 @@ init
 
     string hash;
     using(var md5 = System.Security.Cryptography.MD5.Create())
-        using(var fs = File.OpenRead(modules.First().FileName))
+        using(var fs = File.OpenRead(new FileInfo(module.FileName).DirectoryName + @"\data.win")) 
             hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
     switch(mms)
     {
@@ -299,7 +299,7 @@ init
             break;
 
         case 7495680:
-            if(hash != "DCFB86F7A80D9906BBBAFA1B2C224848")
+            if(hash != "5FBE01F2BC1C04F45D809FFD060AC386")
                 version = "Demo v1.08/v1.09";
             else
                 version = "Demo v1.10";
@@ -310,7 +310,7 @@ init
             break;
 
         case 9650176:
-            if(hash != "14AF94E0435EB4CBE3BB5A03AB4218C4")
+            if(hash != "7AD299A8B33FA449E20EDFE0FEDEDDB2")
                 version = "Demo v1.16/v1.17";
             else
                 version = "Demo v1.19";
