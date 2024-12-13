@@ -342,7 +342,9 @@ init
                 "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19.",
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
-            break;
+
+            print("[DELTARUNE] Unknown version detected: " + hash);
+            return;
     }
     print("[DELTARUNE] Detected game version: " + version + " (" + hash + ")");
 
