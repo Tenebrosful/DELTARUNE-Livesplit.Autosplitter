@@ -287,10 +287,14 @@ init
         return game.ReadString(arrayItem, 64);
     });
 
-    string hash;
-    using(var md5 = System.Security.Cryptography.MD5.Create())
-        using(var fs = File.OpenRead(new FileInfo(module.FileName).DirectoryName + @"\data.win")) 
-            hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
+    string hash = "\0";
+    string dataFile = new FileInfo(module.FileName).DirectoryName + @"\data.win";
+    if(File.Exists(dataFile))
+    {
+        using(var md5 = System.Security.Cryptography.MD5.Create())
+            using(var fs = File.OpenRead(new FileInfo(module.FileName).DirectoryName + @"\data.win"))
+                hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
+    }
     switch(hash)
     {
         case "A88A2DB3A68C714CA2B1FF57AC08A032": // English
