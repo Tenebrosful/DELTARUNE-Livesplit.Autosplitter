@@ -292,7 +292,7 @@ init
     if(File.Exists(dataFile))
     {
         using(var md5 = System.Security.Cryptography.MD5.Create())
-            using(var fs = File.OpenRead(new FileInfo(module.FileName).DirectoryName + @"\data.win"))
+            using(var fs = File.OpenRead(dataFile))
                 hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
     }
     switch(hash)
