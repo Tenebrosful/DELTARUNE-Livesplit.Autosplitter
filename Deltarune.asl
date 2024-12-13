@@ -251,7 +251,6 @@ exit
 init
 {
     var module = modules.First();
-    int mms = module.ModuleMemorySize;
     vars.x64 = game.Is64Bit();
 
     // Thanks to Jujstme and Ero for this (finding room names)
@@ -292,28 +291,41 @@ init
     using(var md5 = System.Security.Cryptography.MD5.Create())
         using(var fs = File.OpenRead(new FileInfo(module.FileName).DirectoryName + @"\data.win")) 
             hash = string.Concat(md5.ComputeHash(fs).Select(b => b.ToString("X2")));
-    switch(mms)
+    switch(hash)
     {
-        case 7954432:
+        case "A88A2DB3A68C714CA2B1FF57AC08A032": // English
+        case "22008370824A37BAEF8948127963C769": // Japanese
             version = "SURVEY_PROGRAM";
             break;
 
-        case 7495680:
-            if(hash != "5FBE01F2BC1C04F45D809FFD060AC386")
-                version = "Demo v1.08/v1.09";
-            else
-                version = "Demo v1.10";
+        case "B465A74B67E4AB915856330AD1149A62": // v1.08 (itch.io)
+        case "AFA40591602758CC56F445E819023E76": // v1.08 (Steam)
+        case "616C5751AC9FC584AF250F1B04474AFD": // v1.09 (itch.io)
+        case "267A8ABE468D824222810201F00003BE": // v1.09 (Steam)
+            version = "Demo v1.08/v1.09";
             break;
 
-        case 7503872:
+        case "5FBE01F2BC1C04F45D809FFD060AC386": // itch.io
+        case "CD77A63D7902990DBC704FE32B30700A": // Steam
+            version = "Demo v1.10";
+            break;
+
+        case "7FA7658151211076FA09BE378BD6BD2B": // v1.12
+        case "D64C80F30EC1AA5718307A2C6EA8DDB5": // v1.13
+        case "8892ACA0ECE33A17711D7780C70CA3DE": // v1.14
+        case "ED4568BAB864166BFD6322CEEB3FB544": // v1.15
             version = "Demo v1.12-v1.15";
             break;
 
-        case 9650176:
-            if(hash != "7AD299A8B33FA449E20EDFE0FEDEDDB2")
-                version = "Demo v1.16/v1.17";
-            else
-                version = "Demo v1.19";
+        // game_change versions - Only check the Chapter Select data.win
+        // Checks for the individual chapters could also be added but there's no point
+        case "498FA77370216BCA0447416A49F34BEF": // v1.16
+        case "6A68061F85445AD705FA200166EEC39F": // v1.17
+            version = "Demo v1.16/v1.17";
+            break;
+            
+        case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
+            version = "Demo v1.19";
             break;
 
         default:
@@ -321,13 +333,18 @@ init
 
             MessageBox.Show
             (
-                "This version of DELTARUNE is not supported by the autosplitter.\nIf you are playing an older version, update your game.\nIf not, please wait until the autosplitter receives an update.\n\n" +
+                "This version of DELTARUNE is not supported by the autosplitter.\n" +
+                "If you are playing an older version, update your game.\n" +
+                "If you are playing a mod, switch to the vanilla game.\n\n" +
+
+                "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n\n" +
+
                 "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19.",
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
             break;
     }
-    print("[DELTARUNE] Detected game version: " + version + " (" + mms + " / " + hash + ")");
+    print("[DELTARUNE] Detected game version: " + version + " (" + hash + ")");
 
     // Ending splits are handled manually in update{}
     // Object variables in order: done, old room, new room, old fight, new fight, special condition
