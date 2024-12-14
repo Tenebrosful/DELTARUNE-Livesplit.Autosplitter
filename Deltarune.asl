@@ -3,6 +3,7 @@
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
     // Global
+    double file    : 0x48E5DC, 0x27C, 0x488, 0x4D0; // global.filechoice
     double plot    : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
     double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
 
@@ -107,7 +108,6 @@ state("DELTARUNE", "Demo v1.19")
 
 startup
 {
-    refreshRate = 30;
     vars.tempVar = 0;
     vars.forceSplit = false;
     vars.ACContinueRooms = new[,]
@@ -480,7 +480,7 @@ update
         {
             case 1:
                 if(version == "SURVEY_PROGRAM")
-                    endCondition = (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2) || (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2)) && current.choicer == 0 && current.plot == 251);
+                    endCondition = ((((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file == old.file + 3) && current.plot == 251);
                 else
                     endCondition = ((old.text == @"＊ (ねむることにした)/%" || old.text == @"* (You decided to go to bed.)/%") && current.text == null);
                 break;
