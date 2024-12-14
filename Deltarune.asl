@@ -110,6 +110,7 @@ startup
 {
     vars.tempVar = 0;
     vars.forceSplit = false;
+    vars.SPEndingTriggered = false; // Used to prevent a double split
     vars.ACContinueRooms = new[,]
     {
         {null, null},
@@ -127,6 +128,7 @@ startup
     {
         vars.tempVar = 0;
         vars.forceSplit = false;
+        vars.SPEndingTriggered = false;
         print("[DELTARUNE] All variables have been reset to initial state");
     });
 
@@ -480,7 +482,13 @@ update
         {
             case 1:
                 if(version == "SURVEY_PROGRAM")
-                    endCondition = ((((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file == old.file + 3) && current.plot == 251);
+                {
+                    if(vars.SPEndingTriggered == false && (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file == old.file + 3) && current.plot == 251)
+                    {
+                        endCondition = true;
+                        vars.SPEndingTriggered = true;
+                    }
+                }
                 else
                     endCondition = ((old.text == @"＊ (ねむることにした)/%" || old.text == @"* (You decided to go to bed.)/%") && current.text == null);
                 break;
