@@ -289,7 +289,7 @@ init
         return game.ReadString(arrayItem, 64);
     });
 
-    string hash = "\0";
+    string hash = "Unknown";
     string dataFile = new FileInfo(module.FileName).DirectoryName + @"\data.win";
     if(File.Exists(dataFile))
     {
