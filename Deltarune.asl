@@ -482,10 +482,18 @@ update
             case 1:
                 if(version == "SURVEY_PROGRAM")
                 {
-                    if(vars.SPEndingTriggered == false && (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file > old.file) && current.plot == 251)
+                    if(!vars.SPEndingTriggered && current.plot == 251 && current.choicer == 0) // Can't check for the text in this version so this is a bit weird but at least it works
                     {
-                        endCondition = true;
-                        vars.SPEndingTriggered = true;
+                        endCondition = (old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2);
+
+                        if(!endCondition)
+                            endCondition = (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2);
+
+                        if(!endCondition)
+                            endCondition = (current.file > 2); // 3-5 for completion data, 9 for autosave
+
+                        if(endCondition)
+                            vars.SPEndingTriggered = true;
                     }
                 }
                 else
