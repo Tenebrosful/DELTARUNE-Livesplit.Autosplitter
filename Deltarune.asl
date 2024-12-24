@@ -68,7 +68,7 @@ state("DELTARUNE", "Demo v1.12-v1.15")
     string256 song  : 0x4E1878, 0x0,  0x0,   0x0;
 }
 
-state("DELTARUNE", "Demo v1.16/v1.17")
+state("DELTARUNE", "Demo v1.17")
 {
     double fight_ch1 : 0x6A1CA8, 0x48, 0x10, 0x490, 0x0;
     double fight_ch2 : 0x6A1CA8, 0x48, 0x10, 0x20,  0x0;
@@ -325,9 +325,8 @@ init
 
         // game_change versions - Only check the Chapter Select data.win
         // Checks for the individual chapters could also be added but there's no point
-        case "498FA77370216BCA0447416A49F34BEF": // v1.16
         case "6A68061F85445AD705FA200166EEC39F": // v1.17
-            version = "Demo v1.16/v1.17";
+            version = "Demo v1.17";
             break;
             
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
@@ -346,7 +345,7 @@ init
 
                 "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n\n" +
 
-                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19.",
+                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19 (without v1.16).",
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
             return;
@@ -483,7 +482,7 @@ update
             case 1:
                 if(version == "SURVEY_PROGRAM")
                 {
-                    if(vars.SPEndingTriggered == false && (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file == old.file + 3) && current.plot == 251)
+                    if(vars.SPEndingTriggered == false && (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file > old.file) && current.plot == 251)
                     {
                         endCondition = true;
                         vars.SPEndingTriggered = true;
