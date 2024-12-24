@@ -325,7 +325,7 @@ init
 
         // game_change versions - Only check the Chapter Select data.win
         // Checks for the individual chapters could also be added but there's no point
-        case "6A68061F85445AD705FA200166EEC39F": // v1.17
+        case "6A68061F85445AD705FA200166EEC39F":
             version = "Demo v1.17";
             break;
             
