@@ -6,6 +6,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 - SURVEY_PROGRAM
 - Chapter 1&2 v1.08-v1.19
+  * Except 1.16 due to speedrun ban
 
 ## How to install
 
