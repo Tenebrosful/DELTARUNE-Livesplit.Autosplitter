@@ -3,9 +3,9 @@
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
     // Global
-    double file    : 0x48E5DC, 0x27C, 0x488, 0x4D0; // global.filechoice
-    double plot    : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
-    double choicer : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
+    double savefile : 0x48E5DC, 0x27C, 0x488, 0x4D0; // global.filechoice
+    double plot     : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
+    double choicer  : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
 
     // Self
     double doorCloseCon      : 0x48BDEC, 0xC,  0x60, 0x10, 0x10,  0x0; // obj_darkdoorevent.con
@@ -68,7 +68,7 @@ state("DELTARUNE", "Demo v1.12-v1.15")
     string256 song  : 0x4E1878, 0x0,  0x0,   0x0;
 }
 
-state("DELTARUNE", "Demo v1.16/v1.17")
+state("DELTARUNE", "Demo v1.17")
 {
     double fight_ch1 : 0x6A1CA8, 0x48, 0x10, 0x490, 0x0;
     double fight_ch2 : 0x6A1CA8, 0x48, 0x10, 0x20,  0x0;
@@ -76,7 +76,7 @@ state("DELTARUNE", "Demo v1.16/v1.17")
     double doorCloseCon     : 0x8B2790, 0xE0,  0x48,  0x10, 0x40,  0x0;
     double namerEvent       : 0x8B2790, 0x178, 0x70,  0x38, 0x48,  0x10, 0x240, 0x0;
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10, 0x2C0, 0x0;
-    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x78,  0x38, 0x198, 0x48, 0x10, 0x1D0, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x70,  0x38, 0x1A0, 0x48, 0x10, 0x3A0, 0x0;
 
     float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
 
@@ -95,7 +95,7 @@ state("DELTARUNE", "Demo v1.19")
     double doorCloseCon     : 0x8B2790, 0xE0,  0x48,  0x10, 0x0,   0x0;
     double namerEvent       : 0x8B2790, 0x178, 0x70,  0x38, 0x48,  0x10, 0x3B0, 0x0;
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10, 0x3C0, 0x0;
-    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x78,  0x38, 0x198, 0x48, 0x10, 0x130, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x70,  0x38, 0x1A0, 0x48, 0x10, 0x3D0, 0x0;
 
     float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
 
@@ -289,7 +289,7 @@ init
         return game.ReadString(arrayItem, 64);
     });
 
-    string hash = "\0";
+    string hash = "Unknown";
     string dataFile = new FileInfo(module.FileName).DirectoryName + @"\data.win";
     if(File.Exists(dataFile))
     {
@@ -325,9 +325,8 @@ init
 
         // game_change versions - Only check the Chapter Select data.win
         // Checks for the individual chapters could also be added but there's no point
-        case "498FA77370216BCA0447416A49F34BEF": // v1.16
-        case "6A68061F85445AD705FA200166EEC39F": // v1.17
-            version = "Demo v1.16/v1.17";
+        case "6A68061F85445AD705FA200166EEC39F":
+            version = "Demo v1.17";
             break;
             
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
@@ -346,7 +345,7 @@ init
 
                 "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n\n" +
 
-                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19.",
+                "Supported versions: SURVEY_PROGRAM, Chapter 1&2 v1.08-v1.19 (without v1.16).",
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
             return;
@@ -483,10 +482,18 @@ update
             case 1:
                 if(version == "SURVEY_PROGRAM")
                 {
-                    if(vars.SPEndingTriggered == false && (((old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2 || old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2) && current.choicer == 0) || current.file == old.file + 3) && current.plot == 251)
+                    if(!vars.SPEndingTriggered && current.plot == 251 && current.choicer == 0) // Can't check for the text in this version so this is a bit weird but at least it works
                     {
-                        endCondition = true;
-                        vars.SPEndingTriggered = true;
+                        endCondition = (old.finalTextboxHalt == 2 && current.finalTextboxHalt != 2);
+
+                        if(!endCondition)
+                            endCondition = (old.finalTextboxHalt2 == 2 && current.finalTextboxHalt2 != 2);
+
+                        if(!endCondition)
+                            endCondition = (current.savefile > 2); // 3-5 for completion data, 9 for autosave
+
+                        if(endCondition)
+                            vars.SPEndingTriggered = true;
                     }
                 }
                 else
