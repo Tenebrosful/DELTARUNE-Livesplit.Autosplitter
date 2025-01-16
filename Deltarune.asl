@@ -99,11 +99,17 @@ state("DELTARUNE", "Demo v1.19")
 
     float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
 
-    string32  sound     : 0x6A3818, 0x60, 0xD0,  0x58, 0x0;
-    string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0xF0,  0x0, 0x0, 0x0;
-    string128 text_ch2  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x5F0, 0x0, 0x0, 0x0;
-    string256 song      : 0x6A2F90, 0x0,  0x0,   0x0;
-    string256 directory : 0x8D06E0, 0x0;
+    string32  sound       : 0x6A3818, 0x60, 0xD0,  0x58, 0x0;
+    string128 text_ch1    : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0xF0,  0x0, 0x0, 0x0;
+
+    // Chapter 2 in this version is a bit weird, this pointer changes on some textboxes and
+    // also seems to change if you don't hold the automasher.
+    string128 text_ch2    : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x5F0, 0x0, 0x0, 0x0;
+    string128 text_ch2_2  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6D0, 0x0, 0x0, 0x0;
+    string128 text_ch2_3  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6F0, 0x0, 0x0, 0x0;
+
+    string256 song        : 0x6A2F90, 0x0,  0x0,   0x0;
+    string256 directory   : 0x8D06E0, 0x0;
 }
 
 startup
@@ -147,13 +153,13 @@ startup
 
     settings.Add("AC_PauseTimer", true, "Pause timer between chapters");
      settings.SetToolTip("AC_PauseTimer",
-        "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save in the next chapter.\n\n" +
+        "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save file in the next chapter.\n\n" +
         "NOTE: For this to work, Game Time must be enabled\n" +
         "(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can do it yourself).");
 
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
      settings.SetToolTip("AC_PauseTimerOST",
-        "This setting is the same as the above one, however it pauses the timer when the credits music starts playing instead.\n" +
+        "This setting is the same as the one above, however it pauses the timer when the credits music starts playing instead.\n" +
         "Useful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
 
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
@@ -169,7 +175,7 @@ startup
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
-    settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer room)");
+    settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer fight room)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 room");
     settings.Add("Ch1_Throne_Exit",           false, "Exit Throne Room");
@@ -196,10 +202,10 @@ startup
     settings.CurrentDefaultParent = "Ch2";
 
     settings.Add("Ch2_Library",          false, "Enter Dark World (True Reset)");
-    settings.Add("Ch2_ArcadeGameText",   false, "Arcade Game (textbox close)");
-    settings.Add("Ch2_ArcadeGameLeave",  false, "Arcade Game (room change)");
-    settings.Add("Ch2_DJFight",          false, "End DJ battle");
-    settings.Add("Ch2_DJShopRoom",       false, "Enter DJ Shop room");
+    settings.Add("Ch2_ArcadeGameText",   false, "End Punch-Out minigame (textbox close)");
+    settings.Add("Ch2_ArcadeGameLeave",  false, "End Punch-Out minigame (room change)");
+    settings.Add("Ch2_DJFight",          false, "End Sweet Cap'n Cakes battle");
+    settings.Add("Ch2_DJShopRoom",       false, "Enter Sweet Cap'n Cakes' shop room");
     settings.Add("Ch2_Ragger2",          false, "Exit Ragger2 room");
     settings.Add("Ch2_CyberFields_Exit", false, "Exit Cyber Fields");
     settings.Add("Ch2_TrashZoneWarp",    false, "Warp from Cyber Fields to Trash Zone");
@@ -289,7 +295,7 @@ init
         return game.ReadString(arrayItem, 64);
     });
 
-    string hash = "Unknown";
+    string hash = "Invalid hash";
     string dataFile = new FileInfo(module.FileName).DirectoryName + @"\data.win";
     if(File.Exists(dataFile))
     {
@@ -501,7 +507,10 @@ update
                 break;
 
             case 2:
-                endCondition = ((old.text == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text == @"\E1* ... they're already&||asleep.../%") && current.text == null);
+                if(version == "Demo v1.19")
+                    endCondition = ((old.text == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text == @"\E1* ... they're already&||asleep.../%") && current.text == null) || ((old.text_ch2_2 == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text_ch2_2 == @"\E1* ... they're already&||asleep.../%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text_ch2_3 == @"\E1* ... they're already&||asleep.../%") && current.text_ch2_3 == null);
+                else
+                    endCondition = ((old.text == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text == @"\E1* ... they're already&||asleep.../%") && current.text == null);
                 break;
         }
         if(endCondition)
@@ -661,7 +670,10 @@ split
                 break;
 
             case 6: // Ch2_ArcadeGameText
-                pass = ((old.text == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text == @"\EH* C'mon^1, let's go after&||her!/%") && current.text == null);
+                if(version == "Demo v1.19")
+                    pass = ((old.text == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text == @"\EH* C'mon^1, let's go after&||her!/%") && current.text == null) || ((old.text_ch2_2 == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text_ch2_2 == @"\EH* C'mon^1, let's go after&||her!/%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text_ch2_3 == @"\EH* C'mon^1, let's go after&||her!/%") && current.text_ch2_3 == null);
+                else
+                    pass = ((old.text == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text == @"\EH* C'mon^1, let's go after&||her!/%") && current.text == null);
                 break;
 
             case 7: // Ch2_CyberFields_Exit
@@ -669,7 +681,10 @@ split
                 break;
 
             case 8: // Ch2_FreezeRing
-                pass = ((old.text == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text == @"* (You got the FreezeRing.)/%") && current.text == null);
+                if(version == "Demo v1.19")
+                    pass = ((old.text == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text == @"* (You got the FreezeRing.)/%") && current.text == null) || ((old.text_ch2_2 == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text_ch2_2 == @"* (You got the FreezeRing.)/%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text_ch2_3 == @"* (You got the FreezeRing.)/%") && current.text_ch2_3 == null);
+                else
+                    pass = ((old.text == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text == @"* (You got the FreezeRing.)/%") && current.text == null);
                 break;
 
             case 9: // Ch2_Egg
@@ -685,7 +700,10 @@ split
                 break;
 
             case 12: // Ch2_Disk_Inserted
-                pass = ((old.text == @"＊ (なにも起こらなかった)/%" || old.text == @"* (Nothing happened.)/%") && current.text == null);
+                if(version == "Demo v1.19")
+                    pass = ((old.text == @"＊ (なにも起こらなかった)/%" || old.text == @"* (Nothing happened.)/%") && current.text == null) || ((old.text_ch2_2 == @"＊ (なにも起こらなかった)/%" || old.text_ch2_2 == @"* (Nothing happened.)/%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"＊ (なにも起こらなかった)/%" || old.text_ch2_3 == @"* (Nothing happened.)/%") && current.text_ch2_3 == null);
+                else
+                    pass = ((old.text == @"＊ (なにも起こらなかった)/%" || old.text == @"* (Nothing happened.)/%") && current.text == null);
                 break;
 
             case 13: // Ch2_SpamtonNEO_End
