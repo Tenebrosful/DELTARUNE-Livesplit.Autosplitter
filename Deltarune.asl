@@ -171,7 +171,7 @@ startup
     settings.Add("Ch1_School",                false, "Enter Dark World (True Reset)");
     settings.Add("Ch1_CastleTown_DoorClose",  false, "Exit Castle Town (door close)");
     settings.Add("Ch1_CastleTown_RoomChange", false, "Exit Castle Town (room change)");
-    settings.Add("Ch1_Fields_Exit",           false, "Exit Fields");
+    settings.Add("Ch1_Fields_Exit",           false, "Exit Field");
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
@@ -189,8 +189,8 @@ startup
 
     settings.Add("Ch1_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch1_AB";
-     settings.Add("Ch1_CFWarp",          false, "Warp from Castle to Fields");
-     settings.Add("Ch1_FBWarp",          false, "Warp from Fields to Bake Sale");
+     settings.Add("Ch1_CFWarp",          false, "Warp from Castle to Field");
+     settings.Add("Ch1_FBWarp",          false, "Warp from Field to Bake Sale");
      settings.Add("Ch1_BCWarp",          false, "Warp from Bake Sale to Castle");
      settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room");
      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil battle");
@@ -207,12 +207,12 @@ startup
     settings.Add("Ch2_DJFight",          false, "End Sweet Cap'n Cakes battle");
     settings.Add("Ch2_DJShopRoom",       false, "Enter Sweet Cap'n Cakes' shop room");
     settings.Add("Ch2_Ragger2",          false, "Exit Ragger2 room");
-    settings.Add("Ch2_CyberFields_Exit", false, "Exit Cyber Fields");
-    settings.Add("Ch2_TrashZoneWarp",    false, "Warp from Cyber Fields to Trash Zone");
-    settings.Add("Ch2_MansionWarp",      false, "Warp from Cyber Fields to Mansion");
-    settings.Add("Ch2_TZCFWarp",         false, "Warp from Trash Zone to Cyber Fields");
+    settings.Add("Ch2_CyberFields_Exit", false, "Exit Cyber Field");
+    settings.Add("Ch2_TrashZoneWarp",    false, "Warp from Cyber Field to Trash Zone");
+    settings.Add("Ch2_MansionWarp",      false, "Warp from Cyber Field to Mansion");
+    settings.Add("Ch2_TZCFWarp",         false, "Warp from Trash Zone to Cyber Field");
     settings.Add("Ch2_TZMWarp",          false, "Warp from Trash Zone to Mansion");
-    settings.Add("Ch2_MCFWarp",          false, "Warp from Mansion to Cyber Fields");
+    settings.Add("Ch2_MCFWarp",          false, "Warp from Mansion to Cyber Field");
     settings.Add("Ch2_MTZWarp",          false, "Warp from Mansion to Trash Zone");
     settings.Add("Ch2_Egg",              false, "Obtain Egg");
     settings.Add("Ch2_Mouse2Puzzle",     false, "Exit Mouse 2 Puzzle room");
@@ -326,6 +326,7 @@ init
         case "D64C80F30EC1AA5718307A2C6EA8DDB5": // v1.13
         case "8892ACA0ECE33A17711D7780C70CA3DE": // v1.14
         case "ED4568BAB864166BFD6322CEEB3FB544": // v1.15
+        case "BCB61AE64476526BB41AC2CAD7B3B160": // v1.15 (item tracker mod)
             version = "Demo v1.12-v1.15";
             break;
 
