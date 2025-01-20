@@ -2,11 +2,12 @@
 
 This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
-## Supported versions
+## Usable on the following versions:
 
 - SURVEY_PROGRAM
 - Chapter 1&2 v1.08-v1.19
-  - Except 1.16 due to speedrun ban
+  - Except v1.16 due to it not being allowed for runs
+  - The item tracker mod for v1.15 is also supported.
 
 ## How to install
 
@@ -14,8 +15,8 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 To use the autosplitter, follow these easy steps:
 
-1. Open your splits and go in `Edit Splits`;
-2. Insert `Deltarune` or `Deltarune Category Extensions` as the Game Name;
+1. Open your splits and go in `Edit Splits`
+2. Insert `Deltarune` or `Deltarune Category Extensions` as the Game Name
 3. You should now have access to the autosplitter and be able to activate it.
 
 ![Splits Editor header with the Game Name and the suggested autosplitter](/assets/quickInstall.png)
@@ -23,8 +24,8 @@ To use the autosplitter, follow these easy steps:
 ### Manual way (also for developers)
 
 1. Download the [latest release of the autosplitter](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/releases)
-or clone the repository;
-2. Open LiveSplit and add the component `Control -> Scriptable Auto Splitter` on your layout;
+or clone the repository
+2. Open LiveSplit and add the component `Control -> Scriptable Auto Splitter` on your layout
 3. Insert the path to the autosplitter file in `Script Path`.
 
 ![Layout Editor with Control -> Scriptable Auto Splitter selected](/assets/manualInstall.png)
