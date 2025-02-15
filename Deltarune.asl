@@ -689,7 +689,7 @@ split
                 break;
 
             case 11: // Ch2_SGBerdly
-                pass = (old.snowgrave < 125 && current.snowgrave >= 125);
+                pass = (old.snowgrave < 127 && current.snowgrave >= 127);
                 break;
 
             case 12: // Ch2_Disk_Loaded
