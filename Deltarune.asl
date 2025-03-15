@@ -422,7 +422,7 @@ init
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n\n" +
             
-                    "You will not be notified again until the next time you start the autosplitter."
+                    "You will not be notified again until the next time you start the autosplitter.",
 
                     "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
                 );
@@ -680,7 +680,7 @@ split
                 break;
 
             case 2: // Ch1_Egg
-                pass = vars.checkTextClose(old.text, current.text, @"* (You received an Egg.)/%", @"＊ (タマゴを　手に入れた)/%");
+                pass = ((old.text == @"＊ (タマゴを　手に入れた)/%" || old.text == @"* (You received an Egg.)/%") && current.text == null);
                 break;
 
             case -3: // Ch2_TrashZoneWarp, Ch2_MansionWarp
