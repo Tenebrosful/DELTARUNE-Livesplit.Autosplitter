@@ -31,7 +31,7 @@ state("DELTARUNE", "Demo v1.08/v1.09")
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
-    string32  sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;                        // Full path to the current sound (highest priority)
+    string32  sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;                        // Current sound (highest priority)
     string128 text  : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0; // obj_writer.mystring
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;                              // Full path to the current song
 }
@@ -89,7 +89,7 @@ state("DELTARUNE", "Demo v1.19")
     string128 text_ch1    : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0xF0,  0x0, 0x0, 0x0;
 
     // Chapter 2 in this version is a bit weird, this pointer changes on some textboxes and
-    // also seems to change if you don't hold the automasher.
+    // also seems to change if you don't hold the automasher
     string128 text_ch2    : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x5F0, 0x0, 0x0, 0x0;
     string128 text_ch2_2  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6D0, 0x0, 0x0, 0x0;
     string128 text_ch2_3  : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6F0, 0x0, 0x0, 0x0;
@@ -338,7 +338,7 @@ init
 
                 "Supported versions:\n" +
                 "- SURVEY_PROGRAM\n" +
-                "- Chapter 1&2 v1.08-v1.15, v1.19",
+                "- Chapter 1&2 v1.08-v1.15, v1.19.",
 
                 "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
             );
@@ -443,7 +443,7 @@ update
     if(version == "SURVEY_PROGRAM")
         current.chapter = 1;
 
-    else if(vars.x64) // This is a bit hacky but it's the best we can do. game_change fully unloads and loads games so consistent pointer paths between chapters are not an option.
+    else if(vars.x64) // This is a bit hacky but game_change fully unloads and loads games so consistent pointer paths between chapters are not an option.
     {
         if(current.directory.EndsWith(@"\chapter1_windows\"))
         {
