@@ -147,9 +147,9 @@ startup
             case "SURVEY_PROGRAM":
                 return false;
             case "Demo v1.19":
-                return ((org.text == en || cur.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
+                return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
             default:
-                return ((org.text == en || cur.text == jp) && cur.text == null);
+                return ((org.text == en || org.text == jp) && cur.text == null);
         }
     });
     
