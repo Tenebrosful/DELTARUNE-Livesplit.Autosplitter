@@ -126,91 +126,111 @@ startup
         print("[DELTARUNE] All variables have been reset to initial state");
     });
 
-    // Ending splits are handled manually in update{}
-    // Object variables in order: done, old room, new room, old fight, new fight, special condition
-    vars.splits = new Dictionary<double, Dictionary<string, object[]>>()
+    // ver = version, org = original (equivalent to old), cur = current (can't use the same names)
+    vars.checkTextOpen = (Func<string, dynamic, dynamic, string, string, bool>)((ver, org, cur, en, jp) => 
     {
-        {1, new Dictionary<string, object[]>
+        switch(ver)
         {
-            {"Ch1_School",                new object[] {false, "room_insidecloset_ch1",       "room_dark1_ch1",               -1, -1, 0}},
-            {"Ch1_CastleTown_DoorClose",  new object[] {false, null,                          "room_castle_darkdoor_ch1",     -1, -1, 1}},
-            {"Ch1_CastleTown_RoomChange", new object[] {false, "room_castle_darkdoor_ch1",    "room_field_start_ch1",         -1, -1, 0}},
-            {"Ch1_Fields_Exit",           new object[] {false, "room_field4_ch1",             "room_field_checkers4_ch1",     -1, -1, 0}},
-            {"Ch1_Checkerboard_Exit",     new object[] {false, "room_field_checkersboss_ch1", "room_forest_savepoint1_ch1",   -1, -1, 0}},
-            {"Ch1_BakeSale_Enter",        new object[] {false, "room_forest_area3_ch1",       "room_forest_savepoint2_ch1",   -1, -1, 0}},
-            {"Ch1_Egg",                   new object[] {false, null,                          "room_man_ch1",                 -1, -1, 2}},
-            {"Ch1_SusieLancer_Exit",      new object[] {false, "room_forest_fightsusie_ch1",  "room_forest_afterthrash2_ch1", -1, -1, 0}},
-            {"Ch1_Escape_Cell",           new object[] {false, "room_cc_prison_cells_ch1",    "room_cc_prisonlancer_ch1",     -1, -1, 3}},
-            {"Ch1_CFWarp",                new object[] {false, "room_forest_fightsusie_ch1",  "room_field3_ch1",              -1, -1, 0}},
-            {"Ch1_FBWarp",                new object[] {false, "room_field3_ch1",             "room_forest_savepoint2_ch1",   -1, -1, 0}},
-            {"Ch1_BCWarp",                new object[] {false, "room_forest_savepoint2_ch1",  "room_forest_fightsusie_ch1",   -1, -1, 0}},
-            {"Ch1_Jevil_EnterRoom",       new object[] {false, "room_cc_prison_prejoker_ch1", "room_cc_joker_ch1",            -1, -1, 0}},
-            {"Ch1_Jevil_EndBattle",       new object[] {false, null,                          "room_cc_joker_ch1",            -1, -1, 4}},
-            {"Ch1_Jevil_LeaveRoom",       new object[] {false, "room_cc_joker_ch1",           "room_cc_prison_prejoker_ch1",  -1, -1, 0}},
-            {"Ch1_KRound2_Exit",          new object[] {false, "room_cc_6f_ch1",              "room_cc_throneroom_ch1",       -1, -1, 0}},
-            {"Ch1_Throne_Exit",           new object[] {false, "room_cc_throneroom_ch1",      "room_cc_preroof_ch1",          -1, -1, 0}},
-            {"Ch1_PreKing_Exit",          new object[] {false, "room_cc_preroof_ch1",         "room_cc_kingbattle_ch1",       -1, -1, 0}},
-            {"Ch1_King_EndBattle",        new object[] {false, null,                          "room_cc_kingbattle_ch1",       -1, -1, 5}},
-            {"Ch1_King_Exit",             new object[] {false, "room_cc_kingbattle_ch1",      "room_cc_prefountain_ch1",      -1, -1, 0}},
-            {"Ch1_Fountain_Enter",        new object[] {false, "room_cc_prefountain_ch1",     "room_cc_fountain_ch1",         -1, -1, 0}},
-            {"Ch1_Fountain_Exit",         new object[] {false, "room_cc_fountain_ch1",        "room_school_unusedroom_ch1",   -1, -1, 0}}
-        }},
+            case "SURVEY_PROGRAM":
+                return false;
+            case "Demo v1.19":
+                return (org.text == null && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 == null && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 == null && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
+            default:
+                return (org.text == null && (cur.text == en || cur.text == jp));
+        }
+    });
 
-        {2, new Dictionary<string, object[]>
+    vars.checkTextClose = (Func<string, dynamic, dynamic, string, string, bool>)((ver, org, cur, en, jp) => 
+    {
+        switch(ver)
         {
-            {"Ch2_Library",            new object[] {false, "room_library_ch2",                            "room_dw_cyber_intro_1_ch2",                   -1, -1,  0}},
-            {"Ch2_ArcadeGameText",     new object[] {false, null,                                          "room_dw_cyber_queen_boxing_ch2",              -1, -1,  6}},
-            {"Ch2_ArcadeGameLeave",    new object[] {false, "room_dw_cyber_queen_boxing_ch2",              "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
-            {"Ch2_DJFight",            new object[] {false, null,                                          "room_dw_cyber_music_final_ch2",                1,  0,  0}},
-            {"Ch2_DJShopRoom",         new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_cyber_musical_shop_ch2",              -1, -1,  0}},
-            {"Ch2_Ragger2",            new object[] {false, "room_dw_cyber_teacup_final_ch2",              "room_dw_cyber_rollercoaster_ch2",             -1, -1,  0}},
-            {"Ch2_CyberFields_Exit",   new object[] {false, null,                                          "room_dw_cyber_rollercoaster_ch2",             -1, -1,  7}},
-            {"Ch2_TrashZoneWarp",      new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_city_intro_ch2",                      -1, -1, -3}},
-            {"Ch2_TrashZoneWarp2",     new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_city_intro_ch2",                      -1, -1,  3}},
-            {"Ch2_MansionWarp",        new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_mansion_entrance_ch2",                -1, -1, -3}},
-            {"Ch2_MansionWarp2",       new object[] {false, "room_dw_cyber_musical_door_ch2",              "room_dw_mansion_entrance_ch2",                -1, -1,  3}},
-            {"Ch2_TZCFWarp",           new object[] {false, "room_dw_city_intro_ch2",                      "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
-            {"Ch2_TZMWarp",            new object[] {false, "room_dw_city_intro_ch2",                      "room_dw_mansion_entrance_ch2",                -1, -1,  0}},
-            {"Ch2_MCFWarp",            new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_cyber_musical_door_ch2",              -1, -1,  0}},
-            {"Ch2_MTZWarp",            new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_city_intro_ch2",                      -1, -1,  0}},
-            {"Ch2_FreezeRing",         new object[] {false, null,                                          "room_dw_city_big_2_ch2",                      -1, -1,  8}},
-            {"Ch2_Egg",                new object[] {false, null,                                          null,                                          -1, -1,  9}},
-            {"Ch2_Mouse2Puzzle",       new object[] {false, "room_dw_city_mice2_ch2",                      "room_dw_city_cheesemaze_ch2",                 -1, -1,  0}},
-            {"Ch2_ThornRing",          new object[] {false, null,                                          "room_dw_city_moss_ch2",                       -1, -1, 10}},
-            {"Ch2_SGBerdly",           new object[] {false, null,                                          "room_dw_city_berdly_ch2",                     -1, -1, 11}},
-            {"Ch2_SGBerdly_LeaveRoom", new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_poppup_ch2",                     -1, -1,  0}},
-            {"Ch2_Berdly_Leave",       new object[] {false, "room_dw_city_berdly_ch2",                     "room_dw_city_traffic_4_ch2",                  -1, -1,  0}},
-            {"Ch2_SpamtonLeave",       new object[] {false, "room_dw_city_spamton_alley_ch2",              "room_dw_city_traffic_4_ch2",                  -1, -1,  0}},
-            {"Ch2_CyberCity_Exit",     new object[] {false, "room_dw_city_mansion_front_ch2",              "room_dw_mansion_krisroom_ch2",                -1, -1,  0}},
-            {"Ch2_Mansion_Entrance",   new object[] {false, "room_dw_mansion_dining_a_ch2",                "room_dw_mansion_entrance_ch2",                -1, -1,  0}},
-            {"Ch2_Mansion_Exit",       new object[] {false, "room_dw_mansion_entrance_ch2",                "room_dw_mansion_fire_paintings_ch2",          -1, -1,  0}},
-            {"Ch2_TasqueManager",      new object[] {false, "room_dw_mansion_tasquePaintings_ch2",         "room_dw_mansion_traffic_ch2",                 -1, -1,  0}},
-            {"Ch2_Mauswheel",          new object[] {false, "room_dw_mansion_kitchen_ch2",                 "room_dw_mansion_east_2f_transformed_new_ch2", -1, -1,  0}},
-            {"Ch2_Disk_Loaded",        new object[] {false, null,                                          "room_shop_ch2_spamton_ch2",                   -1, -1, 12}},
-            {"Ch2_Disk_Inserted",      new object[] {false, null,                                          "room_dw_mansion_b_east_b_ch2",                -1, -1, 13}},
-            {"Ch2_SpamtonNEO_End",     new object[] {false, null,                                          "room_dw_mansion_b_east_ch2",                  -1, -1, 14}},
-            {"Ch2_SpamtonNEO_Leave",   new object[] {false, "room_dw_mansion_b_east_ch2",                  "room_dw_mansion_b_east_a_ch2",                -1, -1,  0}},
-            {"Ch2_AcidLake_Enter",     new object[] {false, "room_dw_mansion_east_3f_ch2",                 "room_dw_mansion_acid_tunnel_ch2",             -1, -1,  0}},
-            {"Ch2_AcidLake_Exit",      new object[] {false, "room_dw_mansion_acid_tunnel_loop_rouxls_ch2", "room_dw_mansion_acid_tunnel_exit_ch2",        -1, -1,  0}},
-            {"Ch2_Queen",              new object[] {false, "room_dw_mansion_east_4f_d_ch2",               "room_dw_mansion_top_ch2",                     -1, -1,  0}},
-            {"Ch2_GigaQueen",          new object[] {false, "room_dw_mansion_top_ch2",                     "room_dw_mansion_top_post_ch2",                -1, -1,  0}},
-            {"Ch2_Fountain_Enter",     new object[] {false, null,                                          null,                                          -1, -1, 15}},
-            {"Ch2_SGSpamtonNEO_End",   new object[] {false, null,                                          "room_dw_mansion_fountain_ch2",                 1,  0,  0}},
-            {"Ch2_Fountain_Exit",      new object[] {false, null,                                          "room_lw_computer_lab_ch2",                    -1, -1, 16}},
-            {"Ch2_PuppetScarfChest",   new object[] {false, null,                                          "room_dw_castle_west_cliff_ch2",               -1, -1, 17}}
-        }}
+            case "SURVEY_PROGRAM":
+                return false;
+            case "Demo v1.19":
+                return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
+            default:
+                return ((org.text == en || org.text == jp) && cur.text == null);
+        }
+    });
+    
+    // Ending splits are handled manually in update{}
+    vars.splits = new Dictionary<string, Func<string, dynamic, dynamic, bool>>[2];
+    vars.splits[0] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
+    {
+        {"Ch1_School",                (ver, org, cur) => org.roomName == "room_insidecloset_ch1" && cur.roomName == "room_dark1_ch1"},
+        {"Ch1_CastleTown_DoorClose",  (ver, org, cur) => cur.roomName == "room_castle_darkdoor_ch1" && org.doorCloseCon == 7 && cur.doorCloseCon == 21},
+        {"Ch1_CastleTown_RoomChange", (ver, org, cur) => org.roomName == "room_castle_darkdoor_ch1" && cur.roomName == "room_field_start_ch1"},
+        {"Ch1_Fields_Exit",           (ver, org, cur) => org.roomName == "room_field4_ch1" && cur.roomName == "room_field_checkers4_ch1"},
+        {"Ch1_Checkerboard_Exit",     (ver, org, cur) => org.roomName == "room_field_checkersboss_ch1" && cur.roomName == "room_forest_savepoint1_ch1"},
+        {"Ch1_BakeSale_Enter",        (ver, org, cur) => org.roomName == "room_forest_area3_ch1" && cur.roomName == "room_forest_savepoint2_ch1"},
+        {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && vars.checkTextClose(ver, org, cur, @"* (You received an Egg.)/%", @"＊ (タマゴを　手に入れた)/%")},
+        {"Ch1_SusieLancer_Exit",      (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_forest_afterthrash2_ch1"},
+        {"Ch1_Escape_Cell",           (ver, org, cur) => org.roomName == "room_cc_prison_cells_ch1" && cur.roomName == "room_cc_prisonlancer_ch1" && vars.tempVar == 2},
+        {"Ch1_CFWarp",                (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_field3_ch1"},
+        {"Ch1_FBWarp",                (ver, org, cur) => org.roomName == "room_field3_ch1" && cur.roomName == "room_forest_savepoint2_ch1"},
+        {"Ch1_BCWarp",                (ver, org, cur) => org.roomName == "room_forest_savepoint2_ch1" && cur.roomName == "room_forest_fightsusie_ch1"},
+        {"Ch1_Jevil_EnterRoom",       (ver, org, cur) => org.roomName == "room_cc_prison_prejoker_ch1" && cur.roomName == "room_cc_joker_ch1"},
+        {"Ch1_Jevil_EndBattle",       (ver, org, cur) => cur.roomName == "room_cc_joker_ch1" && (ver == "SURVEY_PROGRAM" ? (cur.jevilDance == 4 || cur.jevilDance2 == 4) : (org.song.EndsWith(@"mus\joker.ogg") && cur.song == null))},
+        {"Ch1_Jevil_LeaveRoom",       (ver, org, cur) => org.roomName == "room_cc_joker_ch1" && cur.roomName == "room_cc_prison_prejoker_ch1"},
+        {"Ch1_KRound2_Exit",          (ver, org, cur) => org.roomName == "room_cc_6f_ch1" && cur.roomName == "room_cc_throneroom_ch1"},
+        {"Ch1_Throne_Exit",           (ver, org, cur) => org.roomName == "room_cc_throneroom_ch1" && cur.roomName == "room_cc_preroof_ch1"},
+        {"Ch1_PreKing_Exit",          (ver, org, cur) => org.roomName == "room_cc_preroof_ch1" && cur.roomName == "room_cc_kingbattle_ch1"},
+        {"Ch1_King_EndBattle",        (ver, org, cur) => cur.roomName == "room_cc_kingbattle_ch1" && org.kingPos == 680 && cur.kingPos >= 1020 && cur.kingPos <= 1030},
+        {"Ch1_King_Exit",             (ver, org, cur) => org.roomName == "room_cc_kingbattle_ch1" && cur.roomName == "room_cc_prefountain_ch1"},
+        {"Ch1_Fountain_Enter",        (ver, org, cur) => org.roomName == "room_cc_prefountain_ch1" && cur.roomName == "room_cc_fountain_ch1"},
+        {"Ch1_Fountain_Exit",         (ver, org, cur) => org.roomName == "room_cc_fountain_ch1" && cur.roomName == "room_school_unusedroom_ch1"}
     };
+    vars.splits[1] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
+    {
+        {"Ch2_Library",            (ver, org, cur) => org.roomName == "room_library_ch2" && cur.roomName == "room_dw_cyber_intro_1_ch2"},
+        {"Ch2_ArcadeGameText",     (ver, org, cur) => cur.roomName == "room_dw_cyber_queen_boxing_ch2" && vars.checkTextClose(ver, org, cur, @"\EH* C'mon^1, let's go after&||her!/%", @"\EH＊ おまえら^1！&　 追っかけるぞ！/%")},
+        {"Ch2_ArcadeGameLeave",    (ver, org, cur) => org.roomName == "room_dw_cyber_queen_boxing_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
+        {"Ch2_DJFight",            (ver, org, cur) => cur.roomName == "room_dw_cyber_music_final_ch2" && org.fight == 1 && cur.fight == 0},
+        {"Ch2_DJShopRoom",         (ver, org, cur) => org.roomName == "room_dw_cyber_musical_door_ch2" && cur.roomName == "room_dw_cyber_musical_shop_ch2"},
+        {"Ch2_Ragger2",            (ver, org, cur) => org.roomName == "room_dw_cyber_teacup_final_ch2" && cur.roomName == "room_dw_cyber_rollercoaster_ch2"},
+        {"Ch2_CyberFields_Exit",   (ver, org, cur) => cur.roomName == "room_dw_cyber_rollercoaster_ch2" && org.sound == "snd_queen_laugh_0" && cur.sound == "snd_sussurprise"},
+        {"Ch2_TrashZoneWarp",      (ver, org, cur) => org.roomName == "room_dw_cyber_musical_door_ch2" && cur.roomName == "room_dw_city_intro_ch2" && vars.tempVar == 0},
+        {"Ch2_TrashZoneWarp2",     (ver, org, cur) => org.roomName == "room_dw_cyber_musical_door_ch2" && cur.roomName == "room_dw_city_intro_ch2" && vars.tempVar == 1},
+        {"Ch2_MansionWarp",        (ver, org, cur) => org.roomName == "room_dw_cyber_musical_door_ch2" && cur.roomName == "room_dw_mansion_entrance_ch2" && vars.tempVar == 0},
+        {"Ch2_MansionWarp2",       (ver, org, cur) => org.roomName == "room_dw_cyber_musical_door_ch2" && cur.roomName == "room_dw_mansion_entrance_ch2" && vars.tempVar == 1},
+        {"Ch2_TZCFWarp",           (ver, org, cur) => org.roomName == "room_dw_city_intro_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
+        {"Ch2_TZMWarp",            (ver, org, cur) => org.roomName == "room_dw_city_intro_ch2" && cur.roomName == "room_dw_mansion_entrance_ch2"},
+        {"Ch2_MCFWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
+        {"Ch2_MTZWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_city_intro_ch2"},
+        {"Ch2_FreezeRing",         (ver, org, cur) => cur.roomName == "room_dw_city_big_2_ch2" && vars.checkTextClose(ver, org, cur, @"* (You got the FreezeRing.)/%", @"＊ (凍てつく指輪を　手に入れた)/%")},
+        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" || cur.roomName == "room_dw_city_man_ch2") && org.sound != "snd_egg" && cur.sound == "snd_egg"},
+        {"Ch2_Mouse2Puzzle",       (ver, org, cur) => org.roomName == "room_dw_city_mice2_ch2" && cur.roomName == "room_dw_city_cheesemaze_ch2"},
+        {"Ch2_ThornRing",          (ver, org, cur) => cur.roomName == "room_dw_city_moss_ch2" && vars.checkTextClose(ver, org, cur, @"\S1* (You got the ThornRing.)/%", @"\S1＊ (いばらの指輪を　手に入れた)/%")},
+        {"Ch2_SGBerdly",           (ver, org, cur) => cur.roomName == "room_dw_city_berdly_ch2" && org.snowgrave < 127 && cur.snowgrave >= 127},
+        {"Ch2_SGBerdly_LeaveRoom", (ver, org, cur) => org.roomName == "room_dw_city_berdly_ch2" && cur.roomName == "room_dw_city_poppup_ch2"},
+        {"Ch2_Berdly_Leave",       (ver, org, cur) => org.roomName == "room_dw_city_berdly_ch2" && cur.roomName == "room_dw_city_traffic_4_ch2"},
+        {"Ch2_SpamtonLeave",       (ver, org, cur) => org.roomName == "room_dw_city_spamton_alley_ch2" && cur.roomName == "room_dw_city_traffic_4_ch2"},
+        {"Ch2_CyberCity_Exit",     (ver, org, cur) => org.roomName == "room_dw_city_mansion_front_ch2" && cur.roomName == "room_dw_mansion_krisroom_ch2"},
+        {"Ch2_Mansion_Entrance",   (ver, org, cur) => org.roomName == "room_dw_mansion_dining_a_ch2" && cur.roomName == "room_dw_mansion_entrance_ch2"},
+        {"Ch2_Mansion_Exit",       (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_mansion_fire_paintings_ch2"},
+        {"Ch2_TasqueManager",      (ver, org, cur) => org.roomName == "room_dw_mansion_tasquePaintings_ch2" && cur.roomName == "room_dw_mansion_traffic_ch2"},
+        {"Ch2_Mauswheel",          (ver, org, cur) => org.roomName == "room_dw_mansion_kitchen_ch2" && cur.roomName == "room_dw_mansion_east_2f_transformed_new_ch2"},
+        {"Ch2_Disk_Loaded",        (ver, org, cur) => cur.roomName == "room_shop_ch2_spamton_ch2" && org.loadedDiskGreyBG < 121 && cur.loadedDiskGreyBG == 121},
+        {"Ch2_Disk_Inserted",      (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_b_ch2" && vars.checkTextClose(ver, org, cur, @"* (Nothing happened.)/%", @"＊ (なにも起こらなかった)/%")},
+        {"Ch2_SpamtonNEO_End",     (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_ch2" && org.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && cur.song == null},
+        {"Ch2_SpamtonNEO_Leave",   (ver, org, cur) => org.roomName == "room_dw_mansion_b_east_ch2" && cur.roomName == "room_dw_mansion_b_east_a_ch2"},
+        {"Ch2_AcidLake_Enter",     (ver, org, cur) => org.roomName == "room_dw_mansion_east_3f_ch2" && cur.roomName == "room_dw_mansion_acid_tunnel_ch2"},
+        {"Ch2_AcidLake_Exit",      (ver, org, cur) => org.roomName == "room_dw_mansion_acid_tunnel_loop_rouxls_ch2" && cur.roomName == "room_dw_mansion_acid_tunnel_exit_ch2"},
+        {"Ch2_Queen",              (ver, org, cur) => org.roomName == "room_dw_mansion_east_4f_d_ch2" && cur.roomName == "room_dw_mansion_top_ch2"},
+        {"Ch2_GigaQueen",          (ver, org, cur) => org.roomName == "room_dw_mansion_top_ch2" && cur.roomName == "room_dw_mansion_top_post_ch2"},
+        {"Ch2_Fountain_Enter",     (ver, org, cur) => (org.roomName == "room_dw_mansion_top_post_ch2" && cur.roomName == "room_cc_fountain_ch2") || (org.roomName == "room_dw_mansion_prefountain_ch2" && cur.roomName == "room_dw_mansion_fountain_ch2")},
+        {"Ch2_SGSpamtonNEO_End",   (ver, org, cur) => cur.roomName == "room_dw_mansion_fountain_ch2" && org.fight == 1 && cur.fight == 0},
+        {"Ch2_Fountain_Exit",      (ver, org, cur) => (org.roomName == "room_cc_fountain_ch2" || org.roomName == "room_dw_mansion_fountain_ch2") && cur.roomName == "room_lw_computer_lab_ch2"},
+        {"Ch2_PuppetScarfChest",   (ver, org, cur) => cur.roomName == "room_dw_castle_west_cliff_ch2" && vars.checkTextOpen(ver, org, cur, @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/", @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/")}
+    };
+    vars.completedSplits = new HashSet<string>();
 
     vars.resetSplits = (Action)(() =>
     {
-        foreach(int chapter in vars.splits.Keys)
-            foreach(string split in vars.splits[chapter].Keys)
-                vars.splits[chapter][split][0] = false;
-
+        vars.completedSplits.Clear();
         print("[DELTARUNE] All splits have been reset to initial state");
     });
 
-    // -------------------------------------------------------------------------------------------
     settings.Add("AC", true, "All Chapters");
     settings.CurrentDefaultParent = "AC";
 
@@ -227,7 +247,7 @@ startup
 
     settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
     settings.CurrentDefaultParent = null;
-    // -------------------------------------------------------------------------------------------
+
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
     settings.CurrentDefaultParent = "Ch1";
 
@@ -238,6 +258,7 @@ startup
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
+     settings.SetToolTip("Ch1_Egg", "This autosplit does not work in SURVEY_PROGRAM.");
     settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer fight room)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 room");
@@ -260,7 +281,7 @@ startup
       settings.SetToolTip("Ch1_Jevil_EndBattle", @"This autosplit does not work if you remove Jevil's battle theme from the game files (mus\joker.ogg) in non-SURVEY_PROGRAM versions.");
      settings.Add("Ch1_Jevil_LeaveRoom", false, "Exit Jevil room");
     settings.CurrentDefaultParent = null;
-    // -------------------------------------------------------------------------------------------
+
     settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
     settings.CurrentDefaultParent = "Ch2";
 
@@ -315,7 +336,6 @@ startup
      settings.Add("Ch2_SGBerdly_LeaveRoom", false, "Exit Berdly 2 room (Weird Route)");
      settings.Add("Ch2_SGSpamtonNEO_End",   false, "End fountain Spamton NEO battle");
     settings.CurrentDefaultParent = null;
-    // -------------------------------------------------------------------------------------------
 }
 
 exit
@@ -420,7 +440,7 @@ init
 
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
-                    "- Chapter 1&2 v1.08-v1.15, v1.19\n\n" +
+                    "- Chapter 1&2 v1.08-v1.15, v1.19.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
@@ -513,31 +533,16 @@ update
                     }
                 }
                 else
-                    endCondition = ((old.text == @"＊ (ねむることにした)/%" || old.text == @"* (You decided to go to bed.)/%") && current.text == null);
+                    endCondition = vars.checkTextClose(version, old, current, @"* (You decided to go to bed.)/%", @"＊ (ねむることにした)/%");
                 break;
 
             case 2:
                 // This is the only situation where the Door Overflow splits could get triggered
                 // You can not have the 400 bagels and the door available at the same time in regular gameplay
-                // Setting vars.tempVar to 2 just so we can use the same special condition as Ch1_Escape_Cell
-                if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && vars.tempVar == 0 && current.roomName == "room_dw_cyber_musical_door_ch2")
-                {
-                    if(version == "Demo v1.19")
-                        endCondition = (old.text == null && (current.text == @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%" || current.text == @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%")) || (old.text_ch2_2 == null && (current.text_ch2_2 == @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%" || current.text_ch2_2 == @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%")) || (old.text_ch2_3 == null && (current.text_ch2_3 == @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%" || current.text_ch2_3 == @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%"));
-                    else
-                        endCondition = (old.text == null && (current.text == @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%" || current.text == @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%"));
-                    
-                    if(endCondition) // Reusing this instead of making a new variable
-                    {
-                        vars.tempVar = 2;
-                        endCondition = false;
-                    }
-                }
-
-                else if(version == "Demo v1.19")
-                    endCondition = ((old.text == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text == @"\E1* ... they're already&||asleep.../%") && current.text == null) || ((old.text_ch2_2 == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text_ch2_2 == @"\E1* ... they're already&||asleep.../%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text_ch2_3 == @"\E1* ... they're already&||asleep.../%") && current.text_ch2_3 == null);
+                if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && vars.tempVar == 0 && current.roomName == "room_dw_cyber_musical_door_ch2" && vars.checkTextClose(version, old, current, @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%", @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%"))
+                    vars.tempVar = 1;
                 else
-                    endCondition = ((old.text == @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%" || old.text == @"\E1* ... they're already&||asleep.../%") && current.text == null);
+                    endCondition = vars.checkTextClose(version, old, current, @"\E1* ... they're already&||asleep.../%", @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%");
                 break;
         }
         if(endCondition)
@@ -638,8 +643,7 @@ reset
 onReset
 {
     vars.resetVars();
-    if(game != null)
-        vars.resetSplits();
+    vars.resetSplits();
 }
 
 split
@@ -653,129 +657,17 @@ split
     if(current.chapter == 0) // Don't try to split if on Chapter Select
         return;
 
-    int done      = 0,
-        oldRoom   = 1,
-        newRoom   = 2,
-        oldFight  = 3,
-        newFight  = 4,
-        condition = 5;
-
-    foreach(string splitKey in vars.splits[current.chapter].Keys)
+    foreach(var split in vars.splits[(int)current.chapter - 1])
     {
-        if((!settings[splitKey] || vars.splits[current.chapter][splitKey][done]) ||
-           (vars.splits[current.chapter][splitKey][oldRoom] != null && old.roomName != vars.splits[current.chapter][splitKey][oldRoom]) ||
-           (vars.splits[current.chapter][splitKey][newRoom] != null && current.roomName != vars.splits[current.chapter][splitKey][newRoom]) ||
-           (vars.splits[current.chapter][splitKey][oldFight] != -1 && old.fight != vars.splits[current.chapter][splitKey][oldFight]) ||
-           (vars.splits[current.chapter][splitKey][newFight] != -1 && current.fight != vars.splits[current.chapter][splitKey][newFight])) continue;
+        if(!settings[split.Key] || 
+           vars.completedSplits.Contains(split.Key) ||
+           !split.Value(version, old, current)) continue;
 
-        bool pass = false;
-        switch((int)vars.splits[current.chapter][splitKey][condition])
-        {
-            case 0:
-                pass = true;
-                break;
+        if(vars.tempVar > 0)
+            vars.tempVar = 0;
 
-            case 1: // Ch1_CastleTown_DoorClose
-                pass = (old.doorCloseCon == 7 && current.doorCloseCon == 21);
-                break;
-
-            case 2: // Ch1_Egg
-                pass = ((old.text == @"＊ (タマゴを　手に入れた)/%" || old.text == @"* (You received an Egg.)/%") && current.text == null);
-                break;
-
-            case -3: // Ch2_TrashZoneWarp, Ch2_MansionWarp
-                pass = (vars.tempVar == 0);
-                break;
-            case 3: // Ch1_Escape_Cell, Ch2_TrashZoneWarp2, Ch2_MansionWarp2
-                if(vars.tempVar == 2)
-                {
-                    vars.tempVar = 0;
-                    pass = true;
-                }
-                break;
-
-            case 4: // Ch1_Jevil_EndBattle
-                if(version == "SURVEY_PROGRAM")
-                    pass = (current.jevilDance == 4 || current.jevilDance2 == 4);
-                else
-                    pass = (old.song.EndsWith(@"mus\joker.ogg") && current.song == null);
-                break;
-
-            case 5: // Ch1_King_EndBattle
-                pass = (old.kingPos == 680 && current.kingPos >= 1020 && current.kingPos <= 1030);
-                break;
-
-            case 6: // Ch2_ArcadeGameText
-                if(version == "Demo v1.19")
-                    pass = ((old.text == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text == @"\EH* C'mon^1, let's go after&||her!/%") && current.text == null) || ((old.text_ch2_2 == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text_ch2_2 == @"\EH* C'mon^1, let's go after&||her!/%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text_ch2_3 == @"\EH* C'mon^1, let's go after&||her!/%") && current.text_ch2_3 == null);
-                else
-                    pass = ((old.text == @"\EH＊ おまえら^1！&　 追っかけるぞ！/%" || old.text == @"\EH* C'mon^1, let's go after&||her!/%") && current.text == null);
-                break;
-
-            case 7: // Ch2_CyberFields_Exit
-                pass = (old.sound == "snd_queen_laugh_0" && current.sound == "snd_sussurprise");
-                break;
-
-            case 8: // Ch2_FreezeRing
-                if(version == "Demo v1.19")
-                    pass = ((old.text == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text == @"* (You got the FreezeRing.)/%") && current.text == null) || ((old.text_ch2_2 == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text_ch2_2 == @"* (You got the FreezeRing.)/%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text_ch2_3 == @"* (You got the FreezeRing.)/%") && current.text_ch2_3 == null);
-                else
-                    pass = ((old.text == @"＊ (凍てつく指輪を　手に入れた)/%" || old.text == @"* (You got the FreezeRing.)/%") && current.text == null);
-                break;
-
-            case 9: // Ch2_Egg
-                pass = ((current.roomName == "room_dw_cyber_musical_door_ch2" || current.roomName == "room_dw_city_man_ch2") && old.sound != "snd_egg" && current.sound == "snd_egg");
-                break;
-
-            case 10: // Ch2_ThornRing
-                if(version == "Demo v1.19")
-                    pass = (old.text == null && (current.text == @"\S1＊ (いばらの指輪を　手に入れた)/%" || current.text == @"\S1* (You got the ThornRing.)/%")) || (old.text_ch2_2 == null && (current.text_ch2_2 == @"\S1＊ (いばらの指輪を　手に入れた)/%" || current.text_ch2_2 == @"\S1* (You got the ThornRing.)/%")) || (old.text_ch2_3 == null && (current.text_ch2_3 == @"\S1＊ (いばらの指輪を　手に入れた)/%" || current.text_ch2_3 == @"\S1* (You got the ThornRing.)/%"));
-                else
-                    pass = (old.text == null && (current.text == @"\S1＊ (いばらの指輪を　手に入れた)/%" || current.text == @"\S1* (You got the ThornRing.)/%"));
-                break;
-
-            case 11: // Ch2_SGBerdly
-                pass = (old.snowgrave < 127 && current.snowgrave >= 127);
-                break;
-
-            case 12: // Ch2_Disk_Loaded
-                pass = (old.loadedDiskGreyBG < 121 && current.loadedDiskGreyBG == 121);
-                break;
-
-            case 13: // Ch2_Disk_Inserted
-                if(version == "Demo v1.19")
-                    pass = ((old.text == @"＊ (なにも起こらなかった)/%" || old.text == @"* (Nothing happened.)/%") && current.text == null) || ((old.text_ch2_2 == @"＊ (なにも起こらなかった)/%" || old.text_ch2_2 == @"* (Nothing happened.)/%") && current.text_ch2_2 == null) || ((old.text_ch2_3 == @"＊ (なにも起こらなかった)/%" || old.text_ch2_3 == @"* (Nothing happened.)/%") && current.text_ch2_3 == null);
-                else
-                    pass = ((old.text == @"＊ (なにも起こらなかった)/%" || old.text == @"* (Nothing happened.)/%") && current.text == null);
-                break;
-
-            case 14: // Ch2_SpamtonNEO_End
-                pass = (old.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && current.song == null);
-                break;
-
-            // Combined into one split because the rooms are different in Main Route and Snowgrave but visually they're the same
-            // So we did it like this to avoid confusion
-            case 15: // Ch2_Fountain_Enter
-                pass = (current.roomName == "room_cc_fountain_ch2" || current.roomName == "room_dw_mansion_fountain_ch2");
-                break;
-
-            case 16: // Ch2_Fountain_Exit
-                pass = (old.roomName == "room_cc_fountain_ch2" || old.roomName == "room_dw_mansion_fountain_ch2");
-                break;
-
-            case 17: // Ch2_PuppetScarfChest
-                if(version == "Demo v1.19")
-                    pass = (old.text == null && (current.text == @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/" || current.text == @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/")) || (old.text_ch2_2 == null && (current.text_ch2_2 == @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/" || current.text_ch2_2 == @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/")) || (old.text_ch2_3 == null && (current.text_ch2_3 == @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/" || current.text_ch2_3 == @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/"));
-                else
-                    pass = (old.text == null && (current.text == @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/" || current.text == @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/"));
-                break;
-        }
-
-        if(pass)
-        {
-            vars.splits[current.chapter][splitKey][done] = true;
-            print("[DELTARUNE] Split triggered (" + splitKey + ")");
-            return true;
-        }
+        vars.completedSplits.Add(split.Key);
+        print("[DELTARUNE] Split triggered (" + split.Key + ")");
+        return true;
     }
 }
