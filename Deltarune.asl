@@ -198,7 +198,7 @@ startup
         {"Ch2_MCFWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
         {"Ch2_MTZWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_city_intro_ch2"},
         {"Ch2_FreezeRing",         (ver, org, cur) => cur.roomName == "room_dw_city_big_2_ch2" && vars.checkTextClose(ver, org, cur, @"* (You got the FreezeRing.)/%", @"＊ (凍てつく指輪を　手に入れた)/%")},
-        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" || cur.roomName == "room_dw_city_man_ch2") && org.sound != "snd_egg" && cur.sound == "snd_egg"},
+        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" && org.sound != "snd_egg" && cur.sound == "snd_egg") || (cur.roomName == "room_dw_city_man_ch2" && vars.checkTextClose(ver, org, cur, @"* You got the Egg./%", @"＊ タマゴを　手に入れた。/%"))},
         {"Ch2_Mouse2Puzzle",       (ver, org, cur) => org.roomName == "room_dw_city_mice2_ch2" && cur.roomName == "room_dw_city_cheesemaze_ch2"},
         {"Ch2_ThornRing",          (ver, org, cur) => cur.roomName == "room_dw_city_moss_ch2" && vars.checkTextClose(ver, org, cur, @"\S1* (You got the ThornRing.)/%", @"\S1＊ (いばらの指輪を　手に入れた)/%")},
         {"Ch2_SGBerdly",           (ver, org, cur) => cur.roomName == "room_dw_city_berdly_ch2" && org.snowgrave < 127 && cur.snowgrave >= 127},
