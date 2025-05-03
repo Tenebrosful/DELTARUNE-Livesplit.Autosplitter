@@ -23,11 +23,11 @@ state("DELTARUNE", "Demo v1.08/v1.09")
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
 
-    double doorCloseCon     : 0x6EF220, 0x84, 0x24,  0x10, 0x18,  0x0;
-    double ch1Credits       : 0x6EF220, 0xD4, 0x5C,  0x60, 0x24,  0x10, 0xC0,  0x0;
-    double namerEvent       : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24,  0x10, 0x9C,  0x0;                   // DEVICE_NAMER.EVENT
-    double loadedDiskGreyBG : 0x6EF220, 0x84, 0x24,  0x10, 0x3D8, 0x0;                                // obj_shop_ch2_spamton.greybgtimer
-    double snowgrave        : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C,  0x20, 0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
+    double doorCloseCon     : 0x6EF220, 0x84, 0x24,  0x10,  0x18,  0x0;
+    double ch1Credits       : 0x6EF220, 0x80, 0x140, 0x148, 0x18,  0x160, 0x0;
+    double namerEvent       : 0x6EF220, 0xD4, 0x5C,  0x20,  0x24,  0x10,  0x9C,  0x0;                   // DEVICE_NAMER.EVENT
+    double loadedDiskGreyBG : 0x6EF220, 0x84, 0x24,  0x10,  0x3D8, 0x0;                                 // obj_shop_ch2_spamton.greybgtimer
+    double snowgrave        : 0x6EF220, 0xF4, 0x27C, 0x6C,  0x5C,  0x20,  0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
@@ -133,8 +133,10 @@ startup
         {
             case "SURVEY_PROGRAM":
                 return false;
+
             case "Demo v1.19":
                 return (org.text == null && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 == null && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 == null && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
+            
             default:
                 return (org.text == null && (cur.text == en || cur.text == jp));
         }
@@ -146,8 +148,10 @@ startup
         {
             case "SURVEY_PROGRAM":
                 return false;
+
             case "Demo v1.19":
                 return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
+            
             default:
                 return ((org.text == en || org.text == jp) && cur.text == null);
         }
@@ -157,13 +161,13 @@ startup
     vars.splits = new Dictionary<string, Func<string, dynamic, dynamic, bool>>[2];
     vars.splits[0] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
-        {"Ch1_School",                (ver, org, cur) => org.roomName == "room_insidecloset_ch1" && cur.roomName == "room_dark1_ch1"},
+        {"Ch1_School",                (ver, org, cur) => (org.roomName == "room_krisroom_ch1" || org.roomName == "room_insidecloset_ch1") && cur.roomName == "room_dark1_ch1"},
         {"Ch1_CastleTown_DoorClose",  (ver, org, cur) => cur.roomName == "room_castle_darkdoor_ch1" && org.doorCloseCon == 7 && cur.doorCloseCon == 21},
         {"Ch1_CastleTown_RoomChange", (ver, org, cur) => org.roomName == "room_castle_darkdoor_ch1" && cur.roomName == "room_field_start_ch1"},
         {"Ch1_Fields_Exit",           (ver, org, cur) => org.roomName == "room_field4_ch1" && cur.roomName == "room_field_checkers4_ch1"},
         {"Ch1_Checkerboard_Exit",     (ver, org, cur) => org.roomName == "room_field_checkersboss_ch1" && cur.roomName == "room_forest_savepoint1_ch1"},
         {"Ch1_BakeSale_Enter",        (ver, org, cur) => org.roomName == "room_forest_area3_ch1" && cur.roomName == "room_forest_savepoint2_ch1"},
-        {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && vars.checkTextClose(ver, org, cur, @"* (You received an Egg.)/%", @"＊ (タマゴを　手に入れた)/%")},
+        {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && vars.checkKeyItem(2, 1)},
         {"Ch1_SusieLancer_Exit",      (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_forest_afterthrash2_ch1"},
         {"Ch1_Escape_Cell",           (ver, org, cur) => org.roomName == "room_cc_prison_cells_ch1" && cur.roomName == "room_cc_prisonlancer_ch1" && vars.tempVar == 2},
         {"Ch1_CFWarp",                (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_field3_ch1"},
@@ -182,7 +186,7 @@ startup
     };
     vars.splits[1] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
-        {"Ch2_Library",            (ver, org, cur) => org.roomName == "room_library_ch2" && cur.roomName == "room_dw_cyber_intro_1_ch2"},
+        {"Ch2_Library",            (ver, org, cur) => (org.roomName == "room_krisroom_ch2" || org.roomName == "room_library_ch2") && cur.roomName == "room_dw_cyber_intro_1_ch2"},
         {"Ch2_ArcadeGameText",     (ver, org, cur) => cur.roomName == "room_dw_cyber_queen_boxing_ch2" && vars.checkTextClose(ver, org, cur, @"\EH* C'mon^1, let's go after&||her!/%", @"\EH＊ おまえら^1！&　 追っかけるぞ！/%")},
         {"Ch2_ArcadeGameLeave",    (ver, org, cur) => org.roomName == "room_dw_cyber_queen_boxing_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
         {"Ch2_DJFight",            (ver, org, cur) => cur.roomName == "room_dw_cyber_music_final_ch2" && org.fight == 1 && cur.fight == 0},
@@ -198,7 +202,7 @@ startup
         {"Ch2_MCFWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
         {"Ch2_MTZWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_city_intro_ch2"},
         {"Ch2_FreezeRing",         (ver, org, cur) => cur.roomName == "room_dw_city_big_2_ch2" && vars.checkTextClose(ver, org, cur, @"* (You got the FreezeRing.)/%", @"＊ (凍てつく指輪を　手に入れた)/%")},
-        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" && org.sound != "snd_egg" && cur.sound == "snd_egg") || (cur.roomName == "room_dw_city_man_ch2" && vars.checkTextClose(ver, org, cur, @"* You got the Egg./%", @"＊ タマゴを　手に入れた。/%"))},
+        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" || cur.roomName == "room_dw_city_man_ch2") && vars.checkKeyItem(2, 2)},
         {"Ch2_Mouse2Puzzle",       (ver, org, cur) => org.roomName == "room_dw_city_mice2_ch2" && cur.roomName == "room_dw_city_cheesemaze_ch2"},
         {"Ch2_ThornRing",          (ver, org, cur) => cur.roomName == "room_dw_city_moss_ch2" && vars.checkTextClose(ver, org, cur, @"\S1* (You got the ThornRing.)/%", @"\S1＊ (いばらの指輪を　手に入れた)/%")},
         {"Ch2_SGBerdly",           (ver, org, cur) => cur.roomName == "room_dw_city_berdly_ch2" && org.snowgrave < 127 && cur.snowgrave >= 127},
@@ -251,14 +255,13 @@ startup
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
     settings.CurrentDefaultParent = "Ch1";
 
-    settings.Add("Ch1_School",                false, "Enter Dark World (True Reset)");
+    settings.Add("Ch1_School",                false, "Enter Dark World");
     settings.Add("Ch1_CastleTown_DoorClose",  false, "Exit Castle Town (door close)");
-    settings.Add("Ch1_CastleTown_RoomChange", false, "Exit Castle Town (room change)");
+    settings.Add("Ch1_CastleTown_RoomChange", false, "Exit Castle Town (room exit)");
     settings.Add("Ch1_Fields_Exit",           false, "Exit Field");
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
-     settings.SetToolTip("Ch1_Egg", "This autosplit does not work in SURVEY_PROGRAM.");
     settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer fight room)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 room");
@@ -285,9 +288,9 @@ startup
     settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
     settings.CurrentDefaultParent = "Ch2";
 
-    settings.Add("Ch2_Library",          false, "Enter Dark World (True Reset)");
+    settings.Add("Ch2_Library",          false, "Enter Dark World");
     settings.Add("Ch2_ArcadeGameText",   false, "End Punch-Out minigame (textbox close)");
-    settings.Add("Ch2_ArcadeGameLeave",  false, "End Punch-Out minigame (room change)");
+    settings.Add("Ch2_ArcadeGameLeave",  false, "End Punch-Out minigame (room exit)");
     settings.Add("Ch2_DJFight",          false, "End Sweet Cap'n Cakes battle");
     settings.Add("Ch2_DJShopRoom",       false, "Enter Sweet Cap'n Cakes' shop room");
     settings.Add("Ch2_Ragger2",          false, "Exit Ragger2 room");
@@ -395,6 +398,15 @@ init
         case "A88A2DB3A68C714CA2B1FF57AC08A032": // English
         case "22008370824A37BAEF8948127963C769": // Japanese
             version = "SURVEY_PROGRAM";
+
+            // Have to define the chapter here for the game_change versions later even though it's not used for others
+            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            {
+                for(int i = 0; i < 12; i++)
+                    if(new DeepPointer(0x49D598, 0x264, (0x1A00 + (0x10 * i))).Deref<double>(game) == id) return true;
+                
+                return false;
+            });
             break;
 
         case "B465A74B67E4AB915856330AD1149A62": // v1.08 (itch.io)
@@ -404,11 +416,27 @@ init
         case "267A8ABE468D824222810201F00003BE": // v1.09 (Steam)
         case "DF5D64B395AD186DB974C265C87E3336": // v1.09 (Steam, item tracker mod)
             version = "Demo v1.08/v1.09";
+
+            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            {
+                for(int i = 0; i < 12; i++)
+                    if(new DeepPointer(0x6FCF38, 0x30, 0x1E48, 0x0, 0x64, (0x10 * i)).Deref<double>(game) == id) return true;
+                
+                return false;
+            });
             break;
 
         case "5FBE01F2BC1C04F45D809FFD060AC386": // itch.io
         case "CD77A63D7902990DBC704FE32B30700A": // Steam
             version = "Demo v1.10";
+
+            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            {
+                for(int i = 0; i < 12; i++)
+                    if(new DeepPointer(0x6FCF38, 0x30, 0x1E48, 0x0, 0x64, (0x10 * i)).Deref<double>(game) == id) return true;
+                
+                return false;
+            });
             break;
 
         case "7FA7658151211076FA09BE378BD6BD2B": // v1.12
@@ -417,6 +445,14 @@ init
         case "ED4568BAB864166BFD6322CEEB3FB544": // v1.15
         case "BCB61AE64476526BB41AC2CAD7B3B160": // v1.15 (item tracker mod)
             version = "Demo v1.12-v1.15";
+
+            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            {
+                for(int i = 0; i < 12; i++)
+                    if(new DeepPointer(0x6FE860, 0x30, 0x2814, 0x20, 0xE4, (0xC00 + (0x10 * i))).Deref<double>(game) == id) return true;
+                
+                return false;
+            });
             break;
 
         // game_change versions - Chapter Select data.win
@@ -424,6 +460,27 @@ init
         // Just hoping it does not become a problem
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
             version = "Demo v1.19";
+
+            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            {
+                switch(chapter)
+                {
+                    case 1:
+                        for(int i = 0; i < 12; i++)
+                            if(new DeepPointer(0x6A1CA8, 0x48, 0x10, 0x3330, 0x0, (0x100 + (0x10 * i))).Deref<double>(game) == id) return true;
+
+                        return false;
+
+                    case 2:
+                        for(int i = 0; i < 12; i++)
+                            if(new DeepPointer(0x6A1CA8, 0x48, 0x10, 0xD80, 0x0, (0x100 + (0x10 * i))).Deref<double>(game) == id) return true;
+
+                        return false;
+
+                    default:
+                        return false;
+                }
+            });
             break;
 
         default:
