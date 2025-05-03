@@ -400,7 +400,7 @@ init
             version = "SURVEY_PROGRAM";
 
             // Have to define the chapter here for the game_change versions later even though it's not used for others
-            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
             {
                 for(int i = 0; i < 12; i++)
                     if(new DeepPointer(0x49D598, 0x264, (0x1A00 + (0x10 * i))).Deref<double>(game) == id) return true;
@@ -417,7 +417,7 @@ init
         case "DF5D64B395AD186DB974C265C87E3336": // v1.09 (Steam, item tracker mod)
             version = "Demo v1.08/v1.09";
 
-            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
             {
                 for(int i = 0; i < 12; i++)
                     if(new DeepPointer(0x6FCF38, 0x30, 0x1E48, 0x0, 0x64, (0x10 * i)).Deref<double>(game) == id) return true;
@@ -430,7 +430,7 @@ init
         case "CD77A63D7902990DBC704FE32B30700A": // Steam
             version = "Demo v1.10";
 
-            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
             {
                 for(int i = 0; i < 12; i++)
                     if(new DeepPointer(0x6FCF38, 0x30, 0x1E48, 0x0, 0x64, (0x10 * i)).Deref<double>(game) == id) return true;
@@ -446,7 +446,7 @@ init
         case "BCB61AE64476526BB41AC2CAD7B3B160": // v1.15 (item tracker mod)
             version = "Demo v1.12-v1.15";
 
-            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
             {
                 for(int i = 0; i < 12; i++)
                     if(new DeepPointer(0x6FE860, 0x30, 0x2814, 0x20, 0xE4, (0xC00 + (0x10 * i))).Deref<double>(game) == id) return true;
@@ -461,7 +461,7 @@ init
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
             version = "Demo v1.19";
 
-            vars.checkKeyItem = (Func<int, int, bool>)((id, chapter) => 
+            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
             {
                 switch(chapter)
                 {
