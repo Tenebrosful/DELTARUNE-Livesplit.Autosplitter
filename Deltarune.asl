@@ -6,10 +6,10 @@ state("DELTARUNE", "SURVEY_PROGRAM")
     double savefile : 0x48E5DC, 0x27C, 0x488, 0x4D0; // global.filechoice
     double plot     : 0x48E5DC, 0x27C, 0x488, 0x500; // global.plot
     double choicer  : 0x48E5DC, 0x27C, 0x28,  0x40;  // global.choice
+    double msc      : 0x48E5DC, 0x27C, 0x28,  0x140; // global.msc
 
     // Self
     double doorCloseCon      : 0x48BDEC, 0xC,  0x60, 0x10, 0x10,  0x0; // obj_darkdoorevent(_ch1).con
-    double ch1Credits        : 0x48BDEC, 0x4,  0x60, 0x10, 0x34,  0x0; // obj_credits(_ch1).timer
     double jevilDance        : 0x48BDEC, 0x78, 0x60, 0x10, 0x10,  0x0; // obj_joker_body(_ch1).dancelv
     double jevilDance2       : 0x48BDEC, 0x7C, 0x60, 0x10, 0x10,  0x0; // Backup pointer
     double finalTextboxHalt  : 0x48BDEC, 0x98, 0x60, 0x10, 0x274, 0x0; // obj_writer(_ch1).halt
@@ -22,16 +22,17 @@ state("DELTARUNE", "Demo v1.08/v1.09")
 {
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
+    double choicer : 0x6FCF38, 0x30, 0x18C0, 0x0;
+    double msc     : 0x6FCF38, 0x30, 0x354C, 0x0;
 
-    double doorCloseCon : 0x6EF220, 0x84, 0x24,  0x10,  0x18, 0x0;
-    double ch1Credits   : 0x6EF220, 0x80, 0x140, 0x148, 0x18, 0x160, 0x0;
-    double namerEvent   : 0x6EF220, 0xD4, 0x5C,  0x20,  0x24, 0x10,  0x9C,  0x0;                   // DEVICE_NAMER.EVENT
-    double snowgrave    : 0x6EF220, 0xF4, 0x27C, 0x6C,  0x5C, 0x20,  0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
+    double doorCloseCon : 0x6EF220, 0x84, 0x24,  0x10, 0x18, 0x0;
+    double namerEvent   : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0x9C,  0x0;                   // DEVICE_NAMER.EVENT
+    double snowgrave    : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
-    string32  sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;                        // Current sound (highest priority)
     string128 text  : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0; // obj_writer(_ch1).mystring
+    string256 sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;                        // Current sound (highest priority)
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;                              // Full path to the current song
 }
 
@@ -39,16 +40,17 @@ state("DELTARUNE", "Demo v1.10")
 {
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0;
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0;
+    double choicer : 0x6FCF38, 0x30, 0x18C0, 0x0;
+    double msc     : 0x6FCF38, 0x30, 0x354C, 0x0;
 
     double doorCloseCon : 0x6EF220, 0x84, 0x24,  0x10, 0x18, 0x0;
-    double ch1Credits   : 0x6EF220, 0xD4, 0x5C,  0x60, 0x24, 0x10, 0xC0,  0x0;
     double namerEvent   : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0x2F4, 0x0;
     double snowgrave    : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0xC0, 0x0;
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
-    string32  sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;
     string128 text  : 0x6FCE4C, 0x8,  0x144, 0x24, 0x10, 0x5A0, 0x0, 0x0, 0x0;
+    string256 sound : 0x4E0794, 0x58, 0xC0,  0x40, 0x0;
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;
 }
 
@@ -56,32 +58,36 @@ state("DELTARUNE", "Demo v1.12-v1.15")
 {
     double chapter : 0x6FE860, 0x30, 0x2F34, 0x80;
     double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
+    double choicer : 0x6FE860, 0x30, 0xBA0,  0xC0;
+    double msc     : 0x6FE860, 0x30, 0x17AC, 0x0;
 
     double doorCloseCon : 0x6F0B48, 0x84, 0x24,  0x10, 0x18, 0x0;
-    double ch1Credits   : 0x6F0B48, 0xD4, 0x5C,  0x60, 0x24, 0x10, 0x120, 0x0;
     double namerEvent   : 0x6F0B48, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0xFC,  0x0;
     double snowgrave    : 0x6F0B48, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0x120, 0x0;
 
     float kingPos : 0x6F2CBC, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
-    string32  sound : 0x4E20B4, 0x58, 0xC0,  0x40, 0x0;
     string128 text  : 0x6FE774, 0x8,  0x144, 0x24, 0x10, 0x0, 0x0, 0x0, 0x0;
+    string256 sound : 0x4E20B4, 0x58, 0xC0,  0x40, 0x0;
     string256 song  : 0x4E1878, 0x0,  0x0,   0x0;
 }
 
 state("DELTARUNE", "Demo v1.19")
 {
-    double fight_ch1 : 0x6A1CA8, 0x48, 0x10, 0x5D0, 0x0;
-    double fight_ch2 : 0x6A1CA8, 0x48, 0x10, 0x620, 0x50;
+    double fight_ch1   : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x710;
+    double choicer_ch1 : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x0;
+    double msc_ch1     : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0xF0;
+    
+    double fight_ch2   : 0x6A1CA8, 0x48, 0x10, 0x7790, 0xBB0;
+    double choicer_ch2 : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x0;
+    double msc_ch2     : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x130;
 
     double doorCloseCon : 0x8B2790, 0xE0,  0x48,  0x10, 0x0,  0x0;
-    double ch1Credits   : 0x8B2790, 0x178, 0x70,  0x78, 0x48, 0x10, 0x1A0, 0x0;
     double namerEvent   : 0x8B2790, 0x178, 0x70,  0x38, 0x48, 0x10, 0x3B0, 0x0;
     double snowgrave    : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x70, 0x38, 0x1A0, 0x48, 0x10, 0x3D0, 0x0;
 
     float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
 
-    string32  sound    : 0x6A3818, 0x60, 0xD0,  0x58, 0x0;
     string128 text_ch1 : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0xF0, 0x0, 0x0, 0x0;
 
     // Chapter 2 in this version is a bit weird, this pointer changes on some textboxes and
@@ -90,12 +96,14 @@ state("DELTARUNE", "Demo v1.19")
     string128 text_ch2_2 : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6D0, 0x0, 0x0, 0x0;
     string128 text_ch2_3 : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6F0, 0x0, 0x0, 0x0;
 
-    string256 song      : 0x6A2F90, 0x0, 0x0, 0x0;
+    string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
+    string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
 startup
 {
+    vars.offset = new Stopwatch();
     vars.tempVar = 0;
     vars.forceSplit = false;
     vars.SPEndingTriggered = false; // Used to prevent a double split
@@ -116,6 +124,7 @@ startup
 
     vars.resetVars = (Action)(() =>
     {
+        vars.offset.Reset();
         vars.tempVar = 0;
         vars.forceSplit = false;
         vars.SPEndingTriggered = false;
@@ -163,7 +172,7 @@ startup
         {"Ch1_Fields_Exit",           (ver, org, cur) => org.roomName == "room_field4_ch1" && cur.roomName == "room_field_checkers4_ch1"},
         {"Ch1_Checkerboard_Exit",     (ver, org, cur) => org.roomName == "room_field_checkersboss_ch1" && cur.roomName == "room_forest_savepoint1_ch1"},
         {"Ch1_BakeSale_Enter",        (ver, org, cur) => org.roomName == "room_forest_area3_ch1" && cur.roomName == "room_forest_savepoint2_ch1"},
-        {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && vars.checkKeyItem(2, 1)},
+        {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && org.msc != 601 && cur.msc == 601 && cur.choicer == 0},
         {"Ch1_SusieLancer_Exit",      (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_forest_afterthrash2_ch1"},
         {"Ch1_Escape_Cell",           (ver, org, cur) => org.roomName == "room_cc_prison_cells_ch1" && cur.roomName == "room_cc_prisonlancer_ch1" && vars.tempVar == 2},
         {"Ch1_CFWarp",                (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_field3_ch1"},
@@ -197,8 +206,8 @@ startup
         {"Ch2_TZMWarp",            (ver, org, cur) => org.roomName == "room_dw_city_intro_ch2" && cur.roomName == "room_dw_mansion_entrance_ch2"},
         {"Ch2_MCFWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
         {"Ch2_MTZWarp",            (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_city_intro_ch2"},
-        {"Ch2_FreezeRing",         (ver, org, cur) => cur.roomName == "room_dw_city_big_2_ch2" && vars.checkTextClose(ver, org, cur, @"* (You got the FreezeRing.)/%", @"＊ (凍てつく指輪を　手に入れた)/%")},
-        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" || cur.roomName == "room_dw_city_man_ch2") && vars.checkKeyItem(2, 2)},
+        {"Ch2_FreezeRing",         (ver, org, cur) => cur.roomName == "room_dw_city_big_2_ch2" && vars.checkTextOpen(ver, org, cur, @"* (You got the FreezeRing.)/%", @"＊ (凍てつく指輪を　手に入れた)/%")},
+        {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" || cur.roomName == "room_dw_city_man_ch2") && org.msc == 1173 && cur.msc > 1173 && cur.choicer <= 0},
         {"Ch2_Mouse2Puzzle",       (ver, org, cur) => org.roomName == "room_dw_city_mice2_ch2" && cur.roomName == "room_dw_city_cheesemaze_ch2"},
         {"Ch2_ThornRing",          (ver, org, cur) => cur.roomName == "room_dw_city_moss_ch2" && vars.checkTextClose(ver, org, cur, @"\S1* (You got the ThornRing.)/%", @"\S1＊ (いばらの指輪を　手に入れた)/%")},
         {"Ch2_SGBerdly",           (ver, org, cur) => cur.roomName == "room_dw_city_berdly_ch2" && org.snowgrave < 127 && cur.snowgrave >= 127},
@@ -210,7 +219,7 @@ startup
         {"Ch2_Mansion_Exit",       (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_mansion_fire_paintings_ch2"},
         {"Ch2_TasqueManager",      (ver, org, cur) => org.roomName == "room_dw_mansion_tasquePaintings_ch2" && cur.roomName == "room_dw_mansion_traffic_ch2"},
         {"Ch2_Mauswheel",          (ver, org, cur) => org.roomName == "room_dw_mansion_kitchen_ch2" && cur.roomName == "room_dw_mansion_east_2f_transformed_new_ch2"},
-        {"Ch2_Disk_Loaded",        (ver, org, cur) => cur.roomName == "room_shop_ch2_spamton_ch2" && vars.checkKeyItem(11, 2)},
+        {"Ch2_Disk_Loaded",        (ver, org, cur) => cur.roomName == "room_shop_ch2_spamton_ch2" && vars.offset.ElapsedMilliseconds > 1000 && org.sound == null && cur.sound != null && cur.sound.EndsWith(@"mus\spamton_neo_after.ogg")},
         {"Ch2_Disk_Inserted",      (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_b_ch2" && vars.checkTextClose(ver, org, cur, @"* (Nothing happened.)/%", @"＊ (なにも起こらなかった)/%")},
         {"Ch2_SpamtonNEO_End",     (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_ch2" && org.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && cur.song == null},
         {"Ch2_SpamtonNEO_Leave",   (ver, org, cur) => org.roomName == "room_dw_mansion_b_east_ch2" && cur.roomName == "room_dw_mansion_b_east_a_ch2"},
@@ -277,7 +286,7 @@ startup
      settings.Add("Ch1_BCWarp",          false, "Warp from Bake Sale to Castle");
      settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room");
      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil battle");
-      settings.SetToolTip("Ch1_Jevil_EndBattle", @"This autosplit does not work if you remove Jevil's battle theme from the game files (mus\joker.ogg) in non-SURVEY_PROGRAM versions.");
+      settings.SetToolTip("Ch1_Jevil_EndBattle", @"This autosplit does not work if you remove THE WORLD REVOLVING from the game files (mus\joker.ogg) in non-SURVEY_PROGRAM versions.");
      settings.Add("Ch1_Jevil_LeaveRoom", false, "Exit Jevil room");
     settings.CurrentDefaultParent = null;
 
@@ -321,9 +330,10 @@ startup
     settings.Add("Ch2_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch2_AB";
      settings.Add("Ch2_Disk_Loaded",      false, "Obtain Loaded Disk");
+      settings.SetToolTip("Ch2_Disk_Loaded", @"This autosplit does not work if you remove Dialtone from the game files (mus\spamton_neo_after.ogg).");
      settings.Add("Ch2_Disk_Inserted",    false, "Insert Loaded Disk");
      settings.Add("Ch2_SpamtonNEO_End",   false, "End basement Spamton NEO battle");
-      settings.SetToolTip("Ch2_SpamtonNEO_End", @"This autosplit does not work if you remove Spamton NEO's battle theme from the game files (mus\spamton_neo_mix_ex_wip.ogg).");
+      settings.SetToolTip("Ch2_SpamtonNEO_End", @"This autosplit does not work if you remove BIG SHOT from the game files (mus\spamton_neo_mix_ex_wip.ogg).");
      settings.Add("Ch2_SpamtonNEO_Leave", false, "Exit basement Spamton NEO room");
     settings.CurrentDefaultParent = "Ch2";
 
@@ -394,15 +404,6 @@ init
         case "A88A2DB3A68C714CA2B1FF57AC08A032": // English
         case "22008370824A37BAEF8948127963C769": // Japanese
             version = "SURVEY_PROGRAM";
-
-            // Have to define the chapter here for the game_change versions later even though it's not used for others
-            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
-            {
-                for(int i = 0; i < 12; i++)
-                    if(new DeepPointer(0x49D598, 0x264, (0x1A00 + (0x10 * i))).Deref<double>(game) == id) return true;
-                
-                return false;
-            });
             break;
 
         case "B465A74B67E4AB915856330AD1149A62": // v1.08 (itch.io)
@@ -412,27 +413,11 @@ init
         case "267A8ABE468D824222810201F00003BE": // v1.09 (Steam)
         case "DF5D64B395AD186DB974C265C87E3336": // v1.09 (Steam, item tracker mod)
             version = "Demo v1.08/v1.09";
-
-            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
-            {
-                for(int i = 0; i < 12; i++)
-                    if(new DeepPointer(0x6FCF38, 0x30, 0x1E48, 0x0, 0x64, (0x10 * i)).Deref<double>(game) == id) return true;
-                
-                return false;
-            });
             break;
 
         case "5FBE01F2BC1C04F45D809FFD060AC386": // itch.io
         case "CD77A63D7902990DBC704FE32B30700A": // Steam
             version = "Demo v1.10";
-
-            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
-            {
-                for(int i = 0; i < 12; i++)
-                    if(new DeepPointer(0x6FCF38, 0x30, 0x1E48, 0x0, 0x64, (0x10 * i)).Deref<double>(game) == id) return true;
-                
-                return false;
-            });
             break;
 
         case "7FA7658151211076FA09BE378BD6BD2B": // v1.12
@@ -441,14 +426,6 @@ init
         case "ED4568BAB864166BFD6322CEEB3FB544": // v1.15
         case "BCB61AE64476526BB41AC2CAD7B3B160": // v1.15 (item tracker mod)
             version = "Demo v1.12-v1.15";
-
-            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
-            {
-                for(int i = 0; i < 12; i++)
-                    if(new DeepPointer(0x6FE860, 0x30, 0x2814, 0x20, 0xE4, (0xC00 + (0x10 * i))).Deref<double>(game) == id) return true;
-                
-                return false;
-            });
             break;
 
         // game_change versions - Chapter Select data.win
@@ -456,27 +433,6 @@ init
         // Just hoping it does not become a problem
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
             version = "Demo v1.19";
-
-            vars.checkKeyItem = (Func<double, int, bool>)((id, chapter) => 
-            {
-                switch(chapter)
-                {
-                    case 1:
-                        for(int i = 0; i < 12; i++)
-                            if(new DeepPointer(0x6A1CA8, 0x48, 0x10, 0x3330, 0x0, (0x100 + (0x10 * i))).Deref<double>(game) == id) return true;
-
-                        return false;
-
-                    case 2:
-                        for(int i = 0; i < 12; i++)
-                            if(new DeepPointer(0x6A1CA8, 0x48, 0x10, 0xD80, 0x0, (0x100 + (0x10 * i))).Deref<double>(game) == id) return true;
-
-                        return false;
-
-                    default:
-                        return false;
-                }
-            });
             break;
 
         default:
@@ -541,18 +497,24 @@ update
         {
             current.chapter = 1;
             current.fight   = current.fight_ch1;
+            current.choicer = current.choicer_ch1;
+            current.msc     = current.msc_ch1;
             current.text    = current.text_ch1;
         }
         else if(current.directory.EndsWith(@"\chapter2_windows\"))
         {
             current.chapter = 2;
             current.fight   = current.fight_ch2;
+            current.choicer = current.choicer_ch2;
+            current.msc     = current.msc_ch2;
             current.text    = current.text_ch2;
         }
         else
         {
             current.chapter = 0;
             current.fight   = 0;
+            current.choicer = -1;
+            current.msc     = 0;
             current.text    = null;
         }
     }
@@ -611,13 +573,14 @@ update
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
 
-        else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && old.ch1Credits < 108 && current.ch1Credits >= 108) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch, 0] && current.roomName == vars.OSTRooms[ch, 1]))
+        else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch, 0] && current.roomName == vars.OSTRooms[ch, 1]))
         {
             if(settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
             {
                 print("[DELTARUNE] (OST%) All Chapters: Chapter " + ch + " ended, timer paused");
                 timer.IsGameTimePaused = true;
             }
+            vars.offset.Reset();
             vars.forceSplit = settings["Ch" + ch + "_EndingOST"];
         }
 
@@ -647,9 +610,16 @@ update
         if(settings["Ch1_Escape_Cell"] && vars.tempVar < 2 && old.roomName == "room_cc_prison_cells_ch1" && current.roomName == "room_cc_prisonlancer_ch1")
             vars.tempVar ++;
 
+        else if((settings["AC_PauseTimerOST"] || settings["Ch1_EndingOST"]) && current.roomName == "room_ed_ch1" && !vars.offset.IsRunning)
+            vars.offset.Start();
+
         // Edge case: Reset vars.tempVar to make sure Door Overflow splits don't get triggered by doing the 400 bagels cutscene and then playing normally until the door is properly accessible
         else if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && current.chapter == 2 && vars.tempVar == 2 && current.roomName != "room_dw_city_intro_ch2" && current.roomName != "room_dw_mansion_entrance_ch2")
             vars.tempVar = 0;
+
+        // Edge case: Sometimes the sound variable initializes differently when entering the shop
+        else if(settings["Ch2_Disk_Loaded"] && current.roomName == "room_shop_ch2_spamton_ch2" && !vars.offset.IsRunning)
+            vars.offset.Start();
     }
 }
 
@@ -722,6 +692,7 @@ split
             vars.tempVar = 0;
 
         vars.completedSplits.Add(split.Key);
+        vars.offset.Reset();
         print("[DELTARUNE] Split triggered (" + split.Key + ")");
         return true;
     }
