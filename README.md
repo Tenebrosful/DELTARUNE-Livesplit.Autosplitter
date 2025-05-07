@@ -6,7 +6,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 - SURVEY_PROGRAM
 - Chapter 1&2 v1.08-v1.15, v1.19
-  - The item tracker mod for v1.15 is also supported.
+  - The item tracker mod (v1.09, v1.15, v1.19) is also supported.
 
 ## How to install
 
