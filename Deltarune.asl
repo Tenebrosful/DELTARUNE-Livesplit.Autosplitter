@@ -448,12 +448,13 @@ init
                 (
                     "This version of DELTARUNE is not supported by the autosplitter.\n" +
                     "If you are playing an older version, update your game.\n" +
-                    "If you are playing an unsupported mod, switch to the vanilla game or the allowed item tracker mod.\n\n" +
+                    "If you are playing an unsupported mod, switch to the vanilla game or these supported mods:\n" +
+                    "- Item tracker mod;\n" +
+                    "- OST% tracker mod.\n\n" +
 
-                    "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n\n" +
-
+                    "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
-                    "- SURVEY_PROGRAM\n" +
+                    "- SURVEY_PROGRAM;\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
