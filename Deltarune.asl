@@ -410,8 +410,10 @@ init
         case "AFA40591602758CC56F445E819023E76": // v1.08 (Steam)
         case "616C5751AC9FC584AF250F1B04474AFD": // v1.09 (itch.io)
         case "3E9DD6292911D35417E19CD39DF81687": // v1.09 (itch.io, item tracker mod)
+        case "4BDF08DD35BCD8BC39EF71C5E7247C4A": // v1.09 (itch.io, OST% tracker mod)
         case "267A8ABE468D824222810201F00003BE": // v1.09 (Steam)
         case "DF5D64B395AD186DB974C265C87E3336": // v1.09 (Steam, item tracker mod)
+        case "7B73FE95B0E0251CDC3C26155089A5A4": // v1.09 (Steam, OST% tracker mod)
             version = "Demo v1.08/v1.09";
             break;
 
@@ -425,6 +427,7 @@ init
         case "8892ACA0ECE33A17711D7780C70CA3DE": // v1.14
         case "ED4568BAB864166BFD6322CEEB3FB544": // v1.15
         case "BCB61AE64476526BB41AC2CAD7B3B160": // v1.15 (item tracker mod)
+        case "3AEFE7A34739E5677CF3AB1829536BC7": // v1.15 (OST% tracker mod)
             version = "Demo v1.12-v1.15";
             break;
 
