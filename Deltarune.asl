@@ -25,9 +25,10 @@ state("DELTARUNE", "Demo v1.08/v1.09")
     double choicer : 0x6FCF38, 0x30, 0x18C0, 0x0;
     double msc     : 0x6FCF38, 0x30, 0x354C, 0x0;
 
-    double doorCloseCon : 0x6EF220, 0x84, 0x24,  0x10, 0x18, 0x0;
-    double namerEvent   : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0x9C,  0x0;                   // DEVICE_NAMER.EVENT
-    double snowgrave    : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
+    double doorCloseCon     : 0x6EF220, 0x84, 0x24,  0x10, 0x18,  0x0;
+    double namerEvent       : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24,  0x10, 0x9C,  0x0;                   // DEVICE_NAMER.EVENT
+    double loadedDiskGreyBG : 0x6EF220, 0x84, 0x24,  0x10, 0x3D8, 0x0;                                // obj_shop_ch2_spamton.greybgtimer
+    double snowgrave        : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C,  0x20, 0x144, 0x24, 0x10, 0xC0, 0x0; // obj_spell_snowgrave.timer
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
@@ -43,9 +44,10 @@ state("DELTARUNE", "Demo v1.10")
     double choicer : 0x6FCF38, 0x30, 0x18C0, 0x0;
     double msc     : 0x6FCF38, 0x30, 0x354C, 0x0;
 
-    double doorCloseCon : 0x6EF220, 0x84, 0x24,  0x10, 0x18, 0x0;
-    double namerEvent   : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0x2F4, 0x0;
-    double snowgrave    : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0xC0, 0x0;
+    double doorCloseCon     : 0x6EF220, 0x84, 0x24,  0x10, 0x18,  0x0;
+    double namerEvent       : 0x6EF220, 0xD4, 0x5C,  0x20, 0x24,  0x10, 0x2F4, 0x0;
+    double loadedDiskGreyBG : 0x6EF220, 0x84, 0x24,  0x10, 0x87C, 0x0;
+    double snowgrave        : 0x6EF220, 0xF4, 0x27C, 0x6C, 0x5C,  0x20, 0x144, 0x24, 0x10, 0xC0, 0x0;
 
     float kingPos : 0x6F1394, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
@@ -61,9 +63,10 @@ state("DELTARUNE", "Demo v1.12-v1.15")
     double choicer : 0x6FE860, 0x30, 0xBA0,  0xC0;
     double msc     : 0x6FE860, 0x30, 0x17AC, 0x0;
 
-    double doorCloseCon : 0x6F0B48, 0x84, 0x24,  0x10, 0x18, 0x0;
-    double namerEvent   : 0x6F0B48, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0xFC,  0x0;
-    double snowgrave    : 0x6F0B48, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0x120, 0x0;
+    double doorCloseCon     : 0x6F0B48, 0x84, 0x24,  0x10, 0x18, 0x0;
+    double namerEvent       : 0x6F0B48, 0xD4, 0x5C,  0x20, 0x24, 0x10, 0xFC,  0x0;
+    double loadedDiskGreyBG : 0x6F0B48, 0x84, 0x24,  0x10, 0x0,  0x0;
+    double snowgrave        : 0x6F0B48, 0xF4, 0x27C, 0x6C, 0x5C, 0x20, 0x144, 0x24, 0x10, 0x120, 0x0;
 
     float kingPos : 0x6F2CBC, 0x4, 0x140, 0x68, 0x3C, 0x8, 0xB0;
 
@@ -82,9 +85,10 @@ state("DELTARUNE", "Demo v1.19")
     double choicer_ch2 : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x0;
     double msc_ch2     : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x130;
 
-    double doorCloseCon : 0x8B2790, 0xE0,  0x48,  0x10, 0x0,  0x0;
-    double namerEvent   : 0x8B2790, 0x178, 0x70,  0x38, 0x48, 0x10, 0x3B0, 0x0;
-    double snowgrave    : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x70, 0x38, 0x1A0, 0x48, 0x10, 0x3D0, 0x0;
+    double doorCloseCon     : 0x8B2790, 0xE0,  0x48,  0x10, 0x0,   0x0;
+    double namerEvent       : 0x8B2790, 0x178, 0x70,  0x38, 0x48,  0x10, 0x3B0, 0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10, 0x3C0, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88, 0x70,  0x38, 0x1A0, 0x48, 0x10, 0x3D0, 0x0;
 
     float kingPos : 0x69FA98, 0x0, 0x530, 0x50, 0x158, 0x10, 0xE8;
 
@@ -219,7 +223,7 @@ startup
         {"Ch2_Mansion_Exit",       (ver, org, cur) => org.roomName == "room_dw_mansion_entrance_ch2" && cur.roomName == "room_dw_mansion_fire_paintings_ch2"},
         {"Ch2_TasqueManager",      (ver, org, cur) => org.roomName == "room_dw_mansion_tasquePaintings_ch2" && cur.roomName == "room_dw_mansion_traffic_ch2"},
         {"Ch2_Mauswheel",          (ver, org, cur) => org.roomName == "room_dw_mansion_kitchen_ch2" && cur.roomName == "room_dw_mansion_east_2f_transformed_new_ch2"},
-        {"Ch2_Disk_Loaded",        (ver, org, cur) => cur.roomName == "room_shop_ch2_spamton_ch2" && vars.offset.ElapsedMilliseconds > 1000 && org.sound == null && cur.sound != null && cur.sound.EndsWith(@"mus\spamton_neo_after.ogg")},
+        {"Ch2_Disk_Loaded",        (ver, org, cur) => cur.roomName == "room_shop_ch2_spamton_ch2" && org.loadedDiskGreyBG < 121 && cur.loadedDiskGreyBG == 121},
         {"Ch2_Disk_Inserted",      (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_b_ch2" && vars.checkTextClose(ver, org, cur, @"* (Nothing happened.)/%", @"＊ (なにも起こらなかった)/%")},
         {"Ch2_SpamtonNEO_End",     (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_ch2" && org.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && cur.song == null},
         {"Ch2_SpamtonNEO_Leave",   (ver, org, cur) => org.roomName == "room_dw_mansion_b_east_ch2" && cur.roomName == "room_dw_mansion_b_east_a_ch2"},
@@ -330,7 +334,6 @@ startup
     settings.Add("Ch2_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch2_AB";
      settings.Add("Ch2_Disk_Loaded",      false, "Obtain Loaded Disk");
-      settings.SetToolTip("Ch2_Disk_Loaded", @"This autosplit does not work if you remove Dialtone from the game files (mus\spamton_neo_after.ogg).");
      settings.Add("Ch2_Disk_Inserted",    false, "Insert Loaded Disk");
      settings.Add("Ch2_SpamtonNEO_End",   false, "End basement Spamton NEO battle");
       settings.SetToolTip("Ch2_SpamtonNEO_End", @"This autosplit does not work if you remove BIG SHOT from the game files (mus\spamton_neo_mix_ex_wip.ogg).");
@@ -620,10 +623,6 @@ update
         // Edge case: Reset vars.tempVar to make sure Door Overflow splits don't get triggered by doing the 400 bagels cutscene and then playing normally until the door is properly accessible
         else if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && current.chapter == 2 && vars.tempVar == 2 && current.roomName != "room_dw_city_intro_ch2" && current.roomName != "room_dw_mansion_entrance_ch2")
             vars.tempVar = 0;
-
-        // Edge case: Sometimes the sound variable initializes differently when entering the shop
-        else if(settings["Ch2_Disk_Loaded"] && current.roomName == "room_shop_ch2_spamton_ch2" && !vars.offset.IsRunning)
-            vars.offset.Start();
     }
 }
 
@@ -696,7 +695,6 @@ split
             vars.tempVar = 0;
 
         vars.completedSplits.Add(split.Key);
-        vars.offset.Reset();
         print("[DELTARUNE] Split triggered (" + split.Key + ")");
         return true;
     }
