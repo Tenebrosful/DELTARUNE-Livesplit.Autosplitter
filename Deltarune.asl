@@ -80,7 +80,7 @@ state("DELTARUNE", "Demo v1.19")
     double fight_ch1   : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x710;
     double choicer_ch1 : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x0;
     double msc_ch1     : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0xF0;
-    
+
     double fight_ch2   : 0x6A1CA8, 0x48, 0x10, 0x7790, 0xBB0;
     double choicer_ch2 : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x0;
     double msc_ch2     : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x130;
@@ -103,6 +103,11 @@ state("DELTARUNE", "Demo v1.19")
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
+}
+
+state("DELTARUNE", "Release")
+{
+    
 }
 
 startup
@@ -236,6 +241,15 @@ startup
         {"Ch2_Fountain_Exit",      (ver, org, cur) => (org.roomName == "room_cc_fountain_ch2" || org.roomName == "room_dw_mansion_fountain_ch2") && cur.roomName == "room_lw_computer_lab_ch2"},
         {"Ch2_PuppetScarfChest",   (ver, org, cur) => cur.roomName == "room_dw_castle_west_cliff_ch2" && vars.checkTextOpen(ver, org, cur, @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/", @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/")}
     };
+    vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
+    {
+        
+    };
+    vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
+    {
+
+    };
+    
     vars.completedSplits = new HashSet<string>();
 
     vars.resetSplits = (Action)(() =>
