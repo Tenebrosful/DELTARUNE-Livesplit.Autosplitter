@@ -80,7 +80,7 @@ state("DELTARUNE", "Demo v1.19")
     double fight_ch1   : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x710;
     double choicer_ch1 : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x0;
     double msc_ch1     : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0xF0;
-
+    
     double fight_ch2   : 0x6A1CA8, 0x48, 0x10, 0x7790, 0xBB0;
     double choicer_ch2 : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x0;
     double msc_ch2     : 0x6A1CA8, 0x48, 0x10, 0x7790, 0x130;
@@ -105,9 +105,41 @@ state("DELTARUNE", "Demo v1.19")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
-state("DELTARUNE", "Release")
+state("DELTARUNE", "CH1-4 v14")
 {
+    // Commented out = currently not needed but keeping just in case
+    double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
+    double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
+    double msc_ch1      : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x100;
+    string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
+    double doorCloseCon : 0x8B2790, 0xE0, 0x48,  0x10,   0x30,  0x0;
+    float kingPos       : 0x69FA98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
     
+    double fight_ch2        : 0x6A1CA8, 0x48,  0x10,  0xCE0, 0xBE0;
+    double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0xCE0, 0x40;
+    double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0xCE0, 0x160;
+    string128 text_ch2      : 0x8C2008, 0x10,  0x1A0, 0x48,  0x10,  0x6F0, 0x0,   0x0,  0x0;
+    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,  0x10,  0x710, 0x0,   0x0,  0x0;
+    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,  0x10,  0x7E0, 0x0,   0x0,  0x0;
+    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,  0x48,  0x10,  0x40,  0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,  0xC50, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,  0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
+
+    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xCD0;
+    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD20;
+    // double choicer_ch3 : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD0;
+    // double msc_ch3     : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0x240;
+    // string128 text_ch3 : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10, 0x530, 0x0,   0x0, 0x0;
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x2E0, 0x0;
+
+    double fight_ch4      : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0xC10;
+    // double choicer_ch4 : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0x10;
+    // double msc_ch4     : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0x180;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70, 0x38,   0x48, 0x10, 0x1E0, 0x0;
+
+    string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
+    string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
+    string256 directory : 0x8B2818, 0x0;
 }
 
 startup
@@ -121,14 +153,18 @@ startup
     vars.ACContinueRooms = new[,]
     {
         {null, null},
-        {"PLACE_MENU_ch1", "PLACE_CONTACT_ch1"}, // Chapter 1
-        {"PLACE_MENU_ch2", "room_krisroom_ch2"}  // Chapter 1 -> 2
+        {"PLACE_MENU_ch1", "PLACE_CONTACT_ch1"},                 // Chapter 1
+        {"PLACE_MENU_ch2", "room_krisroom_ch2"},                 // Chapter 1 -> 2
+        {"PLACE_MENU_ch3", "room_dw_couch_overworld_intro_ch3"}, // Chapter 2 -> 3
+        {"PLACE_MENU_ch4", "room_cc_fountain_ch4"}               // Chapter 3 -> 4
     };
     vars.OSTRooms = new[,]
     {
         {null, null},
-        {null, null},                        // Chapter 1 (handled separately due to credits timing)
-        {"room_torhouse_ch2", "room_ed_ch2"} // Chapter 2
+        {null, null},                                   // Chapter 1 (handled separately due to credits timing)
+        {"room_torhouse_ch2",           "room_ed_ch2"}, // Chapter 2
+        {"room_town_shelter_ch3",       "room_ed_ch3"}, // Chapter 3
+        {"room_town_krisyard_dark_ch4", "room_ed_ch4"}  // Chapter 4
     };
 
     vars.resetVars = (Action)(() =>
@@ -149,6 +185,7 @@ startup
                 return false;
 
             case "Demo v1.19":
+            case "CH1-4 v14":
                 return (org.text == null && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 == null && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 == null && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
             
             default:
@@ -164,6 +201,7 @@ startup
                 return false;
 
             case "Demo v1.19":
+            case "CH1-4 v14":
                 return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
             
             default:
@@ -172,7 +210,7 @@ startup
     });
     
     // Ending splits are handled manually in update{}
-    vars.splits = new Dictionary<string, Func<string, dynamic, dynamic, bool>>[2];
+    vars.splits = new Dictionary<string, Func<string, dynamic, dynamic, bool>>[4];
     vars.splits[0] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
         {"Ch1_School",                (ver, org, cur) => (org.roomName == "room_krisroom_ch1" || org.roomName == "room_insidecloset_ch1") && cur.roomName == "room_dark1_ch1"},
@@ -243,13 +281,35 @@ startup
     };
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
-        
+        {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 120},
+        {"Ch3_IceKey",       (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
+        {"Ch3_EndRound2",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 150},
+        {"Ch3_ShelterKey",   (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
+        {"Ch3_EndRound3",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_backstage_ch3"},
+        {"Ch3_EnterTVW",     (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
+        {"Ch3_EnterRouxls",  (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
+        {"Ch3_ExitRouxls",   (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
+        {"Ch3_EnterMantle",  (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
+        {"Ch3_ShadowMantle", (ver, org, cur) => cur.roomName == "room_board_prepostshadowmantle_ch3" && vars.checkTextClose(ver, org, cur, @"* (\cYShadowMantle\cW was added to your&||\cYARMORs\cW.)/%", @"＊ (\cYシャドウマント\cWが&　 \cYぼうぐ\cWに　加わった)/%")},
+        {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
+        {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_EndKnight",    (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.fight == 1 && cur.fight == 0))}
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
-
+        {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
+        {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
+        {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
+        {"Ch4_GoldenPiano",     (ver, org, cur) => org.roomName == "room_dw_church_secretpiano_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
+        {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && org.song.EndsWith(@"mus\gerson_defeated.ogg") && cur.song == null},
+        {"Ch4_Fountain1",       (ver, org, cur) => org.roomName == "room_dw_church_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
+        {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_StartTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && org.fight == 0 && cur.fight == 1},
+        {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
+        {"Ch4_Fountain3",       (ver, org, cur) => org.roomName == "room_cc_fountain_ch4" && cur.roomName == "room_lw_church_main_ch4"}
     };
-    
     vars.completedSplits = new HashSet<string>();
 
     vars.resetSplits = (Action)(() =>
@@ -277,7 +337,6 @@ startup
 
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
     settings.CurrentDefaultParent = "Ch1";
-
     settings.Add("Ch1_School",                false, "Enter Dark World");
     settings.Add("Ch1_CastleTown_DoorClose",  false, "Exit Castle Town (door close)");
     settings.Add("Ch1_CastleTown_RoomChange", false, "Exit Castle Town (room exit)");
@@ -285,15 +344,15 @@ startup
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
-    settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer fight room)");
+    settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer battle room)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
-    settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 room");
+    settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 battle room");
     settings.Add("Ch1_Throne_Exit",           false, "Exit Throne Room");
-    settings.Add("Ch1_PreKing_Exit",          false, "Exit Pre-King room");
+    settings.Add("Ch1_PreKing_Exit",          false, "Exit Pre-King battle room");
     settings.Add("Ch1_King_EndBattle",        false, "End King battle");
-    settings.Add("Ch1_King_Exit",             false, "Exit King room");
+    settings.Add("Ch1_King_Exit",             false, "Exit King battle room");
     settings.Add("Ch1_Fountain_Enter",        false, "Enter Fountain");
-    settings.Add("Ch1_Fountain_Exit",         false, "Exit Fountain");
+    settings.Add("Ch1_Fountain_Exit",         false, "Seal Fountain");
     settings.Add("Ch1_Ending",                false, "Ending");
     settings.Add("Ch1_EndingOST",             false, "(OST%) Ending");
 
@@ -302,15 +361,14 @@ startup
      settings.Add("Ch1_CFWarp",          false, "Warp from Castle to Field");
      settings.Add("Ch1_FBWarp",          false, "Warp from Field to Bake Sale");
      settings.Add("Ch1_BCWarp",          false, "Warp from Bake Sale to Castle");
-     settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil room");
+     settings.Add("Ch1_Jevil_EnterRoom", false, "Enter Jevil battle room");
      settings.Add("Ch1_Jevil_EndBattle", false, "End Jevil battle");
       settings.SetToolTip("Ch1_Jevil_EndBattle", @"This autosplit does not work if you remove THE WORLD REVOLVING from the game files (mus\joker.ogg) in non-SURVEY_PROGRAM versions.");
-     settings.Add("Ch1_Jevil_LeaveRoom", false, "Exit Jevil room");
+     settings.Add("Ch1_Jevil_LeaveRoom", false, "Exit Jevil battle room");
     settings.CurrentDefaultParent = null;
 
     settings.Add("Ch2", false, "Chapter 2: A Cyber's World");
     settings.CurrentDefaultParent = "Ch2";
-
     settings.Add("Ch2_Library",          false, "Enter Dark World");
     settings.Add("Ch2_ArcadeGameText",   false, "End Punch-Out minigame (textbox close)");
     settings.Add("Ch2_ArcadeGameLeave",  false, "End Punch-Out minigame (room exit)");
@@ -328,19 +386,19 @@ startup
     settings.Add("Ch2_MTZWarp",          false, "Warp from Mansion to Trash Zone");
     settings.Add("Ch2_Egg",              false, "Obtain Egg (both sources)");
     settings.Add("Ch2_Mouse2Puzzle",     false, "Exit Mouse 2 Puzzle room");
-    settings.Add("Ch2_Berdly_Leave",     false, "Exit Berdly 2 room (Main Route)");
-    settings.Add("Ch2_SpamtonLeave",     false, "Exit Spamton room");
+    settings.Add("Ch2_Berdly_Leave",     false, "Exit Berdly 2 battle room (Main Route)");
+    settings.Add("Ch2_SpamtonLeave",     false, "Exit Spamton battle room");
     settings.Add("Ch2_CyberCity_Exit",   false, "Exit Cyber City (captured by Queen)");
     settings.Add("Ch2_Mansion_Entrance", false, "Enter Mansion Entrance save point room");
     settings.Add("Ch2_Mansion_Exit",     false, "Exit Mansion Entrance save point room");
-    settings.Add("Ch2_TasqueManager",    false, "Exit Tasque Manager room");
-    settings.Add("Ch2_Mauswheel",        false, "Exit Mauswheel room");
+    settings.Add("Ch2_TasqueManager",    false, "Exit Tasque Manager battle room");
+    settings.Add("Ch2_Mauswheel",        false, "Exit Mauswheel battle room");
     settings.Add("Ch2_AcidLake_Enter",   false, "Enter Acid Lake");
     settings.Add("Ch2_AcidLake_Exit",    false, "Exit Acid Lake");
-    settings.Add("Ch2_Queen",            false, "Exit Queen room");
+    settings.Add("Ch2_Queen",            false, "Exit Queen battle room");
     settings.Add("Ch2_GigaQueen",        false, "End Giga Queen battle");
     settings.Add("Ch2_Fountain_Enter",   false, "Enter Fountain");
-    settings.Add("Ch2_Fountain_Exit",    false, "Exit Fountain");
+    settings.Add("Ch2_Fountain_Exit",    false, "Seal Fountain");
     settings.Add("Ch2_PuppetScarfChest", false, "Open PuppetScarf Chest (Castle Town)");
     settings.Add("Ch2_Ending",           false, "Ending");
     settings.Add("Ch2_EndingOST",        false, "(OST%) Ending");
@@ -359,9 +417,53 @@ startup
      settings.Add("Ch2_FreezeRing",         false, "Obtain FreezeRing");
      settings.Add("Ch2_ThornRing",          false, "Obtain ThornRing (original source)");
      settings.Add("Ch2_SGBerdly",           false, "Snowgrave Berdly");
-     settings.Add("Ch2_SGBerdly_LeaveRoom", false, "Exit Berdly 2 room (Weird Route)");
+     settings.Add("Ch2_SGBerdly_LeaveRoom", false, "Exit Berdly 2 battle room (Weird Route)");
      settings.Add("Ch2_SGSpamtonNEO_End",   false, "End fountain Spamton NEO battle");
     settings.CurrentDefaultParent = null;
+
+    settings.Add("Ch3", false, "Chapter 3: Late Night");
+    settings.CurrentDefaultParent = "Ch3";
+    settings.Add("Ch3_EndRound1",   false, "Enter Green Room (post-Round 1)");
+    settings.Add("Ch3_EndRound2",   false, "Enter Green Room (post-Round 2)");
+    settings.Add("Ch3_EndRound3",   false, "Enter TV World Backstage (post-Round 3)");
+    settings.Add("Ch3_EnterTVW",    false, "Enter TV World");
+    settings.Add("Ch3_EnterRouxls", false, "Enter Rouxls battle room");
+    settings.Add("Ch3_ExitRouxls",  false, "Exit Rouxls battle room");
+    settings.Add("Ch3_StartTenna",  false, "Start Tenna battle");
+    settings.Add("Ch3_EndTenna",    false, "End Tenna battle");
+    settings.Add("Ch3_StartKnight", false, "Start Knight battle");
+    settings.Add("Ch3_EndKnight",   false, "End Knight battle (victory & defeat)");
+    settings.Add("Ch3_Ending",      false, "Ending");
+     settings.SetToolTip("Ch3_Ending", @"This autosplit does not work if you remove Crickets from the game files (mus\night_ambience.ogg).");
+    settings.Add("Ch3_EndingOST",   false, "(OST%) Ending");
+
+    settings.Add("Ch3_AB", false, "All Bosses Splits");
+    settings.CurrentDefaultParent = "Ch3_AB";
+     settings.Add("Ch3_IceKey",       false, "Obtain Ice Key (room exit)");
+     settings.Add("Ch3_ShelterKey",   false, "Obtain Shelter Key (room exit)");
+     settings.Add("Ch3_EnterMantle",  false, "Enter Shadow Mantle battle room");
+     settings.Add("Ch3_ShadowMantle", false, "Obtain Shadow Mantle");
+    settings.CurrentDefaultParent = null;
+
+    settings.Add("Ch4", false, "Chapter 4: Prophecy");
+    settings.CurrentDefaultParent = "Ch4";
+    settings.Add("Ch4_EnterDW",     false, "Enter Dark World");
+    settings.Add("Ch4_EnterStudy",  false, "Enter Gerson's Study");
+    settings.Add("Ch4_Jackenstein", false, "End Jackenstein battle");
+    settings.Add("Ch4_Fountain1",   false, "Seal Fountain 1");
+    settings.Add("Ch4_FakeGerson",  false, "End Sound of Justice (Fake Gerson) battle");
+    settings.Add("Ch4_Fountain2",   false, "Seal Fountain 2");
+    settings.Add("Ch4_StartTitan",  false, "Start Titan battle");
+    settings.Add("Ch4_EndTitan",    false, "End Titan battle");
+    settings.Add("Ch4_Fountain3",   false, "Seal Fountain 3");
+    settings.Add("Ch4_Ending",      false, "Ending");
+    settings.Add("Ch4_EndingOST",   false, "(OST%) Ending");
+
+    settings.Add("Ch4_AB", false, "All Bosses Splits");
+    settings.CurrentDefaultParent = "Ch4_AB";
+     settings.Add("Ch4_GoldenPiano",     false, "Solve the Golden Piano puzzle");
+     settings.Add("Ch4_HammerofJustice", false, "End Hammer of Justice battle");
+      settings.SetToolTip("Ch4_HammerofJustice", @"This autosplit does not work if you remove Wise words from the game files (mus\gerson_defeated.ogg).");
 }
 
 exit
@@ -455,6 +557,10 @@ init
             version = "Demo v1.19";
             break;
 
+        case "AFA1C4D83B6570FAAA574254D11CEFC6":
+            version = "CH1-4 v14";
+            break;
+
         default:
             version = "Unknown";
             print("[DELTARUNE] Unknown version detected: " + hash);
@@ -466,13 +572,14 @@ init
                     "This version of DELTARUNE is not supported by the autosplitter.\n" +
                     "If you are playing an older version, update your game.\n" +
                     "If you are playing an unsupported mod, switch to the vanilla game or these supported mods:\n" +
-                    "- Item tracker mod;\n" +
+                    "- Item tracker mod\n" +
                     "- OST% tracker mod.\n\n" +
 
                     "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
-                    "- SURVEY_PROGRAM;\n" +
-                    "- Chapter 1&2 v1.08-v1.15, v1.19.\n\n" +
+                    "- SURVEY_PROGRAM\n" +
+                    "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
+                    "- Chapter 1-4 v14.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
@@ -529,14 +636,35 @@ update
             current.choicer = current.choicer_ch2;
             current.msc     = current.msc_ch2;
             current.text    = current.text_ch2;
+            
+            if(version.StartsWith("CH1-4"))
+                current.namerEvent = current.namerEvent_ch2;
+        }
+        else if(current.directory.EndsWith(@"\chapter3_windows\"))
+        {
+            current.chapter    = 3;
+            current.fight      = current.fight_ch3;
+            // current.choicer    = current.choicer_ch3;
+            // current.msc        = current.msc_ch3;
+            // current.text       = current.text_ch3;
+            current.namerEvent = current.namerEvent_ch3;
+        }
+        else if(current.directory.EndsWith(@"\chapter4_windows\"))
+        {
+            current.chapter    = 4;
+            current.fight      = current.fight_ch4;
+            // current.choicer    = current.choicer_ch4;
+            // current.msc        = current.msc_ch4;
+            current.namerEvent = current.namerEvent_ch4;
         }
         else
         {
-            current.chapter = 0;
-            current.fight   = 0;
-            current.choicer = -1;
-            current.msc     = 0;
-            current.text    = null;
+            current.chapter    = 0;
+            current.fight      = 0;
+            current.choicer    = -1;
+            current.msc        = 0;
+            current.text       = null;
+            current.namerEvent = 0;
         }
     }
 
@@ -581,6 +709,15 @@ update
                     vars.tempVar = 1;
                 else
                     endCondition = vars.checkTextClose(version, old, current, @"\E1* ... they're already&||asleep.../%", @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%");
+                break;
+
+            case 3:
+                if(old.song != null)
+                    endCondition = (current.roomName == "room_town_shelter_ch3" && old.song.EndsWith(@"mus\night_ambience.ogg") && current.song == null);
+                break;
+
+            case 4:
+                endCondition = (old.roomName == "room_torhouse_ch4" && current.roomName == "room_krisroom_dark_ch4");
                 break;
         }
         if(endCondition)
