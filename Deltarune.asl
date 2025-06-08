@@ -105,7 +105,7 @@ state("DELTARUNE", "Demo v1.19")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
-state("DELTARUNE", "CH1-4 v14")
+state("DELTARUNE", "CH1-4 v1.01B")
 {
     // Commented out = currently not needed but keeping just in case
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
@@ -130,12 +130,12 @@ state("DELTARUNE", "CH1-4 v14")
     // double choicer_ch3 : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD0;
     // double msc_ch3     : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0x240;
     // string128 text_ch3 : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10, 0x530, 0x0,   0x0, 0x0;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x2E0, 0x0;
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0xC10;
     // double choicer_ch4 : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0x10;
     // double msc_ch4     : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0x180;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70, 0x38,   0x48, 0x10, 0x1E0, 0x0;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70, 0x38,   0x48, 0x10, 0x230, 0x0;
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -185,7 +185,7 @@ startup
                 return false;
 
             case "Demo v1.19":
-            case "CH1-4 v14":
+            case "CH1-4 v1.01B":
                 return (org.text == null && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 == null && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 == null && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
             
             default:
@@ -201,7 +201,7 @@ startup
                 return false;
 
             case "Demo v1.19":
-            case "CH1-4 v14":
+            case "CH1-4 v1.01B":
                 return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
             
             default:
@@ -557,8 +557,8 @@ init
             version = "Demo v1.19";
             break;
 
-        case "AFA1C4D83B6570FAAA574254D11CEFC6":
-            version = "CH1-4 v14";
+        case "4713153767A8A141C304510178165177":
+            version = "CH1-4 v1.01B";
             break;
 
         default:
@@ -579,7 +579,7 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapter 1-4 v14.\n\n" +
+                    "- Chapter 1-4 v1.01B.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
