@@ -637,11 +637,12 @@ update
     {
         if(current.directory.EndsWith(@"\chapter1_windows\"))
         {
-            current.chapter = 1;
-            current.fight   = current.fight_ch1;
-            current.choicer = current.choicer_ch1;
-            current.msc     = current.msc_ch1;
-            current.text    = current.text_ch1;
+            current.chapter    = 1;
+            current.fight      = current.fight_ch1;
+            current.choicer    = current.choicer_ch1;
+            current.msc        = current.msc_ch1;
+            current.text       = current.text_ch1;
+            current.namerEvent = 0; // Fixes an error if you load the autosplitter while in-game in Chapter 1
         }
         else if(current.directory.EndsWith(@"\chapter2_windows\"))
         {
