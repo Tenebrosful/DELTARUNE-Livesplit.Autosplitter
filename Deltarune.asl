@@ -126,9 +126,9 @@ state("DELTARUNE", "CH1-4 v1.01C")
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x200;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
-    double char1hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x10; // global.hp[0]
-    double char2hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x20; // global.hp[1]
-    double char3hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x30; // global.hp[2]
+    double char1hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x0,  0x190, 0x410; // global.hp[0]
+    double char2hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x0,  0x190, 0x420; // global.hp[1]
+    double char3hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x0,  0x190, 0x430; // global.hp[2]
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0xC10;
@@ -333,7 +333,8 @@ startup
      settings.SetToolTip("AC_AlternateCh2",
         "This setting pauses the timer when Susie falls asleep instead of when you close Toriel's final textbox\n" +
         "(and it also changes the Ending autosplit location accordingly).\n" +
-        "This is the timing used for All Chapters runs. Disable this if you're running Chapter 2 or Chapter 1&2.");
+        "This is the timing used for All Chapters runs. Disable this if you're running Chapter 2 or Chapter 1&2.\n\n" +
+        @"This setting does not work if you remove You Can Always Come Home from the game files (mus\home.ogg).");
 
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
      settings.SetToolTip("AC_PauseTimerOST",
@@ -636,11 +637,12 @@ update
     {
         if(current.directory.EndsWith(@"\chapter1_windows\"))
         {
-            current.chapter = 1;
-            current.fight   = current.fight_ch1;
-            current.choicer = current.choicer_ch1;
-            current.msc     = current.msc_ch1;
-            current.text    = current.text_ch1;
+            current.chapter    = 1;
+            current.fight      = current.fight_ch1;
+            current.choicer    = current.choicer_ch1;
+            current.msc        = current.msc_ch1;
+            current.text       = current.text_ch1;
+            current.namerEvent = 0; // Fixes an error if you load the autosplitter while in-game in Chapter 1
         }
         else if(current.directory.EndsWith(@"\chapter2_windows\"))
         {
@@ -717,8 +719,13 @@ update
                     vars.tempVar = 1;
                 else
                 {
-                    if(settings["AC_AlternateCh2"])
-                        endCondition = vars.checkTextOpen(version, old, current, @"* (... Susie fell asleep.)/%", @"＊ (…スージィは　ねおちした)/%");
+                    if(settings["AC_AlternateCh2"] && current.roomName == "room_torhouse_ch2")
+                    {
+                        if(((old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && !vars.offset.IsRunning)
+                            vars.offset.Start();
+                        else
+                            endCondition = (vars.offset.ElapsedMilliseconds >= 3667);
+                    }
                     else
                         endCondition = vars.checkTextClose(version, old, current, @"\E1* ... they're already&||asleep.../%", @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%");
                 }
@@ -740,6 +747,7 @@ update
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " ended, timer paused");
                 timer.IsGameTimePaused = true;
             }
+            vars.offset.Reset();
             vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
