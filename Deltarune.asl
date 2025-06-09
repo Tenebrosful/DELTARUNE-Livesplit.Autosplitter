@@ -105,7 +105,7 @@ state("DELTARUNE", "Demo v1.19")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
-state("DELTARUNE", "CH1-4 v1.01B")
+state("DELTARUNE", "CH1-4 v1.01C")
 {
     // Commented out = currently not needed but keeping just in case
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
@@ -127,6 +127,9 @@ state("DELTARUNE", "CH1-4 v1.01B")
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xCD0;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD20;
+    double char1hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x10; // global.hp[0]
+    double char2hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x20; // global.hp[1]
+    double char3hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x30; // global.hp[2]
     // double choicer_ch3 : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD0;
     // double msc_ch3     : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0x240;
     // string128 text_ch3 : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10, 0x530, 0x0,   0x0, 0x0;
@@ -185,7 +188,7 @@ startup
                 return false;
 
             case "Demo v1.19":
-            case "CH1-4 v1.01B":
+            case "CH1-4 v1.01C":
                 return (org.text == null && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 == null && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 == null && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
             
             default:
@@ -201,7 +204,7 @@ startup
                 return false;
 
             case "Demo v1.19":
-            case "CH1-4 v1.01B":
+            case "CH1-4 v1.01C":
                 return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
             
             default:
@@ -281,7 +284,9 @@ startup
     };
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
+        {"Ch3_EnterChef",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_chef_ch3"},
         {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 120},
+        {"Ch3_EnterRhythm",  (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
         {"Ch3_IceKey",       (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_EndRound2",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 150},
         {"Ch3_ShelterKey",   (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
@@ -290,11 +295,12 @@ startup
         {"Ch3_EnterRouxls",  (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
         {"Ch3_ExitRouxls",   (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
         {"Ch3_EnterMantle",  (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
-        {"Ch3_ShadowMantle", (ver, org, cur) => cur.roomName == "room_board_prepostshadowmantle_ch3" && vars.checkTextClose(ver, org, cur, @"* (\cYShadowMantle\cW was added to your&||\cYARMORs\cW.)/%", @"＊ (\cYシャドウマント\cWが&　 \cYぼうぐ\cWに　加わった)/%")},
+        {"Ch3_ShadowMantle", (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
         {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_EndKnight",    (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.fight == 1 && cur.fight == 0))}
+        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.fight == 1 && cur.fight == 0 && cur.char1hp_ch3 <= 0 && cur.char2hp_ch3 <= 0 && cur.char3hp_ch3 <= 0))},
+        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 1 && cur.fight == 0 && (cur.char1hp_ch3 > 0 || cur.char2hp_ch3 > 0 || cur.char3hp_ch3 > 0)}
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
@@ -306,6 +312,7 @@ startup
         {"Ch4_Fountain1",       (ver, org, cur) => org.roomName == "room_dw_church_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_ClimbTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_post_ch4"},
         {"Ch4_StartTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && org.fight == 0 && cur.fight == 1},
         {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
         {"Ch4_Fountain3",       (ver, org, cur) => org.roomName == "room_cc_fountain_ch4" && cur.roomName == "room_lw_church_main_ch4"}
@@ -326,6 +333,12 @@ startup
         "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save file in the next chapter.\n\n" +
         "NOTE: For this to work, Game Time must be enabled\n" +
         "(you will be asked if you want to enable it by turning on this setting and opening the game if the timer isn't already running, or you can do it yourself).");
+
+    settings.Add("AC_AlternateCh2", true, "Pause Chapter 2 when Susie falls asleep");
+     settings.SetToolTip("AC_AlternateCh2",
+        "This setting pauses the timer when Susie falls asleep instead of when you close Toriel's final textbox\n" +
+        "(and it also changes the Ending autosplit location accordingly).\n" +
+        "This is the timing used for All Chapters runs. Disable this if you're running Chapter 2 or Chapter 1&2.");
 
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
      settings.SetToolTip("AC_PauseTimerOST",
@@ -423,7 +436,9 @@ startup
 
     settings.Add("Ch3", false, "Chapter 3: Late Night");
     settings.CurrentDefaultParent = "Ch3";
+    settings.Add("Ch3_EnterChef",   false, "Enter Cooking Show");
     settings.Add("Ch3_EndRound1",   false, "Enter Green Room (post-Round 1)");
+    settings.Add("Ch3_EnterRhythm", false, "Enter Lightners Live");
     settings.Add("Ch3_EndRound2",   false, "Enter Green Room (post-Round 2)");
     settings.Add("Ch3_EndRound3",   false, "Enter TV World Backstage (post-Round 3)");
     settings.Add("Ch3_EnterTVW",    false, "Enter TV World");
@@ -432,7 +447,8 @@ startup
     settings.Add("Ch3_StartTenna",  false, "Start Tenna battle");
     settings.Add("Ch3_EndTenna",    false, "End Tenna battle");
     settings.Add("Ch3_StartKnight", false, "Start Knight battle");
-    settings.Add("Ch3_EndKnight",   false, "End Knight battle (victory & defeat)");
+    settings.Add("Ch3_DieToKnight", false, "End Knight battle (loss)");
+    settings.Add("Ch3_EndKnight",   false, "End Knight battle (win)");
     settings.Add("Ch3_Ending",      false, "Ending");
      settings.SetToolTip("Ch3_Ending", @"This autosplit does not work if you remove Crickets from the game files (mus\night_ambience.ogg).");
     settings.Add("Ch3_EndingOST",   false, "(OST%) Ending");
@@ -441,8 +457,8 @@ startup
     settings.CurrentDefaultParent = "Ch3_AB";
      settings.Add("Ch3_IceKey",       false, "Obtain Ice Key (room exit)");
      settings.Add("Ch3_ShelterKey",   false, "Obtain Shelter Key (room exit)");
-     settings.Add("Ch3_EnterMantle",  false, "Enter Shadow Mantle battle room");
-     settings.Add("Ch3_ShadowMantle", false, "Obtain Shadow Mantle");
+     settings.Add("Ch3_EnterMantle",  false, "Start Shadow Mantle battle");
+     settings.Add("Ch3_ShadowMantle", false, "Obtain Shadow Mantle (room exit)");
     settings.CurrentDefaultParent = null;
 
     settings.Add("Ch4", false, "Chapter 4: Prophecy");
@@ -453,6 +469,7 @@ startup
     settings.Add("Ch4_Fountain1",   false, "Seal Fountain 1");
     settings.Add("Ch4_FakeGerson",  false, "End Sound of Justice (Fake Gerson) battle");
     settings.Add("Ch4_Fountain2",   false, "Seal Fountain 2");
+    settings.Add("Ch4_ClimbTitan",  false, "Climb Titan");
     settings.Add("Ch4_StartTitan",  false, "Start Titan battle");
     settings.Add("Ch4_EndTitan",    false, "End Titan battle");
     settings.Add("Ch4_Fountain3",   false, "Seal Fountain 3");
@@ -557,8 +574,8 @@ init
             version = "Demo v1.19";
             break;
 
-        case "4713153767A8A141C304510178165177":
-            version = "CH1-4 v1.01B";
+        case "BDD3FBEB0F51A7B522CA296092A20853":
+            version = "CH1-4 v1.01C";
             break;
 
         default:
@@ -579,7 +596,7 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapter 1-4 v1.01B.\n\n" +
+                    "- Chapter 1-4 v1.01C.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
@@ -644,17 +661,17 @@ update
         {
             current.chapter    = 3;
             current.fight      = current.fight_ch3;
-            // current.choicer    = current.choicer_ch3;
-            // current.msc        = current.msc_ch3;
-            // current.text       = current.text_ch3;
+            // current.choicer = current.choicer_ch3;
+            // current.msc     = current.msc_ch3;
+            // current.text    = current.text_ch3;
             current.namerEvent = current.namerEvent_ch3;
         }
         else if(current.directory.EndsWith(@"\chapter4_windows\"))
         {
             current.chapter    = 4;
             current.fight      = current.fight_ch4;
-            // current.choicer    = current.choicer_ch4;
-            // current.msc        = current.msc_ch4;
+            // current.choicer = current.choicer_ch4;
+            // current.msc     = current.msc_ch4;
             current.namerEvent = current.namerEvent_ch4;
         }
         else
@@ -708,7 +725,12 @@ update
                 if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && vars.tempVar == 0 && current.roomName == "room_dw_cyber_musical_door_ch2" && vars.checkTextClose(version, old, current, @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%", @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%"))
                     vars.tempVar = 1;
                 else
-                    endCondition = vars.checkTextClose(version, old, current, @"\E1* ... they're already&||asleep.../%", @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%");
+                {
+                    if(settings["AC_AlternateCh2"])
+                        endCondition = vars.checkTextOpen(version, old, current, @"* (... Susie fell asleep.)/%", @"＊ (…スージィは　ねおちした)/%");
+                    else
+                        endCondition = vars.checkTextClose(version, old, current, @"\E1* ... they're already&||asleep.../%", @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%");
+                }
                 break;
 
             case 3:
