@@ -284,9 +284,9 @@ startup
     };
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
-        {"Ch3_EnterChef",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_chef_ch3"},
+        {"Ch3_EnterChef",    (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
         {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 120},
-        {"Ch3_EnterRhythm",  (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
+        {"Ch3_EnterRhythm",  (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
         {"Ch3_IceKey",       (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_EndRound2",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 150},
         {"Ch3_ShelterKey",   (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
