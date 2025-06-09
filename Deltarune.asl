@@ -94,7 +94,7 @@ state("DELTARUNE", "Demo v1.19")
 
     string128 text_ch1 : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0xF0, 0x0, 0x0, 0x0;
 
-    // Chapter 2 in this version is a bit weird, this pointer changes on some textboxes and
+    // Chapter 2 in LTS is a bit weird, this pointer changes on some textboxes and
     // also seems to change if you don't hold the automasher
     string128 text_ch2   : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x5F0, 0x0, 0x0, 0x0;
     string128 text_ch2_2 : 0x8C2008, 0x10, 0x1A0, 0x48, 0x10, 0x6D0, 0x0, 0x0, 0x0;
@@ -107,7 +107,6 @@ state("DELTARUNE", "Demo v1.19")
 
 state("DELTARUNE", "CH1-4 v1.01C")
 {
-    // Commented out = currently not needed but keeping just in case
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
     double msc_ch1      : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x100;
@@ -125,19 +124,14 @@ state("DELTARUNE", "CH1-4 v1.01C")
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,  0xC50, 0x0;
     double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,  0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
 
-    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xCD0;
-    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD20;
+    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x200;
+    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
     double char1hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x10; // global.hp[0]
     double char2hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x20; // global.hp[1]
     double char3hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x20, 0x190, 0x30; // global.hp[2]
-    // double choicer_ch3 : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0xD0;
-    // double msc_ch3     : 0x6A1CA8, 0x48,  0x10,  0x11F0, 0x240;
-    // string128 text_ch3 : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10, 0x530, 0x0,   0x0, 0x0;
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0xC10;
-    // double choicer_ch4 : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0x10;
-    // double msc_ch4     : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0x180;
     double namerEvent_ch4 : 0x8B2790, 0x178, 0x70, 0x38,   0x48, 0x10, 0x230, 0x0;
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
@@ -285,10 +279,10 @@ startup
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
         {"Ch3_EnterChef",    (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
-        {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 120},
+        {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 110 || cur.plot_ch3 == 120)},
         {"Ch3_EnterRhythm",  (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
         {"Ch3_IceKey",       (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
-        {"Ch3_EndRound2",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 == 150},
+        {"Ch3_EndRound2",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 140 || cur.plot_ch3 == 150)},
         {"Ch3_ShelterKey",   (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_EndRound3",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_backstage_ch3"},
         {"Ch3_EnterTVW",     (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
@@ -661,17 +655,12 @@ update
         {
             current.chapter    = 3;
             current.fight      = current.fight_ch3;
-            // current.choicer = current.choicer_ch3;
-            // current.msc     = current.msc_ch3;
-            // current.text    = current.text_ch3;
             current.namerEvent = current.namerEvent_ch3;
         }
         else if(current.directory.EndsWith(@"\chapter4_windows\"))
         {
             current.chapter    = 4;
             current.fight      = current.fight_ch4;
-            // current.choicer = current.choicer_ch4;
-            // current.msc     = current.msc_ch4;
             current.namerEvent = current.namerEvent_ch4;
         }
         else
