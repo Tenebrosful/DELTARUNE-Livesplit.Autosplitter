@@ -126,10 +126,8 @@ state("DELTARUNE", "CH1-4 v1.01C")
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x200;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
-    double char1hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x0,  0x190, 0x410; // global.hp[0]
-    double char2hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x0,  0x190, 0x420; // global.hp[1]
-    double char3hp_ch3    : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x0,  0x190, 0x430; // global.hp[2]
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
+    double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x70,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10, 0x2FC0, 0xC10;
     double namerEvent_ch4 : 0x8B2790, 0x178, 0x70, 0x38,   0x48, 0x10, 0x230, 0x0;
@@ -293,8 +291,8 @@ startup
         {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
         {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.fight == 1 && cur.fight == 0 && cur.char1hp_ch3 <= 0 && cur.char2hp_ch3 <= 0 && cur.char3hp_ch3 <= 0))},
-        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 1 && cur.fight == 0 && (cur.char1hp_ch3 > 0 || cur.char2hp_ch3 > 0 || cur.char3hp_ch3 > 0)}
+        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightCon != 9 && cur.knightCon == 9))},
+        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightCon != 49 && cur.knightCon == 49}
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
@@ -307,6 +305,7 @@ startup
         {"Ch4_FallDown",        (ver, org, cur) => org.roomName == "room_dw_churchb_darkclimb_scene_ch4" && cur.roomName == "room_dw_churchb_darkclimb_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_ClimbTitan1",     (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_post_ch4"},
         {"Ch4_ClimbTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_post_ch4"},
         {"Ch4_StartTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && org.fight == 0 && cur.fight == 1},
         {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
@@ -466,7 +465,8 @@ startup
     settings.Add("Ch4_FallDown",    false, "Fall down below the study");
     settings.Add("Ch4_FakeGerson",  false, "End Sound of Justice (Fake Gerson) battle");
     settings.Add("Ch4_Fountain2",   false, "Seal Fountain 2");
-    settings.Add("Ch4_ClimbTitan",  false, "Climb Titan");
+    settings.Add("Ch4_ClimbTitan1", false, "Titan Climb 1");
+    settings.Add("Ch4_ClimbTitan",  false, "Titan Climb 2");
     settings.Add("Ch4_StartTitan",  false, "Start Titan battle");
     settings.Add("Ch4_EndTitan",    false, "End Titan battle");
     settings.Add("Ch4_Fountain3",   false, "Seal Fountain 3");
