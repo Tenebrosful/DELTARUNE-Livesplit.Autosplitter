@@ -620,10 +620,27 @@ init
 
         vars.IGTPopup = true;
     }
+    current.chapter    = 0;
+    current.fight      = 0;
+    current.choicer    = -1;
+    current.msc        = 0;
+    current.text       = null;
+    current.namerEvent = 0;
+    current.room = 0;
+    current.roomName = "";
+    current.song = null;
+    current.finalTextboxHalt = 0;
+    current.finalTextboxHalt2 = 0;
+    current.text_ch2_2 = 0;
+    current.text_ch2_3 = 0;
+    current.directory = null;
+    vars.first_update = 1;
 }
 
 update
 {
+    if (vars.first_update == 2)
+        vars.first_update = 0;
     if(version == "Unknown")
         return false;
 
@@ -635,6 +652,8 @@ update
 
     else if(vars.x64) // game_change fully unloads and loads games so consistent pointer paths between chapters are not an option
     {
+        if (current.directory == null)
+            return false;
         if(current.directory.EndsWith(@"\chapter1_windows\"))
         {
             current.chapter    = 1;
@@ -687,6 +706,10 @@ update
         // It's also useful for differentiating duplicate rooms using the chapter number
         if(!current.roomName.EndsWith(chapterStr))
             current.roomName += chapterStr;
+        if (vars.first_update == 1) {
+            vars.first_update = 2;
+            return false;
+        }
 
         bool endCondition = false;
         switch(ch)
@@ -778,6 +801,10 @@ update
                     vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
             }
         }
+    }
+    if (vars.first_update == 1) {
+        vars.first_update = 2;
+        return false;
     }
 
     if(old.room != current.room)
