@@ -1,5 +1,15 @@
-// DELTARUNE Autosplitter by Narry, Tenebrosful & NERS
-// devek1 - Linux-specific failsafes
+/*
+    DELTARUNE Autosplitter
+
+    Credits:
+    - Originally inspired by Narry's DELTARUNE SURVEY_PROGRAM Autosplitter that was based on Glacia's UNDERTALE Autosplitter
+    - Tenebrosful (Repository, Development, Testing)
+    - NERS (Development, Memory pointers, In-Game Time, Testing)
+    - Vintagix (Development, Testing)
+    - devek1 (Linux-specific failsafes)
+    - Jujstme (Sigscanning for room names)
+    - Ero (Sigscanning for room names).
+*/
 
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
@@ -491,7 +501,6 @@ init
     var module = modules.First();
     vars.x64 = game.Is64Bit();
 
-    // Thanks to Jujstme and Ero for this (finding room names)
     var scanner = new SignatureScanner(game, module.BaseAddress, module.ModuleMemorySize);
     Func<int, string, IntPtr> scan = (o, sig) =>
     {
