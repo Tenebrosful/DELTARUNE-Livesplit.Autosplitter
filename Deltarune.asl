@@ -1,4 +1,5 @@
 // DELTARUNE Autosplitter by Narry, Tenebrosful & NERS
+// devek1 - Linux-specific failsafes
 
 state("DELTARUNE", "SURVEY_PROGRAM")
 {
@@ -620,27 +621,26 @@ init
 
         vars.IGTPopup = true;
     }
-    current.chapter    = 0;
-    current.fight      = 0;
-    current.choicer    = -1;
-    current.msc        = 0;
-    current.text       = null;
-    current.namerEvent = 0;
-    current.room = 0;
-    current.roomName = "";
-    current.song = null;
-    current.finalTextboxHalt = 0;
+
+    current.chapter           = 0;
+    current.fight             = 0;
+    current.choicer           = -1;
+    current.msc               = 0;
+    current.text              = null;
+    current.namerEvent        = 0;
+    current.room              = 0;
+    current.roomName          = null;
+    current.song              = null;
+    current.finalTextboxHalt  = 0;
     current.finalTextboxHalt2 = 0;
-    current.text_ch2_2 = 0;
-    current.text_ch2_3 = 0;
-    current.directory = null;
-    vars.first_update = 1;
+    current.text_ch2_2        = 0;
+    current.text_ch2_3        = 0;
+    current.directory         = null;
+    vars.firstUpdate          = false;
 }
 
 update
 {
-    if (vars.first_update == 2)
-        vars.first_update = 0;
     if(version == "Unknown")
         return false;
 
@@ -652,8 +652,9 @@ update
 
     else if(vars.x64) // game_change fully unloads and loads games so consistent pointer paths between chapters are not an option
     {
-        if (current.directory == null)
+        if(current.directory == null)
             return false;
+
         if(current.directory.EndsWith(@"\chapter1_windows\"))
         {
             current.chapter    = 1;
@@ -706,8 +707,10 @@ update
         // It's also useful for differentiating duplicate rooms using the chapter number
         if(!current.roomName.EndsWith(chapterStr))
             current.roomName += chapterStr;
-        if (vars.first_update == 1) {
-            vars.first_update = 2;
+
+        if(!vars.firstUpdate)
+        {
+            vars.firstUpdate = true;
             return false;
         }
 
@@ -763,6 +766,7 @@ update
                 endCondition = (old.roomName == "room_torhouse_ch4" && current.roomName == "room_krisroom_dark_ch4");
                 break;
         }
+
         if(endCondition)
         {
             if(settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
@@ -774,7 +778,6 @@ update
             vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
-
         else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch, 0] && current.roomName == vars.OSTRooms[ch, 1]))
         {
             if(settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
@@ -786,42 +789,43 @@ update
             vars.forceSplit = settings["Ch" + ch + "_EndingOST"];
         }
 
-        if(old.roomName == vars.ACContinueRooms[ch, 0] && current.roomName == vars.ACContinueRooms[ch, 1])
+        if(old.room != current.room)
         {
-            if((settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]) && timer.IsGameTimePaused)
+            print("[DELTARUNE] Room: " + old.room + " (" + old.roomName + ")" + " -> " + current.room + " (" + current.roomName + ")");
+
+            if(old.roomName == vars.ACContinueRooms[ch, 0] && current.roomName == vars.ACContinueRooms[ch, 1])
             {
-                print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
-                timer.IsGameTimePaused = false;
+                if((settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]) && timer.IsGameTimePaused)
+                {
+                    print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
+                    timer.IsGameTimePaused = false;
+                }
+                if(settings["AC_Continue"])
+                {
+                    if(current.chapter == 1)
+                        vars.forceSplit = (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
+                    else
+                        vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
+                }
             }
-            if(settings["AC_Continue"])
-            {
-                if(current.chapter == 1)
-                    vars.forceSplit = (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
-                else
-                    vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
-            }
+
+            // You enter the room twice, once in the cutscene and once when you regain control
+            // so we need to keep track of the number of room entrances, otherwise it would split during the cutscene
+            else if(settings["Ch1_Escape_Cell"] && vars.tempVar < 2 && old.roomName == "room_cc_prison_cells_ch1" && current.roomName == "room_cc_prisonlancer_ch1")
+                vars.tempVar ++;
+
+            else if((settings["AC_PauseTimerOST"] || settings["Ch1_EndingOST"]) && current.roomName == "room_ed_ch1" && !vars.offset.IsRunning)
+                vars.offset.Start();
+
+            // Edge case: Reset vars.tempVar to make sure Door Overflow splits don't get triggered by doing the 400 bagels cutscene and then playing normally until the door is properly accessible
+            else if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && current.chapter == 2 && vars.tempVar == 2 && current.roomName != "room_dw_city_intro_ch2" && current.roomName != "room_dw_mansion_entrance_ch2")
+                vars.tempVar = 0;
         }
     }
-    if (vars.first_update == 1) {
-        vars.first_update = 2;
-        return false;
-    }
-
-    if(old.room != current.room)
+    else if(!vars.firstUpdate)
     {
-        print("[DELTARUNE] Room: " + old.room + " (" + old.roomName + ")" + " -> " + current.room + " (" + current.roomName + ")");
-
-        // You enter the room twice, once in the cutscene and once when you regain control
-        // so we need to keep track of the number of room entrances, otherwise it would split during the cutscene
-        if(settings["Ch1_Escape_Cell"] && vars.tempVar < 2 && old.roomName == "room_cc_prison_cells_ch1" && current.roomName == "room_cc_prisonlancer_ch1")
-            vars.tempVar ++;
-
-        else if((settings["AC_PauseTimerOST"] || settings["Ch1_EndingOST"]) && current.roomName == "room_ed_ch1" && !vars.offset.IsRunning)
-            vars.offset.Start();
-
-        // Edge case: Reset vars.tempVar to make sure Door Overflow splits don't get triggered by doing the 400 bagels cutscene and then playing normally until the door is properly accessible
-        else if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && current.chapter == 2 && vars.tempVar == 2 && current.roomName != "room_dw_city_intro_ch2" && current.roomName != "room_dw_mansion_entrance_ch2")
-            vars.tempVar = 0;
+        vars.firstUpdate = true;
+        return false;
     }
 }
 
