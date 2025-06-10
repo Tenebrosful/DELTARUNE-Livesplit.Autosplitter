@@ -291,8 +291,8 @@ startup
         {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
         {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightCon == 7 && cur.knightCon == 9))},
-        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightCon == 7 && cur.knightCon == 49}
+        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightCon != 9 && cur.knightCon == 9))},
+        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightCon != 49 && cur.knightCon == 49}
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
