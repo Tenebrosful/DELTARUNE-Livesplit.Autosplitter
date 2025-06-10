@@ -305,6 +305,7 @@ startup
         {"Ch4_FallDown",        (ver, org, cur) => org.roomName == "room_dw_churchb_darkclimb_scene_ch4" && cur.roomName == "room_dw_churchb_darkclimb_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_ClimbTitan1",     (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_post_ch4"},
         {"Ch4_ClimbTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_post_ch4"},
         {"Ch4_StartTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && org.fight == 0 && cur.fight == 1},
         {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
@@ -464,7 +465,8 @@ startup
     settings.Add("Ch4_FallDown",    false, "Fall down below the study");
     settings.Add("Ch4_FakeGerson",  false, "End Sound of Justice (Fake Gerson) battle");
     settings.Add("Ch4_Fountain2",   false, "Seal Fountain 2");
-    settings.Add("Ch4_ClimbTitan",  false, "Climb Titan");
+    settings.Add("Ch4_ClimbTitan1", false, "Titan Climb 1");
+    settings.Add("Ch4_ClimbTitan",  false, "Titan Climb 2");
     settings.Add("Ch4_StartTitan",  false, "Start Titan battle");
     settings.Add("Ch4_EndTitan",    false, "End Titan battle");
     settings.Add("Ch4_Fountain3",   false, "Seal Fountain 3");
