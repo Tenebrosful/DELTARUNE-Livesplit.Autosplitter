@@ -65,5 +65,6 @@ that was based on **Glacia's** UNDERTALE Autosplitter
 - [**Tenebrosful**](https://github.com/Tenebrosful) (Repository, Development, Testing)
 - [**NERS**](https://github.com/NERS1111) (Development, Memory pointers, In-Game Time, Testing)
 - [**Vintagix**](https://github.com/VintagixDev) (Development, Testing)
+- [**devek1**](https://github.com/devek1) (Linux-specific failsafes)
 - [**Jujstme**](https://github.com/jujstme) (Sigscanning for room names)
 - [**Ero**](https://github.com/just-ero) (Sigscanning for room names)
