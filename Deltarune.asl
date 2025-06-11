@@ -645,7 +645,7 @@ init
     current.text_ch2_2        = null;
     current.text_ch2_3        = null;
     current.directory         = null;
-    vars.firstUpdate          = false;
+    vars.firstUpdateDone      = false;
 }
 
 update
@@ -717,9 +717,9 @@ update
         if(!current.roomName.EndsWith(chapterStr))
             current.roomName += chapterStr;
 
-        if(!vars.firstUpdate)
+        if(!vars.firstUpdateDone)
         {
-            vars.firstUpdate = true;
+            vars.firstUpdateDone = true;
             return false;
         }
 
@@ -831,9 +831,9 @@ update
                 vars.tempVar = 0;
         }
     }
-    else if(!vars.firstUpdate)
+    else if(!vars.firstUpdateDone)
     {
-        vars.firstUpdate = true;
+        vars.firstUpdateDone = true;
         return false;
     }
 }
