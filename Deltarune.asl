@@ -642,8 +642,8 @@ init
     current.song              = null;
     current.finalTextboxHalt  = 0;
     current.finalTextboxHalt2 = 0;
-    current.text_ch2_2        = 0;
-    current.text_ch2_3        = 0;
+    current.text_ch2_2        = null;
+    current.text_ch2_3        = null;
     current.directory         = null;
     vars.firstUpdate          = false;
 }
