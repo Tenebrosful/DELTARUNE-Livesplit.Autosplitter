@@ -20,7 +20,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 To use the autosplitter, follow these easy steps:
 
 1. Open your splits and go in `Edit Splits`
-2. Insert `Deltarune` or `Deltarune Category Extensions` as the Game Name
+2. Insert `Deltarune` or `Deltarune Category Extensions` as the Game Name (case-insensitive)
 3. You should now have access to the autosplitter and be able to activate it.
 
 ![Splits Editor header with the Game Name and the suggested autosplitter](/assets/quickInstall.png)
