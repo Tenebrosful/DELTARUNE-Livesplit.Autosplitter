@@ -135,13 +135,16 @@ state("DELTARUNE", "CH1-4 v1.01C")
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,  0xC50, 0x0;
     double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,  0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
 
-    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1190, 0x370; // Can't use 0x1000, 0x200 as the last two offsets because it breaks when launching Chapter 3 in Japanese
+    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
     double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x70,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
-    double fight_ch4      : 0x6A1CA8, 0x48,  0x10, 0x72B0, 0x370;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70, 0x38,   0x48, 0x10, 0x230, 0x0;
+    double fight_ch4      : 0x6A1CA8, 0x48,  0x10,  0x72B0, 0x370;
+    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,  0x2F40, 0x30;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x230, 0x0;
+    float playerX_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xE8; // obj_mainchara.x
+    float playerY_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xEC; // obj_mainchara.y
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -351,7 +354,7 @@ startup
         "This setting is the same as the one above, however it pauses the timer when the credits music starts playing instead.\n" +
         "Useful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
 
-    settings.Add("AC_Continue", false, "Split on starting a chapter from a previous save file");
+    settings.Add("AC_Continue", false, "Split when starting a chapter from a previous save file");
     settings.CurrentDefaultParent = null;
 
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
@@ -772,7 +775,7 @@ update
                 break;
 
             case 4:
-                endCondition = (old.roomName == "room_torhouse_ch4" && current.roomName == "room_krisroom_dark_ch4");
+                endCondition = (current.roomName == "room_torhouse_ch4" && current.plot_ch4 == 310 && (old.playerX_ch4 != current.playerX_ch4 || old.playerY_ch4 != current.playerY_ch4) && current.playerX_ch4 < 160 && current.playerY_ch4 < 80);
                 break;
         }
 
