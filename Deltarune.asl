@@ -781,7 +781,7 @@ update
 
         if(endCondition)
         {
-            if(settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
+            if(settings["AC_PauseTimer"] && (!settings["AC_PauseTimerOST"] || (current.chapter == 2 && settings["AC_AlternateCh2"]) || (current.chapter == 3 && !settings["AC_AlternateCh2"])) && !timer.IsGameTimePaused)
             {
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " ended, timer paused");
                 timer.IsGameTimePaused = true;
