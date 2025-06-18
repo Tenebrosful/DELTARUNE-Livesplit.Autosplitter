@@ -125,20 +125,20 @@ state("DELTARUNE", "CH1-4 v1.01C")
     double doorCloseCon : 0x8B2790, 0xE0, 0x48,  0x10,   0x30,  0x0;
     float kingPos       : 0x69FA98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
     
-    double fight_ch2        : 0x6A1CA8, 0x48,  0x10,  0xCE0, 0xBE0;
-    double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0xCE0, 0x40;
-    double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0xCE0, 0x160;
-    string128 text_ch2      : 0x8C2008, 0x10,  0x1A0, 0x48,  0x10,  0x6F0, 0x0,   0x0,  0x0;
-    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,  0x10,  0x710, 0x0,   0x0,  0x0;
-    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,  0x10,  0x7E0, 0x0,   0x0,  0x0;
-    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,  0x48,  0x10,  0x40,  0x0;
-    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,  0xC50, 0x0;
-    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,  0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
+    double fight_ch2        : 0x6A1CA8, 0x48,  0x10,  0x100,  0x0;
+    double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0x7870, 0x0;
+    double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0x7310, 0x0;
+    string128 text_ch2      : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x6F0, 0x0,   0x0,  0x0;
+    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
+    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
+    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x40,  0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC50, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
-    double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x70,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
+    double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,  0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,  0x2F40, 0x30;
@@ -321,6 +321,7 @@ startup
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
         {"Ch4_PreClimbTitan1",  (ver, org, cur) => org.roomName == "room_dw_churchc_pretitan_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_ch4"},
         {"Ch4_ClimbTitan1",     (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_post_ch4"},
+        {"Ch4_PreClimbTitan2",  (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_post_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_ch4"},
         {"Ch4_ClimbTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_post_ch4"},
         {"Ch4_StartTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && org.fight == 0 && cur.fight == 1},
         {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
@@ -337,7 +338,7 @@ startup
     settings.Add("AC", true, "All Chapters");
     settings.CurrentDefaultParent = "AC";
 
-    settings.Add("AC_PauseTimer", true, "Pause timer between chapters");
+    settings.Add("AC_PauseTimer", true, "Pause the timer between chapters");
      settings.SetToolTip("AC_PauseTimer",
         "This setting pauses the timer when you end a chapter and resumes it when you continue from a previous save file in the next chapter.\n\n" +
         "NOTE: For this to work, Game Time must be enabled\n" +
@@ -350,10 +351,10 @@ startup
         "This is the timing used for All Chapters runs. Disable this if you're running Chapter 2 or Chapter 1&2.\n\n" +
         @"This setting does not work if you remove You Can Always Come Home from the game files (mus\home.ogg).");
 
-    settings.Add("AC_PauseTimerOST", false, "(OST%) Pause timer between chapters");
+    settings.Add("AC_PauseTimerOST", false, "(OST%) Pause the timer between chapters");
      settings.SetToolTip("AC_PauseTimerOST",
-        "This setting is the same as the one above, however it pauses the timer when the credits music starts playing instead.\n" +
-        "Useful for OST%. NOTE: Enabling this will override the above setting (you can not have both activated at once).");
+        "This setting pauses the timer when the credits music starts playing instead.\n" +
+        "Useful for OST%. NOTE: Enabling this will override the other setting (you can not have both activated at once).");
 
     settings.Add("AC_Continue", false, "Split when starting a chapter from a previous save file");
     settings.CurrentDefaultParent = null;
@@ -473,21 +474,22 @@ startup
 
     settings.Add("Ch4", false, "Chapter 4: Prophecy");
     settings.CurrentDefaultParent = "Ch4";
-    settings.Add("Ch4_EnterDW",         false, "Enter Dark World");
-    settings.Add("Ch4_EnterStudy",      false, "Enter Gerson's Study");
-    settings.Add("Ch4_Jackenstein",     false, "End Jackenstein battle");
-    settings.Add("Ch4_Fountain1",       false, "Seal Fountain 1");
-    settings.Add("Ch4_FallDown",        false, "Fall down below the study");
-    settings.Add("Ch4_FakeGerson",      false, "End Sound of Justice (Fake Gerson) battle");
-    settings.Add("Ch4_Fountain2",       false, "Seal Fountain 2");
-    settings.Add("Ch4_PreClimbTitan1",  false, "Pre-Titan Climb 1");
-    settings.Add("Ch4_ClimbTitan1",     false, "Titan Climb 1");
-    settings.Add("Ch4_ClimbTitan",      false, "Titan Climb 2");
-    settings.Add("Ch4_StartTitan",      false, "Start Titan battle");
-    settings.Add("Ch4_EndTitan",        false, "End Titan battle");
-    settings.Add("Ch4_Fountain3",       false, "Seal Fountain 3");
-    settings.Add("Ch4_Ending",          false, "Ending");
-    settings.Add("Ch4_EndingOST",       false, "(OST%) Ending");
+    settings.Add("Ch4_EnterDW",        false, "Enter Dark World");
+    settings.Add("Ch4_EnterStudy",     false, "Enter Gerson's Study");
+    settings.Add("Ch4_Jackenstein",    false, "End Jackenstein battle");
+    settings.Add("Ch4_Fountain1",      false, "Seal Fountain 1");
+    settings.Add("Ch4_FallDown",       false, "Fall down below the study");
+    settings.Add("Ch4_FakeGerson",     false, "End Sound of Justice (Fake Gerson) battle");
+    settings.Add("Ch4_Fountain2",      false, "Seal Fountain 2");
+    settings.Add("Ch4_PreClimbTitan1", false, "Start Titan Climb 1");
+    settings.Add("Ch4_ClimbTitan1",    false, "End Titan Climb 1");
+    settings.Add("Ch4_PreClimbTitan2", false, "Start Titan Climb 2");
+    settings.Add("Ch4_ClimbTitan",     false, "End Titan Climb 2");
+    settings.Add("Ch4_StartTitan",     false, "Start Titan battle");
+    settings.Add("Ch4_EndTitan",       false, "End Titan battle");
+    settings.Add("Ch4_Fountain3",      false, "Seal Fountain 3");
+    settings.Add("Ch4_Ending",         false, "Ending");
+    settings.Add("Ch4_EndingOST",      false, "(OST%) Ending");
 
     settings.Add("Ch4_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch4_AB";
@@ -608,7 +610,7 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapter 1-4 v1.01C.\n\n" +
+                    "- Chapters 1-4 v1.01C.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 

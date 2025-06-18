@@ -6,7 +6,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 - SURVEY_PROGRAM
 - Chapter 1&2 v1.08-v1.15, v1.19
-- Chapter 1-4 v1.01C.
+- Chapters 1-4 v1.01C.
 
 ## Supported mods
 
@@ -20,7 +20,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 To use the autosplitter, follow these easy steps:
 
 1. Open your splits and go in `Edit Splits`
-2. Insert `Deltarune` or `Deltarune Category Extensions` as the Game Name (case-insensitive)
+2. Insert `DELTARUNE` or `DELTARUNE Category Extensions` as the Game Name (case-insensitive)
 3. You should now have access to the autosplitter and be able to activate it.
 
 ![Splits Editor header with the Game Name and the suggested autosplitter](/assets/quickInstall.png)
