@@ -138,6 +138,7 @@ state("DELTARUNE", "CH1-4 v1.01C")
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0xF10, 0x38,   0x48, 0x10,  0x1F0, 0x0;              // obj_blocktree_dmg.mytimer
     double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,  0x72B0, 0x370;
@@ -300,6 +301,7 @@ startup
         {"Ch3_EnterTVW",     (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
         {"Ch3_EnterRouxls",  (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
         {"Ch3_ExitRouxls",   (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
+        {"Ch3_Egg",          (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer == 0 && cur.eggTimer > 0},
         {"Ch3_EnterMantle",  (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
         {"Ch3_ShadowMantle", (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
@@ -455,6 +457,7 @@ startup
     settings.Add("Ch3_EnterTVW",    false, "Enter TV World");
     settings.Add("Ch3_EnterRouxls", false, "Enter Rouxls battle room");
     settings.Add("Ch3_ExitRouxls",  false, "Exit Rouxls battle room");
+    settings.Add("Ch3_Egg",         false, "Obtain Egg");
     settings.Add("Ch3_StartTenna",  false, "Start Tenna battle");
     settings.Add("Ch3_EndTenna",    false, "End Tenna battle");
     settings.Add("Ch3_StartKnight", false, "Start Knight battle");
