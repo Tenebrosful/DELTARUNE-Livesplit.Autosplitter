@@ -316,7 +316,9 @@ startup
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
         {"Ch4_GoldenPiano",     (ver, org, cur) => org.roomName == "room_dw_church_secretpiano_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
+        {"Ch4_EnterHoJ",        (ver, org, cur) => org.roomName == "room_dw_church_gersonstudy_ch4" && cur.roomName == "room_dw_church_arena_ch4"},
         {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && org.song.EndsWith(@"mus\gerson_defeated.ogg") && cur.song == null},
+        {"Ch4_ExitHoJ",         (ver, org, cur) => org.roomName == "room_dw_church_arena_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_Fountain1",       (ver, org, cur) => org.roomName == "room_dw_church_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
         {"Ch4_FallDown",        (ver, org, cur) => org.roomName == "room_dw_churchb_darkclimb_scene_ch4" && cur.roomName == "room_dw_churchb_darkclimb_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
@@ -497,7 +499,9 @@ startup
     settings.Add("Ch4_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch4_AB";
      settings.Add("Ch4_GoldenPiano",     false, "Solve the Golden Piano puzzle");
+     settings.Add("Ch4_EnterHoJ",        false, "Enter Hammer of Justice battle room");
      settings.Add("Ch4_HammerofJustice", false, "End Hammer of Justice battle");
+     settings.Add("Ch4_ExitHoJ",         false, "Exit Hammer of Justice battle room");
       settings.SetToolTip("Ch4_HammerofJustice", @"This autosplit does not work if you remove Wise words from the game files (mus\gerson_defeated.ogg).");
 }
 
