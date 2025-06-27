@@ -501,8 +501,8 @@ startup
      settings.Add("Ch4_GoldenPiano",     false, "Solve the Golden Piano puzzle");
      settings.Add("Ch4_EnterHoJ",        false, "Enter Hammer of Justice battle room");
      settings.Add("Ch4_HammerofJustice", false, "End Hammer of Justice battle");
-     settings.Add("Ch4_ExitHoJ",         false, "Exit Hammer of Justice battle room");
       settings.SetToolTip("Ch4_HammerofJustice", @"This autosplit does not work if you remove Wise words from the game files (mus\gerson_defeated.ogg).");
+     settings.Add("Ch4_ExitHoJ",         false, "Exit Hammer of Justice battle room");
 }
 
 exit
