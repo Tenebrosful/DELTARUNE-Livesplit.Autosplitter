@@ -315,6 +315,7 @@ startup
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
+        {"Ch4_MissMizzle",      (ver, org, cur) => org.roomName == "room_dw_church_holywatercooler_ch4" && cur.roomName == "room_dw_church_intro_gerson_ch4"},
         {"Ch4_GoldenPiano",     (ver, org, cur) => org.roomName == "room_dw_church_secretpiano_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_EnterHoJ",        (ver, org, cur) => org.roomName == "room_dw_church_gersonstudy_ch4" && cur.roomName == "room_dw_church_arena_ch4"},
         {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && org.song.EndsWith(@"mus\gerson_defeated.ogg") && cur.song == null},
@@ -482,6 +483,7 @@ startup
     settings.Add("Ch4_EnterDW",        false, "Enter Dark World");
     settings.Add("Ch4_EnterStudy",     false, "Enter Gerson's Study");
     settings.Add("Ch4_Jackenstein",    false, "End Jackenstein battle");
+    settings.Add("Ch4_MissMizzle",     false, "Exit Miss Mizzle battle room");
     settings.Add("Ch4_Fountain1",      false, "Seal Fountain 1");
     settings.Add("Ch4_FallDown",       false, "Fall down below the study");
     settings.Add("Ch4_FakeGerson",     false, "End Sound of Justice (Fake Gerson) battle");
