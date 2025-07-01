@@ -129,8 +129,9 @@ state("DELTARUNE", "CH1-4 v1.01C")
     double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0x7870, 0x0;
     double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0x7310, 0x0;
     string128 text_ch2      : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x6F0, 0x0,   0x0,  0x0;
-    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
-    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
+    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
+    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
+    string128 text_ch2_4    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
     double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x40,  0x0;
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC50, 0x0;
     double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
@@ -143,9 +144,10 @@ state("DELTARUNE", "CH1-4 v1.01C")
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,  0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,  0x2F40, 0x30;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x230, 0x0;
-    float playerX_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xE8; // obj_mainchara.x
-    float playerY_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xEC; // obj_mainchara.y
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x230, 0x0;
+    float playerX_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50,  0x158, 0x10,  0xE8;       // obj_mainchara.x
+    float playerY_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50,  0x158, 0x10,  0xEC;       // obj_mainchara.y
+    double gotEgg         : 0x8B2790, 0x1E8, 0x80,  0x38,   0x1A0, 0x48,  0x10,  0x350, 0x0; // obj_dw_churchb_man.gotegg
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -195,11 +197,13 @@ startup
                 return false;
 
             case "Demo v1.19":
+                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
+
             case "CH1-4 v1.01C":
-                return (org.text == null && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 == null && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 == null && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
+                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
             
             default:
-                return (org.text == null && (cur.text == en || cur.text == jp));
+                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp));
         }
     });
 
@@ -211,11 +215,13 @@ startup
                 return false;
 
             case "Demo v1.19":
+                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
+
             case "CH1-4 v1.01C":
-                return ((org.text == en || org.text == jp) && cur.text == null) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 == null) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 == null);
+                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
             
             default:
-                return ((org.text == en || org.text == jp) && cur.text == null);
+                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp);
         }
     });
     
@@ -315,12 +321,14 @@ startup
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
-        {"Ch4_MissMizzle",      (ver, org, cur) => org.roomName == "room_dw_church_holywatercooler_ch4" && cur.roomName == "room_dw_church_intro_gerson_ch4"},
         {"Ch4_GoldenPiano",     (ver, org, cur) => org.roomName == "room_dw_church_secretpiano_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_EnterHoJ",        (ver, org, cur) => org.roomName == "room_dw_church_gersonstudy_ch4" && cur.roomName == "room_dw_church_arena_ch4"},
         {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && org.song.EndsWith(@"mus\gerson_defeated.ogg") && cur.song == null},
         {"Ch4_ExitHoJ",         (ver, org, cur) => org.roomName == "room_dw_church_arena_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
+        {"Ch4_GrandPiano",      (ver, org, cur) => org.roomName == "room_dw_church_organpuzzle_ch4" && (cur.roomName == "room_dw_church_trueclimbadventure_ch4" || cur.roomName == "room_dw_church_rightconnect_ch4")},
+        {"Ch4_MissMizzle",      (ver, org, cur) => org.roomName == "room_dw_church_holywatercooler_ch4" && cur.roomName == "room_dw_church_intro_gerson_ch4"},
         {"Ch4_Fountain1",       (ver, org, cur) => org.roomName == "room_dw_church_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_Egg",             (ver, org, cur) => cur.roomName == "room_dw_churchb_man_ch4" && org.gotEgg == 0 && cur.gotEgg == 1},
         {"Ch4_FallDown",        (ver, org, cur) => org.roomName == "room_dw_churchb_darkclimb_scene_ch4" && cur.roomName == "room_dw_churchb_darkclimb_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
@@ -483,9 +491,11 @@ startup
     settings.Add("Ch4_EnterDW",        false, "Enter Dark World");
     settings.Add("Ch4_EnterStudy",     false, "Enter Gerson's Study");
     settings.Add("Ch4_Jackenstein",    false, "End Jackenstein battle");
+    settings.Add("Ch4_GrandPiano",     false, "Exit Grand Piano room");
     settings.Add("Ch4_MissMizzle",     false, "Exit Miss Mizzle battle room");
     settings.Add("Ch4_Fountain1",      false, "Seal Fountain 1");
     settings.Add("Ch4_FallDown",       false, "Fall down below the study");
+    settings.Add("Ch4_Egg",            false, "Obtain Egg");
     settings.Add("Ch4_FakeGerson",     false, "End Sound of Justice (Fake Gerson) battle");
     settings.Add("Ch4_Fountain2",      false, "Seal Fountain 2");
     settings.Add("Ch4_PreClimbTitan1", false, "Start Titan Climb 1");
