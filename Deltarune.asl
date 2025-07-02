@@ -255,7 +255,7 @@ startup
     vars.splits[1] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
         {"Ch2_Library",            (ver, org, cur) => (org.roomName == "room_krisroom_ch2" || org.roomName == "room_library_ch2") && cur.roomName == "room_dw_cyber_intro_1_ch2"},
-        {"Ch2_ArcadeGameText",     (ver, org, cur) => cur.roomName == "room_dw_cyber_queen_boxing_ch2" && vars.checkTextClose(ver, org, cur, @"\EH* C'mon^1, let's go after&||her!/%", @"\EH＊ おまえら^1！&　 追っかけるぞ！/%")},
+        {"Ch2_ArcadeGameText",     (ver, org, cur) => cur.roomName == "room_dw_cyber_queen_boxing_ch2" && cur.msc == 1015 && !org.song.EndsWith(@"mus\cyber.ogg") && cur.song.EndsWith(@"mus\cyber.ogg")},
         {"Ch2_ArcadeGameLeave",    (ver, org, cur) => org.roomName == "room_dw_cyber_queen_boxing_ch2" && cur.roomName == "room_dw_cyber_musical_door_ch2"},
         {"Ch2_DJFight",            (ver, org, cur) => cur.roomName == "room_dw_cyber_music_final_ch2" && org.fight == 1 && cur.fight == 0},
         {"Ch2_DJShopRoom",         (ver, org, cur) => org.roomName == "room_dw_cyber_musical_door_ch2" && cur.roomName == "room_dw_cyber_musical_shop_ch2"},
@@ -408,6 +408,7 @@ startup
     settings.CurrentDefaultParent = "Ch2";
     settings.Add("Ch2_Library",          false, "Enter Dark World");
     settings.Add("Ch2_ArcadeGameText",   false, "End Punch-Out minigame (textbox close)");
+     settings.SetToolTip("Ch2_ArcadeGameText", @"This autosplit does not work if you remove A CYBER'S WORLD? from the game files (mus\cyber.ogg).");
     settings.Add("Ch2_ArcadeGameLeave",  false, "End Punch-Out minigame (room exit)");
     settings.Add("Ch2_DJFight",          false, "End Sweet Cap'n Cakes battle");
     settings.Add("Ch2_DJShopRoom",       false, "Enter Sweet Cap'n Cakes' shop room");
