@@ -283,7 +283,7 @@ startup
         {"Ch2_TasqueManager",      (ver, org, cur) => org.roomName == "room_dw_mansion_tasquePaintings_ch2" && cur.roomName == "room_dw_mansion_traffic_ch2"},
         {"Ch2_Mauswheel",          (ver, org, cur) => org.roomName == "room_dw_mansion_kitchen_ch2" && cur.roomName == "room_dw_mansion_east_2f_transformed_new_ch2"},
         {"Ch2_Disk_Loaded",        (ver, org, cur) => cur.roomName == "room_shop_ch2_spamton_ch2" && org.loadedDiskGreyBG < 121 && cur.loadedDiskGreyBG == 121},
-        {"Ch2_Disk_Inserted",      (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_b_ch2" && vars.checkTextClose(ver, org, cur, @"* (Nothing happened.)/%", @"＊ (なにも起こらなかった)/%")},
+        {"Ch2_Disk_Inserted",      (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_b_ch2" && org.msc != 1134 && cur.msc == 1134 && cur.choicer == 0},
         {"Ch2_SpamtonNEO_End",     (ver, org, cur) => cur.roomName == "room_dw_mansion_b_east_ch2" && org.song.EndsWith(@"mus\spamton_neo_mix_ex_wip.ogg") && cur.song == null},
         {"Ch2_SpamtonNEO_Leave",   (ver, org, cur) => org.roomName == "room_dw_mansion_b_east_ch2" && cur.roomName == "room_dw_mansion_b_east_a_ch2"},
         {"Ch2_AcidLake_Enter",     (ver, org, cur) => org.roomName == "room_dw_mansion_east_3f_ch2" && cur.roomName == "room_dw_mansion_acid_tunnel_ch2"},
