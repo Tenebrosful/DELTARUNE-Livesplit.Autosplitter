@@ -162,21 +162,21 @@ startup
     vars.SPEndingTriggered = false; // Used to prevent a double split
     vars.IGTPopup = false; // Used to prevent the IGT pop-up opening multiple times, especially on LTS (the game fully closes and reopens every chapter switch)
     vars.UnknownPopup = false; // Same as above for the unknown version pop-up
-    vars.ACContinueRooms = new[,]
+    vars.ACContinueRooms = new[]
     {
-        {null, null},
-        {"PLACE_MENU_ch1", "PLACE_CONTACT_ch1"},                 // Chapter 1
-        {"PLACE_MENU_ch2", "room_krisroom_ch2"},                 // Chapter 1 -> 2
-        {"PLACE_MENU_ch3", "room_dw_couch_overworld_intro_ch3"}, // Chapter 2 -> 3
-        {"PLACE_MENU_ch4", "room_cc_fountain_ch4"}               // Chapter 3 -> 4
+        null,
+        "PLACE_CONTACT_ch1",                 // Chapter 1
+        "room_krisroom_ch2",                 // Chapter 1 -> 2
+        "room_dw_couch_overworld_intro_ch3", // Chapter 2 -> 3
+        "room_cc_fountain_ch4"               // Chapter 3 -> 4
     };
-    vars.OSTRooms = new[,]
+    vars.OSTRooms = new[]
     {
-        {null, null},
-        {null, null},                                   // Chapter 1 (handled separately due to credits timing)
-        {"room_torhouse_ch2",           "room_ed_ch2"}, // Chapter 2
-        {"room_town_shelter_ch3",       "room_ed_ch3"}, // Chapter 3
-        {"room_town_krisyard_dark_ch4", "room_ed_ch4"}  // Chapter 4
+        null,
+        null,                         // Chapter 1 (handled separately due to credits timing)
+        "room_torhouse_ch2",          // Chapter 2
+        "room_town_shelter_ch3",      // Chapter 3
+        "room_town_krisyard_dark_ch4" // Chapter 4
     };
 
     vars.resetVars = (Action)(() =>
@@ -318,6 +318,9 @@ startup
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
+        {"Ch4_EnterCT",         (ver, org, cur) => (org.roomName == "room_schooldoor_ch4" || org.roomName == "room_dw_church_knightclimb_post_ch4") && cur.roomName == "room_dw_castle_area_1_ch4"},
+        {"Ch4_StartMike",       (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 0 && cur.fight == 1},
+        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 1 && cur.fight == 0},
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
@@ -489,6 +492,9 @@ startup
 
     settings.Add("Ch4", false, "Chapter 4: Prophecy");
     settings.CurrentDefaultParent = "Ch4";
+    settings.Add("Ch4_EnterCT",        false, "Enter Castle Town");
+    settings.Add("Ch4_StartMike",      false, "Start Mike battle");
+    settings.Add("Ch4_EndMike",        false, "End Mike battle");
     settings.Add("Ch4_EnterDW",        false, "Enter Dark World");
     settings.Add("Ch4_EnterStudy",     false, "Enter Gerson's Study");
     settings.Add("Ch4_Jackenstein",    false, "End Jackenstein battle");
@@ -814,7 +820,7 @@ update
             vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
-        else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch, 0] && current.roomName == vars.OSTRooms[ch, 1]))
+        else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch] && current.roomName.StartsWith("room_ed")))
         {
             if(settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
             {
@@ -829,7 +835,7 @@ update
         {
             print("[DELTARUNE] Room: " + old.room + " (" + old.roomName + ")" + " -> " + current.room + " (" + current.roomName + ")");
 
-            if(old.roomName == vars.ACContinueRooms[ch, 0] && current.roomName == vars.ACContinueRooms[ch, 1])
+            if(old.roomName.StartsWith("PLACE_MENU") && current.roomName == vars.ACContinueRooms[ch])
             {
                 if((settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]) && timer.IsGameTimePaused)
                 {
@@ -875,7 +881,7 @@ start
 
     else if(version != "SURVEY_PROGRAM")
     {
-        if(old.namerEvent == 74 && current.namerEvent == 75)
+        if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU"))
         {
             print("[DELTARUNE] Timer started (Start Event for Chapter " + current.chapter + " detected)");
             return true;
@@ -899,7 +905,7 @@ reset
 
     else if(version != "SURVEY_PROGRAM")
     {
-        if(old.namerEvent == 74 && current.namerEvent == 75)
+        if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU"))
         {
             print("[DELTARUNE] Timer reset (Start Event for Chapter " + current.chapter + " detected)");
             return true;
