@@ -789,7 +789,7 @@ update
                 {
                     if(settings["AC_AlternateCh2"] && current.roomName == "room_torhouse_ch2")
                     {
-                        if(((old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && !vars.offset.IsRunning)
+                        if(((old.sound != "snd_bump" && current.sound == "snd_bump") || (old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && current.msc == 1090 && !vars.offset.IsRunning)
                             vars.offset.Start();
                         else
                             endCondition = (vars.offset.ElapsedMilliseconds >= 3667);
