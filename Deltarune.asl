@@ -849,7 +849,6 @@ update
                     else
                         vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
                 }
-                vars.tempVar = 0;
             }
 
             // You enter the room twice, once in the cutscene and once when you regain control
