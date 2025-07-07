@@ -789,7 +789,7 @@ update
                 {
                     if(settings["AC_AlternateCh2"] && current.roomName == "room_torhouse_ch2")
                     {
-                        if(((old.sound != "snd_bump" && current.sound == "snd_bump") || (old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && current.msc == 1090 && !vars.offset.IsRunning)
+                        if(((old.sound != "snd_bump" && current.sound == "snd_bump") || (old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && vars.tempVar == 0 && current.msc == 1090 && !vars.offset.IsRunning)
                             vars.offset.Start();
                         else
                             endCondition = (vars.offset.ElapsedMilliseconds >= 3667);
@@ -816,6 +816,7 @@ update
                 print("[DELTARUNE] All Chapters: Chapter " + ch + " ended, timer paused");
                 timer.IsGameTimePaused = true;
             }
+            vars.tempVar = 1;
             vars.offset.Reset();
             vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
@@ -849,6 +850,7 @@ update
                     else
                         vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
                 }
+                vars.tempVar = 0;
             }
 
             // You enter the room twice, once in the cutscene and once when you regain control
@@ -936,9 +938,7 @@ split
            vars.completedSplits.Contains(split.Key) ||
            !split.Value(version, old, current)) continue;
 
-        if(vars.tempVar > 0)
-            vars.tempVar = 0;
-
+        vars.tempVar = 0;
         vars.completedSplits.Add(split.Key);
         print("[DELTARUNE] Split triggered (" + split.Key + ")");
         return true;
