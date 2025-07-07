@@ -199,7 +199,7 @@ startup
             case "Demo v1.19":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
 
-            case "CH1-4 v1.01C":
+            case " v1.01C":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
             
             default:
@@ -217,7 +217,7 @@ startup
             case "Demo v1.19":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
 
-            case "CH1-4 v1.01C":
+            case " v1.01C":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
             
             default:
@@ -714,7 +714,7 @@ update
             current.msc     = current.msc_ch2;
             current.text    = current.text_ch2;
             
-            if(version.StartsWith("CH1-4"))
+            if(version.StartsWith("CH1-"))
                 current.namerEvent = current.namerEvent_ch2;
         }
         else if(current.directory.EndsWith(@"\chapter3_windows\"))
