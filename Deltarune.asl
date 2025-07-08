@@ -714,7 +714,7 @@ update
             current.msc     = current.msc_ch2;
             current.text    = current.text_ch2;
             
-            if(version.StartsWith("CH1-4"))
+            if(version.StartsWith("CH1-"))
                 current.namerEvent = current.namerEvent_ch2;
         }
         else if(current.directory.EndsWith(@"\chapter3_windows\"))
@@ -789,7 +789,7 @@ update
                 {
                     if(settings["AC_AlternateCh2"] && current.roomName == "room_torhouse_ch2")
                     {
-                        if(((old.sound != "snd_bump" && current.sound == "snd_bump") || (old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && current.msc == 1090 && !vars.offset.IsRunning)
+                        if(((old.sound == "snd_wing" && current.sound == "snd_bump") || (old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && current.msc == 1090 && !vars.offset.IsRunning)
                             vars.offset.Start();
                         else
                             endCondition = (vars.offset.ElapsedMilliseconds >= 3667);
@@ -936,9 +936,7 @@ split
            vars.completedSplits.Contains(split.Key) ||
            !split.Value(version, old, current)) continue;
 
-        if(vars.tempVar > 0)
-            vars.tempVar = 0;
-
+        vars.tempVar = 0;
         vars.completedSplits.Add(split.Key);
         print("[DELTARUNE] Split triggered (" + split.Key + ")");
         return true;
