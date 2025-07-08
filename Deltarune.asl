@@ -116,7 +116,7 @@ state("DELTARUNE", "Demo v1.19")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
-state("DELTARUNE", "CH1-4 v1.01C")
+state("DELTARUNE", "CH1-4 v1.02")
 {
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
@@ -132,22 +132,22 @@ state("DELTARUNE", "CH1-4 v1.01C")
     string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
     string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
     string128 text_ch2_4    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
-    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x40,  0x0;
-    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC50, 0x0;
-    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xB0, 0x0;
+    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x60,  0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC70, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xA0, 0x0;
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x340, 0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0xF10, 0x38,   0x48, 0x10,  0x1F0, 0x0;              // obj_blocktree_dmg.mytimer
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x60,  0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0x530, 0x38,   0x48, 0x10,  0x290, 0x0;              // obj_blocktree_dmg.mytimer
     double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,  0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,  0x2F40, 0x30;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x230, 0x0;
-    float playerX_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50,  0x158, 0x10,  0xE8;       // obj_mainchara.x
-    float playerY_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50,  0x158, 0x10,  0xEC;       // obj_mainchara.y
-    double gotEgg         : 0x8B2790, 0x1E8, 0x80,  0x38,   0x1A0, 0x48,  0x10,  0x350, 0x0; // obj_dw_churchb_man.gotegg
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x280, 0x0;
+    float playerX_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xE8; // obj_mainchara.x
+    float playerY_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xEC; // obj_mainchara.y
+    double gotEgg         : 0x8B2790, 0x1E8, 0x80,  0x38,   0x48, 0x10,  0x380, 0x0;  // obj_dw_churchb_man.gotegg
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -199,7 +199,7 @@ startup
             case "Demo v1.19":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
 
-            case "CH1-4 v1.01C":
+            case "CH1-4 v1.02":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
             
             default:
@@ -217,7 +217,7 @@ startup
             case "Demo v1.19":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
 
-            case "CH1-4 v1.01C":
+            case "CH1-4 v1.02":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
             
             default:
@@ -273,7 +273,7 @@ startup
         {"Ch2_Egg",                (ver, org, cur) => (cur.roomName == "room_dw_cyber_musical_door_ch2" || cur.roomName == "room_dw_city_man_ch2") && org.msc == 1173 && cur.msc > 1173 && cur.choicer <= 0},
         {"Ch2_Mouse2Puzzle",       (ver, org, cur) => org.roomName == "room_dw_city_mice2_ch2" && cur.roomName == "room_dw_city_cheesemaze_ch2"},
         {"Ch2_ThornRing",          (ver, org, cur) => cur.roomName == "room_dw_city_moss_ch2" && vars.checkTextClose(ver, org, cur, @"\S1* (You got the ThornRing.)/%", @"\S1＊ (いばらの指輪を　手に入れた)/%")},
-        {"Ch2_SGBerdly",           (ver, org, cur) => cur.roomName == "room_dw_city_berdly_ch2" && org.snowgrave < 127 && cur.snowgrave >= 127},
+        {"Ch2_SGBerdly",           (ver, org, cur) => cur.roomName == "room_dw_city_berdly_ch2" && org.snowgrave < 127 && cur.snowgrave >= 127 && cur.snowgrave <= 150},
         {"Ch2_SGBerdly_LeaveRoom", (ver, org, cur) => org.roomName == "room_dw_city_berdly_ch2" && cur.roomName == "room_dw_city_poppup_ch2"},
         {"Ch2_Berdly_Leave",       (ver, org, cur) => org.roomName == "room_dw_city_berdly_ch2" && cur.roomName == "room_dw_city_traffic_4_ch2"},
         {"Ch2_SpamtonLeave",       (ver, org, cur) => org.roomName == "room_dw_city_spamton_alley_ch2" && cur.roomName == "room_dw_city_traffic_4_ch2"},
@@ -614,8 +614,8 @@ init
             version = "Demo v1.19";
             break;
 
-        case "BDD3FBEB0F51A7B522CA296092A20853":
-            version = "CH1-4 v1.01C";
+        case "B5EF0EEC9554C491777D6C4E93E0DF76":
+            version = "CH1-4 v1.02";
             break;
 
         default:
@@ -636,7 +636,7 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapters 1-4 v1.01C.\n\n" +
+                    "- Chapters 1-4 v1.02.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
