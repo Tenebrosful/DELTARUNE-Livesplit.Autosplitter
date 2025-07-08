@@ -293,7 +293,7 @@ startup
         {"Ch2_Fountain_Enter",     (ver, org, cur) => (org.roomName == "room_dw_mansion_top_post_ch2" && cur.roomName == "room_cc_fountain_ch2") || (org.roomName == "room_dw_mansion_prefountain_ch2" && cur.roomName == "room_dw_mansion_fountain_ch2")},
         {"Ch2_SGSpamtonNEO_End",   (ver, org, cur) => cur.roomName == "room_dw_mansion_fountain_ch2" && org.fight == 1 && cur.fight == 0},
         {"Ch2_Fountain_Exit",      (ver, org, cur) => (org.roomName == "room_cc_fountain_ch2" || org.roomName == "room_dw_mansion_fountain_ch2") && cur.roomName == "room_lw_computer_lab_ch2"},
-        {"Ch2_PuppetScarfChest",   (ver, org, cur) => cur.roomName == "room_dw_castle_west_cliff_ch2" && vars.checkTextOpen(ver, org, cur, @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/", @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/")}
+        {"Ch2_PuppetScarfChest",   (ver, org, cur) => cur.roomName == "room_dw_castle_west_cliff_ch2" && (vars.checkTextOpen(ver, org, cur, @"* (You opened the treasure&||chest.^1)&* (Inside was \cYPuppetScarf\cW.)/", @"＊ (宝箱を開けた^1)&＊ (\cYパペットマフラー\cWが&　 入っていた)/") || vars.checkTextOpen(ver, org, cur, @"* (\cYPuppetScarf\cW was added to your&||\cYWEAPONs\cW.)/%", @"＊ (\cYパペットマフラー\cWが&　 \cYぶき\cWに　加わった)/%"))}
     };
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
