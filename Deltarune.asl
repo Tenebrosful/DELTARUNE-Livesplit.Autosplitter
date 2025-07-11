@@ -238,6 +238,7 @@ startup
         {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && org.msc != 601 && cur.msc == 601 && cur.choicer == 0},
         {"Ch1_SusieLancer_Exit",      (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_forest_afterthrash2_ch1"},
         {"Ch1_Escape_Cell",           (ver, org, cur) => org.roomName == "room_cc_prison_cells_ch1" && cur.roomName == "room_cc_prisonlancer_ch1" && vars.tempVar == 2},
+        {"Ch1_Enter_Elevator",        (ver, org, cur) => org.roomName == "room_cc_prison_to_elevator_ch1" && cur.roomName == "room_cc_prisonelevator_ch1"},
         {"Ch1_CFWarp",                (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_field3_ch1"},
         {"Ch1_FBWarp",                (ver, org, cur) => org.roomName == "room_field3_ch1" && cur.roomName == "room_forest_savepoint2_ch1"},
         {"Ch1_BCWarp",                (ver, org, cur) => org.roomName == "room_forest_savepoint2_ch1" && cur.roomName == "room_forest_fightsusie_ch1"},
@@ -340,6 +341,7 @@ startup
         {"Ch4_PreClimbTitan2",  (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_post_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_ch4"},
         {"Ch4_ClimbTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_post_ch4"},
         {"Ch4_StartTitan",      (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && org.fight == 0 && cur.fight == 1},
+        {"Ch4_InsideTitan",     (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb2_post_ch4" && cur.roomName == "room_dw_churchc_insidetitan_ch4"},
         {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
         {"Ch4_Fountain3",       (ver, org, cur) => org.roomName == "room_cc_fountain_ch4" && cur.roomName == "room_lw_church_main_ch4"}
     };
@@ -386,6 +388,7 @@ startup
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
     settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer battle room)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
+    settings.Add("Ch1_Enter_Elevator",        false, "Enter Elevator");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 battle room");
     settings.Add("Ch1_Throne_Exit",           false, "Exit Throne Room");
     settings.Add("Ch1_PreKing_Exit",          false, "Exit Pre-King battle room");
@@ -510,7 +513,8 @@ startup
     settings.Add("Ch4_PreClimbTitan2", false, "Start Titan Climb 2");
     settings.Add("Ch4_ClimbTitan",     false, "End Titan Climb 2");
     settings.Add("Ch4_StartTitan",     false, "Start Titan battle");
-    settings.Add("Ch4_EndTitan",       false, "End Titan battle");
+    settings.Add("Ch4_InsideTitan",    false, "End Titan battle");
+    settings.Add("Ch4_EndTitan",       false, "Seal Titan");
     settings.Add("Ch4_Fountain3",      false, "Seal Fountain 3");
     settings.Add("Ch4_Ending",         false, "Ending");
     settings.Add("Ch4_EndingOST",      false, "(OST%) Ending");
