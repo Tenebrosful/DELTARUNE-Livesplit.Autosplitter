@@ -819,7 +819,7 @@ update
                 break;
 
             case 4:
-                if(settings["Ch4_HammerofJustice"] && vars.tempVar == 0 && current.roomName == "room_dw_church_arena_ch4" && old.susieSprite == 3128 && current.susieSprite != 3128)
+                if(settings["Ch4_HammerofJustice"] && vars.tempVar == 0 && current.roomName == "room_dw_church_arena_ch4" && current.fight == 1 && old.susieSprite == 3128 && current.susieSprite != 3128)
                 {
                     vars.tempVar = 1;
                 }
@@ -866,9 +866,13 @@ update
                 if(settings["AC_Continue"])
                 {
                     if(current.chapter == 1)
+                    {
                         vars.forceSplit = (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
+                    }
                     else
+                    {
                         vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
+                    }
                 }
             }
 
