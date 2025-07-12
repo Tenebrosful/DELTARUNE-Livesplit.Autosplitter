@@ -136,18 +136,20 @@ state("DELTARUNE", "CH1-4 v1.02")
     double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC70, 0x0;
     double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xA0, 0x0;
 
-    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,  0x1190, 0x370;
-    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,  0x1000, 0x250;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x60,  0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0x530, 0x38,   0x48, 0x10,  0x290, 0x0;              // obj_blocktree_dmg.mytimer
-    double knightCon      : 0x8B2790, 0x1A0, 0x5E0, 0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
+    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
+    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10,  0x60,  0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10,  0x290, 0x0;              // obj_blocktree_dmg.mytimer
+    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10,  0xD0;                    // obj_shadow_mantle_enemy_outro.image_speed
+    double knightCon      : 0x8B2790, 0x1A0, 0x5E0,  0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
-    double fight_ch4      : 0x6A1CA8, 0x48,  0x10,  0x72B0, 0x370;
-    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,  0x2F40, 0x30;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,  0x38,   0x48, 0x10,  0x280, 0x0;
-    float playerX_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xE8; // obj_mainchara.x
-    float playerY_ch4     : 0x69FA98, 0x0,   0x198, 0x0,    0x50, 0x158, 0x10,  0xEC; // obj_mainchara.y
-    double gotEgg         : 0x8B2790, 0x1E8, 0x80,  0x38,   0x48, 0x10,  0x380, 0x0;  // obj_dw_churchb_man.gotegg
+    double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
+    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x280, 0x0;
+    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;        // obj_herosusie.sprite_index
+    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8; // obj_mainchara.x
+    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC; // obj_mainchara.y
+    double gotEgg         : 0x8B2790, 0x1E8, 0x80,   0x38,   0x48,  0x10,  0x380, 0x0;  // obj_dw_churchb_man.gotegg
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -310,6 +312,7 @@ startup
         {"Ch3_ExitRouxls",   (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
         {"Ch3_Egg",          (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer == 0 && cur.eggTimer > 0},
         {"Ch3_EnterMantle",  (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
+        {"Ch3_EndMantle",    (ver, org, cur) => cur.roomName == "room_shadowmantle_ch3" && org.mantleOutro != 0.125 && cur.mantleOutro == 0.125},
         {"Ch3_ShadowMantle", (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
@@ -327,7 +330,7 @@ startup
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
         {"Ch4_GoldenPiano",     (ver, org, cur) => org.roomName == "room_dw_church_secretpiano_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_EnterHoJ",        (ver, org, cur) => org.roomName == "room_dw_church_gersonstudy_ch4" && cur.roomName == "room_dw_church_arena_ch4"},
-        {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && org.song.EndsWith(@"mus\gerson_defeated.ogg") && cur.song == null},
+        {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && cur.fight == 1 && org.susieSprite == 1535 && cur.susieSprite == 1553 && vars.tempVar == 1},
         {"Ch4_ExitHoJ",         (ver, org, cur) => org.roomName == "room_dw_church_arena_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_GrandPiano",      (ver, org, cur) => org.roomName == "room_dw_church_organpuzzle_ch4" && (cur.roomName == "room_dw_church_trueclimbadventure_ch4" || cur.roomName == "room_dw_church_rightconnect_ch4")},
         {"Ch4_MissMizzle",      (ver, org, cur) => org.roomName == "room_dw_church_holywatercooler_ch4" && cur.roomName == "room_dw_church_intro_gerson_ch4"},
@@ -490,6 +493,7 @@ startup
      settings.Add("Ch3_IceKey",       false, "Obtain Ice Key (room exit)");
      settings.Add("Ch3_ShelterKey",   false, "Obtain Shelter Key (room exit)");
      settings.Add("Ch3_EnterMantle",  false, "Start Shadow Mantle battle");
+     settings.Add("Ch3_EndMantle",    false, "End Shadow Mantle battle");
      settings.Add("Ch3_ShadowMantle", false, "Obtain Shadow Mantle (room exit)");
     settings.CurrentDefaultParent = null;
 
@@ -524,7 +528,6 @@ startup
      settings.Add("Ch4_GoldenPiano",     false, "Solve the Golden Piano puzzle");
      settings.Add("Ch4_EnterHoJ",        false, "Enter Hammer of Justice battle room");
      settings.Add("Ch4_HammerofJustice", false, "End Hammer of Justice battle");
-      settings.SetToolTip("Ch4_HammerofJustice", @"This autosplit does not work if you remove Wise words from the game files (mus\gerson_defeated.ogg).");
      settings.Add("Ch4_ExitHoJ",         false, "Exit Hammer of Justice battle room");
 }
 
@@ -694,8 +697,9 @@ update
     current.roomName = vars.getRoomName();
 
     if(version == "SURVEY_PROGRAM")
+    {
         current.chapter = 1;
-
+    }
     else if(vars.x64) // game_change fully unloads and loads games so consistent pointer paths between chapters are not an option
     {
         if(current.directory == null)
@@ -781,14 +785,18 @@ update
                     }
                 }
                 else
+                {
                     endCondition = vars.checkTextClose(version, old, current, @"* (You decided to go to bed.)/%", @"＊ (ねむることにした)/%");
+                }
                 break;
 
             case 2:
                 // This is the only situation where the Door Overflow splits could get triggered
                 // You can not have the 400 bagels and the door available at the same time in regular gameplay
                 if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && vars.tempVar == 0 && current.roomName == "room_dw_cyber_musical_door_ch2" && vars.checkTextClose(version, old, current, @"* (You were crushed under the&||weight of 400 bagels and&||defeated instantly...)/%", @"＊ (ベーグル400コの　重みに耐えきれ^1ず&　たちまち　力つきた…)/%"))
+                {
                     vars.tempVar = 1;
+                }
                 else
                 {
                     if(settings["AC_AlternateCh2"] && current.roomName == "room_torhouse_ch2")
@@ -805,11 +813,20 @@ update
 
             case 3:
                 if(old.song != null)
+                {
                     endCondition = (current.roomName == "room_town_shelter_ch3" && old.song.EndsWith(@"mus\night_ambience.ogg") && current.song == null);
+                }
                 break;
 
             case 4:
-                endCondition = (current.roomName == "room_torhouse_ch4" && current.plot_ch4 == 310 && (old.playerX_ch4 != current.playerX_ch4 || old.playerY_ch4 != current.playerY_ch4) && current.playerX_ch4 < 160 && current.playerY_ch4 < 80);
+                if(settings["Ch4_HammerofJustice"] && vars.tempVar == 0 && current.roomName == "room_dw_church_arena_ch4" && current.fight == 1 && old.susieSprite == 3128 && current.susieSprite != 3128)
+                {
+                    vars.tempVar = 1;
+                }
+                else
+                {
+                    endCondition = (current.roomName == "room_torhouse_ch4" && current.plot_ch4 == 310 && (old.playerX != current.playerX || old.playerY != current.playerY) && current.playerX < 160 && current.playerY < 80);
+                }
                 break;
         }
 
@@ -849,23 +866,31 @@ update
                 if(settings["AC_Continue"])
                 {
                     if(current.chapter == 1)
+                    {
                         vars.forceSplit = (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
+                    }
                     else
+                    {
                         vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
+                    }
                 }
             }
 
             // You enter the room twice, once in the cutscene and once when you regain control
             // so we need to keep track of the number of room entrances, otherwise it would split during the cutscene
             else if(settings["Ch1_Escape_Cell"] && vars.tempVar < 2 && old.roomName == "room_cc_prison_cells_ch1" && current.roomName == "room_cc_prisonlancer_ch1")
+            {
                 vars.tempVar ++;
-
+            }
             else if((settings["AC_PauseTimerOST"] || settings["Ch1_EndingOST"]) && current.roomName == "room_ed_ch1" && !vars.offset.IsRunning)
+            {
                 vars.offset.Start();
-
+            }
             // Edge case: Reset vars.tempVar to make sure Door Overflow splits don't get triggered by doing the 400 bagels cutscene and then playing normally until the door is properly accessible
             else if((settings["Ch2_TrashZoneWarp2"] || settings["Ch2_MansionWarp2"]) && current.chapter == 2 && vars.tempVar == 2 && current.roomName != "room_dw_city_intro_ch2" && current.roomName != "room_dw_mansion_entrance_ch2")
+            {
                 vars.tempVar = 0;
+            }
         }
     }
     else if(!vars.firstUpdateDone)
