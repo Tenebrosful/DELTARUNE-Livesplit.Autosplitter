@@ -379,7 +379,7 @@ startup
 
     settings.Add("AC_UnpauseOnLoad", false, "Also unpause the timer when loading a save file");
 
-    settings.Add("AC_Continue", false, "Split when continuing from the previous chapter's save file");
+    settings.Add("AC_Continue", false, "Split when starting from the previous chapter's save file");
     settings.CurrentDefaultParent = null;
 
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
