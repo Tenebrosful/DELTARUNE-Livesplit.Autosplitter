@@ -377,7 +377,9 @@ startup
         "This setting pauses the timer when the credits music starts playing instead.\n" +
         "Useful for OST%. NOTE: Enabling this will override the other setting (you can not have both activated at once).");
 
-    settings.Add("AC_Continue", false, "Split when starting a chapter from a previous save file");
+    settings.Add("AC_UnpauseOnLoad", false, "Also unpause the timer when loading a save file");
+
+    settings.Add("AC_Continue", false, "Split when continuing from the previous chapter's save file");
     settings.CurrentDefaultParent = null;
 
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
@@ -856,14 +858,14 @@ update
         {
             print("[DELTARUNE] Room: " + old.room + " (" + old.roomName + ")" + " -> " + current.room + " (" + current.roomName + ")");
 
-            if(old.roomName.StartsWith("PLACE_MENU") && current.roomName == vars.ACContinueRooms[ch])
+            if(old.roomName.StartsWith("PLACE_MENU") && (current.roomName == vars.ACContinueRooms[ch] || (settings["AC_UnpauseOnLoad"] && current.roomName != vars.ACContinueRooms[ch])))
             {
                 if((settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]) && timer.IsGameTimePaused)
                 {
                     print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
                     timer.IsGameTimePaused = false;
                 }
-                if(settings["AC_Continue"])
+                if(settings["AC_Continue"] && current.roomName == vars.ACContinueRooms[ch])
                 {
                     if(current.chapter == 1)
                     {
