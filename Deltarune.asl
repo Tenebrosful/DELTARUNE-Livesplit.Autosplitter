@@ -377,9 +377,8 @@ startup
         "This setting pauses the timer when the credits music starts playing instead.\n" +
         "Useful for OST%. NOTE: Enabling this will override the other setting (you can not have both activated at once).");
 
-    settings.Add("AC_UnpauseOnLoad", false, "Also unpause the timer when loading a save file");
-
-    settings.Add("AC_Continue", false, "Split when starting from the previous chapter's save file");
+    settings.Add("AC_UnpauseOnLoad",  false, "Also unpause the timer when loading a save file");
+    settings.Add("AC_UnpauseOnStart", false, "Also unpause the timer when starting from a new save file");
     settings.CurrentDefaultParent = null;
 
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
@@ -860,24 +859,10 @@ update
         {
             print("[DELTARUNE] Room: " + old.room + " (" + old.roomName + ")" + " -> " + current.room + " (" + current.roomName + ")");
 
-            if(old.roomName.StartsWith("PLACE_MENU") && (current.roomName == vars.ACContinueRooms[ch] || (settings["AC_UnpauseOnLoad"] && current.roomName != vars.ACContinueRooms[ch])))
+            if((settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]) && timer.IsGameTimePaused && old.roomName.StartsWith("PLACE_MENU") && (current.roomName == vars.ACContinueRooms[ch] || (settings["AC_UnpauseOnLoad"] && current.roomName != vars.ACContinueRooms[ch])))
             {
-                if((settings["AC_PauseTimer"] || settings["AC_PauseTimerOST"]) && timer.IsGameTimePaused)
-                {
-                    print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
-                    timer.IsGameTimePaused = false;
-                }
-                if(settings["AC_Continue"] && current.roomName == vars.ACContinueRooms[ch])
-                {
-                    if(current.chapter == 1)
-                    {
-                        vars.forceSplit = (timer.CurrentTime.RealTime > TimeSpan.FromSeconds(0)); // Workaround for Chapter 1 splitting right after starting
-                    }
-                    else
-                    {
-                        vars.forceSplit = (old.namerEvent != 75); // Workaround for Chapter 2+ splitting on the cut to black after starting
-                    }
-                }
+                print("[DELTARUNE] All Chapters: Chapter " + ch + " started, timer resumed");
+                timer.IsGameTimePaused = false;
             }
 
             // You enter the room twice, once in the cutscene and once when you regain control
@@ -932,6 +917,11 @@ reset
 {
     if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
     {
+        if(settings["AC_UnpauseOnStart"] && timer.IsGameTimePaused)
+        {
+            timer.IsGameTimePaused = false;
+            return false;
+        }
         print("[DELTARUNE] Timer reset (Start Room for Chapter 1 detected)");
         return true;
     }
@@ -940,6 +930,11 @@ reset
     {
         if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU"))
         {
+            if(settings["AC_UnpauseOnStart"] && timer.IsGameTimePaused)
+            {
+                timer.IsGameTimePaused = false;
+                return false;
+            }
             print("[DELTARUNE] Timer reset (Start Event for Chapter " + current.chapter + " detected)");
             return true;
         }
@@ -960,7 +955,7 @@ split
         return true;
     }
     
-    if(current.chapter == 0) // Don't try to split if on Chapter Select
+    if(current.chapter == 0)
         return;
 
     foreach(var split in vars.splits[(int)current.chapter - 1])
