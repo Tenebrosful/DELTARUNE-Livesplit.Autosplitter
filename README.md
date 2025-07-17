@@ -6,12 +6,12 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 - SURVEY_PROGRAM
 - Chapter 1&2 v1.08-v1.15, v1.19
-- Chapters 1-4 v1.02.
+- Chapters 1-4 v1.02
 
 ## Supported mods
 
 - [Item tracker mod](https://github.com/nhaar/deltarune-items-tracker)
-- [OST% tracker mod](https://github.com/VintagixDev/DELTARUNE_OSTTracker).
+- [OST% tracker mod](https://github.com/VintagixDev/DELTARUNE_OSTTracker)
 
 ## How to install
 
