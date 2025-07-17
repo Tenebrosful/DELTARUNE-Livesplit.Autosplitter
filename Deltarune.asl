@@ -624,6 +624,8 @@ init
             break;
 
         case "B5EF0EEC9554C491777D6C4E93E0DF76":
+        case "5AD96F21CEE4AE12B85B5F24BBBDB93A": // Item tracker mod
+        case "D6ECCBC495E06E835B17815D0A5B2852": // OST% tracker mod
             version = "CH1-4 v1.02";
             break;
 
