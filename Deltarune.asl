@@ -146,10 +146,10 @@ state("DELTARUNE", "CH1-4 v1.02")
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
     double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x280, 0x0;
+    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0, 0x0;
     int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;        // obj_herosusie.sprite_index
     float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8; // obj_mainchara.x
     float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC; // obj_mainchara.y
-    double gotEgg         : 0x8B2790, 0x1E8, 0x80,   0x38,   0x48,  0x10,  0x380, 0x0;  // obj_dw_churchb_man.gotegg
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -335,10 +335,11 @@ startup
         {"Ch4_GrandPiano",      (ver, org, cur) => org.roomName == "room_dw_church_organpuzzle_ch4" && (cur.roomName == "room_dw_church_trueclimbadventure_ch4" || cur.roomName == "room_dw_church_rightconnect_ch4")},
         {"Ch4_MissMizzle",      (ver, org, cur) => org.roomName == "room_dw_church_holywatercooler_ch4" && cur.roomName == "room_dw_church_intro_gerson_ch4"},
         {"Ch4_Fountain1",       (ver, org, cur) => org.roomName == "room_dw_church_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
-        {"Ch4_Egg",             (ver, org, cur) => cur.roomName == "room_dw_churchb_man_ch4" && org.gotEgg == 0 && cur.gotEgg == 1},
+        {"Ch4_Egg",             (ver, org, cur) => cur.roomName == "room_dw_churchb_man_ch4" && vars.checkTextClose(ver, org, cur, @"* (An Egg was picked up from a&||nearby easel.)/%", "＊ (近くのイーゼルから\n　 タマゴを　拾いあげた)/%")},
         {"Ch4_FallDown",        (ver, org, cur) => org.roomName == "room_dw_churchb_darkclimb_scene_ch4" && cur.roomName == "room_dw_churchb_darkclimb_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
+        {"Ch4_PrincessRBN",     (ver, org, cur) => cur.roomName == "room_dw_churchc_prophecies_ch4" && vars.checkTextOpen(ver, org, cur, @"* (\cYPrincessRBN\cW was added to your&||\cYARMORs\cW.)/%", @"＊ (\cYプリティリボン\cWが&　 \cYぼうぐ\cWに　加わった)/%")},       
         {"Ch4_PreClimbTitan1",  (ver, org, cur) => org.roomName == "room_dw_churchc_pretitan_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_ch4"},
         {"Ch4_ClimbTitan1",     (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_post_ch4"},
         {"Ch4_PreClimbTitan2",  (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_post_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_ch4"},
@@ -513,6 +514,7 @@ startup
     settings.Add("Ch4_Egg",            false, "Obtain Egg");
     settings.Add("Ch4_FakeGerson",     false, "End Sound of Justice (Fake Gerson) battle");
     settings.Add("Ch4_Fountain2",      false, "Seal Fountain 2");
+    settings.Add("Ch4_PrincessRBN",    false, "Obtain Princess Ribbon");
     settings.Add("Ch4_PreClimbTitan1", false, "Start Titan Climb 1");
     settings.Add("Ch4_ClimbTitan1",    false, "End Titan Climb 1");
     settings.Add("Ch4_PreClimbTitan2", false, "Start Titan Climb 2");
@@ -738,6 +740,7 @@ update
         {
             current.chapter    = 4;
             current.fight      = current.fight_ch4;
+            current.text       = current.text_ch4;
             current.namerEvent = current.namerEvent_ch4;
         }
         else
