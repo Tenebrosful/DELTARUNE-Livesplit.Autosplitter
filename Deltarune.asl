@@ -325,6 +325,7 @@ startup
         {"Ch4_EnterCT",         (ver, org, cur) => (org.roomName == "room_schooldoor_ch4" || org.roomName == "room_dw_church_knightclimb_post_ch4") && cur.roomName == "room_dw_castle_area_1_ch4"},
         {"Ch4_StartMike",       (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 0 && cur.fight == 1},
         {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 1 && cur.fight == 0},
+        {"Ch4_NoellesHouse",    (ver, org, cur) => org.roomName == "room_town_noellehouse_ch4" && cur.roomName == "room_lw_noellehouse_main_ch4"},
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
@@ -504,8 +505,9 @@ startup
     settings.Add("Ch4_EnterCT",        false, "Enter Castle Town");
     settings.Add("Ch4_StartMike",      false, "Start Mike battle");
     settings.Add("Ch4_EndMike",        false, "End Mike battle");
+    settings.Add("Ch4_NoellesHouse",   false, "Enter Noelle's house");
     settings.Add("Ch4_EnterDW",        false, "Enter Dark World");
-    settings.Add("Ch4_EnterStudy",     false, "Enter Gerson's Study");
+    settings.Add("Ch4_EnterStudy",     false, "Enter Gerson's study");
     settings.Add("Ch4_Jackenstein",    false, "End Jackenstein battle");
     settings.Add("Ch4_GrandPiano",     false, "Exit Grand Piano room");
     settings.Add("Ch4_MissMizzle",     false, "Exit Miss Mizzle battle room");
