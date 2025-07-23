@@ -52,7 +52,7 @@ like the timer pause will not work.
 
 Want to get in touch with the developers?
 In that case, we recommend you join the Deltarune Speedrunning community Discord server ["Fast Little Boys"](https://discord.gg/W6uckvkuer)
-(FLB) and ping one of the developers in the channel #autosplitter-feedback.
+(FLB) and ping one of the developers in the channel [#software-feedback](https://discord.com/channels/779455689079914566/1121166903273066638).
 
 You can also create an issue on this repository by clicking on the [Issues](https://github.com/Tenebrosful/DELTARUNE-Livesplit.Autosplitter/issues)
 tab and then on `New Issue`.
