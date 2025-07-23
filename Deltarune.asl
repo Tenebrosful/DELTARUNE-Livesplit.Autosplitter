@@ -146,10 +146,11 @@ state("DELTARUNE", "CH1-4 v1.03")
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
     double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x320, 0x0;
-    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0, 0x0;
-    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;        // obj_herosusie.sprite_index
-    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8; // obj_mainchara.x
-    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC; // obj_mainchara.y
+    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0,  0x0;
+    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x140, 0x0; // obj_mike_attack_controller.action
+    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;                          // obj_herosusie.sprite_index
+    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;                   // obj_mainchara.x
+    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;                   // obj_mainchara.y
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -324,7 +325,7 @@ startup
     {
         {"Ch4_EnterCT",         (ver, org, cur) => (org.roomName == "room_schooldoor_ch4" || org.roomName == "room_dw_church_knightclimb_post_ch4") && cur.roomName == "room_dw_castle_area_1_ch4"},
         {"Ch4_StartMike",       (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 0 && cur.fight == 1},
-        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 1 && cur.fight == 0},
+        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && cur.fight == 1 && org.mikeAction == 17 && cur.mikeAction == 18},
         {"Ch4_NoellesHouse",    (ver, org, cur) => org.roomName == "room_town_noellehouse_ch4" && cur.roomName == "room_lw_noellehouse_main_ch4"},
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
@@ -810,12 +811,18 @@ update
                     if(settings["AC_AlternateCh2"] && current.roomName == "room_torhouse_ch2")
                     {
                         if(((old.sound == "snd_wing" && current.sound == "snd_bump") || (old.sound != null && old.sound.EndsWith(@"mus\home.ogg") && current.sound == null) || (old.song != null && old.song.EndsWith(@"mus\home.ogg") && current.song == null)) && current.msc == 1090 && !vars.offset.IsRunning)
+                        {
                             vars.offset.Start();
+                        }
                         else
+                        {
                             endCondition = (vars.offset.ElapsedMilliseconds >= 3667);
+                        }
                     }
                     else
+                    {
                         endCondition = vars.checkTextClose(version, old, current, @"\E1* ... they're already&||asleep.../%", @"\E1＊ …ふたりとも　もう&　 ねむってしまったのね。/%");
+                    }
                 }
                 break;
 
@@ -874,7 +881,7 @@ update
             // so we need to keep track of the number of room entrances, otherwise it would split during the cutscene
             else if(settings["Ch1_Escape_Cell"] && vars.tempVar < 2 && old.roomName == "room_cc_prison_cells_ch1" && current.roomName == "room_cc_prisonlancer_ch1")
             {
-                vars.tempVar ++;
+                vars.tempVar++;
             }
             else if((settings["AC_PauseTimerOST"] || settings["Ch1_EndingOST"]) && current.roomName == "room_ed_ch1" && !vars.offset.IsRunning)
             {
@@ -896,6 +903,9 @@ update
 
 start
 {
+    if(timer.Run.Offset != TimeSpan.FromSeconds(0))
+        return false;
+
     if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
     {
         print("[DELTARUNE] Timer started (Start Room for Chapter 1 detected)");
@@ -920,6 +930,9 @@ onStart
 
 reset
 {
+    if(timer.Run.Offset != TimeSpan.FromSeconds(0))
+        return false;
+
     if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
     {
         if(settings["AC_UnpauseOnStart"] && timer.IsGameTimePaused)
