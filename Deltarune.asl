@@ -116,7 +116,7 @@ state("DELTARUNE", "Demo v1.19")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
-state("DELTARUNE", "CH1-4 v1.02")
+state("DELTARUNE", "CH1-4 v1.03")
 {
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
@@ -132,20 +132,20 @@ state("DELTARUNE", "CH1-4 v1.02")
     string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
     string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
     string128 text_ch2_4    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
-    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x60,  0x0;
-    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC70, 0x0;
-    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xA0, 0x0;
+    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x90,  0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xCA0, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0x80, 0x0;
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10,  0x60,  0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10,  0x290, 0x0;              // obj_blocktree_dmg.mytimer
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10,  0xF0,  0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10,  0x2D0, 0x0;              // obj_blocktree_dmg.mytimer
     float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10,  0xD0;                    // obj_shadow_mantle_enemy_outro.image_speed
     double knightCon      : 0x8B2790, 0x1A0, 0x5E0,  0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x280, 0x0;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x320, 0x0;
     string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0, 0x0;
     int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;        // obj_herosusie.sprite_index
     float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8; // obj_mainchara.x
@@ -201,7 +201,7 @@ startup
             case "Demo v1.19":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
 
-            case "CH1-4 v1.02":
+            case "CH1-4 v1.03":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
             
             default:
@@ -219,7 +219,7 @@ startup
             case "Demo v1.19":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
 
-            case "CH1-4 v1.02":
+            case "CH1-4 v1.03":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
             
             default:
@@ -310,7 +310,7 @@ startup
         {"Ch3_EnterTVW",     (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
         {"Ch3_EnterRouxls",  (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
         {"Ch3_ExitRouxls",   (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
-        {"Ch3_Egg",          (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer == 0 && cur.eggTimer > 0},
+        {"Ch3_Egg",          (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer <= 1 && cur.eggTimer > 1},
         {"Ch3_EnterMantle",  (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
         {"Ch3_EndMantle",    (ver, org, cur) => cur.roomName == "room_shadowmantle_ch3" && org.mantleOutro != 0.125 && cur.mantleOutro == 0.125},
         {"Ch3_ShadowMantle", (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
@@ -377,7 +377,7 @@ startup
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause the timer between chapters");
      settings.SetToolTip("AC_PauseTimerOST",
         "This setting pauses the timer when the credits music starts playing instead.\n" +
-        "Useful for OST%. NOTE: Enabling this will override the other setting (you can not have both activated at once).");
+        "Useful for OST%. NOTE: If you still want Chapter 2 to pause when Susie falls asleep, enable every setting above as well.");
 
     settings.Add("AC_UnpauseOnLoad",  false, "Also unpause the timer when loading a save file");
     settings.Add("AC_UnpauseOnStart", false, "Also unpause the timer when starting from a new save file");
@@ -626,10 +626,10 @@ init
             version = "Demo v1.19";
             break;
 
-        case "B5EF0EEC9554C491777D6C4E93E0DF76":
-        case "5AD96F21CEE4AE12B85B5F24BBBDB93A": // Item tracker mod
-        case "D6ECCBC495E06E835B17815D0A5B2852": // OST% tracker mod
-            version = "CH1-4 v1.02";
+        case "E5A2E12C70C9A73C4BFDFC5FE1F5D62A":
+        case "4B919C9465AE5396CB67BECB121FEC1B": // Item tracker mod
+        case "2613F2CFED4EA391D1920BFC7B331935": // OST% tracker mod
+            version = "CH1-4 v1.03";
             break;
 
         default:
@@ -650,7 +650,7 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapters 1-4 v1.02.\n\n" +
+                    "- Chapters 1-4 v1.03.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
