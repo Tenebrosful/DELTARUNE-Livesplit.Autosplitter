@@ -834,7 +834,7 @@ update
                 break;
 
             case 4:
-                if(settings["Ch4_HammerofJustice"] && vars.tempVar == 0 && current.roomName == "room_dw_church_arena_ch4" && current.fight == 1 && old.susieSprite == 3128 && current.susieSprite != 3128)
+                if(settings["Ch4_HammerofJustice"] && vars.tempVar == 0 && current.roomName == "room_dw_church_arena_ch4" && current.fight == 1 && old.susieSprite == 3129 && current.susieSprite != 3129)
                 {
                     vars.tempVar = 1;
                 }
