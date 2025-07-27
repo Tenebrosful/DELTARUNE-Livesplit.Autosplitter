@@ -138,10 +138,10 @@ state("DELTARUNE", "CH1-4 v1.03")
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10,  0xF0,  0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10,  0x2D0, 0x0;              // obj_blocktree_dmg.mytimer
-    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10,  0xD0;                    // obj_shadow_mantle_enemy_outro.image_speed
-    double knightCon      : 0x8B2790, 0x1A0, 0x5E0,  0x78,   0x38, 0x198, 0x48,  0x10, 0x170, 0x0; // obj_ch3_PTB02.con
+    double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;     // global.flag[1047] - For future reference: last offset is (flag index * 16) in hex
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0xF0,  0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10, 0x2D0, 0x0; // obj_blocktree_dmg.mytimer
+    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;       // obj_shadow_mantle_enemy_outro.image_speed
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
@@ -301,6 +301,7 @@ startup
     };
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
+        {"Ch3_EnterRound1",  (ver, org, cur) => (org.roomName == "room_dw_couch_overworld_intro_ch3" || org.roomName == "room_ch3_gameshowroom_ch3") && cur.roomName == "room_board_gsa02_b0_ch3"},
         {"Ch3_EnterChef",    (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
         {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 110 || cur.plot_ch3 == 120)},
         {"Ch3_IceKey",       (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
@@ -318,8 +319,8 @@ startup
         {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
         {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightCon != 9 && cur.knightCon == 9))},
-        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightCon != 49 && cur.knightCon == 49}
+        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightResult == 0 && cur.knightResult == 2))},
+        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightResult == 0 && cur.knightResult == 1}
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
@@ -474,6 +475,7 @@ startup
 
     settings.Add("Ch3", false, "Chapter 3: Late Night");
     settings.CurrentDefaultParent = "Ch3";
+    settings.Add("Ch3_EnterRound1", false, "Enter Round 1");
     settings.Add("Ch3_EnterChef",   false, "Enter Cooking Show");
     settings.Add("Ch3_EndRound1",   false, "Enter Green Room (post-Round 1)");
     settings.Add("Ch3_EnterRhythm", false, "Enter Lightners Live");
