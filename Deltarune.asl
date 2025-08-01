@@ -369,7 +369,7 @@ startup
     {
         {"Ch4_EnterCT",         (ver, org, cur) => (org.roomName == "room_schooldoor_ch4" || org.roomName == "room_dw_church_knightclimb_post_ch4") && cur.roomName == "room_dw_castle_area_1_ch4"},
         {"Ch4_StartMike",       (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 0 && cur.fight == 1},
-        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && cur.fight == 1 && org.mikeAction == 17 && cur.mikeAction == 18},
+        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && cur.fight == 1 && org.mikeAction != 18 && cur.mikeAction == 18},
         {"Ch4_NoellesHouse",    (ver, org, cur) => org.roomName == "room_town_noellehouse_ch4" && cur.roomName == "room_lw_noellehouse_main_ch4"},
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
