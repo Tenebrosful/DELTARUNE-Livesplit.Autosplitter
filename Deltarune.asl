@@ -116,6 +116,47 @@ state("DELTARUNE", "Demo v1.19")
     string256 directory : 0x8D06E0, 0x0; // Full path to the current game's directory
 }
 
+state("DELTARUNE", "CH1-4 v1.02")
+{
+    double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
+    double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
+    double msc_ch1      : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x100;
+    string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
+    double doorCloseCon : 0x8B2790, 0xE0, 0x48,  0x10,   0x30,  0x0;
+    float kingPos       : 0x69FA98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
+
+    double fight_ch2        : 0x6A1CA8, 0x48,  0x10,  0x100,  0x0;
+    double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0x7870, 0x0;
+    double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0x7310, 0x0;
+    string128 text_ch2      : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x6F0, 0x0,   0x0,  0x0;
+    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
+    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
+    string128 text_ch2_4    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
+    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x60,  0x0;
+    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xC70, 0x0;
+    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0xA0, 0x0;
+
+    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
+    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
+    double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;     // global.flag[1047]
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x60,  0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10, 0x290, 0x0; // obj_blocktree_dmg.mytimer
+    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;       // obj_shadow_mantle_enemy_outro.image_speed
+
+    double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
+    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x280, 0x0;
+    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0, 0x0;
+    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x140, 0x0; // obj_mike_attack_controller.action
+    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;                          // obj_herosusie.sprite_index
+    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;                   // obj_mainchara.x
+    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;                   // obj_mainchara.y
+
+    string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
+    string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
+    string256 directory : 0x8B2818, 0x0;
+}
+
 state("DELTARUNE", "CH1-4 v1.03")
 {
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
@@ -138,19 +179,19 @@ state("DELTARUNE", "CH1-4 v1.03")
 
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
-    double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;     // global.flag[1047] - For future reference: last offset is (flag index * 16) in hex
+    double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0xF0,  0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10, 0x2D0, 0x0; // obj_blocktree_dmg.mytimer
-    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;       // obj_shadow_mantle_enemy_outro.image_speed
+    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10, 0x2D0, 0x0;
+    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
     double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
     double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x320, 0x0;
     string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0,  0x0;
-    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x140, 0x0; // obj_mike_attack_controller.action
-    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;                          // obj_herosusie.sprite_index
-    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;                   // obj_mainchara.x
-    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;                   // obj_mainchara.y
+    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x140, 0x0;
+    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;
+    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;
+    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;
 
     string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
     string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
@@ -202,6 +243,7 @@ startup
             case "Demo v1.19":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
 
+            case "CH1-4 v1.02":
             case "CH1-4 v1.03":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
             
@@ -220,6 +262,7 @@ startup
             case "Demo v1.19":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
 
+            case "CH1-4 v1.02":
             case "CH1-4 v1.03":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
             
@@ -326,7 +369,7 @@ startup
     {
         {"Ch4_EnterCT",         (ver, org, cur) => (org.roomName == "room_schooldoor_ch4" || org.roomName == "room_dw_church_knightclimb_post_ch4") && cur.roomName == "room_dw_castle_area_1_ch4"},
         {"Ch4_StartMike",       (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && org.fight == 0 && cur.fight == 1},
-        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && cur.fight == 1 && org.mikeAction == 17 && cur.mikeAction == 18},
+        {"Ch4_EndMike",         (ver, org, cur) => cur.roomName == "room_dw_castle_tv_zone_battle_ch4" && cur.fight == 1 && org.mikeAction != 18 && cur.mikeAction == 18},
         {"Ch4_NoellesHouse",    (ver, org, cur) => org.roomName == "room_town_noellehouse_ch4" && cur.roomName == "room_lw_noellehouse_main_ch4"},
         {"Ch4_EnterDW",         (ver, org, cur) => (org.roomName == "room_torhouse_ch4" || org.roomName == "room_town_church_ch4") && cur.roomName == "room_dw_church_intro1_ch4"},
         {"Ch4_EnterStudy",      (ver, org, cur) => org.roomName == "room_dw_church_darkmaze_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
@@ -629,6 +672,12 @@ init
             version = "Demo v1.19";
             break;
 
+        case "B5EF0EEC9554C491777D6C4E93E0DF76":
+        case "5AD96F21CEE4AE12B85B5F24BBBDB93A": // Item tracker mod
+        case "D6ECCBC495E06E835B17815D0A5B2852": // OST% tracker mod
+            version = "CH1-4 v1.02";
+            break;
+
         case "E5A2E12C70C9A73C4BFDFC5FE1F5D62A":
         case "4B919C9465AE5396CB67BECB121FEC1B": // Item tracker mod
         case "2613F2CFED4EA391D1920BFC7B331935": // OST% tracker mod
@@ -653,7 +702,7 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapters 1-4 v1.03.\n\n" +
+                    "- Chapters 1-4 v1.02, v1.03.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
