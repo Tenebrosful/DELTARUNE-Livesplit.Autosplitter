@@ -157,7 +157,7 @@ state("DELTARUNE", "CH1-4 v1.02")
     string256 directory : 0x8B2818, 0x0;
 }
 
-state("DELTARUNE", "CH1-4 v1.03")
+state("DELTARUNE", "CH1-4 v1.04")
 {
     double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
@@ -180,15 +180,15 @@ state("DELTARUNE", "CH1-4 v1.03")
     double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
     double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
     double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0xF0,  0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10, 0x2D0, 0x0;
+    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x100, 0x0;
+    double eggTimer       : 0x8B2790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x300, 0x0;
     float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
-    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F40, 0x30;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x320, 0x0;
-    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x300, 0x0,   0x0,  0x0;
-    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x140, 0x0;
+    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F60, 0x30;
+    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x3A0, 0x0;
+    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x310, 0x0,   0x0,  0x0;
+    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x180, 0x0;
     int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;
     float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;
     float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;
@@ -244,7 +244,7 @@ startup
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
 
             case "CH1-4 v1.02":
-            case "CH1-4 v1.03":
+            case "CH1-4 v1.04":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
             
             default:
@@ -263,7 +263,7 @@ startup
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
 
             case "CH1-4 v1.02":
-            case "CH1-4 v1.03":
+            case "CH1-4 v1.04":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
             
             default:
@@ -678,10 +678,10 @@ init
             version = "CH1-4 v1.02";
             break;
 
-        case "E5A2E12C70C9A73C4BFDFC5FE1F5D62A":
-        case "4B919C9465AE5396CB67BECB121FEC1B": // Item tracker mod
-        case "2613F2CFED4EA391D1920BFC7B331935": // OST% tracker mod
-            version = "CH1-4 v1.03";
+        case "9D1FEA9DE81219EA7304F32F1AE7A878":
+        case "28660F14803390E2D1061ECE661E3CD0": // Item tracker mod
+        case "5CDE5CD6C739B962D583D297514C6C1C": // OST% tracker mod
+            version = "CH1-4 v1.04";
             break;
 
         default:
@@ -698,11 +698,11 @@ init
                     "- Item tracker mod\n" +
                     "- OST% tracker mod.\n\n" +
 
-                    "Make sure the game's executable is named \"DELTARUNE.exe\" and the data file is named \"data.win\".\n" +
+                    "Make sure the game's executable is named \"DELTARUNE.exe\" and the main data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
-                    "- Chapters 1-4 v1.02, v1.03.\n\n" +
+                    "- Chapters 1-4 v1.02, v1.04.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
 
