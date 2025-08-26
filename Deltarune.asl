@@ -419,7 +419,7 @@ startup
         {"Ch4_Jackenstein",     (ver, org, cur) => cur.roomName == "room_dw_church_jackenstein_ch4" && org.fight == 1 && cur.fight == 0},
         {"Ch4_GoldenPiano",     (ver, org, cur) => org.roomName == "room_dw_church_secretpiano_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_EnterHoJ",        (ver, org, cur) => org.roomName == "room_dw_church_gersonstudy_ch4" && cur.roomName == "room_dw_church_arena_ch4"},
-        {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && cur.fight == 1 && org.susieSprite == 1535 && cur.susieSprite == 1553 && vars.tempVar == 1},
+        {"Ch4_HammerofJustice", (ver, org, cur) => cur.roomName == "room_dw_church_arena_ch4" && cur.fight == 1 && ((org.susieSprite == 1535 && cur.susieSprite == 1553) || (org.susieSprite == 1536 && cur.susieSprite == 1554)) && vars.tempVar == 1},
         {"Ch4_ExitHoJ",         (ver, org, cur) => org.roomName == "room_dw_church_arena_ch4" && cur.roomName == "room_dw_church_gersonstudy_ch4"},
         {"Ch4_GrandPiano",      (ver, org, cur) => org.roomName == "room_dw_church_organpuzzle_ch4" && (cur.roomName == "room_dw_church_trueclimbadventure_ch4" || cur.roomName == "room_dw_church_rightconnect_ch4")},
         {"Ch4_MissMizzle",      (ver, org, cur) => org.roomName == "room_dw_church_holywatercooler_ch4" && cur.roomName == "room_dw_church_intro_gerson_ch4"},
