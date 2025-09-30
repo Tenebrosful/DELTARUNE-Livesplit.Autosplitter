@@ -713,8 +713,6 @@ init
             break;
 
         case "B5EF0EEC9554C491777D6C4E93E0DF76":
-        case "5AD96F21CEE4AE12B85B5F24BBBDB93A": // Item tracker mod
-        case "D6ECCBC495E06E835B17815D0A5B2852": // OST% tracker mod
         case "CFD84EDB7B8DE90683627AAD6507F440": // 30 TBPS mod
             version = "CH1-4 v1.02";
             break;
@@ -745,7 +743,8 @@ init
                     "If you are playing an older version, update your game.\n" +
                     "If you are playing an unsupported mod, switch to the vanilla game or these supported mods:\n" +
                     "- Item tracker mod\n" +
-                    "- OST% tracker mod.\n\n" +
+                    "- OST% tracker mod\n" +
+                    "- 30 TBPS mod.\n\n" +
 
                     "Make sure the game's executable is named \"DELTARUNE.exe\" and the main data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
