@@ -29,7 +29,7 @@ state("DELTARUNE", "SURVEY_PROGRAM")
     float kingPos : 0x6AEB80, 0x4, 0x178, 0x80, 0xC8, 0x8, 0xB4; // obj_kingcutscene(_ch1).king.x
 }
 
-state("DELTARUNE", "Demo v1.08/v1.09")
+state("DELTARUNE", "Demo v1.09")
 {
     double chapter : 0x6FCF38, 0x30, 0x24D8, 0x0; // global.chapter
     double fight   : 0x6FCF38, 0x30, 0x4F8,  0x0; // global.fighting
@@ -67,7 +67,7 @@ state("DELTARUNE", "Demo v1.10")
     string256 song  : 0x4DFF58, 0x0,  0x44,  0x0;
 }
 
-state("DELTARUNE", "Demo v1.12-v1.15")
+state("DELTARUNE", "Demo v1.15")
 {
     double chapter : 0x6FE860, 0x30, 0x2F34, 0x80;
     double fight   : 0x6FE860, 0x30, 0xA758, 0x0;
@@ -679,57 +679,55 @@ init
     switch(hash)
     {
         case "A88A2DB3A68C714CA2B1FF57AC08A032": // English
+        case "7CBE5B23457411DC31DD8F5CC3561056": // English, 30 TBPS mod
         case "22008370824A37BAEF8948127963C769": // Japanese
+        case "1C90213933C958124F78C88381E3CF60": // Japanese, 30 TBPS mod
             version = "SURVEY_PROGRAM";
             break;
 
-        case "B465A74B67E4AB915856330AD1149A62": // v1.08 (itch.io)
-        case "AFA40591602758CC56F445E819023E76": // v1.08 (Steam)
-        case "616C5751AC9FC584AF250F1B04474AFD": // v1.09 (itch.io)
-        case "3E9DD6292911D35417E19CD39DF81687": // v1.09 (itch.io, item tracker mod)
-        case "4BDF08DD35BCD8BC39EF71C5E7247C4A": // v1.09 (itch.io, OST% tracker mod)
-        case "267A8ABE468D824222810201F00003BE": // v1.09 (Steam)
-        case "DF5D64B395AD186DB974C265C87E3336": // v1.09 (Steam, item tracker mod)
-        case "7B73FE95B0E0251CDC3C26155089A5A4": // v1.09 (Steam, OST% tracker mod)
-            version = "Demo v1.08/v1.09";
+        case "616C5751AC9FC584AF250F1B04474AFD": // itch.io
+        case "33725A1E5AF6625C5785FD6A44357901": // itch.io, 30 TBPS mod
+        case "267A8ABE468D824222810201F00003BE": // Steam
+        case "8E4AAFC73873A9D0159605E0359A5C09": // Steam, 30 TBPS mod
+            version = "Demo v1.09";
             break;
 
         case "5FBE01F2BC1C04F45D809FFD060AC386": // itch.io
+        case "AFA542A149DB4F3564C09FF949E57716": // itch.io, 30 TBPS mod
         case "CD77A63D7902990DBC704FE32B30700A": // Steam
+        case "357EC65735CA6E40DC90040D211A1DB9": // Steam, 30 TBPS mod
             version = "Demo v1.10";
             break;
 
-        case "7FA7658151211076FA09BE378BD6BD2B": // v1.12
-        case "D64C80F30EC1AA5718307A2C6EA8DDB5": // v1.13
-        case "8892ACA0ECE33A17711D7780C70CA3DE": // v1.14
-        case "ED4568BAB864166BFD6322CEEB3FB544": // v1.15
-        case "BCB61AE64476526BB41AC2CAD7B3B160": // v1.15 (item tracker mod)
-        case "3AEFE7A34739E5677CF3AB1829536BC7": // v1.15 (OST% tracker mod)
-            version = "Demo v1.12-v1.15";
+        case "ED4568BAB864166BFD6322CEEB3FB544":
+        case "1BE8FEAEFBC335169EE3D6BD6F99E7B0": // 30 TBPS mod
+            version = "Demo v1.15";
             break;
 
         // game_change versions - Chapter Select data.win
         // Not checking the individual chapters does mean that mods could get through, but chances are the autosplitter will just break anyway
         // Just hoping it does not become a problem
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
+        case "B752A37D30DCC9F6048BB9361C1D677D": // 30 TBPS mod
             version = "Demo v1.19";
             break;
 
         case "B5EF0EEC9554C491777D6C4E93E0DF76":
-        case "5AD96F21CEE4AE12B85B5F24BBBDB93A": // Item tracker mod
-        case "D6ECCBC495E06E835B17815D0A5B2852": // OST% tracker mod
+        case "CFD84EDB7B8DE90683627AAD6507F440": // 30 TBPS mod
             version = "CH1-4 v1.02";
             break;
 
         case "9D1FEA9DE81219EA7304F32F1AE7A878":
         case "28660F14803390E2D1061ECE661E3CD0": // Item tracker mod
         case "5CDE5CD6C739B962D583D297514C6C1C": // OST% tracker mod
+        case "8B7811F2EB0E5A413C90EA693FFCEBCC": // 30 TBPS mod
             version = "CH1-4 v1.04";
             break;
 
         case "5D3E158DBE6888FBF24471019FBDE3C9":
         case "0A9267AD2A88CBDE8D9650CFE8265085": // Item tracker mod
         case "9FB4D5FCB9D42765BFC2A57BE1FBD945": // OST% tracker mod
+        case "F4C52EC90D3DE038833705247DBA4536": // 30 TBPS mod
             version = "CH1-4 v1.05 Beta";
             break;
 
@@ -745,12 +743,13 @@ init
                     "If you are playing an older version, update your game.\n" +
                     "If you are playing an unsupported mod, switch to the vanilla game or these supported mods:\n" +
                     "- Item tracker mod\n" +
-                    "- OST% tracker mod.\n\n" +
+                    "- OST% tracker mod\n" +
+                    "- 30 TBPS mod.\n\n" +
 
                     "Make sure the game's executable is named \"DELTARUNE.exe\" and the main data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
-                    "- Chapter 1&2 v1.08-v1.15, v1.19\n" +
+                    "- Chapter 1&2 v1.09, v1.15, v1.19\n" +
                     "- Chapters 1-4 v1.02, v1.04, v1.05 Beta.\n\n" +
             
                     "You will not be notified again until the next time you start the autosplitter.",
