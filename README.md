@@ -11,7 +11,8 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 ## Supported mods
 
 - [Item tracker mod](https://www.speedrun.com/deltarune_category_extensions/resources/012ml)
-- [OST% tracker mod](https://www.speedrun.com/deltarune_category_extensions/resources/6qhfh).
+- [OST% tracker mod](https://www.speedrun.com/deltarune_category_extensions/resources/6qhfh)
+- [30 TBPS mod](https://www.speedrun.com/deltarune/resources/y7c1h).
 
 ## How to install
 
