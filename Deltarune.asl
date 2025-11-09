@@ -406,8 +406,85 @@ startup
         {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
         {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightResult == 0 && cur.knightResult == 2))},
-        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightResult == 0 && cur.knightResult == 1}
-    };
+        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightResult == 0 && cur.knightResult == 1},
+
+        
+        {"Ch3_TMS1",         (ver, org, cur) => org.roomName == "PLACE_MENU_ch3" && cur.roomName == "room_dw_couch_overworld_intro_ch3"},
+        {"Ch3_TMS2",         (ver, org, cur) => org.roomName == "room_dw_couch_overworld_intro_ch3" && cur.roomName == "room_board_gsa02_b0_ch3"},
+        {"Ch3_TMS3",         (ver, org, cur) => org.roomName == "room_board_gsa02_b0_ch3" && cur.roomName == "room_board_intro_ch3"},
+        {"Ch3_TMS4",         (ver, org, cur) => org.roomName == "room_board_intro_ch3" && cur.roomName == "room_board_1_ch3"},
+        {"Ch3_TMSweaduoent", (ver, org, cur) => cur.roomName == "room_board_1_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMSweaduoexit",(ver, org, cur) => cur.roomName == "room_board_1_ch3" && org.fight == 1 && cur.fight == 0},
+        {"Ch3_TMS5",         (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
+        {"Ch3_TMS6",         (ver, org, cur) => org.roomName == "room_dw_chef_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
+        {"Ch3_TMS7",         (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 < 130},
+        {"Ch3_TMS8",         (ver, org, cur) => org.roomName == "room_dw_green_room_ch3" && cur.roomName == "room_dw_b3bs_interstitial_ch3"},
+        {"Ch3_TMS9",         (ver, org, cur) => org.roomName == "room_dw_b3bs_interstitial_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
+        {"Ch3_TMS10",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_board_2_ch3"},
+        {"Ch3_TMStripipent", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMStripipexi", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 1 && cur.fight == 0},
+        {"Ch3_TMS11",        (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
+        {"Ch3_TMS12",        (ver, org, cur) => org.roomName == "room_dw_rhythm_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
+        {"Ch3_TMS13",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 > 130},
+        {"Ch3_TMS14",        (ver, org, cur) => org.roomName == "room_dw_green_room_ch3" && cur.roomName == "room_dw_teevie_preview_ch3"},
+        {"Ch3_TMS15",        (ver, org, cur) => org.roomName == "room_dw_teevie_preview_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 < 200},
+        {"Ch3_TMS16",        (ver, org, cur) => org.roomName == "room_dw_green_room_ch3" && cur.roomName == "room_dw_puzzlecloset_0_ch3"},
+        {"Ch3_TMS17",        (ver, org, cur) => org.roomName == "room_dw_puzzlecloset_0_ch3" && cur.roomName == "room_dw_puzzlecloset_1_ch3"},
+        {"Ch3_TMS18",        (ver, org, cur) => org.roomName == "room_dw_puzzlecloset_1_ch3" && cur.roomName == "room_dw_puzzlecloset_1a_ch3"},
+        {"Ch3_TMS19",        (ver, org, cur) => org.roomName == "room_dw_puzzlecloset_1a_ch3" && cur.roomName == "room_dw_puzzlecloset_2_ch3"},
+        {"Ch3_TMS20",        (ver, org, cur) => org.roomName == "room_dw_puzzlecloset_2_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
+        {"Ch3_TMS21",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
+        {"Ch3_TMS22",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_chef_empty_ch3"},
+        {"Ch3_TMS23",        (ver, org, cur) => org.roomName == "room_dw_chef_empty_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
+        {"Ch3_TMS24",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_rhythm_empty_ch3"},
+        {"Ch3_TMS25",        (ver, org, cur) => org.roomName == "room_dw_rhythm_empty_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
+        {"Ch3_TMS26",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_backstage_ch3"},
+        {"Ch3_TMS27",        (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
+        {"Ch3_TMS28",        (ver, org, cur) => org.roomName == "room_dw_teevie_intro_ch3" && cur.roomName == "room_dw_teevie_cowboy_zone_01_intro_ch3"},
+        {"Ch3_TMS29",        (ver, org, cur) => org.roomName == "room_dw_teevie_cowboy_zone_01_intro_ch3" && cur.roomName == "room_shootout_ch3"},
+        {"Ch3_TMS30",        (ver, org, cur) => org.roomName == "room_shootout_ch3" && cur.roomName == "room_dw_teevie_cowboy_zone_01_after_ch3"},
+        {"Ch3_TMS31",        (ver, org, cur) => org.roomName == "room_dw_teevie_cowboy_zone_01_after_ch3" && cur.roomName == "room_dw_teevie_large_01_ch3"},
+        {"Ch3_TMS32",        (ver, org, cur) => org.roomName == "room_dw_teevie_large_01_ch3" && cur.roomName == "room_dw_teevie_large_02_ch3"},
+        {"Ch3_TMS33",        (ver, org, cur) => org.roomName == "room_dw_teevie_large_02_ch3" && cur.roomName == "room_dw_teevie_susiezilla_ch3"},
+        {"Ch3_TMS34",        (ver, org, cur) => org.roomName == "room_dw_teevie_susiezilla_ch3" && cur.roomName == "room_dw_b3bs_jail1_ch3"},
+        {"Ch3_TMS35",        (ver, org, cur) => org.roomName == "room_dw_b3bs_jail1_ch3" && cur.roomName == "room_dw_b3bs_zapper_a_ch3"},
+        {"Ch3_TMS36",        (ver, org, cur) => org.roomName == "room_dw_b3bs_zapper_a_ch3" && cur.roomName == "room_dw_teevie_ribbicks_a_ch3"},
+        {"Ch3_TMS37",        (ver, org, cur) => org.roomName == "room_dw_teevie_ribbicks_a_ch3" && cur.roomName == "room_dw_b3bs_zapper_b_ch3"},
+        {"Ch3_TMS38",        (ver, org, cur) => org.roomName == "room_dw_b3bs_zapper_b_ch3" && cur.roomName == "room_dw_teevie_ribbicks_b_ch3"},
+        {"Ch3_TMS39",        (ver, org, cur) => org.roomName == "room_dw_teevie_ribbicks_b_ch3" && cur.roomName == "room_dw_b3bs_jail2_ch3"},
+        {"Ch3_TMS40",        (ver, org, cur) => org.roomName == "room_dw_b3bs_jail2_ch3" && cur.roomName == "room_dw_teevie_cowboy_zone_02_intro_ch3"},
+        {"Ch3_TMS41",        (ver, org, cur) => org.roomName == "room_dw_teevie_cowboy_zone_02_intro_ch3" && cur.roomName == "room_shootout_ch3"},
+        {"Ch3_TMS42",        (ver, org, cur) => org.roomName == "room_shootout_ch3" && cur.roomName == "room_dw_teevie_cowboy_zone_02_after_ch3"},
+        {"Ch3_TMS43",        (ver, org, cur) => org.roomName == "room_dw_teevie_cowboy_zone_02_after_ch3" && cur.roomName == "room_dw_teevie_shadow_guys_ch3"},
+        {"Ch3_TMS44",        (ver, org, cur) => org.roomName == "room_dw_teevie_shadow_guys_ch3" && cur.roomName == "room_dw_b3bs_cooltrashy_ch3"},
+        {"Ch3_TMS45",        (ver, org, cur) => org.roomName == "room_dw_b3bs_cooltrashy_ch3" && cur.roomName == "room_dw_teevie_shadow_guys_ch3"},
+        {"Ch3_TMS46",        (ver, org, cur) => org.roomName == "room_dw_teevie_shadow_guys_ch3" && cur.roomName == "room_dw_teevie_stealth_c_ch3"},
+        {"Ch3_TMS47",        (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_c_ch3" && cur.roomName == "room_dw_teevie_rhythm_ch3"},
+        {"Ch3_TMS48",        (ver, org, cur) => org.roomName == "room_dw_teevie_rhythm_ch3" && cur.roomName == "room_dw_teevie_shuttahmaze_ch3"},
+        {"Ch3_TMS49",        (ver, org, cur) => org.roomName == "room_dw_teevie_shuttahmaze_ch3" && cur.roomName == "room_dw_teevie_maze_quiz_ch3"},
+        {"Ch3_TMS50",        (ver, org, cur) => org.roomName == "room_dw_teevie_maze_quiz_ch3" && cur.roomName == "room_dw_teevie_stealth_d_ch3"},
+        {"Ch3_TMS51",        (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
+        {"Ch3_TMSentrouxls", (ver, org, cur) => cur.roomName == "room_dw_teevie_chef_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMSexitrouxls",(ver, org, cur) => cur.roomName == "room_dw_teevie_chef_ch3" && org.fight == 1 && cur.fight == 0},
+        {"Ch3_TMS52",        (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
+        {"Ch3_TMS53",        (ver, org, cur) => org.roomName == "room_dw_teevie_dust_ch3" && cur.roomName == "room_dw_teevie_preview_ch3"},
+        {"Ch3_TMS54",        (ver, org, cur) => org.roomName == "room_dw_teevie_preview_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 > 200},
+        {"Ch3_TMS55",        (ver, org, cur) => org.roomName == "room_dw_green_room_ch3" && cur.roomName == "room_dw_puzzlecloset_3_ch3"},
+        {"Ch3_TMS56",        (ver, org, cur) => org.roomName == "room_dw_puzzlecloset_3_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
+        {"Ch3_TMS57",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && cur.roomName == "room_torhouse_sepia_ch3"},
+        {"Ch3_TMS58",        (ver, org, cur) => org.roomName == "room_torhouse_sepia_ch3" && cur.roomName == "room_dw_snow_zone_battle_ch3"},
+        {"Ch3_TMSenterTenna",(ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMS59",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
+        {"Ch3_TMSentKnight", (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMS60",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && cur.roomName == "room_gameover_ch3"},
+        {"Ch3_TMS61",        (ver, org, cur) => org.roomName == "room_gameover_ch3" && cur.roomName == "PLACE_FAILURE_ch3"},
+        {"Ch3_TMS62",        (ver, org, cur) => org.roomName == "PLACE_FAILURE_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
+        {"Ch3_TMS63",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && cur.roomName == "room_town_krisyard_dark_ch3"},
+        {"Ch3_TMS64",        (ver, org, cur) => org.roomName == "room_town_krisyard_dark_ch3" && cur.roomName == "room_town_church_ch3"},
+        {"Ch3_TMS65",        (ver, org, cur) => org.roomName == "room_town_church_ch3" && cur.roomName == "room_town_shelter_ch3"},
+        {"Ch3_TMS66",        (ver, org, cur) => org.roomName == "room_town_shelter_ch3" && cur.roomName == "room_ed_ch3"},
+};
+
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
         {"Ch4_EnterCT",         (ver, org, cur) => (org.roomName == "room_schooldoor_ch4" || org.roomName == "room_dw_church_knightclimb_post_ch4") && cur.roomName == "room_dw_castle_area_1_ch4"},
@@ -587,8 +664,86 @@ startup
      settings.Add("Ch3_EnterMantle",  false, "Start Shadow Mantle battle");
      settings.Add("Ch3_EndMantle",    false, "End Shadow Mantle battle");
      settings.Add("Ch3_ShadowMantle", false, "Obtain Shadow Mantle (room exit)");
+    settings.CurrentDefaultParent = "Ch3";
+    settings.Add("TooManySplits", false, "Everyroom Splits");
+    settings.CurrentDefaultParent = "TooManySplits";
+     settings.Add("Ch3_TMS2",          false, "Intro + Enter Couch");
+     settings.Add("Ch3_TMS3",          false, "Legend of Tenna Screen");
+     settings.Add("Ch3_TMS4",          false, "Beginning Area");
+     settings.Add("Ch3_TMSweaduoent",  false, "Enter Weather Duo");
+     settings.Add("Ch3_TMSweaduoexit", false, "Exit Weather Duo");
+     settings.Add("Ch3_TMS5",          false, "Enter Cooking Minigame");
+     settings.Add("Ch3_TMS6",          false, "Exit Cooking Minigame");
+     settings.Add("Ch3_TMS7",          false, "Post-Cooking Cutscene");
+     settings.Add("Ch3_TMS8",          false, "Green Room: Board 1");
+     settings.Add("Ch3_TMS9",          false, "Green Room: DBIS");
+     settings.Add("Ch3_TMS10",         false, "Pre-Board 2 Gameshow");
+     settings.Add("Ch3_TMStripipent",  false, "Enter Triple Pippins");
+     settings.SetToolTip("Ch3_TMStripipent", "This will split at double pippins if you encounter that first");
+     settings.Add("Ch3_TMStripipexi",  false, "Exit Triple Pippins");
+     settings.Add("Ch3_TMS11",         false, "Exit Board 2");
+     settings.Add("Ch3_TMS12",         false, "Rhythm Minigame");
+     settings.Add("Ch3_TMS13",         false, "Post-Rhythm Cutscene");
+     settings.Add("Ch3_TMS14",         false, "Green Room: Post-Board 2 (Zapper Exit)");
+     settings.SetToolTip("Ch3_TMS14", "This will split on the room transition after you press the right option on zapper for the first time");
+     settings.Add("Ch3_TMS15",         false, "Below Green Room: Board 2");
+     settings.Add("Ch3_TMS16",         false, "Green Room: Post-Board 2 (Normal Exit)");
+     settings.Add("Ch3_TMS17",         false, "Cold Place Pre-Codes");
+     settings.Add("Ch3_TMS18",         false, "Door Code #1");
+     settings.Add("Ch3_TMS19",         false, "Cold Place Choicer");
+     settings.Add("Ch3_TMS20",         false, "Door Code #2");
+     settings.Add("Ch3_TMS21",         false, "Pre-Doom Board Snow Zone");
+     settings.Add("Ch3_TMS22",         false, "Doom Board: Enter Cooking Minigame");
+     settings.Add("Ch3_TMS23",         false, "Doom Board: Cooking Minigame");
+     settings.Add("Ch3_TMS24",         false, "Doom Board: Enter Rhythm Minigame");
+     settings.Add("Ch3_TMS25",         false, "Doom Board: Rhythm Minigame");
+     settings.Add("Ch3_TMS26",         false, "Doom Board: TV Off");
+     settings.Add("Ch3_TMS27",         false, "TV World Backstage");
+     settings.Add("Ch3_TMS28",         false, "TV World - Entrance");
+     settings.Add("Ch3_TMS29",         false, "Pre-Shooting #1 Room");
+     settings.Add("Ch3_TMS30",         false, "Shooting Minigame #1");
+     settings.Add("Ch3_TMS31",         false, "Post-Shooting #1 Room");
+     settings.Add("Ch3_TMS32",         false, "Shadowguy Skip");
+     settings.Add("Ch3_TMS33",         false, "Watercooler Quiz Room");
+     settings.Add("Ch3_TMS34",         false, "Susiezilla Room");
+     settings.Add("Ch3_TMS35",         false, "TV World - Goulden Sam");
+     settings.Add("Ch3_TMS36",         false, "1st Stealth Room (Stealth Skip)");
+     settings.Add("Ch3_TMS37",         false, "1st Ribbick Room");
+     settings.Add("Ch3_TMS38",         false, "2nd Stealth Room");
+     settings.Add("Ch3_TMS39",         false, "2nd Ribbick Room");
+     settings.Add("Ch3_TMS40",         false, "Cheater's Cage");
+     settings.Add("Ch3_TMS41",         false, "Pre-Shooting #2 Room");
+     settings.Add("Ch3_TMS42",         false, "Shooting Minigame #2");
+     settings.Add("Ch3_TMS43",         false, "Post-Shooting #2 Room");
+     settings.Add("Ch3_TMS44",         false, "20 Shadowguys #1");
+     settings.SetToolTip("Ch3_TMS44", "Splits on entering the room above. If you don't enter that room you'll want 20 Shadowguys #2");
+     settings.Add("Ch3_TMS45",         false, "Serious Trashy Room");
+     settings.Add("Ch3_TMS46",         false, "20 Shadowguys #2");
+     settings.Add("Ch3_TMS47",         false, "Tenna/Ramb Argument");
+     settings.Add("Ch3_TMS48",         false, "DarkNERS Live");
+     settings.Add("Ch3_TMS49",         false, "Zapper-Shuttah Room");
+     settings.Add("Ch3_TMS50",         false, "Large Quiz Room");
+     settings.Add("Ch3_TMS51",         false, "Large Stealth Room");
+     settings.Add("Ch3_TMSentrouxls",  false, "Enter Rouxls Fight");
+     settings.Add("Ch3_TMSexitrouxls", false, "Exit Rouxls Fight");
+     settings.Add("Ch3_TMS52",         false, "Exit Rouxls Room");
+     settings.Add("Ch3_TMS53",         false, "Tenna Crashout");
+     settings.Add("Ch3_TMS54",         false, "Glowing Snow");
+     settings.Add("Ch3_TMS55",         false, "Lonely Green Room");
+     settings.Add("Ch3_TMS56",         false, "Lonely Cold Place");
+     settings.Add("Ch3_TMS57",         false, "Pre-Tenna Cutscene #1");
+     settings.Add("Ch3_TMS58",         false, "Pre-Tenna Cutscene #2");
+     settings.Add("Ch3_TMSenterTenna", false, "Pre-Tenna Cutscene #3 (Enter Tenna)");
+     settings.Add("Ch3_TMS59",         false, "Exit Tenna");
+     settings.Add("Ch3_TMSentKnight",  false, "Enter Knight");
+     settings.Add("Ch3_TMS60",         false, "Die to Knight");
+     settings.Add("Ch3_TMS61",         false, "Gameover Screen part 1");
+     settings.Add("Ch3_TMS62",         false, "Gameover Screen part 2");
+     settings.Add("Ch3_TMS63",         false, "Post-Knight Cutscene");
+     settings.Add("Ch3_TMS64",         false, "Running From Toriel's House");
+     settings.Add("Ch3_TMS65",         false, "Running Past the Church");
     settings.CurrentDefaultParent = null;
-
+    
     settings.Add("Ch4", false, "Chapter 4: Prophecy");
     settings.CurrentDefaultParent = "Ch4";
     settings.Add("Ch4_EnterCT",        false, "Enter Castle Town");
