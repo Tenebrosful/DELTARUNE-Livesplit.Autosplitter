@@ -413,16 +413,16 @@ startup
         {"Ch3_TMS2",         (ver, org, cur) => org.roomName == "room_dw_couch_overworld_intro_ch3" && cur.roomName == "room_board_gsa02_b0_ch3"},
         {"Ch3_TMS3",         (ver, org, cur) => org.roomName == "room_board_gsa02_b0_ch3" && cur.roomName == "room_board_intro_ch3"},
         {"Ch3_TMS4",         (ver, org, cur) => org.roomName == "room_board_intro_ch3" && cur.roomName == "room_board_1_ch3"},
-        {"Ch3_TMSweaduoent", (ver, org, cur) => cur.roomName == "room_board_1_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_TMSweaduoexit",(ver, org, cur) => cur.roomName == "room_board_1_ch3" && org.fight == 1 && cur.fight == 0},
+        {"Ch3_TMSWeatherDuoEnter", (ver, org, cur) => cur.roomName == "room_board_1_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMSWeatherDuoExit",(ver, org, cur) => cur.roomName == "room_board_1_ch3" && org.fight == 1 && cur.fight == 0},
         {"Ch3_TMS5",         (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
         {"Ch3_TMS6",         (ver, org, cur) => org.roomName == "room_dw_chef_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
         {"Ch3_TMS7",         (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 < 130},
         {"Ch3_TMS8",         (ver, org, cur) => org.roomName == "room_dw_green_room_ch3" && cur.roomName == "room_dw_b3bs_interstitial_ch3"},
         {"Ch3_TMS9",         (ver, org, cur) => org.roomName == "room_dw_b3bs_interstitial_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
         {"Ch3_TMS10",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_board_2_ch3"},
-        {"Ch3_TMStripipent", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_TMStripipexi", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 1 && cur.fight == 0},
+        {"Ch3_TMSTriplepippinsEnter", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMSTriplePippinsExit", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 1 && cur.fight == 0},
         {"Ch3_TMS11",        (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
         {"Ch3_TMS12",        (ver, org, cur) => org.roomName == "room_dw_rhythm_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
         {"Ch3_TMS13",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 > 130},
@@ -670,17 +670,17 @@ startup
      settings.Add("Ch3_TMS2",          false, "Intro + Enter Couch");
      settings.Add("Ch3_TMS3",          false, "Legend of Tenna Screen");
      settings.Add("Ch3_TMS4",          false, "Beginning Area");
-     settings.Add("Ch3_TMSweaduoent",  false, "Enter Weather Duo");
-     settings.Add("Ch3_TMSweaduoexit", false, "Exit Weather Duo");
+     settings.Add("Ch3_TMSWeatherDuoEnter",  false, "Enter Weather Duo");
+     settings.Add("Ch3_TMSWeatherDuoExit", false, "Exit Weather Duo");
      settings.Add("Ch3_TMS5",          false, "Enter Cooking Minigame");
      settings.Add("Ch3_TMS6",          false, "Exit Cooking Minigame");
      settings.Add("Ch3_TMS7",          false, "Post-Cooking Cutscene");
      settings.Add("Ch3_TMS8",          false, "Green Room: Board 1");
      settings.Add("Ch3_TMS9",          false, "Green Room: DBIS");
      settings.Add("Ch3_TMS10",         false, "Pre-Board 2 Gameshow");
-     settings.Add("Ch3_TMStripipent",  false, "Enter Triple Pippins");
-     settings.SetToolTip("Ch3_TMStripipent", "This will split at double pippins if you encounter that first");
-     settings.Add("Ch3_TMStripipexi",  false, "Exit Triple Pippins");
+     settings.Add("Ch3_TMSTriplepippinsEnter",  false, "Enter Triple Pippins");
+     settings.SetToolTip("Ch3_TMSTriplepippinsEnter", "This will split at double pippins if you encounter that first");
+     settings.Add("Ch3_TMSTriplePippinsExit",  false, "Exit Triple Pippins");
      settings.Add("Ch3_TMS11",         false, "Exit Board 2");
      settings.Add("Ch3_TMS12",         false, "Rhythm Minigame");
      settings.Add("Ch3_TMS13",         false, "Post-Rhythm Cutscene");
