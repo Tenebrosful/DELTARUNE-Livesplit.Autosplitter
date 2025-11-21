@@ -421,7 +421,7 @@ startup
         {"Ch3_TMS8",         (ver, org, cur) => org.roomName == "room_dw_green_room_ch3" && cur.roomName == "room_dw_b3bs_interstitial_ch3"},
         {"Ch3_TMS9",         (ver, org, cur) => org.roomName == "room_dw_b3bs_interstitial_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
         {"Ch3_TMS10",        (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_board_2_ch3"},
-        {"Ch3_TMSTriplepippinsEnter", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMSTriplePippinsEnter", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_TMSTriplePippinsExit", (ver, org, cur) => cur.roomName == "room_board_2_ch3" && org.fight == 1 && cur.fight == 0},
         {"Ch3_TMS11",        (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
         {"Ch3_TMS12",        (ver, org, cur) => org.roomName == "room_dw_rhythm_ch3" && cur.roomName == "room_ch3_gameshowroom_ch3"},
@@ -464,8 +464,8 @@ startup
         {"Ch3_TMS49",        (ver, org, cur) => org.roomName == "room_dw_teevie_shuttahmaze_ch3" && cur.roomName == "room_dw_teevie_maze_quiz_ch3"},
         {"Ch3_TMS50",        (ver, org, cur) => org.roomName == "room_dw_teevie_maze_quiz_ch3" && cur.roomName == "room_dw_teevie_stealth_d_ch3"},
         {"Ch3_TMS51",        (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
-        {"Ch3_TMSentrouxls", (ver, org, cur) => cur.roomName == "room_dw_teevie_chef_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_TMSexitrouxls",(ver, org, cur) => cur.roomName == "room_dw_teevie_chef_ch3" && org.fight == 1 && cur.fight == 0},
+        {"Ch3_TMSEnterRouxls", (ver, org, cur) => cur.roomName == "room_dw_teevie_chef_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_TMSExitRouxls",(ver, org, cur) => cur.roomName == "room_dw_teevie_chef_ch3" && org.fight == 1 && cur.fight == 0},
         {"Ch3_TMS52",        (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
         {"Ch3_TMS53",        (ver, org, cur) => org.roomName == "room_dw_teevie_dust_ch3" && cur.roomName == "room_dw_teevie_preview_ch3"},
         {"Ch3_TMS54",        (ver, org, cur) => org.roomName == "room_dw_teevie_preview_ch3" && cur.roomName == "room_dw_green_room_ch3" && cur.plot_ch3 > 200},
@@ -665,7 +665,7 @@ startup
      settings.Add("Ch3_EndMantle",    false, "End Shadow Mantle battle");
      settings.Add("Ch3_ShadowMantle", false, "Obtain Shadow Mantle (room exit)");
     settings.CurrentDefaultParent = "Ch3";
-    settings.Add("TooManySplits", false, "Everyroom Splits");
+    settings.Add("TooManySplits", false, "Every room Splits");
     settings.CurrentDefaultParent = "TooManySplits";
      settings.Add("Ch3_TMS2",          false, "Intro + Enter Couch");
      settings.Add("Ch3_TMS3",          false, "Legend of Tenna Screen");
@@ -677,9 +677,9 @@ startup
      settings.Add("Ch3_TMS7",          false, "Post-Cooking Cutscene");
      settings.Add("Ch3_TMS8",          false, "Green Room: Board 1");
      settings.Add("Ch3_TMS9",          false, "Green Room: DBIS");
-     settings.Add("Ch3_TMS10",         false, "Pre-Board 2 Gameshow");
-     settings.Add("Ch3_TMSTriplepippinsEnter",  false, "Enter Triple Pippins");
-     settings.SetToolTip("Ch3_TMSTriplepippinsEnter", "This will split at double pippins if you encounter that first");
+     settings.Add("Ch3_TMS10",         false, "Pre-Board 2 Game show");
+     settings.Add("Ch3_TMSTriplePippinsEnter",  false, "Enter Triple Pippins");
+     settings.SetToolTip("Ch3_TMSTriplePippinsEnter", "This will split at double pippins if you encounter that first");
      settings.Add("Ch3_TMSTriplePippinsExit",  false, "Exit Triple Pippins");
      settings.Add("Ch3_TMS11",         false, "Exit Board 2");
      settings.Add("Ch3_TMS12",         false, "Rhythm Minigame");
@@ -724,8 +724,8 @@ startup
      settings.Add("Ch3_TMS49",         false, "Zapper-Shuttah Room");
      settings.Add("Ch3_TMS50",         false, "Large Quiz Room");
      settings.Add("Ch3_TMS51",         false, "Large Stealth Room");
-     settings.Add("Ch3_TMSentrouxls",  false, "Enter Rouxls Fight");
-     settings.Add("Ch3_TMSexitrouxls", false, "Exit Rouxls Fight");
+     settings.Add("Ch3_TMSEnterRouxls",  false, "Enter Rouxls Fight");
+     settings.Add("Ch3_TMSExitRouxls", false, "Exit Rouxls Fight");
      settings.Add("Ch3_TMS52",         false, "Exit Rouxls Room");
      settings.Add("Ch3_TMS53",         false, "Tenna Crashout");
      settings.Add("Ch3_TMS54",         false, "Glowing Snow");
