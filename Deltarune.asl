@@ -165,7 +165,7 @@ state("DELTARUNE", "CH1-4 v1.04")
     string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
     double doorCloseCon : 0x8B2790, 0xE0, 0x48,  0x10,   0x30,  0x0;
     float kingPos       : 0x69FA98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
-    
+
     double fight_ch2        : 0x6A1CA8, 0x48,  0x10,  0x100,  0x0;
     double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0x7870, 0x0;
     double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0x7310, 0x0;
@@ -206,7 +206,7 @@ state("DELTARUNE", "CH1-4 v1.05 Beta")
     string128 text_ch1  : 0x8CE220, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
     double doorCloseCon : 0x8BA790, 0xE0, 0x48,  0x10,   0x30,  0x0;
     float kingPos       : 0x6A7A98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
-    
+
     double fight_ch2        : 0x6A9CA8, 0x48,  0x10,  0x100,  0x0;
     double choicer_ch2      : 0x6A9CA8, 0x48,  0x10,  0x7870, 0x0;
     double msc_ch2          : 0x6A9CA8, 0x48,  0x10,  0x7310, 0x0;
@@ -274,7 +274,7 @@ startup
     });
 
     // ver = version, org = original (equivalent to old), cur = current (can't use the same names)
-    vars.checkTextOpen = (Func<string, dynamic, dynamic, string, string, bool>)((ver, org, cur, en, jp) => 
+    vars.checkTextOpen = (Func<string, dynamic, dynamic, string, string, bool>)((ver, org, cur, en, jp) =>
     {
         switch(ver)
         {
@@ -294,7 +294,7 @@ startup
         }
     });
 
-    vars.checkTextClose = (Func<string, dynamic, dynamic, string, string, bool>)((ver, org, cur, en, jp) => 
+    vars.checkTextClose = (Func<string, dynamic, dynamic, string, string, bool>)((ver, org, cur, en, jp) =>
     {
         switch(ver)
         {
@@ -319,13 +319,16 @@ startup
     vars.splits[0] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
         {"Ch1_School",                (ver, org, cur) => (org.roomName == "room_krisroom_ch1" || org.roomName == "room_insidecloset_ch1") && cur.roomName == "room_dark1_ch1"},
+        {"Ch1_Chase1",                (ver, org, cur) => org.roomName == "room_dark7_ch1" && cur.roomName == "room_dark_chase1_ch1"},
         {"Ch1_CastleTown_DoorClose",  (ver, org, cur) => cur.roomName == "room_castle_darkdoor_ch1" && org.doorCloseCon == 7 && cur.doorCloseCon == 21},
         {"Ch1_CastleTown_RoomChange", (ver, org, cur) => org.roomName == "room_castle_darkdoor_ch1" && cur.roomName == "room_field_start_ch1"},
         {"Ch1_Fields_Exit",           (ver, org, cur) => org.roomName == "room_field4_ch1" && cur.roomName == "room_field_checkers4_ch1"},
         {"Ch1_Checkerboard_Exit",     (ver, org, cur) => org.roomName == "room_field_checkersboss_ch1" && cur.roomName == "room_forest_savepoint1_ch1"},
         {"Ch1_BakeSale_Enter",        (ver, org, cur) => org.roomName == "room_forest_area3_ch1" && cur.roomName == "room_forest_savepoint2_ch1"},
         {"Ch1_Egg",                   (ver, org, cur) => cur.roomName == "room_man_ch1" && org.msc != 601 && cur.msc == 601 && cur.choicer == 0},
+        {"Ch1_EnterForestMaze",       (ver, org, cur) => org.roomName == "room_forest_savepoint_relax_ch1" && cur.roomName == "room_forest_maze1_ch1"},
         {"Ch1_SusieLancer_Exit",      (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_forest_afterthrash2_ch1"},
+        {"Ch1_GetCapture",            (ver, org, cur) => org.roomName == "room_forest_castlefront_ch1" && cur.roomName == "room_cc_prison_cells_ch1"},
         {"Ch1_Escape_Cell",           (ver, org, cur) => org.roomName == "room_cc_prison_cells_ch1" && cur.roomName == "room_cc_prisonlancer_ch1" && vars.tempVar == 2},
         {"Ch1_Enter_Elevator",        (ver, org, cur) => org.roomName == "room_cc_prison_to_elevator_ch1" && cur.roomName == "room_cc_prisonelevator_ch1"},
         {"Ch1_CFWarp",                (ver, org, cur) => org.roomName == "room_forest_fightsusie_ch1" && cur.roomName == "room_field3_ch1"},
@@ -387,26 +390,27 @@ startup
     };
     vars.splits[2] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
-        {"Ch3_EnterRound1",  (ver, org, cur) => (org.roomName == "room_dw_couch_overworld_intro_ch3" || org.roomName == "room_ch3_gameshowroom_ch3") && cur.roomName == "room_board_gsa02_b0_ch3"},
-        {"Ch3_EnterChef",    (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
-        {"Ch3_EndRound1",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 110 || cur.plot_ch3 == 120)},
-        {"Ch3_IceKey",       (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
-        {"Ch3_EnterRhythm",  (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
-        {"Ch3_EndRound2",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 140 || cur.plot_ch3 == 150)},
-        {"Ch3_ShelterKey",   (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
-        {"Ch3_EndRound3",    (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_backstage_ch3"},
-        {"Ch3_EnterTVW",     (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
-        {"Ch3_EnterRouxls",  (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
-        {"Ch3_ExitRouxls",   (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
-        {"Ch3_Egg",          (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer <= 1 && cur.eggTimer > 1},
-        {"Ch3_EnterMantle",  (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
-        {"Ch3_EndMantle",    (ver, org, cur) => cur.roomName == "room_shadowmantle_ch3" && org.mantleOutro != 0.125 && cur.mantleOutro == 0.125},
-        {"Ch3_ShadowMantle", (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
-        {"Ch3_StartTenna",   (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_EndTenna",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
-        {"Ch3_StartKnight",  (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
-        {"Ch3_DieToKnight",  (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightResult == 0 && cur.knightResult == 2))},
-        {"Ch3_EndKnight",    (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightResult == 0 && cur.knightResult == 1}
+        {"Ch3_EnterRound1",     (ver, org, cur) => (org.roomName == "room_dw_couch_overworld_intro_ch3" || org.roomName == "room_ch3_gameshowroom_ch3") && cur.roomName == "room_board_gsa02_b0_ch3"},
+        {"Ch3_EnterChef",       (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
+        {"Ch3_EndRound1",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 110 || cur.plot_ch3 == 120)},
+        {"Ch3_IceKey",          (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
+        {"Ch3_EnterRhythm",     (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
+        {"Ch3_EndRound2",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 140 || cur.plot_ch3 == 150)},
+        {"Ch3_ShelterKey",      (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
+        {"Ch3_EndRound3",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_backstage_ch3"},
+        {"Ch3_EnterTVW",        (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
+        {"Ch3_2ndShootOutRoom", (ver, org, cur) => org.roomName == "room_dw_b3bs_jail2_ch3" && cur.roomName == "room_dw_teevie_cowboy_zone_02_intro_ch3"},
+        {"Ch3_EnterRouxls",     (ver, org, cur) => org.roomName == "room_dw_teevie_stealth_d_ch3" && cur.roomName == "room_dw_teevie_chef_ch3"},
+        {"Ch3_ExitRouxls",      (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
+        {"Ch3_Egg",             (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer <= 1 && cur.eggTimer > 1},
+        {"Ch3_EnterMantle",     (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
+        {"Ch3_EndMantle",       (ver, org, cur) => cur.roomName == "room_shadowmantle_ch3" && org.mantleOutro != 0.125 && cur.mantleOutro == 0.125},
+        {"Ch3_ShadowMantle",    (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
+        {"Ch3_StartTenna",      (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_EndTenna",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
+        {"Ch3_StartKnight",     (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.fight == 0 && cur.fight == 1},
+        {"Ch3_DieToKnight",     (ver, org, cur) => org.roomName == "room_dw_snow_zone_ch3" && (cur.roomName == "room_gameover_ch3" || (org.knightResult == 0 && cur.knightResult == 2))},
+        {"Ch3_EndKnight",       (ver, org, cur) => cur.roomName == "room_dw_snow_zone_ch3" && org.knightResult == 0 && cur.knightResult == 1}
     };
     vars.splits[3] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
@@ -428,7 +432,7 @@ startup
         {"Ch4_FallDown",        (ver, org, cur) => org.roomName == "room_dw_churchb_darkclimb_scene_ch4" && cur.roomName == "room_dw_churchb_darkclimb_ch4"},
         {"Ch4_FakeGerson",      (ver, org, cur) => org.roomName == "room_dw_churchb_nongerson_ch4" && cur.roomName == "room_dw_churchb_nongerson_post_ch4"},
         {"Ch4_Fountain2",       (ver, org, cur) => org.roomName == "room_dw_churchb_fountain_ch4" && cur.roomName == "room_lw_church_entrance_ch4"},
-        {"Ch4_PrincessRBN",     (ver, org, cur) => cur.roomName == "room_dw_churchc_prophecies_ch4" && vars.checkTextOpen(ver, org, cur, @"* (\cYPrincessRBN\cW was added to your&||\cYARMORs\cW.)/%", @"＊ (\cYプリティリボン\cWが&　 \cYぼうぐ\cWに　加わった)/%")},       
+        {"Ch4_PrincessRBN",     (ver, org, cur) => cur.roomName == "room_dw_churchc_prophecies_ch4" && vars.checkTextOpen(ver, org, cur, @"* (\cYPrincessRBN\cW was added to your&||\cYARMORs\cW.)/%", @"＊ (\cYプリティリボン\cWが&　 \cYぼうぐ\cWに　加わった)/%")},
         {"Ch4_PreClimbTitan1",  (ver, org, cur) => org.roomName == "room_dw_churchc_pretitan_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_ch4"},
         {"Ch4_ClimbTitan1",     (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_ch4" && cur.roomName == "room_dw_churchc_titanclimb1_post_ch4"},
         {"Ch4_PreClimbTitan2",  (ver, org, cur) => org.roomName == "room_dw_churchc_titanclimb1_post_ch4" && cur.roomName == "room_dw_churchc_titanclimb2_ch4"},
@@ -474,13 +478,16 @@ startup
     settings.Add("Ch1", false, "Chapter 1: The Beginning");
     settings.CurrentDefaultParent = "Ch1";
     settings.Add("Ch1_School",                false, "Enter Dark World");
+    settings.Add("Ch1_Chase1",                false, "Enter Chase 1 room");
     settings.Add("Ch1_CastleTown_DoorClose",  false, "Exit Castle Town (door close)");
     settings.Add("Ch1_CastleTown_RoomChange", false, "Exit Castle Town (room exit)");
     settings.Add("Ch1_Fields_Exit",           false, "Exit Field");
     settings.Add("Ch1_Checkerboard_Exit",     false, "Exit Checkerboard");
     settings.Add("Ch1_BakeSale_Enter",        false, "Enter Bake Sale");
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
+    settings.Add("Ch1_EnterForestMaze",       false, "Enter Forest maze");
     settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer battle room)");
+    settings.Add("Ch1_GetCapture",            false, "Enter Prison Cell (Get Capture)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
     settings.Add("Ch1_Enter_Elevator",        false, "Enter Elevator");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 battle room");
@@ -568,6 +575,7 @@ startup
     settings.Add("Ch3_EndRound2",   false, "Enter Green Room (post-Round 2)");
     settings.Add("Ch3_EndRound3",   false, "Enter TV World Backstage (post-Round 3)");
     settings.Add("Ch3_EnterTVW",    false, "Enter TV World");
+    settings.Add("Ch3_2ndShootOutRoom", false, "Entering 2nd Shoot-Out room");
     settings.Add("Ch3_EnterRouxls", false, "Enter Rouxls battle room");
     settings.Add("Ch3_ExitRouxls",  false, "Exit Rouxls battle room");
     settings.Add("Ch3_Egg",         false, "Obtain Egg");
@@ -751,7 +759,7 @@ init
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.09, v1.15, v1.19\n" +
                     "- Chapters 1-4 v1.02, v1.04, v1.05 Beta.\n\n" +
-            
+
                     "You will not be notified again until the next time you start the autosplitter.",
 
                     "LiveSplit | DELTARUNE", MessageBoxButtons.OK, MessageBoxIcon.Warning
@@ -828,7 +836,7 @@ update
             current.choicer = current.choicer_ch2;
             current.msc     = current.msc_ch2;
             current.text    = current.text_ch2;
-            
+
             if(version.StartsWith("CH1-"))
                 current.namerEvent = current.namerEvent_ch2;
         }
@@ -1071,13 +1079,13 @@ split
         vars.forceSplit = false;
         return true;
     }
-    
+
     if(current.chapter == 0)
         return;
 
     foreach(var split in vars.splits[(int)current.chapter - 1])
     {
-        if(!settings[split.Key] || 
+        if(!settings[split.Key] ||
            vars.completedSplits.Contains(split.Key) ||
            !split.Value(version, old, current)) continue;
 
