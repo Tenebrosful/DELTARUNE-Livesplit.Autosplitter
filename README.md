@@ -37,7 +37,7 @@ or clone the repository
 
 > The autosplitter file will auto-refresh when you save it.
 
-> This is also the recommended way to use the everyroom autosplitters
+> This is also the recommended way to use the everyroom autosplitters.
 
 ## How to use
 
