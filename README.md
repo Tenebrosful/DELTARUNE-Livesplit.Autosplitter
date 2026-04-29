@@ -12,7 +12,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 
 - [Item tracker mod](https://www.speedrun.com/deltarune_category_extensions/resources/012ml)
 - [OST% tracker mod](https://www.speedrun.com/deltarune_category_extensions/resources/6qhfh)
-- [30 TBPS mod](https://www.speedrun.com/deltarune/resources/y7c1h).
+- [30 TBPS mod](https://www.speedrun.com/deltarune/resources/9op73).
 
 ## How to install
 
@@ -36,6 +36,8 @@ or clone the repository
 ![Layout Editor with Control -> Scriptable Auto Splitter selected](/assets/manualInstall.png)
 
 > The autosplitter file will auto-refresh when you save it.
+
+> This is also the recommended way to use the every room autosplitter.
 
 ## How to use
 
@@ -64,7 +66,7 @@ That can be made to report a bug or to request a new feature / new split.
 - Originally inspired by **Narry's** [DELTARUNE SURVEY_PROGRAM Autosplitter](https://drive.google.com/file/d/1SCpuUpDgIYHmbc6xKK3ZrNk1zaIeDUMq/view?usp=sharing)
 that was based on **Glacia's** UNDERTALE Autosplitter
 - [**Tenebrosful**](https://github.com/Tenebrosful) (Repository, Development, Testing)
-- [**NERS**](https://github.com/NERS1111) (Development, Memory pointers, In-Game Time, Testing)
+- [**NERS**](https://github.com/ners-xd) (Development, Memory pointers, In-Game Time, Testing)
 - [**Vintagix**](https://github.com/VintagixDev) (Development, Testing)
 - [**devek1**](https://github.com/devek1) (Linux-specific failsafes)
 - [**Jujstme**](https://github.com/jujstme) (Sigscanning for room names)
