@@ -568,25 +568,25 @@ startup
 
     settings.Add("Ch3", false, "Chapter 3: Late Night");
     settings.CurrentDefaultParent = "Ch3";
-    settings.Add("Ch3_EnterRound1", false, "Enter Round 1");
-    settings.Add("Ch3_EnterChef",   false, "Enter Cooking Show");
-    settings.Add("Ch3_EndRound1",   false, "Enter Green Room (post-Round 1)");
-    settings.Add("Ch3_EnterRhythm", false, "Enter Lightners Live");
-    settings.Add("Ch3_EndRound2",   false, "Enter Green Room (post-Round 2)");
-    settings.Add("Ch3_EndRound3",   false, "Enter TV World Backstage (post-Round 3)");
-    settings.Add("Ch3_EnterTVW",    false, "Enter TV World");
+    settings.Add("Ch3_EnterRound1",     false, "Enter Round 1");
+    settings.Add("Ch3_EnterChef",       false, "Enter Cooking Show");
+    settings.Add("Ch3_EndRound1",       false, "Enter Green Room (post-Round 1)");
+    settings.Add("Ch3_EnterRhythm",     false, "Enter Lightners Live");
+    settings.Add("Ch3_EndRound2",       false, "Enter Green Room (post-Round 2)");
+    settings.Add("Ch3_EndRound3",       false, "Enter TV World Backstage (post-Round 3)");
+    settings.Add("Ch3_EnterTVW",        false, "Enter TV World");
     settings.Add("Ch3_2ndShootOutRoom", false, "Entering 2nd Shoot-Out room");
-    settings.Add("Ch3_EnterRouxls", false, "Enter Rouxls battle room");
-    settings.Add("Ch3_ExitRouxls",  false, "Exit Rouxls battle room");
-    settings.Add("Ch3_Egg",         false, "Obtain Egg");
-    settings.Add("Ch3_StartTenna",  false, "Start Tenna battle");
-    settings.Add("Ch3_EndTenna",    false, "End Tenna battle");
-    settings.Add("Ch3_StartKnight", false, "Start Knight battle");
-    settings.Add("Ch3_DieToKnight", false, "End Knight battle (loss)");
-    settings.Add("Ch3_EndKnight",   false, "End Knight battle (win)");
-    settings.Add("Ch3_Ending",      false, "Ending");
+    settings.Add("Ch3_EnterRouxls",     false, "Enter Rouxls battle room");
+    settings.Add("Ch3_ExitRouxls",      false, "Exit Rouxls battle room");
+    settings.Add("Ch3_Egg",             false, "Obtain Egg");
+    settings.Add("Ch3_StartTenna",      false, "Start Tenna battle");
+    settings.Add("Ch3_EndTenna",        false, "End Tenna battle");
+    settings.Add("Ch3_StartKnight",     false, "Start Knight battle");
+    settings.Add("Ch3_DieToKnight",     false, "End Knight battle (loss)");
+    settings.Add("Ch3_EndKnight",       false, "End Knight battle (win)");
+    settings.Add("Ch3_Ending",          false, "Ending");
      settings.SetToolTip("Ch3_Ending", @"This autosplit does not work if you remove Crickets from the game files (mus\night_ambience.ogg).");
-    settings.Add("Ch3_EndingOST",   false, "(OST%) Ending");
+    settings.Add("Ch3_EndingOST",       false, "(OST%) Ending");
 
     settings.Add("Ch3_AB", false, "All Bosses Splits");
     settings.CurrentDefaultParent = "Ch3_AB";
@@ -687,28 +687,35 @@ init
     switch(hash)
     {
         case "A88A2DB3A68C714CA2B1FF57AC08A032": // English
-        case "7CBE5B23457411DC31DD8F5CC3561056": // English, 30 TBPS mod
+        case "7CBE5B23457411DC31DD8F5CC3561056": // English, 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "047C11435B1C592EC731BFF3B9C5B0CF": // English, 30 TBPS mod
         case "22008370824A37BAEF8948127963C769": // Japanese
-        case "1C90213933C958124F78C88381E3CF60": // Japanese, 30 TBPS mod
+        case "1C90213933C958124F78C88381E3CF60": // Japanese, 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "E05433FE679BC91E3809C1138E3A8EA1": // Japanese, 30 TBPS mod
             version = "SURVEY_PROGRAM";
             break;
 
         case "616C5751AC9FC584AF250F1B04474AFD": // itch.io
-        case "33725A1E5AF6625C5785FD6A44357901": // itch.io, 30 TBPS mod
+        case "33725A1E5AF6625C5785FD6A44357901": // itch.io, 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "05689183497E58838E99B897F2E0E6AC": // itch.io, 30 TBPS mod
         case "267A8ABE468D824222810201F00003BE": // Steam
-        case "8E4AAFC73873A9D0159605E0359A5C09": // Steam, 30 TBPS mod
+        case "8E4AAFC73873A9D0159605E0359A5C09": // Steam, 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "272A16964597ED6DC8D2393ED051D3CE": // Steam, 30 TBPS mod
             version = "Demo v1.09";
             break;
 
         case "5FBE01F2BC1C04F45D809FFD060AC386": // itch.io
-        case "AFA542A149DB4F3564C09FF949E57716": // itch.io, 30 TBPS mod
+        case "AFA542A149DB4F3564C09FF949E57716": // itch.io, 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "A37C77A4310D2D6A6C2AF18294AAAE7A": // itch.io, 30 TBPS mod
         case "CD77A63D7902990DBC704FE32B30700A": // Steam
-        case "357EC65735CA6E40DC90040D211A1DB9": // Steam, 30 TBPS mod
+        case "357EC65735CA6E40DC90040D211A1DB9": // Steam, 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "758C8862F22F778FDEAFE25FBCD1F4EC": // Steam, 30 TBPS mod
             version = "Demo v1.10";
             break;
 
         case "ED4568BAB864166BFD6322CEEB3FB544":
-        case "1BE8FEAEFBC335169EE3D6BD6F99E7B0": // 30 TBPS mod
+        case "1BE8FEAEFBC335169EE3D6BD6F99E7B0": // 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "6BD6D1381C194C0F456B184CB48D132D": // 30 TBPS mod
             version = "Demo v1.15";
             break;
 
@@ -716,26 +723,30 @@ init
         // Not checking the individual chapters does mean that mods could get through, but chances are the autosplitter will just break anyway
         // Just hoping it does not become a problem
         case "7AD299A8B33FA449E20EDFE0FEDEDDB2":
-        case "B752A37D30DCC9F6048BB9361C1D677D": // 30 TBPS mod
+        case "B752A37D30DCC9F6048BB9361C1D677D": // 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "FD0857E6A3AF3AA74E5E00F15AEA5224": // 30 TBPS mod
             version = "Demo v1.19";
             break;
 
         case "B5EF0EEC9554C491777D6C4E93E0DF76":
-        case "CFD84EDB7B8DE90683627AAD6507F440": // 30 TBPS mod
+        case "CFD84EDB7B8DE90683627AAD6507F440": // 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "40A8185886A8A1A2BE996BC57DE3D916": // 30 TBPS mod
             version = "CH1-4 v1.02";
             break;
 
         case "9D1FEA9DE81219EA7304F32F1AE7A878":
-        case "28660F14803390E2D1061ECE661E3CD0": // Item tracker mod
-        case "5CDE5CD6C739B962D583D297514C6C1C": // OST% tracker mod
-        case "8B7811F2EB0E5A413C90EA693FFCEBCC": // 30 TBPS mod
+        case "28660F14803390E2D1061ECE661E3CD0": // Item tracker mod - REMOVE AFTER CH5
+        case "5CDE5CD6C739B962D583D297514C6C1C": // OST% tracker mod - REMOVE AFTER CH5
+        case "8B7811F2EB0E5A413C90EA693FFCEBCC": // 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "E437BCB299F8A69670C825121E5B8F19": // 30 TBPS mod
             version = "CH1-4 v1.04";
             break;
 
         case "5D3E158DBE6888FBF24471019FBDE3C9":
-        case "0A9267AD2A88CBDE8D9650CFE8265085": // Item tracker mod
-        case "9FB4D5FCB9D42765BFC2A57BE1FBD945": // OST% tracker mod
-        case "F4C52EC90D3DE038833705247DBA4536": // 30 TBPS mod
+        case "0A9267AD2A88CBDE8D9650CFE8265085": // Item tracker mod - REMOVE AFTER CH5
+        case "9FB4D5FCB9D42765BFC2A57BE1FBD945": // OST% tracker mod - REMOVE AFTER CH5
+        case "F4C52EC90D3DE038833705247DBA4536": // 30 TBPS mod (old) - REMOVE AFTER CH5
+        case "7A0DDC20059BDFB56E7E5523B0B65ABF": // 30 TBPS mod
             version = "CH1-4 v1.05 Beta";
             break;
 
