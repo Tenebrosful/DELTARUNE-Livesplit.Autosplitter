@@ -735,7 +735,7 @@ init
         case "5D3E158DBE6888FBF24471019FBDE3C9":
         case "0A9267AD2A88CBDE8D9650CFE8265085": // Item tracker mod
         case "9FB4D5FCB9D42765BFC2A57BE1FBD945": // OST% tracker mod
-        case "F4C52EC90D3DE038833705247DBA4536": // 30 TBPS mod
+        case "7A0DDC20059BDFB56E7E5523B0B65ABF": // 30 TBPS mod
             version = "CH1-4 v1.05 Beta";
             break;
 
