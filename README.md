@@ -38,7 +38,6 @@ or clone the repository
 > The autosplitter file will auto-refresh when you save it.
 
 > This is also the recommended way to use the every room autosplitter.
-
 ## How to use
 
 To use and configure the autosplitter, just click `Settings` and enable the locations you want the autosplitter
