@@ -744,8 +744,8 @@ init
             version = "CH1-4 v1.05 Beta";
             break;
 
-        case "F3DABE6444829688FD7FBAA68F78794F":
-        case "765C27CF5BCE65F617A19B4198D94022": // 30 TBPS mod
+        case "0A448A89C32C802A138621A39CED69DB":
+        case "CF830A90BE088CC48DF801E883AC29EA": // 30 TBPS mod
             vars.UnknownPopup = true;
             vars.IGTPopup = true;
             version = "CH1-5 (Autosplitting not supported yet)";
