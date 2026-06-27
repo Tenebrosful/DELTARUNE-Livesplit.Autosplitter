@@ -35,9 +35,8 @@ or clone the repository
 
 ![Layout Editor with Control -> Scriptable Auto Splitter selected](/assets/manualInstall.png)
 
-> The autosplitter file will auto-refresh when you save it.
-
-> This is also the recommended way to use the every room autosplitter.
+The autosplitter file will auto-refresh when you save it.
+This is also the recommended way to use the every room autosplitter.
 
 ## How to use
 
