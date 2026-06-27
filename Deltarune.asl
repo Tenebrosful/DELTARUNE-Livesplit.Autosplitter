@@ -731,21 +731,19 @@ init
             break;
 
         case "9D1FEA9DE81219EA7304F32F1AE7A878":
-        case "28660F14803390E2D1061ECE661E3CD0": // Item tracker mod - REMOVE AFTER CH5 TRACKERS ARE MADE
-        case "5CDE5CD6C739B962D583D297514C6C1C": // OST% tracker mod - REMOVE AFTER CH5 TRACKERS ARE MADE
         case "E437BCB299F8A69670C825121E5B8F19": // 30 TBPS mod
             version = "CH1-4 v1.04";
             break;
 
         case "5D3E158DBE6888FBF24471019FBDE3C9":
-        case "0A9267AD2A88CBDE8D9650CFE8265085": // Item tracker mod - REMOVE AFTER CH5 TRACKERS ARE MADE
-        case "9FB4D5FCB9D42765BFC2A57BE1FBD945": // OST% tracker mod - REMOVE AFTER CH5 TRACKERS ARE MADE
         case "7A0DDC20059BDFB56E7E5523B0B65ABF": // 30 TBPS mod
             version = "CH1-4 v1.05 Beta";
             break;
 
-        case "0A448A89C32C802A138621A39CED69DB":
-        case "CF830A90BE088CC48DF801E883AC29EA": // 30 TBPS mod
+        case "CC76C5EFEB1B5FEFD1822CEB1340CA10":
+        case "B1930BB4E86FDA801639E94A6DA307C5": // 30 TBPS mod
+        case "F615CFC82A244E3AC79386443A01FC51": // Item tracker mod
+        case "5C91588C7A012B362FF5317CDFAC8584": // OST% tracker mod
             vars.UnknownPopup = true;
             vars.IGTPopup = true;
             version = "CH1-5 (Autosplitting not supported yet)";
