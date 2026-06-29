@@ -239,9 +239,51 @@ state("DELTARUNE", "CH1-4 v1.05 Beta")
     string256 directory : 0x8BA818, 0x0;
 }
 
-state("DELTARUNE", "CH1-5 (Autosplitting not supported yet)")
+state("DELTARUNE", "CH1-5 v243")
 {
+    double fight_ch1    : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x740;
+    double choicer_ch1  : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x10;
+    double msc_ch1      : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x100;
+    string128 text_ch1  : 0x8CE220, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
+    double doorCloseCon : 0x8BA790, 0xE0, 0x48,  0x10,   0x30,  0x0;
+    float kingPos       : 0x6A7A98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
 
+    double fight_ch2        : 0x6A9CA8, 0x48,  0x10,  0x100,  0x0;
+    double choicer_ch2      : 0x6A9CA8, 0x48,  0x10,  0x7870, 0x0;
+    double msc_ch2          : 0x6A9CA8, 0x48,  0x10,  0x7310, 0x0;
+    string128 text_ch2      : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x6F0, 0x0,   0x0,  0x0;
+    string128 text_ch2_2    : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
+    string128 text_ch2_3    : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
+    string128 text_ch2_4    : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
+    double namerEvent_ch2   : 0x8BA790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x90,  0x0;
+    double loadedDiskGreyBG : 0x8BA790, 0xE0,  0x48,  0x10,   0xCA0, 0x0;
+    double snowgrave        : 0x8BA790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0x80, 0x0;
+
+    double fight_ch3      : 0x6A9CA8, 0x48,  0x10,   0x1190, 0x370;
+    double plot_ch3       : 0x6A9CA8, 0x48,  0x10,   0x1000, 0x250;
+    double knightResult   : 0x6A9CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
+    double namerEvent_ch3 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x120, 0x0;
+    double eggTimer       : 0x8BA790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x330, 0x0;
+    float mantleOutro     : 0x6A7A98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
+
+    double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
+    double plot_ch4       : 0x6A9CA8, 0x48,  0x10,   0x2FC0, 0x30;
+    double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x40,  0x0;
+    string128 text_ch4    : 0x8CE220, 0x10,  0x1A0,  0x48,   0x10,  0x310, 0x0,   0x0,  0x0;
+    double mikeAction     : 0x8BA790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x250, 0x0;
+    int susieSprite       : 0x6A7A98, 0x0,   0x1018, 0x50,   0x158, 0x10,  0xBC;
+    float playerX         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xE8;
+    float playerY         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xEC;
+
+    double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x820,  0x70;
+    double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x150,  0x20;
+    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x150, 0x0;
+    double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BB0, 0x0,  0x90, 0x5200;      // global.flag[1312]
+    int crtStart          : 0x6A7A98, 0x0,   0x1910, 0x8,    0x18, 0x68, 0x10,  0xE4; // obj_ch5_LW20W_end.image_blend
+
+    string256 sound     : 0x6AB818, 0x60, 0xD0, 0x58, 0x0;
+    string256 song      : 0x6AAF90, 0x0,  0x0,  0x0;
+    string256 directory : 0x8BA818, 0x0;
 }
 
 startup
@@ -258,15 +300,17 @@ startup
         "PLACE_CONTACT_ch1",                 // Chapter 1
         "room_krisroom_ch2",                 // Chapter 1 -> 2
         "room_dw_couch_overworld_intro_ch3", // Chapter 2 -> 3
-        "room_cc_fountain_ch4"               // Chapter 3 -> 4
+        "room_cc_fountain_ch4",              // Chapter 3 -> 4
+        "room_krisroom_ch5"                  // Chapter 4 -> 5
     };
     vars.OSTRooms = new[]
     {
         null,
-        null,                         // Chapter 1 (handled separately due to credits timing)
-        "room_torhouse_ch2",          // Chapter 2
-        "room_town_shelter_ch3",      // Chapter 3
-        "room_town_krisyard_dark_ch4" // Chapter 4
+        null,                          // Chapter 1 (handled separately due to credits timing)
+        "room_torhouse_ch2",           // Chapter 2
+        "room_town_shelter_ch3",       // Chapter 3
+        "room_town_krisyard_dark_ch4", // Chapter 4
+        "room_schooldoor_ch5"          // Chapter 5 (useless because timing ends on credits anyway)
     };
 
     vars.resetVars = (Action)(() =>
@@ -286,16 +330,16 @@ startup
             case "SURVEY_PROGRAM":
                 return false;
 
+            case "Demo v1.09":
+            case "Demo v1.10":
+            case "Demo v1.15":
+                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp));
+
             case "Demo v1.19":
                 return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp));
 
-            case "CH1-4 v1.02":
-            case "CH1-4 v1.04":
-            case "CH1-4 v1.05 Beta":
-                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
-
             default:
-                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp));
+                return (org.text != en && org.text != jp && (cur.text == en || cur.text == jp)) || (org.text_ch2_2 != en && org.text_ch2_2 != jp && (cur.text_ch2_2 == en || cur.text_ch2_2 == jp)) || (org.text_ch2_3 != en && org.text_ch2_3 != jp && (cur.text_ch2_3 == en || cur.text_ch2_3 == jp)) || (org.text_ch2_4 != en && org.text_ch2_4 != jp && (cur.text_ch2_4 == en || cur.text_ch2_4 == jp));
         }
     });
 
@@ -306,21 +350,21 @@ startup
             case "SURVEY_PROGRAM":
                 return false;
 
+            case "Demo v1.09":
+            case "Demo v1.10":
+            case "Demo v1.15":
+                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp);
+
             case "Demo v1.19":
                 return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp);
 
-            case "CH1-4 v1.02":
-            case "CH1-4 v1.04":
-            case "CH1-4 v1.05 Beta":
-                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
-
             default:
-                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp);
+                return ((org.text == en || org.text == jp) && cur.text != en && cur.text != jp) || ((org.text_ch2_2 == en || org.text_ch2_2 == jp) && cur.text_ch2_2 != en && cur.text_ch2_2 != jp) || ((org.text_ch2_3 == en || org.text_ch2_3 == jp) && cur.text_ch2_3 != en && cur.text_ch2_3 != jp) || ((org.text_ch2_4 == en || org.text_ch2_4 == jp) && cur.text_ch2_4 != en && cur.text_ch2_4 != jp);
         }
     });
 
     // Ending splits are handled manually in update{}
-    vars.splits = new Dictionary<string, Func<string, dynamic, dynamic, bool>>[4];
+    vars.splits = new Dictionary<string, Func<string, dynamic, dynamic, bool>>[5];
     vars.splits[0] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
         {"Ch1_School",                (ver, org, cur) => (org.roomName == "room_krisroom_ch1" || org.roomName == "room_insidecloset_ch1") && cur.roomName == "room_dark1_ch1"},
@@ -447,6 +491,47 @@ startup
         {"Ch4_EndTitan",        (ver, org, cur) => org.roomName == "room_dw_churchc_insidetitan_ch4" && cur.roomName == "room_dw_churchc_titandefeated_ch4"},
         {"Ch4_Fountain3",       (ver, org, cur) => org.roomName == "room_cc_fountain_ch4" && cur.roomName == "room_lw_church_main_ch4"}
     };
+    vars.splits[4] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
+    {
+        {"Ch5_EnterCT",       (ver, org, cur) => org.roomName == "room_schooldoor_ch5" && cur.roomName == "room_dw_castle_area_1_ch5"},
+        {"Ch5_EnterDW",       (ver, org, cur) => (org.roomName == "room_krisroom_ch5" || org.roomName == "room_town_north_ch5") && cur.roomName == "room_dw_garden_intro_ch5"},
+        {"Ch5_EnterDiner",    (ver, org, cur) => org.roomName == "room_dw_garden_firstdash_ch5" && cur.roomName == "room_dw_garden_diner_ch5"},
+        {"Ch5_ExitDiner",     (ver, org, cur) => org.roomName == "room_dw_garden_diner_ch5" && cur.roomName == "room_dw_garden_newdash_ch5"},
+        {"Ch5_DarkGarden",    (ver, org, cur) => org.roomName == "room_dw_garden_hardpressureplates_ch5" && cur.roomName == "room_dw_garden_aquatransition_ch5"},
+        {"Ch5_EnterAqua",     (ver, org, cur) => org.roomName == "room_dw_garden_wateringcan_aqua_ch5" && cur.roomName == "room_dw_garden_aqua_ch5"},
+        {"Ch5_EndAqua",       (ver, org, cur) => cur.roomName == "room_dw_garden_aqua_ch5" && org.fight == 1 && cur.fight == 0},
+        {"Ch5_ExitAqua",      (ver, org, cur) => org.roomName == "room_dw_garden_aqua_ch5" && cur.roomName == "room_dw_garden_aquadarkness_ch5"},
+        {"Ch5_ExitFeather",   (ver, org, cur) => org.roomName == "room_dw_garden_aquashrine_ch5" && (cur.roomName == "room_dw_garden_aquahole_ch5" || cur.roomName == "room_dw_garden_aquaplatforming_ch5")},
+        {"Ch5_EnterCliff1",   (ver, org, cur) => org.roomName == "room_dw_garden_finalplatforming_ch5" && cur.roomName == "room_dw_garden_cliffexit_ch5"},
+        {"Ch5_EnterCliff2",   (ver, org, cur) => org.roomName == "room_dw_garden_cliffexit_ch5" && cur.roomName == "room_dw_cliff_gardentransition_new_ch5"},
+        {"Ch5_EnterShopRoom", (ver, org, cur) => org.roomName == "room_dw_cliff_seth_miniboss_ch5" && cur.roomName == "room_dw_cliff_shop_ch5"},
+        {"Ch5_ExitShopRoom",  (ver, org, cur) => org.roomName == "room_dw_cliff_shop_ch5" && cur.roomName == "room_dw_cliff_kawkawdash_ch5"},
+        {"Ch5_Egg",           (ver, org, cur) => cur.roomName == "room_man_ch5" && org.choicer == -1 && cur.choicer == 0},
+        {"Ch5_EnterSethAqua", (ver, org, cur) => org.roomName == "room_dw_cliff_verticalwind_post_ch5" && cur.roomName == "room_dw_cliff_sethaqua_battle_ch5"},
+        {"Ch5_EndSethAqua",   (ver, org, cur) => cur.roomName == "room_dw_cliff_sethaqua_battle_ch5" && org.fight == 1 && cur.fight == 0},
+        {"Ch5_ExitSethAqua",  (ver, org, cur) => org.roomName == "room_dw_cliff_sethaqua_battle_ch5" && cur.roomName == "room_dw_fcastle_entrance_ch5"},
+        {"Ch5_ExitDW",        (ver, org, cur) => org.roomName == "room_dw_fcastle_entrance_ch5" && cur.roomName == "room_town_north_ch5"},
+        {"Ch5_ReenterDW",     (ver, org, cur) => org.roomName == "room_town_north_ch5" && cur.roomName == "room_dw_fcastle_partyjail_ch5"},
+        {"Ch5_EnterLeft",     (ver, org, cur) => org.roomName == "room_dw_fcastle_foyer_ch5" && cur.roomName == "room_dw_fcastle_shinobeetle_encounter_ch5"},
+        {"Ch5_ExitLeft",      (ver, org, cur) => org.roomName == "room_dw_fcastle_onsen_ch5" && cur.roomName == "room_dw_fcastle_foyer_ch5"},
+        {"Ch5_EnterRight",    (ver, org, cur) => org.roomName == "room_dw_fcastle_foyer_ch5" && cur.roomName == "room_dw_fcastle_cafe_ch5"},
+        {"Ch5_ExitRight",     (ver, org, cur) => org.roomName == "room_dw_fcastle_right_endingscene_ch5" && cur.roomName == "room_dw_fcastle_foyer_ch5"},
+        {"Ch5_PinkShop",      (ver, org, cur) => org.roomName == "room_shop_ch5" && cur.roomName == "room_dw_cliff_shop_ch5" && vars.tempVar == 1},
+        {"Ch5_PinkDoor",      (ver, org, cur) => org.roomName == "room_dw_fcastle_top_pinkdoor_ch5" && cur.roomName == "room_dw_fcastle_pinkroom_ch5"},
+        {"Ch5_PinkEnter",     (ver, org, cur) => org.roomName == "room_dw_fcastle_pinkroom_ch5" && cur.roomName == "room_dw_pink_encounter_ch5"},
+        {"Ch5_PinkEnd",       (ver, org, cur) => cur.roomName == "room_dw_pink_encounter_ch5" && org.fight == 1 && cur.fight == 0},
+        {"Ch5_PinkExit",      (ver, org, cur) => org.roomName == "room_dw_pink_encounter_ch5" && cur.roomName == "room_dw_fcastle_pinkroom_ch5"},
+        {"Ch5_EnterGreenC",   (ver, org, cur) => org.roomName == "room_dw_fcastle_top_staircase_2_ch5" && cur.roomName == "room_dw_fcastle_green_checkpoint_ch5"},
+        {"Ch5_ExitGreenC",    (ver, org, cur) => org.roomName == "room_dw_fcastle_green_checkpoint_ch5" && cur.roomName == "room_dw_fcastle_top_ascent_ch5"},
+        {"Ch5_EnterTopSave",  (ver, org, cur) => org.roomName == "room_dw_fcastle_orange_gauntlet_ch5" && cur.roomName == "room_dw_fcastle_final_save_ch5"},
+        {"Ch5_ExitTopSave",   (ver, org, cur) => org.roomName == "room_dw_fcastle_final_save_ch5" && cur.roomName == "room_dw_fcastle_flowery_ch5"},
+        {"Ch5_StartFlowery",  (ver, org, cur) => cur.roomName == "room_dw_fcastle_flowery_ch5" && org.fight == 0 && cur.fight == 1},
+        {"Ch5_EndFlowery",    (ver, org, cur) => org.roomName == "room_dw_fcastle_flowery_ch5" && cur.roomName == "room_dw_fcastle_flowerclimb_ch5"},
+        {"Ch5_EndTowery",     (ver, org, cur) => org.roomName == "room_dw_fcastle_flowerclimb_ch5" && cur.roomName == "room_dw_fcastle_flowerydash_ch5"},
+        {"Ch5_OmegaFlowery",  (ver, org, cur) => org.roomName == "room_dw_fcastle_flowerydash_ch5" && cur.roomName == "room_dw_post_flowery_battle_ch5"},
+        {"Ch5_Fountain1",     (ver, org, cur) => org.roomName == "room_dw_fcastle_top_fountain_ch5" && cur.roomName == "room_dw_post_fountain_close_ch5"},
+        {"Ch5_Fountain2",     (ver, org, cur) => org.roomName == "room_cc_fountain_ch5" && cur.roomName == "room_flowershop_2f_ch5"}
+    };
     vars.completedSplits = new HashSet<string>();
 
     vars.resetSplits = (Action)(() =>
@@ -468,7 +553,7 @@ startup
      settings.SetToolTip("AC_AlternateCh2",
         "This setting pauses the timer when Susie falls asleep instead of when you close Toriel's final textbox\n" +
         "(and it also changes the Ending autosplit location accordingly).\n" +
-        "This is the timing used for All Chapters runs. Disable this if you're running Chapter 2 or Chapter 1&2.\n\n" +
+        "This is the timing used for All Chapters runs. Disable this if you're running Chapter 2 or CH1+2 Demo.\n\n" +
         @"This setting does not work if you remove You Can Always Come Home from the game files (mus\home.ogg).");
 
     settings.Add("AC_PauseTimerOST", false, "(OST%) Pause the timer between chapters");
@@ -492,7 +577,7 @@ startup
     settings.Add("Ch1_Egg",                   false, "Obtain Egg");
     settings.Add("Ch1_EnterForestMaze",       false, "Enter Forest maze");
     settings.Add("Ch1_SusieLancer_Exit",      false, "Exit Forest (Susie & Lancer battle room)");
-    settings.Add("Ch1_GetCapture",            false, "Enter Prison Cell (Get Capture)");
+    settings.Add("Ch1_GetCapture",            false, "Enter Prison Cell (captured)");
     settings.Add("Ch1_Escape_Cell",           false, "Exit Prison Cell");
     settings.Add("Ch1_Enter_Elevator",        false, "Enter Elevator");
     settings.Add("Ch1_KRound2_Exit",          false, "Exit K. Round 2 battle room");
@@ -573,14 +658,14 @@ startup
 
     settings.Add("Ch3", false, "Chapter 3: Late Night");
     settings.CurrentDefaultParent = "Ch3";
-    settings.Add("Ch3_EnterRound1",     false, "Enter Round 1");
+    settings.Add("Ch3_EnterRound1",     false, "Enter Board 1");
     settings.Add("Ch3_EnterChef",       false, "Enter Cooking Show");
-    settings.Add("Ch3_EndRound1",       false, "Enter Green Room (post-Round 1)");
+    settings.Add("Ch3_EndRound1",       false, "Enter Green Room (post-Board 1)");
     settings.Add("Ch3_EnterRhythm",     false, "Enter Lightners Live");
-    settings.Add("Ch3_EndRound2",       false, "Enter Green Room (post-Round 2)");
-    settings.Add("Ch3_EndRound3",       false, "Enter TV World Backstage (post-Round 3)");
+    settings.Add("Ch3_EndRound2",       false, "Enter Green Room (post-Board 2)");
+    settings.Add("Ch3_EndRound3",       false, "Enter TV World Backstage (post-Doom Board)");
     settings.Add("Ch3_EnterTVW",        false, "Enter TV World");
-    settings.Add("Ch3_2ndShootOutRoom", false, "Entering 2nd Shoot-Out room");
+    settings.Add("Ch3_2ndShootOutRoom", false, "Enter 2nd shootout room");
     settings.Add("Ch3_EnterRouxls",     false, "Enter Rouxls battle room");
     settings.Add("Ch3_ExitRouxls",      false, "Exit Rouxls battle room");
     settings.Add("Ch3_Egg",             false, "Obtain Egg");
@@ -636,6 +721,52 @@ startup
      settings.Add("Ch4_EnterHoJ",        false, "Enter Hammer of Justice battle room");
      settings.Add("Ch4_HammerofJustice", false, "End Hammer of Justice battle");
      settings.Add("Ch4_ExitHoJ",         false, "Exit Hammer of Justice battle room");
+    settings.CurrentDefaultParent = null;
+
+    settings.Add("Ch5", false, "Chapter 5: Festival Day");
+    settings.CurrentDefaultParent = "Ch5";
+    settings.Add("Ch5_EnterCT",       false, "Enter Castle Town");
+    settings.Add("Ch5_EnterDW",       false, "Enter Dark World");
+    settings.Add("Ch5_EnterDiner",    false, "Enter the diner (from the bottom)");
+    settings.Add("Ch5_ExitDiner",     false, "Exit the diner (to the right)");
+    settings.Add("Ch5_DarkGarden",    false, "Enter the dark garden");
+    settings.Add("Ch5_EnterAqua",     false, "Enter Aqua battle room");
+    settings.Add("Ch5_EndAqua",       false, "End Aqua battle");
+    settings.Add("Ch5_ExitAqua",      false, "Exit Aqua battle room");
+    settings.Add("Ch5_ExitFeather",   false, "Exit Petal Feather room");
+    settings.Add("Ch5_EnterCliff1",   false, "Enter first Cliff save point room");
+    settings.Add("Ch5_EnterCliff2",   false, "Exit first Cliff save point room");
+    settings.Add("Ch5_EnterShopRoom", false, "Enter Pink's shop room");
+    settings.Add("Ch5_ExitShopRoom",  false, "Exit Pink's shop room");
+    settings.Add("Ch5_Egg",           false, "Obtain Egg");
+    settings.Add("Ch5_EnterSethAqua", false, "Enter Seth & Aqua battle room");
+    settings.Add("Ch5_EndSethAqua",   false, "End Seth & Aqua battle");
+    settings.Add("Ch5_ExitSethAqua",  false, "Exit Seth & Aqua battle room");
+    settings.Add("Ch5_ExitDW",        false, "Exit Dark World");
+    settings.Add("Ch5_ReenterDW",     false, "Reenter Dark World");
+    settings.Add("Ch5_EnterLeft",     false, "Enter Foyer Left Side");
+    settings.Add("Ch5_ExitLeft",      false, "Exit Foyer Left Side");
+    settings.Add("Ch5_EnterRight",    false, "Enter Foyer Right Side");
+    settings.Add("Ch5_ExitRight",     false, "Exit Foyer Right Side");
+    settings.Add("Ch5_EnterGreenC",   false, "Enter Green's checkpoint/shop room");
+    settings.Add("Ch5_ExitGreenC",    false, "Exit Green's checkpoint/shop room");
+    settings.Add("Ch5_EnterTopSave",  false, "Enter Castle Top save point room");
+    settings.Add("Ch5_ExitTopSave",   false, "Enter Flowery battle room");
+    settings.Add("Ch5_StartFlowery",  false, "Start Flowery battle");
+    settings.Add("Ch5_EndFlowery",    false, "End Flowery battle");
+    settings.Add("Ch5_EndTowery",     false, "End post-Flowery Climb");
+    settings.Add("Ch5_OmegaFlowery",  false, "Hit Omega Flowery");
+    settings.Add("Ch5_Fountain1",     false, "Seal Fountain 1");
+    settings.Add("Ch5_Fountain2",     false, "Seal Fountain 2");
+    settings.Add("Ch5_Ending",        false, "Ending (both routes)");
+
+    settings.Add("Ch5_AB", false, "All Bosses Splits");
+    settings.CurrentDefaultParent = "Ch5_AB";
+     settings.Add("Ch5_PinkShop",  false, "Exit Pink's shop after buying the key");
+     settings.Add("Ch5_PinkDoor",  false, "Enter the pink door");
+     settings.Add("Ch5_PinkEnter", false, "Enter Pink battle room");
+     settings.Add("Ch5_PinkEnd",   false, "End Pink battle");
+     settings.Add("Ch5_PinkExit",  false, "Exit Pink battle room");
 }
 
 exit
@@ -740,14 +871,12 @@ init
             version = "CH1-4 v1.05 Beta";
             break;
 
-        case "CC76C5EFEB1B5FEFD1822CEB1340CA10":
-        case "B1930BB4E86FDA801639E94A6DA307C5": // 30 TBPS mod
-        case "F615CFC82A244E3AC79386443A01FC51": // Item tracker mod
-        case "5C91588C7A012B362FF5317CDFAC8584": // OST% tracker mod
-            vars.UnknownPopup = true;
-            vars.IGTPopup = true;
-            version = "CH1-5 (Autosplitting not supported yet)";
-            return;
+        case "359ADB2DB26D7E902F4C26B40E9B58AE":
+        case "479DFDADFE1C84CD6B676D9412F27710": // 30 TBPS mod
+        case "0B927B5048DDFD5F128E40B950F102F4": // Item tracker mod
+        case "EF0C81785E7F93D3560638B5A86AD120": // OST% tracker mod
+            version = "CH1-5 v243";
+            break;
 
         default:
             version = "Unknown";
@@ -768,7 +897,8 @@ init
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.09, v1.15, v1.19\n" +
-                    "- Chapters 1-4 v1.02, v1.04, v1.05 Beta.\n\n" +
+                    "- Chapters 1-4 v1.02, v1.04, v1.05 Beta\n" +
+                    "- Chapters 1-5 v243.\n\n" +
 
                     "You will not be notified again until the next time you start the autosplitter.",
 
@@ -815,7 +945,7 @@ init
 
 update
 {
-    if(version == "Unknown" || version == "CH1-5 (Autosplitting not supported yet)")
+    if(version == "Unknown")
         return false;
 
     current.room = game.ReadValue<int>((IntPtr)vars.ptrRoomID);
@@ -862,6 +992,13 @@ update
             current.fight      = current.fight_ch4;
             current.text       = current.text_ch4;
             current.namerEvent = current.namerEvent_ch4;
+        }
+        else if(current.directory.EndsWith(@"\chapter5_windows\"))
+        {
+            current.chapter    = 5;
+            current.fight      = current.fight_ch5;
+            current.choicer    = current.choicer_ch5;
+            current.namerEvent = current.namerEvent_ch5;
         }
         else
         {
@@ -957,7 +1094,21 @@ update
                 }
                 else
                 {
-                    endCondition = (current.roomName == "room_torhouse_ch4" && current.plot_ch4 == 310 && (old.playerX != current.playerX || old.playerY != current.playerY) && current.playerX < 160 && current.playerY < 80);
+                    if(settings["AC_PauseTimer"])
+                        endCondition = (old.roomName == "room_torhouse_ch4" && current.roomName == "room_krisroom_dark_ch4");
+                    else
+                        endCondition = (current.roomName == "room_torhouse_ch4" && current.plot_ch4 == 310 && (old.playerX != current.playerX || old.playerY != current.playerY) && current.playerX < 160 && current.playerY < 80);
+                }
+                break;
+
+            case 5:
+                if(current.roomName == "room_shop_ch5" && current.pinkCoins == (old.pinkCoins - 10))
+                {
+                    vars.tempVar = 1;
+                }
+                else
+                {
+                    endCondition = ((old.roomName == "room_schooldoor_ch5" && current.roomName == "room_ed_ch5") || (current.roomName == "room_beach_ch5" && old.crtStart != 16777215 && current.crtStart == 16777215));
                 }
                 break;
         }
@@ -973,7 +1124,7 @@ update
             vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
-        else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch] && current.roomName.StartsWith("room_ed")))
+        else if(current.chapter != 5 && ((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch] && current.roomName.StartsWith("room_ed"))))
         {
             if(settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
             {
@@ -1023,10 +1174,18 @@ start
     if(timer.Run.Offset != TimeSpan.FromSeconds(0))
         return false;
 
-    if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
+    if(old.room != current.room)
     {
-        print("[DELTARUNE] Timer started (Start Room for Chapter 1 detected)");
-        return true;
+        if(current.roomName == "PLACE_CONTACT_ch1")
+        {
+            print("[DELTARUNE] Timer started (Start Room for Chapter 1 detected)");
+            return true;
+        }
+        else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
+        {
+            print("[DELTARUNE] Timer started (Start Room for Chapter 5 with completion data detected)");
+            return true;            
+        }
     }
 
     else if(version != "SURVEY_PROGRAM")
@@ -1050,15 +1209,23 @@ reset
     if(timer.Run.Offset != TimeSpan.FromSeconds(0))
         return false;
 
-    if(old.room != current.room && current.roomName == "PLACE_CONTACT_ch1")
+    if(old.room != current.room)
     {
-        if(settings["AC_UnpauseOnStart"] && timer.IsGameTimePaused)
+        if(current.roomName == "PLACE_CONTACT_ch1")
         {
-            timer.IsGameTimePaused = false;
-            return false;
+            if(settings["AC_UnpauseOnStart"] && timer.IsGameTimePaused)
+            {
+                timer.IsGameTimePaused = false;
+                return false;
+            }
+            print("[DELTARUNE] Timer reset (Start Room for Chapter 1 detected)");
+            return true;
         }
-        print("[DELTARUNE] Timer reset (Start Room for Chapter 1 detected)");
-        return true;
+        else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
+        {
+            print("[DELTARUNE] Timer reset (Start Room for Chapter 5 with completion data detected)");
+            return true;            
+        }
     }
 
     else if(version != "SURVEY_PROGRAM")
