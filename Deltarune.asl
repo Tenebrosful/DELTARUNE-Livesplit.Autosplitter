@@ -1124,7 +1124,7 @@ update
             vars.resetSplits();
             vars.forceSplit = settings["Ch" + ch + "_Ending"];
         }
-        else if((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch] && current.roomName.StartsWith("room_ed")))
+        else if(current.chapter != 5 && ((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch] && current.roomName.StartsWith("room_ed"))))
         {
             if(settings["AC_PauseTimerOST"] && !timer.IsGameTimePaused)
             {
