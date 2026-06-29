@@ -516,6 +516,7 @@ startup
         {"Ch5_ExitLeft",      (ver, org, cur) => org.roomName == "room_dw_fcastle_onsen_ch5" && cur.roomName == "room_dw_fcastle_foyer_ch5"},
         {"Ch5_EnterRight",    (ver, org, cur) => org.roomName == "room_dw_fcastle_foyer_ch5" && cur.roomName == "room_dw_fcastle_cafe_ch5"},
         {"Ch5_ExitRight",     (ver, org, cur) => org.roomName == "room_dw_fcastle_right_endingscene_ch5" && cur.roomName == "room_dw_fcastle_foyer_ch5"},
+        {"Ch5_FBeanstalk",    (ver, org, cur) => org.roomName == "room_dw_fcastle_foyer_ch5" && cur.roomName == "room_dw_fcastle_asgore_ch5"},
         {"Ch5_PinkShop",      (ver, org, cur) => org.roomName == "room_shop_ch5" && cur.roomName == "room_dw_cliff_shop_ch5" && vars.tempVar == 1},
         {"Ch5_PinkDoor",      (ver, org, cur) => org.roomName == "room_dw_fcastle_top_pinkdoor_ch5" && cur.roomName == "room_dw_fcastle_pinkroom_ch5"},
         {"Ch5_PinkEnter",     (ver, org, cur) => org.roomName == "room_dw_fcastle_pinkroom_ch5" && cur.roomName == "room_dw_pink_encounter_ch5"},
@@ -744,10 +745,11 @@ startup
     settings.Add("Ch5_ExitSethAqua",  false, "Exit Seth & Aqua battle room");
     settings.Add("Ch5_ExitDW",        false, "Exit Dark World");
     settings.Add("Ch5_ReenterDW",     false, "Reenter Dark World");
-    settings.Add("Ch5_EnterLeft",     false, "Enter Foyer Left Side");
-    settings.Add("Ch5_ExitLeft",      false, "Exit Foyer Left Side");
-    settings.Add("Ch5_EnterRight",    false, "Enter Foyer Right Side");
-    settings.Add("Ch5_ExitRight",     false, "Exit Foyer Right Side");
+    settings.Add("Ch5_EnterLeft",     false, "Enter the left side from the foyer");
+    settings.Add("Ch5_ExitLeft",      false, "Enter the foyer from the left side");
+    settings.Add("Ch5_EnterRight",    false, "Enter the right side from the foyer");
+    settings.Add("Ch5_ExitRight",     false, "Enter the foyer from the right side");
+    settings.Add("Ch5_FBeanstalk",    false, "Climb the foyer beanstalk");
     settings.Add("Ch5_EnterGreenC",   false, "Enter Green's checkpoint/shop room");
     settings.Add("Ch5_ExitGreenC",    false, "Exit Green's checkpoint/shop room");
     settings.Add("Ch5_EnterTopSave",  false, "Enter Castle Top save point room");
