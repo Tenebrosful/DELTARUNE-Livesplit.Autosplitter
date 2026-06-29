@@ -726,6 +726,7 @@ startup
 
     settings.Add("Ch5", false, "Chapter 5: Festival Day");
     settings.CurrentDefaultParent = "Ch5";
+    settings.Add("Ch5_StartOnPrev",   false, "Only start/reset the timer when loading completion data");
     settings.Add("Ch5_EnterCT",       false, "Enter Castle Town");
     settings.Add("Ch5_EnterDW",       false, "Enter Dark World");
     settings.Add("Ch5_EnterDiner",    false, "Enter the diner (from the bottom)");
@@ -1183,7 +1184,7 @@ start
             print("[DELTARUNE] Timer started (Start Room for Chapter 1 detected)");
             return true;
         }
-        else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
+        else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && settings["Ch5_StartOnPrev"] && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
         {
             print("[DELTARUNE] Timer started (Start Room for Chapter 5 with completion data detected)");
             return true;            
@@ -1192,7 +1193,7 @@ start
 
     else if(version != "SURVEY_PROGRAM")
     {
-        if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU"))
+        if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU") && (current.chapter != 5 || !settings["Ch5_StartOnPrev"]))
         {
             print("[DELTARUNE] Timer started (Start Event for Chapter " + current.chapter + " detected)");
             return true;
@@ -1223,7 +1224,7 @@ reset
             print("[DELTARUNE] Timer reset (Start Room for Chapter 1 detected)");
             return true;
         }
-        else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
+        else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && settings["Ch5_StartOnPrev"] && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
         {
             print("[DELTARUNE] Timer reset (Start Room for Chapter 5 with completion data detected)");
             return true;            
@@ -1232,7 +1233,7 @@ reset
 
     else if(version != "SURVEY_PROGRAM")
     {
-        if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU"))
+        if(old.namerEvent == 74 && current.namerEvent == 75 && current.roomName.StartsWith("PLACE_MENU") && (current.chapter != 5 || !settings["Ch5_StartOnPrev"]))
         {
             if(settings["AC_UnpauseOnStart"] && timer.IsGameTimePaused)
             {
