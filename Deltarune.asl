@@ -899,7 +899,7 @@ init
                     "Make sure the game's executable is named \"DELTARUNE.exe\" and the main data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
-                    "- Chapter 1&2 v1.09, v1.15, v1.19\n" +
+                    "- Chapter 1&2 v1.09, v1.10, v1.15, v1.19\n" +
                     "- Chapters 1-4 v1.02, v1.04, v1.05 Beta\n" +
                     "- Chapters 1-5 v244.\n\n" +
 
