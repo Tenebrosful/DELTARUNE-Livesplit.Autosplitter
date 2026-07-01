@@ -239,7 +239,7 @@ state("DELTARUNE", "CH1-4 v1.05 Beta")
     string256 directory : 0x8BA818, 0x0;
 }
 
-state("DELTARUNE", "CH1-5 v243")
+state("DELTARUNE", "CH1-5 v244")
 {
     double fight_ch1    : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x740;
     double choicer_ch1  : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x10;
@@ -267,7 +267,7 @@ state("DELTARUNE", "CH1-5 v243")
     float mantleOutro     : 0x6A7A98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
-    double plot_ch4       : 0x6A9CA8, 0x48,  0x10,   0x2FC0, 0x30;
+    double plot_ch4       : 0x6A9CA8, 0x48,  0x10,   0x2F70, 0x30;
     double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x40,  0x0;
     string128 text_ch4    : 0x8CE220, 0x10,  0x1A0,  0x48,   0x10,  0x310, 0x0,   0x0,  0x0;
     double mikeAction     : 0x8BA790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x250, 0x0;
@@ -277,7 +277,7 @@ state("DELTARUNE", "CH1-5 v243")
 
     double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x820,  0x70;
     double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x150,  0x20;
-    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x150, 0x0;
+    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x170, 0x0;
     double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BB0, 0x0,  0x90, 0x5200;      // global.flag[1312]
     int crtStart          : 0x6A7A98, 0x0,   0x1910, 0x8,    0x18, 0x68, 0x10,  0xE4; // obj_ch5_LW20W_end.image_blend
 
@@ -874,11 +874,11 @@ init
             version = "CH1-4 v1.05 Beta";
             break;
 
-        case "359ADB2DB26D7E902F4C26B40E9B58AE":
-        case "479DFDADFE1C84CD6B676D9412F27710": // 30 TBPS mod
-        case "0B927B5048DDFD5F128E40B950F102F4": // Item tracker mod
-        case "EF0C81785E7F93D3560638B5A86AD120": // OST% tracker mod
-            version = "CH1-5 v243";
+        case "DDEDBBD10FF129B49C64DBEFAA763C6A":
+        case "4A9C69B42E442B673395B3253F292F17": // 30 TBPS mod
+        case "42B66B41B6CEA12FB54219E9D31E5DC8": // Item tracker mod
+        case "D0420C09A5DEBD6176EA24A1FE1EE3E3": // OST% tracker mod
+            version = "CH1-5 v244";
             break;
 
         default:
@@ -901,7 +901,7 @@ init
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.09, v1.15, v1.19\n" +
                     "- Chapters 1-4 v1.02, v1.04, v1.05 Beta\n" +
-                    "- Chapters 1-5 v243.\n\n" +
+                    "- Chapters 1-5 v244.\n\n" +
 
                     "You will not be notified again until the next time you start the autosplitter.",
 
