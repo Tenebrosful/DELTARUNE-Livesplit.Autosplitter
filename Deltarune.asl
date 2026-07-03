@@ -736,8 +736,8 @@ startup
     settings.Add("Ch5_EndAqua",       false, "End Aqua battle");
     settings.Add("Ch5_ExitAqua",      false, "Exit Aqua battle room");
     settings.Add("Ch5_ExitFeather",   false, "Exit Petal Feather room");
-    settings.Add("Ch5_EnterCliff1",   false, "Enter first Cliff save point room");
-    settings.Add("Ch5_EnterCliff2",   false, "Exit first Cliff save point room");
+    settings.Add("Ch5_EnterCliff1",   false, "Enter first Cliffs save point room");
+    settings.Add("Ch5_EnterCliff2",   false, "Exit first Cliffs save point room");
     settings.Add("Ch5_EnterShopRoom", false, "Enter Pink's shop room");
     settings.Add("Ch5_ExitShopRoom",  false, "Exit Pink's shop room");
     settings.Add("Ch5_Egg",           false, "Obtain Egg");
@@ -1105,7 +1105,7 @@ update
                 break;
 
             case 5:
-                if(current.roomName == "room_shop_ch5" && current.pinkCoins == (old.pinkCoins - 10))
+                if(settings["Ch5_PinkShop"] && current.roomName == "room_shop_ch5" && current.pinkCoins == (old.pinkCoins - 10))
                 {
                     vars.tempVar = 1;
                 }
