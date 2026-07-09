@@ -88,7 +88,6 @@ state("DELTARUNE", "Demo v1.15")
 
 state("DELTARUNE", "Demo v1.19")
 {
-    double fight_ch1   : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x710;
     double choicer_ch1 : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0x0;
     double msc_ch1     : 0x6A1CA8, 0x48, 0x10, 0x32F0, 0xF0;
 
@@ -118,7 +117,6 @@ state("DELTARUNE", "Demo v1.19")
 
 state("DELTARUNE", "CH1-4 v1.02")
 {
-    double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
     double msc_ch1      : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x100;
     string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
@@ -159,7 +157,6 @@ state("DELTARUNE", "CH1-4 v1.02")
 
 state("DELTARUNE", "CH1-4 v1.04")
 {
-    double fight_ch1    : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
     double msc_ch1      : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x100;
     string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
@@ -200,7 +197,6 @@ state("DELTARUNE", "CH1-4 v1.04")
 
 state("DELTARUNE", "CH1-4 v1.05 Beta")
 {
-    double fight_ch1    : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x720;
     double choicer_ch1  : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x10;
     double msc_ch1      : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x100;
     string128 text_ch1  : 0x8CE220, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
@@ -239,9 +235,8 @@ state("DELTARUNE", "CH1-4 v1.05 Beta")
     string256 directory : 0x8BA818, 0x0;
 }
 
-state("DELTARUNE", "CH1-5 v244")
+state("DELTARUNE", "CH1-5 v247")
 {
-    double fight_ch1    : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x740;
     double choicer_ch1  : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x10;
     double msc_ch1      : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x100;
     string128 text_ch1  : 0x8CE220, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
@@ -277,8 +272,8 @@ state("DELTARUNE", "CH1-5 v244")
 
     double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x820,  0x70;
     double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x150,  0x20;
-    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x170, 0x0;
-    double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BB0, 0x0,  0x90, 0x5200;      // global.flag[1312]
+    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x220, 0x0;
+    double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BA0, 0x0,  0x90, 0x5200;      // global.flag[1312]
     int crtStart          : 0x6A7A98, 0x0,   0x1910, 0x8,    0x18, 0x68, 0x10,  0xE4; // obj_ch5_LW20W_end.image_blend
 
     string256 sound     : 0x6AB818, 0x60, 0xD0, 0x58, 0x0;
@@ -874,11 +869,11 @@ init
             version = "CH1-4 v1.05 Beta";
             break;
 
-        case "DDEDBBD10FF129B49C64DBEFAA763C6A":
-        case "4A9C69B42E442B673395B3253F292F17": // 30 TBPS mod
-        case "42B66B41B6CEA12FB54219E9D31E5DC8": // Item tracker mod
-        case "D0420C09A5DEBD6176EA24A1FE1EE3E3": // OST% tracker mod
-            version = "CH1-5 v244";
+        case "908643B7593B000F5B6C61BB484D086A":
+        case "80A63475EF69529B612F9DCA75AF4CC5": // 30 TBPS mod
+        case "3217F3BFE82C3E4AA8EE2E9E3A4F4E14": // Item tracker mod
+        case "21CDD09EEADBCC77535AB2BB3412259A": // OST% tracker mod
+            version = "CH1-5 v247";
             break;
 
         default:
@@ -901,7 +896,7 @@ init
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.09, v1.10, v1.15, v1.19\n" +
                     "- Chapters 1-4 v1.02, v1.04, v1.05 Beta\n" +
-                    "- Chapters 1-5 v244.\n\n" +
+                    "- Chapters 1-5 v247.\n\n" +
 
                     "You will not be notified again until the next time you start the autosplitter.",
 
@@ -966,7 +961,6 @@ update
         if(current.directory.EndsWith(@"\chapter1_windows\"))
         {
             current.chapter    = 1;
-            current.fight      = current.fight_ch1;
             current.choicer    = current.choicer_ch1;
             current.msc        = current.msc_ch1;
             current.text       = current.text_ch1;
