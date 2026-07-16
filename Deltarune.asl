@@ -515,7 +515,7 @@ startup
         {"Ch5_PinkShop",      (ver, org, cur) => org.roomName == "room_shop_ch5" && cur.roomName == "room_dw_cliff_shop_ch5" && vars.tempVar == 1},
         {"Ch5_PinkDoor",      (ver, org, cur) => org.roomName == "room_dw_fcastle_top_pinkdoor_ch5" && cur.roomName == "room_dw_fcastle_pinkroom_ch5"},
         {"Ch5_PinkEnter",     (ver, org, cur) => org.roomName == "room_dw_fcastle_pinkroom_ch5" && cur.roomName == "room_dw_pink_encounter_ch5"},
-        {"Ch5_PinkEnd",       (ver, org, cur) => cur.roomName == "room_dw_pink_encounter_ch5" && org.fight == 1 && cur.fight == 0},
+        {"Ch5_PinkEnd",       (ver, org, cur) => cur.roomName == "room_dw_pink_encounter_ch5" && cur.fight == 1 && ((org.sound != "snd_cymbal_reverse.mp3" && cur.sound == "snd_cymbal_reverse.mp3") || (org.song != null && cur.song == null))},
         {"Ch5_PinkExit",      (ver, org, cur) => org.roomName == "room_dw_pink_encounter_ch5" && cur.roomName == "room_dw_fcastle_pinkroom_ch5"},
         {"Ch5_EnterGreenC",   (ver, org, cur) => org.roomName == "room_dw_fcastle_top_staircase_2_ch5" && cur.roomName == "room_dw_fcastle_green_checkpoint_ch5"},
         {"Ch5_ExitGreenC",    (ver, org, cur) => org.roomName == "room_dw_fcastle_green_checkpoint_ch5" && cur.roomName == "room_dw_fcastle_top_ascent_ch5"},
