@@ -155,87 +155,7 @@ state("DELTARUNE", "CH1-4 v1.02")
     string256 directory : 0x8B2818, 0x0;
 }
 
-state("DELTARUNE", "CH1-4 v1.04")
-{
-    double choicer_ch1  : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x10;
-    double msc_ch1      : 0x6A1CA8, 0x48, 0x10,  0x1E40, 0x100;
-    string128 text_ch1  : 0x8C2008, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
-    double doorCloseCon : 0x8B2790, 0xE0, 0x48,  0x10,   0x30,  0x0;
-    float kingPos       : 0x69FA98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
-
-    double fight_ch2        : 0x6A1CA8, 0x48,  0x10,  0x100,  0x0;
-    double choicer_ch2      : 0x6A1CA8, 0x48,  0x10,  0x7870, 0x0;
-    double msc_ch2          : 0x6A1CA8, 0x48,  0x10,  0x7310, 0x0;
-    string128 text_ch2      : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x6F0, 0x0,   0x0,  0x0;
-    string128 text_ch2_2    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
-    string128 text_ch2_3    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
-    string128 text_ch2_4    : 0x8C2008, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
-    double namerEvent_ch2   : 0x8B2790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x90,  0x0;
-    double loadedDiskGreyBG : 0x8B2790, 0xE0,  0x48,  0x10,   0xCA0, 0x0;
-    double snowgrave        : 0x8B2790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0x80, 0x0;
-
-    double fight_ch3      : 0x6A1CA8, 0x48,  0x10,   0x1190, 0x370;
-    double plot_ch3       : 0x6A1CA8, 0x48,  0x10,   0x1000, 0x250;
-    double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
-    double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x100, 0x0;
-    double eggTimer       : 0x8B2790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x300, 0x0;
-    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
-
-    double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
-    double plot_ch4       : 0x6A1CA8, 0x48,  0x10,   0x2F60, 0x30;
-    double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x3A0, 0x0;
-    string128 text_ch4    : 0x8C2008, 0x10,  0x1A0,  0x48,   0x10,  0x310, 0x0,   0x0,  0x0;
-    double mikeAction     : 0x8B2790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x180, 0x0;
-    int susieSprite       : 0x69FA98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;
-    float playerX         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;
-    float playerY         : 0x69FA98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;
-
-    string256 sound     : 0x6A3818, 0x60, 0xD0, 0x58, 0x0;
-    string256 song      : 0x6A2F90, 0x0,  0x0,  0x0;
-    string256 directory : 0x8B2818, 0x0;
-}
-
-state("DELTARUNE", "CH1-4 v1.05 Beta")
-{
-    double choicer_ch1  : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x10;
-    double msc_ch1      : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x100;
-    string128 text_ch1  : 0x8CE220, 0x10, 0x1A0, 0x48,   0x10,  0x390, 0x0, 0x0, 0x0;
-    double doorCloseCon : 0x8BA790, 0xE0, 0x48,  0x10,   0x30,  0x0;
-    float kingPos       : 0x6A7A98, 0x0,  0x560, 0x50,   0x158, 0x10,  0xE8;
-
-    double fight_ch2        : 0x6A9CA8, 0x48,  0x10,  0x100,  0x0;
-    double choicer_ch2      : 0x6A9CA8, 0x48,  0x10,  0x7870, 0x0;
-    double msc_ch2          : 0x6A9CA8, 0x48,  0x10,  0x7310, 0x0;
-    string128 text_ch2      : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x6F0, 0x0,   0x0,  0x0;
-    string128 text_ch2_2    : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x700, 0x0,   0x0,  0x0;
-    string128 text_ch2_3    : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x710, 0x0,   0x0,  0x0;
-    string128 text_ch2_4    : 0x8CE220, 0x10,  0x1A0, 0x48,   0x10,  0x7E0, 0x0,   0x0,  0x0;
-    double namerEvent_ch2   : 0x8BA790, 0x178, 0x70,  0x38,   0x48,  0x10,  0x90,  0x0;
-    double loadedDiskGreyBG : 0x8BA790, 0xE0,  0x48,  0x10,   0xCA0, 0x0;
-    double snowgrave        : 0x8BA790, 0x1A0, 0x3B0, 0x88,   0x70,  0x38,  0x1A0, 0x48, 0x10, 0x80, 0x0;
-
-    double fight_ch3      : 0x6A9CA8, 0x48,  0x10,   0x1190, 0x370;
-    double plot_ch3       : 0x6A9CA8, 0x48,  0x10,   0x1000, 0x250;
-    double knightResult   : 0x6A9CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
-    double namerEvent_ch3 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x100, 0x0;
-    double eggTimer       : 0x8BA790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x300, 0x0;
-    float mantleOutro     : 0x6A7A98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
-
-    double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
-    double plot_ch4       : 0x6A9CA8, 0x48,  0x10,   0x2F70, 0x30;
-    double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x3C0, 0x0;
-    string128 text_ch4    : 0x8CE220, 0x10,  0x1A0,  0x48,   0x10,  0x310, 0x0,   0x0,  0x0;
-    double mikeAction     : 0x8BA790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x180, 0x0;
-    int susieSprite       : 0x6A7A98, 0x0,   0x1008, 0x50,   0x158, 0x10,  0xBC;
-    float playerX         : 0x6A7A98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xE8;
-    float playerY         : 0x6A7A98, 0x0,   0x198,  0x0,    0x50,  0x158, 0x10,  0xEC;
-
-    string256 sound     : 0x6AB818, 0x60, 0xD0, 0x58, 0x0;
-    string256 song      : 0x6AAF90, 0x0,  0x0,  0x0;
-    string256 directory : 0x8BA818, 0x0;
-}
-
-state("DELTARUNE", "CH1-5 v247")
+state("DELTARUNE", "CH1-5 v250")
 {
     double choicer_ch1  : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x10;
     double msc_ch1      : 0x6A9CA8, 0x48, 0x10,  0x1E40, 0x100;
@@ -263,17 +183,18 @@ state("DELTARUNE", "CH1-5 v247")
 
     double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
     double plot_ch4       : 0x6A9CA8, 0x48,  0x10,   0x2F70, 0x30;
-    double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x40,  0x0;
+    double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x60,  0x0;
     string128 text_ch4    : 0x8CE220, 0x10,  0x1A0,  0x48,   0x10,  0x310, 0x0,   0x0,  0x0;
-    double mikeAction     : 0x8BA790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x250, 0x0;
+    double mikeAction     : 0x8BA790, 0x1A0, 0x2F0,  0x90,   0x78,  0x38,  0x198, 0x48, 0x10, 0x270, 0x0;
     int susieSprite       : 0x6A7A98, 0x0,   0x1018, 0x50,   0x158, 0x10,  0xBC;
     float playerX         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xE8;
     float playerY         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xEC;
 
-    double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x820,  0x70;
-    double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x150,  0x20;
-    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x220, 0x0;
-    double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BA0, 0x0,  0x90, 0x5200;      // global.flag[1312]
+    double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x850,  0x70;
+    double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x180,  0x20;
+    double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x2E0, 0x0;
+    double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6B90, 0x0,  0x90, 0x5200;      // global.flag[1312]
+    double floweryDollars : 0x6A9CA8, 0x48,  0x10,   0x6B90, 0x0,  0x90, 0x5830;      // global.flag[1411]
     int crtStart          : 0x6A7A98, 0x0,   0x1910, 0x8,    0x18, 0x68, 0x10,  0xE4; // obj_ch5_LW20W_end.image_blend
 
     string256 sound     : 0x6AB818, 0x60, 0xD0, 0x58, 0x0;
@@ -507,6 +428,7 @@ startup
         {"Ch5_ExitSethAqua",  (ver, org, cur) => org.roomName == "room_dw_cliff_sethaqua_battle_ch5" && cur.roomName == "room_dw_fcastle_entrance_ch5"},
         {"Ch5_ExitDW",        (ver, org, cur) => org.roomName == "room_dw_fcastle_entrance_ch5" && cur.roomName == "room_town_north_ch5"},
         {"Ch5_ReenterDW",     (ver, org, cur) => org.roomName == "room_town_north_ch5" && cur.roomName == "room_dw_fcastle_partyjail_ch5"},
+        {"Ch5_EnterFoyer",    (ver, org, cur) => org.roomName == "room_dw_fcastle_post_party_jail_ch5" && cur.roomName == "room_dw_fcastle_foyer_ch5"},
         {"Ch5_EnterLeft",     (ver, org, cur) => org.roomName == "room_dw_fcastle_foyer_ch5" && cur.roomName == "room_dw_fcastle_shinobeetle_encounter_ch5"},
         {"Ch5_ExitLeft",      (ver, org, cur) => org.roomName == "room_dw_fcastle_onsen_ch5" && cur.roomName == "room_dw_fcastle_foyer_ch5"},
         {"Ch5_EnterRight",    (ver, org, cur) => org.roomName == "room_dw_fcastle_foyer_ch5" && cur.roomName == "room_dw_fcastle_cafe_ch5"},
@@ -517,6 +439,7 @@ startup
         {"Ch5_PinkEnter",     (ver, org, cur) => org.roomName == "room_dw_fcastle_pinkroom_ch5" && cur.roomName == "room_dw_pink_encounter_ch5"},
         {"Ch5_PinkEnd",       (ver, org, cur) => cur.roomName == "room_dw_pink_encounter_ch5" && cur.fight == 1 && ((org.sound != "snd_cymbal_reverse.mp3" && cur.sound == "snd_cymbal_reverse.mp3") || (org.song != null && cur.song == null))},
         {"Ch5_PinkExit",      (ver, org, cur) => org.roomName == "room_dw_pink_encounter_ch5" && cur.roomName == "room_dw_fcastle_pinkroom_ch5"},
+        {"Ch5_FloweryScarf",  (ver, org, cur) => cur.roomName == "room_dw_fcastle_pinkshop_ch5" && cur.floweryDollars == (org.floweryDollars - 1)},
         {"Ch5_EnterGreenC",   (ver, org, cur) => org.roomName == "room_dw_fcastle_top_staircase_2_ch5" && cur.roomName == "room_dw_fcastle_green_checkpoint_ch5"},
         {"Ch5_ExitGreenC",    (ver, org, cur) => org.roomName == "room_dw_fcastle_green_checkpoint_ch5" && cur.roomName == "room_dw_fcastle_top_ascent_ch5"},
         {"Ch5_EnterTopSave",  (ver, org, cur) => org.roomName == "room_dw_fcastle_orange_gauntlet_ch5" && cur.roomName == "room_dw_fcastle_final_save_ch5"},
@@ -741,11 +664,13 @@ startup
     settings.Add("Ch5_ExitSethAqua",  false, "Exit Seth & Aqua battle room");
     settings.Add("Ch5_ExitDW",        false, "Exit Dark World");
     settings.Add("Ch5_ReenterDW",     false, "Reenter Dark World");
+    settings.Add("Ch5_EnterFoyer",    false, "Climb up to the foyer");
     settings.Add("Ch5_EnterLeft",     false, "Enter the left side from the foyer");
     settings.Add("Ch5_ExitLeft",      false, "Enter the foyer from the left side");
     settings.Add("Ch5_EnterRight",    false, "Enter the right side from the foyer");
     settings.Add("Ch5_ExitRight",     false, "Enter the foyer from the right side");
     settings.Add("Ch5_FBeanstalk",    false, "Climb the foyer beanstalk");
+    settings.Add("Ch5_FloweryScarf",  false, "Obtain FloweryScarf");
     settings.Add("Ch5_EnterGreenC",   false, "Enter Green's checkpoint/shop room");
     settings.Add("Ch5_ExitGreenC",    false, "Exit Green's checkpoint/shop room");
     settings.Add("Ch5_EnterTopSave",  false, "Enter Castle Top save point room");
@@ -859,21 +784,11 @@ init
             version = "CH1-4 v1.02";
             break;
 
-        case "9D1FEA9DE81219EA7304F32F1AE7A878":
-        case "E437BCB299F8A69670C825121E5B8F19": // 30 TBPS mod
-            version = "CH1-4 v1.04";
-            break;
-
-        case "5D3E158DBE6888FBF24471019FBDE3C9":
-        case "7A0DDC20059BDFB56E7E5523B0B65ABF": // 30 TBPS mod
-            version = "CH1-4 v1.05 Beta";
-            break;
-
-        case "908643B7593B000F5B6C61BB484D086A":
-        case "80A63475EF69529B612F9DCA75AF4CC5": // 30 TBPS mod
-        case "3217F3BFE82C3E4AA8EE2E9E3A4F4E14": // Item tracker mod
-        case "21CDD09EEADBCC77535AB2BB3412259A": // OST% tracker mod
-            version = "CH1-5 v247";
+        case "1F00145D681F830F1249D9493BA8F579":
+        case "C4AF126CF2E678E8CB06151CD007804B": // 30 TBPS mod
+        case "46050610DFB4DF977E21967D1A1D9FA8": // Item tracker mod
+        case "14D163E00A840E22B16369862264146D": // OST% tracker mod
+            version = "CH1-5 v250";
             break;
 
         default:
@@ -887,16 +802,16 @@ init
                     "This version of DELTARUNE is not supported by the autosplitter.\n" +
                     "If you are playing an older version, update your game.\n" +
                     "If you are playing an unsupported mod, switch to the vanilla game or these supported mods:\n" +
+                    "- 30 TBPS mod\n" +
                     "- Item tracker mod\n" +
-                    "- OST% tracker mod\n" +
-                    "- 30 TBPS mod.\n\n" +
+                    "- OST% tracker mod.\n\n" +
 
                     "Make sure the game's executable is named \"DELTARUNE.exe\" and the main data file is named \"data.win\".\n" +
                     "Supported versions:\n" +
                     "- SURVEY_PROGRAM\n" +
                     "- Chapter 1&2 v1.09, v1.10, v1.15, v1.19\n" +
-                    "- Chapters 1-4 v1.02, v1.04, v1.05 Beta\n" +
-                    "- Chapters 1-5 v247.\n\n" +
+                    "- Chapters 1-4 v1.02\n" +
+                    "- Chapters 1-5 v250.\n\n" +
 
                     "You will not be notified again until the next time you start the autosplitter.",
 
