@@ -7,7 +7,7 @@ This is a LiveSplit Autosplitter for DELTARUNE speedruns.
 - SURVEY_PROGRAM
 - Chapter 1&2 v1.09, v1.10, v1.15, v1.19
 - Chapters 1-4 v1.02
-- Chapters 1-5 v250.
+- Chapters 1-5 v244, v250.
 
 ## Supported mods
 
