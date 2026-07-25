@@ -191,6 +191,7 @@ state("DELTARUNE", "CH1-5 v244")
     float playerY         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xEC;
 
     double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x820,  0x70;
+    double plot_ch5       : 0x6A9CA8, 0x48,  0x10,   0x820,  0xC0;
     double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x150,  0x20;
     double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x170, 0x0;
     double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BB0, 0x0,  0x90, 0x5200;      // global.flag[1312]
@@ -238,6 +239,7 @@ state("DELTARUNE", "CH1-5 v247")
     float playerY         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xEC;
 
     double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x820,  0x70;
+    double plot_ch5       : 0x6A9CA8, 0x48,  0x10,   0x820,  0xC0;
     double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x150,  0x20;
     double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x220, 0x0;
     double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6BA0, 0x0,  0x90, 0x5200;
@@ -285,8 +287,10 @@ state("DELTARUNE", "CH1-5 v250")
     float playerY         : 0x6A7A98, 0x0,   0x1A8,  0x0,    0x50,  0x158, 0x10,  0xEC;
 
     double fight_ch5      : 0x6A9CA8, 0x48,  0x10,   0x850,  0x70;
+    double plot_ch5       : 0x6A9CA8, 0x48,  0x10,   0x850,  0xC0;
     double choicer_ch5    : 0x6A9CA8, 0x48,  0x10,   0x180,  0x20;
     double namerEvent_ch5 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x2E0, 0x0;
+    string128 text_ch5    : 0x8CE220, 0x18,  0x90,   0x0,    0x0,  0x0; // This is a different type of text pointer. It points ONLY to the text of the first textbox in the current series.
     double pinkCoins      : 0x6A9CA8, 0x48,  0x10,   0x6B90, 0x0,  0x90, 0x5200;
     double floweryDollars : 0x6A9CA8, 0x48,  0x10,   0x6B90, 0x0,  0x90, 0x5830;
     int crtStart          : 0x6A7A98, 0x0,   0x1910, 0x8,    0x18, 0x68, 0x10,  0xE4;
@@ -451,10 +455,10 @@ startup
     {
         {"Ch3_EnterRound1",     (ver, org, cur) => (org.roomName == "room_dw_couch_overworld_intro_ch3" || org.roomName == "room_ch3_gameshowroom_ch3") && cur.roomName == "room_board_gsa02_b0_ch3"},
         {"Ch3_EnterChef",       (ver, org, cur) => org.roomName == "room_board_1_ch3" && cur.roomName == "room_dw_chef_ch3"},
-        {"Ch3_EndRound1",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 110 || cur.plot_ch3 == 120)},
+        {"Ch3_EndRound1",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot == 110 || cur.plot == 120)},
         {"Ch3_IceKey",          (ver, org, cur) => org.roomName == "room_board_1_sword_trees_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_EnterRhythm",     (ver, org, cur) => org.roomName == "room_board_2_ch3" && cur.roomName == "room_dw_rhythm_ch3"},
-        {"Ch3_EndRound2",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot_ch3 == 140 || cur.plot_ch3 == 150)},
+        {"Ch3_EndRound2",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_green_room_ch3" && (cur.plot == 140 || cur.plot == 150)},
         {"Ch3_ShelterKey",      (ver, org, cur) => org.roomName == "room_board_dungeon_2_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_EndRound3",       (ver, org, cur) => org.roomName == "room_ch3_gameshowroom_ch3" && cur.roomName == "room_dw_backstage_ch3"},
         {"Ch3_EnterTVW",        (ver, org, cur) => org.roomName == "room_dw_backstage_ch3" && cur.roomName == "room_dw_teevie_intro_ch3"},
@@ -503,6 +507,7 @@ startup
     };
     vars.splits[4] = new Dictionary<string, Func<string, dynamic, dynamic, bool>>()
     {
+        {"Ch5_Bread",         (ver, org, cur) => cur.roomName == "room_town_mid_ch5" && vars.checkTextOpen(ver, org, cur, @"* (You got the Bread.)/%", @"＊ (パンを　てにいれた)/%")},
         {"Ch5_EnterCT",       (ver, org, cur) => org.roomName == "room_schooldoor_ch5" && cur.roomName == "room_dw_castle_area_1_ch5"},
         {"Ch5_EnterDW",       (ver, org, cur) => (org.roomName == "room_krisroom_ch5" || org.roomName == "room_town_north_ch5") && cur.roomName == "room_dw_garden_intro_ch5"},
         {"Ch5_EnterDiner",    (ver, org, cur) => org.roomName == "room_dw_garden_firstdash_ch5" && cur.roomName == "room_dw_garden_diner_ch5"},
@@ -739,6 +744,7 @@ startup
     settings.Add("Ch5", false, "Chapter 5: Festival Day");
     settings.CurrentDefaultParent = "Ch5";
     settings.Add("Ch5_StartOnPrev",   false, "Only start/reset the timer when loading completion data");
+    settings.Add("Ch5_Bread",         false, "Obtain Bread");
     settings.Add("Ch5_EnterCT",       false, "Enter Castle Town");
     settings.Add("Ch5_EnterDW",       false, "Enter Dark World");
     settings.Add("Ch5_EnterDiner",    false, "Enter the diner (from the bottom)");
@@ -775,6 +781,7 @@ startup
     settings.Add("Ch5_OmegaFlowery",  false, "Hit Omega Flowery");
     settings.Add("Ch5_Fountain1",     false, "Seal Fountain 1");
     settings.Add("Ch5_Fountain2",     false, "Seal Fountain 2");
+    settings.Add("Ch5_Seeds",         false, "Obtain Seeds");
     settings.Add("Ch5_Ending",        false, "Ending (both routes)");
 
     settings.Add("Ch5_AB", false, "All Bosses Splits");
@@ -1004,12 +1011,14 @@ update
         {
             current.chapter    = 3;
             current.fight      = current.fight_ch3;
+            current.plot       = current.plot_ch3;
             current.namerEvent = current.namerEvent_ch3;
         }
         else if(current.directory.EndsWith(@"\chapter4_windows\"))
         {
             current.chapter    = 4;
             current.fight      = current.fight_ch4;
+            current.plot       = current.plot_ch4;
             current.text       = current.text_ch4;
             current.namerEvent = current.namerEvent_ch4;
         }
@@ -1017,7 +1026,9 @@ update
         {
             current.chapter    = 5;
             current.fight      = current.fight_ch5;
+            current.plot       = current.plot_ch5;
             current.choicer    = current.choicer_ch5;
+            current.text       = current.text_ch5;
             current.namerEvent = current.namerEvent_ch5;
         }
         else
@@ -1117,7 +1128,7 @@ update
                     if(settings["AC_PauseTimer"])
                         endCondition = (old.roomName == "room_torhouse_ch4" && current.roomName == "room_krisroom_dark_ch4");
                     else
-                        endCondition = (current.roomName == "room_torhouse_ch4" && current.plot_ch4 == 310 && (old.playerX != current.playerX || old.playerY != current.playerY) && current.playerX < 160 && current.playerY < 80);
+                        endCondition = (current.roomName == "room_torhouse_ch4" && current.plot == 310 && (old.playerX != current.playerX || old.playerY != current.playerY) && current.playerX < 160 && current.playerY < 80);
                 }
                 break;
 
@@ -1125,6 +1136,16 @@ update
                 if(settings["Ch5_PinkShop"] && current.roomName == "room_shop_ch5" && current.pinkCoins == (old.pinkCoins - 10))
                 {
                     vars.tempVar = 1;
+                }
+                else if(current.roomName == "room_town_mid_ch5" && vars.checkTextOpen(version, old, current, @"* (You got the Bread.)/%", @"＊ (パンを　てにいれた)/%"))
+                {
+                    endCondition = true;
+                    vars.forceSplit = settings["Ch5_Bread"];
+                }
+                else if(current.roomName == "room_flowershop_2f_ch5" && old.plot != 560 && current.plot == 560)
+                {
+                    endCondition = true;
+                    vars.forceSplit = settings["Ch5_Seeds"];
                 }
                 else
                 {
@@ -1142,7 +1163,9 @@ update
             }
             vars.offset.Reset();
             vars.resetSplits();
-            vars.forceSplit = settings["Ch" + ch + "_Ending"];
+
+            if(settings["Ch" + ch + "_Ending"])
+                vars.forceSplit = true;
         }
         else if(current.chapter != 5 && ((current.chapter == 1 && current.roomName == "room_ed_ch1" && vars.offset.ElapsedMilliseconds >= 3600) || (current.chapter > 1 && old.roomName == vars.OSTRooms[ch] && current.roomName.StartsWith("room_ed"))))
         {
@@ -1152,7 +1175,9 @@ update
                 timer.IsGameTimePaused = true;
             }
             vars.offset.Reset();
-            vars.forceSplit = settings["Ch" + ch + "_EndingOST"];
+
+            if(settings["Ch" + ch + "_EndingOST"])
+                vars.forceSplit = true;
         }
 
         if(old.room != current.room)
