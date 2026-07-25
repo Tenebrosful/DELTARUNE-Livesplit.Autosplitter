@@ -747,6 +747,7 @@ startup
     settings.CurrentDefaultParent = "Ch5";
     settings.Add("Ch5_StartOnPrev",   false, "Only start/reset the timer when loading completion data");
     settings.Add("Ch5_Bread",         false, "Obtain Bread");
+     settings.SetToolTip("Ch5_Bread", "You have to enable this alongside the\n'Pause the timer between chapters' setting in order to pause the timer\nhere for All Items runs.");
     settings.Add("Ch5_EnterCT",       false, "Enter Castle Town");
     settings.Add("Ch5_EnterDW",       false, "Enter Dark World");
     settings.Add("Ch5_EnterDiner",    false, "Enter the diner (from the bottom)");
@@ -784,6 +785,7 @@ startup
     settings.Add("Ch5_Fountain1",     false, "Seal Fountain 1");
     settings.Add("Ch5_Fountain2",     false, "Seal Fountain 2");
     settings.Add("Ch5_Seeds",         false, "Obtain Seeds");
+     settings.SetToolTip("Ch5_Seeds", "You have to enable this alongside the\n'Pause the timer between chapters' setting in order to pause the timer\nhere for All Items runs.");
     settings.Add("Ch5_Ending",        false, "Ending (both routes)");
 
     settings.Add("Ch5_AB", false, "All Bosses Splits");
@@ -1139,15 +1141,11 @@ update
                 {
                     vars.tempVar = 1;
                 }
-                else if(current.roomName == "room_town_mid_ch5" && vars.checkTextOpen(version, old, current, @"* (You got the Bread.)/%", @"＊ (パンを　てにいれた)/%"))
+                else if((settings["Ch5_Bread"] && current.roomName == "room_town_mid_ch5" && vars.checkTextOpen(version, old, current, @"* (You got the Bread.)/%", @"＊ (パンを　てにいれた)/%")) ||
+                        (settings["Ch5_Seeds"] && current.roomName == "room_flowershop_2f_ch5" && old.plot != 560 && current.plot == 560))
                 {
                     endCondition = true;
-                    vars.forceSplit = settings["Ch5_Bread"];
-                }
-                else if(current.roomName == "room_flowershop_2f_ch5" && old.plot != 560 && current.plot == 560)
-                {
-                    endCondition = true;
-                    vars.forceSplit = settings["Ch5_Seeds"];
+                    vars.forceSplit = true;
                 }
                 else
                 {
