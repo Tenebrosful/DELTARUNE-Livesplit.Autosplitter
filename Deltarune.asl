@@ -139,7 +139,6 @@ state("DELTARUNE", "CH1-4 v1.02")
     double knightResult   : 0x6A1CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;     // global.flag[1047]
     double namerEvent_ch3 : 0x8B2790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x60,  0x0;
     double eggTimer       : 0x8B2790, 0x1E8, 0x530,  0x38,   0x48, 0x10, 0x290, 0x0; // obj_blocktree_dmg.mytimer
-    float mantleOutro     : 0x69FA98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;       // obj_shadow_mantle_enemy_outro.image_speed
 
     double fight_ch4      : 0x6A1CA8, 0x48,  0x10,   0x72B0, 0x370;
     double namerEvent_ch4 : 0x8B2790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x280, 0x0;
@@ -176,7 +175,6 @@ state("DELTARUNE", "CH1-5 v244")
     double knightResult   : 0x6A9CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
     double namerEvent_ch3 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x120, 0x0;
     double eggTimer       : 0x8BA790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x330, 0x0;
-    float mantleOutro     : 0x6A7A98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
     double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x40,  0x0;
@@ -222,7 +220,6 @@ state("DELTARUNE", "CH1-5 v247")
     double knightResult   : 0x6A9CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
     double namerEvent_ch3 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x120, 0x0;
     double eggTimer       : 0x8BA790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x330, 0x0;
-    float mantleOutro     : 0x6A7A98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
     double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x40,  0x0;
@@ -268,7 +265,6 @@ state("DELTARUNE", "CH1-5 v250")
     double knightResult   : 0x6A9CA8, 0x48,  0x10,   0x6A70, 0x0,  0x90, 0x4170;
     double namerEvent_ch3 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x120, 0x0;
     double eggTimer       : 0x8BA790, 0x1E8, 0x40,   0x38,   0x48, 0x10, 0x330, 0x0;
-    float mantleOutro     : 0x6A7A98, 0x0,   0x19B0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
     double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x60,  0x0;
@@ -314,7 +310,6 @@ state("DELTARUNE", "CH1-5 v253")
     double knightResult   : 0x6A9CA8, 0x48,  0x10,   0x6A80, 0x0,  0x90, 0x4170;
     double namerEvent_ch3 : 0x8BA790, 0x178, 0x70,   0x38,   0x48, 0x10, 0x160, 0x0;
     double eggTimer       : 0x8BA790, 0x1E8, 0x2A0,  0x38,   0x48, 0x10, 0x140, 0x0;
-    float mantleOutro     : 0x6A7A98, 0x0,   0x19D0, 0x18,   0x50, 0x10, 0xD0;
 
     double fight_ch4      : 0x6A9CA8, 0x48,  0x10,   0x72B0, 0x370;
     double namerEvent_ch4 : 0x8BA790, 0x178, 0x70,   0x38,   0x48,  0x10,  0x80,  0x0;
@@ -503,7 +498,7 @@ startup
         {"Ch3_ExitRouxls",      (ver, org, cur) => org.roomName == "room_dw_teevie_chef_ch3" && cur.roomName == "room_dw_teevie_dust_ch3"},
         {"Ch3_Egg",             (ver, org, cur) => cur.roomName == "room_dw_ch3_man_ch3" && org.eggTimer <= 1 && cur.eggTimer > 1},
         {"Ch3_EnterMantle",     (ver, org, cur) => org.roomName == "room_board_preshadowmantle_ch3" && cur.roomName == "room_shadowmantle_ch3"},
-        {"Ch3_EndMantle",       (ver, org, cur) => cur.roomName == "room_shadowmantle_ch3" && org.mantleOutro != 0.125 && cur.mantleOutro == 0.125},
+        {"Ch3_EndMantle",       (ver, org, cur) => cur.roomName == "room_board_prepostshadowmantle_ch3" && cur.roomName == "room_board_postshadowmantle_ch3"},
         {"Ch3_ShadowMantle",    (ver, org, cur) => org.roomName == "room_board_postshadowmantle_ch3" && cur.roomName == "room_dw_console_room_ch3"},
         {"Ch3_StartTenna",      (ver, org, cur) => cur.roomName == "room_dw_snow_zone_battle_ch3" && org.fight == 0 && cur.fight == 1},
         {"Ch3_EndTenna",        (ver, org, cur) => org.roomName == "room_dw_snow_zone_battle_ch3" && cur.roomName == "room_dw_snow_zone_ch3"},
@@ -1266,7 +1261,7 @@ start
         else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && settings["Ch5_StartOnPrev"] && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
         {
             print("[DELTARUNE] Timer started (Start Room for Chapter 5 with completion data detected)");
-            return true;            
+            return true;
         }
     }
 
@@ -1306,7 +1301,7 @@ reset
         else if(old.roomName == "PLACE_MENU_ch5" && current.roomName == "room_krisroom_ch5" && settings["Ch5_StartOnPrev"] && old.namerEvent != 75 && !settings["AC_PauseTimer"] && !settings["AC_PauseTimerOST"])
         {
             print("[DELTARUNE] Timer reset (Start Room for Chapter 5 with completion data detected)");
-            return true;            
+            return true;
         }
     }
 
